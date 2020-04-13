@@ -21,45 +21,10 @@ namespace SciChart.Xamarin.iOS.Renderer.DependencyService
             remove { throw new NotImplementedException(); }
         }
 
-        public bool DrawMinorTicks
-        {
-            get => base.Style.DrawMinorTicks;
-            set => base.Style.DrawMinorTicks = value;
-        }
-
-        public bool DrawLabels
-        {
-            get => base.Style.DrawLabels;
-            set => base.Style.DrawLabels = value;
-        }
-        public bool DrawMajorTicks
-        {
-            get => base.Style.DrawMajorTicks;
-            set => base.Style.DrawMajorTicks = value;
-        }
-
-        bool IAxisCore.DrawMajorGridLines
-        {
-            get => base.Style.DrawMajorGridLines;
-            set => base.Style.DrawMajorGridLines = value;
-        }
-
-        bool IAxisCore.DrawMinorGridLines
-        {
-            get => base.Style.DrawMinorGridLines;
-            set => base.Style.DrawMinorGridLines = value;
-        }
-
-        bool IAxisCore.DrawMajorBands
-        {
-            get => base.Style.DrawMajorBands;
-            set => base.Style.DrawMajorBands = value;
-        }
-
         public Color AxisBandsFill
         {
-            get => ColorUtil.BrushToXamarinColor(base.Style.GridBandBrush);
-            set => base.Style.GridBandBrush = ColorUtil.BrushFromXamarinColor(value);
+            get => ColorUtil.BrushToXamarinColor(base.AxisBandsStyle);
+            set => base.AxisBandsStyle = ColorUtil.BrushFromXamarinColor(value);
         }
 
         public AutoRange AutoRange

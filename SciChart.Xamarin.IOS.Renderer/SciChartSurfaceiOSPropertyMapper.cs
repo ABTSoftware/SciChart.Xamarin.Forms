@@ -16,7 +16,6 @@ namespace SciChart.Xamarin.iOS.Renderer
         public SciChartSurfaceiOSPropertyMapper(SciChartSurfaceX sourceControl, SCIChartSurface targetControl) : base(sourceControl, targetControl)
         {
             this.Add(SciChartSurfaceX.RenderableSeriesProperty.PropertyName, OnRenderableSeriesChanged);
-            this.Add(SciChartSurfaceX.ChartTitleProperty.PropertyName, (s, d) => { d.ChartTitle = s.ChartTitle; });
             this.Add(SciChartSurfaceX.BackgroundColorProperty.PropertyName, UpdateChartStyle);
             this.Add(SciChartSurfaceX.ForegroundColorProperty.PropertyName, UpdateChartStyle);
             this.Add(SciChartSurfaceX.XAxesProperty.PropertyName, OnXAxesChanged);
@@ -32,7 +31,6 @@ namespace SciChart.Xamarin.iOS.Renderer
 
         private void UpdateChartStyle(SciChartSurfaceX source, SCIChartSurface target)
         {
-            target.ChartTitleColor = ColorUtil.FromXamarinColor(source.ForegroundColor);
             target.BackgroundColor = ColorUtil.FromXamarinColor(source.BackgroundColor);
             target.Opaque = Math.Abs(source.BackgroundColor.A - 1.0) < 0.01;
         }

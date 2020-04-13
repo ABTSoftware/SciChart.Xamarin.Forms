@@ -8,12 +8,6 @@ namespace SciChart.Xamarin.iOS.Renderer.DependencyService
         where TY : IComparable
         where TX : IComparable
     {
-        public bool AcceptsUnsortedData
-        {
-            get => this.AcceptUnsortedData;
-            set => this.AcceptUnsortedData = value;
-        }
-
         public IList<TX> XValues
         {
             get { throw new NotImplementedException(); }

@@ -13,7 +13,7 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
             if (iosAxisAlignment == SCIAxisAlignment.Bottom) return AxisAlignment.Bottom;
             if (iosAxisAlignment == SCIAxisAlignment.Right) return AxisAlignment.Right;
             if (iosAxisAlignment == SCIAxisAlignment.Top) return AxisAlignment.Top;
-            if (iosAxisAlignment == SCIAxisAlignment.Default) return AxisAlignment.Default;
+            if (iosAxisAlignment == SCIAxisAlignment.Auto) return AxisAlignment.Default;
 
             throw new NotImplementedException("The AxisAlignment " + iosAxisAlignment.ToString() +
                                               " has not been handled");
@@ -27,7 +27,7 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
                 case AxisAlignment.Bottom: return SCIAxisAlignment.Bottom;
                 case AxisAlignment.Right: return SCIAxisAlignment.Right;
                 case AxisAlignment.Top: return SCIAxisAlignment.Top;
-                case AxisAlignment.Default: return SCIAxisAlignment.Default;
+                case AxisAlignment.Default: return SCIAxisAlignment.Auto;
                 default:
                     throw new NotImplementedException("The AxisAlignment " + xfAxisAlignment.ToString() +
                                                       " has not been handled");

@@ -5,7 +5,7 @@ using SciChart.iOS.Charting;
 using SciChart.Xamarin.Views.Utility;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;
 using IRenderableSeriesXf = SciChart.Xamarin.Views.Visuals.RenderableSeries.IRenderableSeries;
-using IRenderableSeriesiOS = SciChart.iOS.Charting.ISCIRenderableSeriesProtocol;
+using IRenderableSeriesiOS = SciChart.iOS.Charting.IISCIRenderableSeries;
 
 namespace SciChart.Xamarin.iOS.Renderer.DependencyService
 {

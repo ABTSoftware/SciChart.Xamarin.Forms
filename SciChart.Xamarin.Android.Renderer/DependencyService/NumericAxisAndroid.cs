@@ -11,6 +11,7 @@ using IAxis = SciChart.Xamarin.Views.Visuals.Axes.IAxis;
 using IAxisCore = SciChart.Xamarin.Views.Visuals.Axes.IAxisCore;
 using NumericAxis = SciChart.Charting.Visuals.Axes.NumericAxis;
 using NumericAxisXf = SciChart.Xamarin.Views.Visuals.Axes.NumericAxis;
+using INumericAxis = SciChart.Xamarin.Views.Visuals.Axes.INumericAxis;
 
 namespace SciChart.Xamarin.Android.Renderer.DependencyService
 {

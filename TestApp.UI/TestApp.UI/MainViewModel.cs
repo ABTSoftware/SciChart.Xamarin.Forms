@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using SciChart.Wpf.UI.Reactive.Observability;
 using SciChart.Xamarin.Views.Model;
 using SciChart.Xamarin.Views.Model.DataSeries;
 using Xamarin.Forms;
 
 namespace TestApp.UI
 {
-    public class MainViewModel : ObservableObjectBase
+    public class MainViewModel
     {
         public MainViewModel()
         {
@@ -28,26 +27,26 @@ namespace TestApp.UI
 
         public IXyDataSeries<double, double> LineSeries
         {
-            get => GetDynamicValue<IXyDataSeries<double, double>>();
-            set => SetDynamicValue(value);
+            get;
+            set;
         }
 
         public Color LineStroke
         {
-            get => GetDynamicValue<Color>();
-            set => SetDynamicValue(value);
+            get;
+            set;
         }
 
         public int StrokeThickness
         {
-            get => GetDynamicValue<int>();
-            set => SetDynamicValue(value);
+            get;
+            set;
         }
 
         public string ChartTitle
         {
-            get => GetDynamicValue<string>();
-            set => SetDynamicValue(value);
+            get;
+            set;
         }
     }
 }

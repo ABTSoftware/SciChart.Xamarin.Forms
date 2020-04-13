@@ -6,7 +6,7 @@ using SciChart.iOS.Charting;
 using SciChart.Xamarin.Views.Utility;
 using SciChart.Xamarin.Views.Visuals.Axes;
 using IAxisXf = SciChart.Xamarin.Views.Visuals.Axes.IAxis;
-using IAxisNative = SciChart.iOS.Charting.ISCIAxis2DProtocol;
+using IAxisNative = SciChart.iOS.Charting.IISCIAxis;
 
 namespace SciChart.Xamarin.iOS.Renderer.DependencyService
 {
