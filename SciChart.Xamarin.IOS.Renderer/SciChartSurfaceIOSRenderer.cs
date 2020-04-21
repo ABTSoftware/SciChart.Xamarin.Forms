@@ -12,20 +12,6 @@ namespace SciChart.Xamarin.iOS.Renderer
     public class SciChartSurfaceIosRenderer : ViewRenderer<SciChartSurfaceX, SCIChartSurface>
     {
         private PropertyMapper<SciChartSurfaceX, SCIChartSurface> _propertyMapper;
-        private readonly string _license;
-
-        public SciChartSurfaceIosRenderer()
-        {
-            // Apply license 
-            if (_license == null)
-            {
-                _license = SciChartLicenseManager.GetLicense(SciChartPlatform.iOS);
-                if (_license != null)
-                {
-                    SCIChartSurface.SetRuntimeLicenseKey(_license);
-                }
-            }
-        }
 
         // Note Crashes before any breakpoints hit 
         protected override void OnElementChanged(ElementChangedEventArgs<SciChart.Xamarin.Views.Visuals.SciChartSurface> e)

@@ -48,14 +48,14 @@
     <Compile Include="..\AssemblyInfoCommon.cs">
       <Link>Properties\AssemblyInfoCommon.cs</Link>
     </Compile>
-    <Compile Include="DependencyService\AxisCollectionAndroid.cs" />
+    <Compile Include="DependencyService\ObservableCollectionFactoryAndroid.cs" />
+    <Compile Include="DependencyService\SciChartAndroidLicenseProvider.cs" />
     <Compile Include="DependencyService\AxisFactoryAndroid.cs" />
     <Compile Include="DependencyService\DataSeriesFactoryAndroid.cs" />
     <Compile Include="DependencyService\DoubleRangeAndroid.cs" />
     <Compile Include="DependencyService\FastLineRenderableSeriesAndroid.cs" />
     <Compile Include="DependencyService\NumericAxisAndroid.cs" />
     <Compile Include="DependencyService\RangeFactoryAndroid.cs" />
-    <Compile Include="DependencyService\RenderableSeriesCollectionAndroid.cs" />
     <Compile Include="DependencyService\RenderableSeriesFactoryAndroid.cs" />
     <Compile Include="DependencyService\XyDataSeriesWpf.cs" />
     <Compile Include="SciChartSurfaceAndroidPropertyMapper.cs" />

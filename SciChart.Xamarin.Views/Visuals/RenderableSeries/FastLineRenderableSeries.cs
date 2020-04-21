@@ -5,9 +5,9 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
 {
     public class FastLineRenderableSeries : CrossPlatformRenderableSeriesBase, IFastLineRenderableSeries
     {                
-        public FastLineRenderableSeries()
+        public FastLineRenderableSeries() : base(DependencyService.Get<IRenderableSeriesFactory>().NewLineSeries())
         {
-            NativeSeries = Factory.NewLineSeries();
+
         }               
     }
 }

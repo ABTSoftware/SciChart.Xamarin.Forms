@@ -1,4 +1,5 @@
 ﻿using System;
+using SciChart.Xamarin.Views.Core;
 
 namespace SciChart.Xamarin.Views.Visuals.Axes
 {
@@ -7,6 +8,8 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
         /// <summary>
         /// Gets or sets the Alignment for this axis, e.g. Left, Right, Bottom, Top
         /// </summary>
-        AxisAlignment AxisAlignment { get; set; }        
+        // AxisAlignment AxisAlignment { get; set; }
+
+        INativeAxis NativeAxis { get; }
     }
 }

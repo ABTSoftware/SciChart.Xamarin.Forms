@@ -1,7 +1,9 @@
-﻿namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
+﻿using SciChart.Xamarin.Views.Core;
+
+namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
 {
     public interface IRenderableSeriesFactory
     {
-        IFastLineRenderableSeries NewLineSeries();
+        INativeRenderableSeries NewLineSeries();
     }
 }

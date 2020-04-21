@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using SciChart.Xamarin.Views.Core;
 using SciChart.Xamarin.Views.Model.DataSeries;
 using SciChart.Xamarin.Views.Visuals.Axes;
 using Xamarin.Forms;
@@ -8,8 +9,6 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
 {
     public abstract class CrossPlatformRenderableSeriesBase : View, IRenderableSeries
     {
-        protected static readonly IRenderableSeriesFactory Factory;
-
         /// <summary>
         /// Defines the XAxisId BindableProperty
         /// </summary>
@@ -35,18 +34,10 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
         /// </summary>
         public static readonly BindableProperty DataSeriesProperty = BindableProperty.Create("DataSeries", typeof(IDataSeries), typeof(SciChartSurface), null, BindingMode.Default, null, OnDataSeriesPropertyChanged, null, null, null);        
 
-        static CrossPlatformRenderableSeriesBase()
+        protected CrossPlatformRenderableSeriesBase(INativeRenderableSeries nativeRenderableSeries)
         {
-            Factory = DependencyService.Get<IRenderableSeriesFactory>();
-            if (Factory == null)
-            {
-                throw new InvalidOperationException(
-                    "Cannot get Dependency IRenderableSeriesFactory. Have you registered the dependency via attribute [assembly: Xamarin.Forms.Dependency(typeof(RenderableSeriesFactory))] in your application?");
-            }            
-        }
+            NativeRenderableSeries = nativeRenderableSeries;
 
-        protected CrossPlatformRenderableSeriesBase()
-        {
             this.BindingContextChanged += (s, e) =>
             {
                 Debug.WriteLine("Binding Context changed for " + GetType().Name);
@@ -58,6 +49,8 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
             get => (string)GetValue(XAxisIdProperty);
             set => SetValue(XAxisIdProperty, value);
         }
+
+        public INativeRenderableSeries NativeRenderableSeries { get; }
 
         public string YAxisId
         {
@@ -83,30 +76,27 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
             set => SetValue(DataSeriesProperty, value);
         }
 
-        // Platform specific series implementation
-        public IRenderableSeries NativeSeries { get; set; }
-
         private static void OnXAxisIdPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((CrossPlatformRenderableSeriesBase)bindable).NativeSeries.XAxisId = (string)newvalue;
+            ((CrossPlatformRenderableSeriesBase)bindable).NativeRenderableSeries.XAxisId = (string)newvalue;
         }
 
         private static void OnYAxisIdPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((CrossPlatformRenderableSeriesBase)bindable).NativeSeries.YAxisId = (string)newvalue;
+            ((CrossPlatformRenderableSeriesBase)bindable).NativeRenderableSeries.YAxisId = (string)newvalue;
         }
         private static void OnStrokePropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((CrossPlatformRenderableSeriesBase)bindable).NativeSeries.Stroke = (Color)newvalue;
+            ((CrossPlatformRenderableSeriesBase)bindable).NativeRenderableSeries.Stroke = (Color)newvalue;
         }
         private static void OnStrokeThicknessPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((CrossPlatformRenderableSeriesBase)bindable).NativeSeries.StrokeThickness = (int)newvalue;
+            ((CrossPlatformRenderableSeriesBase)bindable).NativeRenderableSeries.StrokeThickness = (int)newvalue;
         }
 
         private static void OnDataSeriesPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((CrossPlatformRenderableSeriesBase)bindable).NativeSeries.DataSeries = (IDataSeries)newvalue;
+            ((CrossPlatformRenderableSeriesBase)bindable).NativeRenderableSeries.DataSeries = (IDataSeries)newvalue;
         }
     }
 }

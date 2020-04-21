@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using SciChart.Xamarin.Views.Core;
 using SciChart.Xamarin.Views.Tests.Stubs;
 using SciChart.Xamarin.Views.Visuals;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;
@@ -50,7 +50,7 @@ namespace SciChart.Xamarin.Views.Tests
             scs.BindingContext = "ABindingContext";
 
             // Set binding context then series add
-            scs.RenderableSeries = new ObservableCollection<IRenderableSeries>(new [] { rs });
+            scs.RenderableSeries = new RenderableSeriesCollection(new [] { rs });
 
             Assert.That(rs.BindingContext, Is.EqualTo("ABindingContext"));
         }
@@ -63,7 +63,7 @@ namespace SciChart.Xamarin.Views.Tests
             scs.BindingContext = "ABindingContext";
 
             // Set binding context then series add
-            scs.RenderableSeries = new ObservableCollection<IRenderableSeries>();
+            scs.RenderableSeries = new RenderableSeriesCollection();
             scs.RenderableSeries.Add(rs);
 
             Assert.That(rs.BindingContext, Is.EqualTo("ABindingContext"));

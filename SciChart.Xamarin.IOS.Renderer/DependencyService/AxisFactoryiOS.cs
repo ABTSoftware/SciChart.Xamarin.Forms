@@ -1,10 +1,11 @@
-﻿using SciChart.Xamarin.Views.Visuals.Axes;
+﻿using SciChart.Xamarin.Views.Core;
+using SciChart.Xamarin.Views.Visuals.Axes;
 
 namespace SciChart.Xamarin.iOS.Renderer.DependencyService
 {
     public class AxisFactoryiOS : IAxisFactory
     {
-        public INumericAxis NewNumericAxis()
+        public INativeAxis NewNumericAxis()
         {
             return new NumericAxisiOS();
         }

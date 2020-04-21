@@ -7,6 +7,10 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
 {
     public interface IAxisCore
     {
+
+
+        /**
+
         /// <summary>
         /// Gets or sets the Axis Title
         /// </summary>
@@ -77,12 +81,7 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
         /// If AutoRange.Never, then the axis will never autorange.</value>
         /// <remarks>GrowBy is applied when the axis scales to fit</remarks>
         AutoRange AutoRange { get; set; }
-
-        /// <summary>
-        /// Gets or sets the BindingContext for the axis 
-        /// </summary>
-        object BindingContext { get; set; }
-
+        
         /// <summary>
         /// Gets or sets the String ID for this axis. An axis ID must be unique in the XAxes or YAxes collection of a <see cref="SciChartSurface"/>. RenderableSeries, Annotations and some modifiers are registered on an Axis via the properties like <see cref="IRenderableSeries.YAxisId"/> properties
         /// </summary>
@@ -103,5 +102,13 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
         /// Raised when the VisibleRange is changed
         /// </summary>
         event EventHandler<VisibleRangeChangedEventArgs> VisibleRangeChanged;
+
+        **/
+
+
+        /// <summary>
+        /// Gets or sets the BindingContext for the axis 
+        /// </summary>
+        object BindingContext { get; set; }
     }
 }

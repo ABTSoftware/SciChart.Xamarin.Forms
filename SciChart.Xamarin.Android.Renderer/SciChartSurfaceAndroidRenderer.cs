@@ -21,19 +21,10 @@ namespace SciChart.Xamarin.Android.Renderer
     public class SciChartSurfaceAndroidRenderer : ViewRenderer<SciChartSurfaceX, SciChartSurface>
     {
         private PropertyMapper<SciChartSurfaceX, SciChartSurface> _propertyMapper;
-        private string _license;
 
         public SciChartSurfaceAndroidRenderer(Context context) : base(context) 
         {
-            // Apply license 
-            if (_license == null)
-            {
-                _license = SciChartLicenseManager.GetLicense(SciChartPlatform.Android);
-                if (_license != null)
-                {
-                    SciChartSurface.SetRuntimeLicenseKey(_license);
-                }
-            }
+
         }        
 
         protected override void OnElementChanged(ElementChangedEventArgs<Views.Visuals.SciChartSurface> e)

@@ -6,10 +6,11 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
 {
     public class AxisCore : View, IAxisCore
     {
-        protected static readonly IAxisFactory Factory;
 
-        public static string DefaultAxisId = "DefaultAxisId";        
+        public static string DefaultAxisId = "DefaultAxisId";
 
+        /**
+        
         /// <summary>
         /// Defines the XAxisId BindableProperty
         /// </summary>
@@ -43,17 +44,6 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
 
         public event EventHandler<VisibleRangeChangedEventArgs> VisibleRangeChanged;
 
-        static AxisCore()
-        {
-            Factory = DependencyService.Get<IAxisFactory>();
-            if (Factory == null)
-            {
-                throw new InvalidOperationException(
-                    "Cannot get Dependency IAxisFactory. Have you registered the dependency via attribute [assembly: Xamarin.Forms.Dependency(typeof(AxisFactory))] in your application?");
-            }
-        }
-
-        public IAxisCore NativeAxis { get; protected set; }
 
         public string AxisTitle
         {
@@ -206,5 +196,6 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
         {
             ((AxisCore)bindable).NativeAxis.GrowBy = (IDoubleRange)newvalue;
         }
+        **/
     }
 }

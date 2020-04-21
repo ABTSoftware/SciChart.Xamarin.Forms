@@ -1,4 +1,5 @@
 ﻿using SciChart.iOS.Charting;
+using SciChart.Xamarin.Views.Core;
 using SciChart.Xamarin.Views.Model.DataSeries;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;
 using Xamarin.Forms;
@@ -7,7 +8,7 @@ using IDataSeriesX = SciChart.Xamarin.Views.Model.DataSeries.IDataSeries;
 namespace SciChart.Xamarin.iOS.Renderer.DependencyService
 {
     [Foundation.Register]
-    internal class FastLineRenderableSeriesiOS : SCIFastLineRenderableSeries, IFastLineRenderableSeries
+    internal class FastLineRenderableSeriesiOS : SCIFastLineRenderableSeries, IFastLineRenderableSeries, INativeRenderableSeries
     {
         private IDataSeriesX _dataSeries;
 
@@ -29,5 +30,6 @@ namespace SciChart.Xamarin.iOS.Renderer.DependencyService
         }
 
         public object BindingContext { get; set; }
+        public INativeRenderableSeries NativeRenderableSeries => this;
     }
 }

@@ -1,7 +1,9 @@
-﻿namespace SciChart.Xamarin.Views.Visuals.Axes
+﻿using SciChart.Xamarin.Views.Core;
+
+namespace SciChart.Xamarin.Views.Visuals.Axes
 {
     public interface IAxisFactory
     {
-        INumericAxis NewNumericAxis();
+        INativeAxis NewNumericAxis();
     }
 }

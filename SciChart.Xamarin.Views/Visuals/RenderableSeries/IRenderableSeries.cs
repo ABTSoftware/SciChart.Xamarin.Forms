@@ -1,4 +1,5 @@
-﻿using SciChart.Xamarin.Views.Model.DataSeries;
+﻿using SciChart.Xamarin.Views.Core;
+using SciChart.Xamarin.Views.Model.DataSeries;
 using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
@@ -43,5 +44,7 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
         /// Gets or sets the BindingContext (DataContext) to apply to the <see cref="IRenderableSeries"/>
         /// </summary>        
         object BindingContext { get; set; }
+
+        INativeRenderableSeries NativeRenderableSeries { get; }
     }
 }

@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using SciChart.Xamarin.Views.Core;
 using SciChart.Xamarin.Views.Model.DataSeries;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;
 using Xamarin.Forms;
@@ -17,7 +18,7 @@ using IDataSeriesX = SciChart.Xamarin.Views.Model.DataSeries.IDataSeries;
 
 namespace SciChart.Xamarin.Android.Renderer.DependencyService
 {
-    public class FastLineRenderableSeriesAndroid : FastLineRenderableSeries, IFastLineRenderableSeries
+    public class FastLineRenderableSeriesAndroid : FastLineRenderableSeries, IFastLineRenderableSeries, INativeRenderableSeries
     {
         private IDataSeriesX _dataSeries;
 
@@ -39,5 +40,7 @@ namespace SciChart.Xamarin.Android.Renderer.DependencyService
         }
 
         public object BindingContext { get; set; }
+
+        public INativeRenderableSeries NativeRenderableSeries => this;
     }
 }

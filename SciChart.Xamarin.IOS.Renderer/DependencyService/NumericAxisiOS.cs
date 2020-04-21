@@ -1,6 +1,7 @@
 ﻿using System;
 using SciChart.iOS.Charting;
 using SciChart.Xamarin.iOS.Renderer.Utility;
+using SciChart.Xamarin.Views.Core;
 using SciChart.Xamarin.Views.Model;
 using SciChart.Xamarin.Views.Visuals.Axes;
 using Xamarin.Forms;
@@ -9,54 +10,10 @@ using NumericAxisXf = SciChart.Xamarin.Views.Visuals.Axes.NumericAxis;
 namespace SciChart.Xamarin.iOS.Renderer.DependencyService
 {
     [Foundation.Register]
-    internal class NumericAxisiOS : SCINumericAxis, INumericAxis
+    internal class NumericAxisiOS : SCINumericAxis, INativeAxis
     {
         public NumericAxisiOS()
         {
-        }
-
-        event EventHandler<VisibleRangeChangedEventArgs> IAxisCore.VisibleRangeChanged
-        {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
-        }
-
-        public Color AxisBandsFill
-        {
-            get => ColorUtil.BrushToXamarinColor(base.AxisBandsStyle);
-            set => base.AxisBandsStyle = ColorUtil.BrushFromXamarinColor(value);
-        }
-
-        public AutoRange AutoRange
-        {
-            get => AxisHelper.ToXfAutoRange(base.AutoRange);
-            set => base.AutoRange = AxisHelper.FromXfAutoRange(value);
-        }
-
-        public object BindingContext { get; set; }
-
-        public string Id
-        {
-            get => base.AxisId;
-            set => base.AxisId = value;
-        }
-
-        public IRange VisibleRange
-        {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
-        }
-
-        public IDoubleRange GrowBy
-        {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
-        }        
-
-        AxisAlignment IAxis.AxisAlignment
-        {
-            get => AxisHelper.ToXfAxisAlignemnt(base.AxisAlignment);
-            set => base.AxisAlignment = AxisHelper.FromXfAxisAlignment(value);
         }
     }
 }
