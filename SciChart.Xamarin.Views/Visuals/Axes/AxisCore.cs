@@ -1,20 +1,28 @@
 ﻿using System;
+using SciChart.Xamarin.Views.Common;
+using SciChart.Xamarin.Views.Generation;
 using SciChart.Xamarin.Views.Model;
 using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views.Visuals.Axes
 {
-    public class AxisCore : View, IAxisCore
+    [InjectAndroidContext]
+    public abstract class AxisCore : View, IAxisCore, IBindingContextProvider
     {
 
         public static string DefaultAxisId = "DefaultAxisId";
 
-        /**
-        
+        protected AxisCore(IAxisCore nativeAxis)
+        {
+            NativeSciChartObject = nativeAxis.NativeSciChartObject;
+        }
+
+        public INativeSciChartObject NativeSciChartObject { get; }
+
         /// <summary>
         /// Defines the XAxisId BindableProperty
         /// </summary>
-        public static readonly BindableProperty IdProperty = BindableProperty.Create("Id", typeof(string), typeof(AxisCore), AxisCore.DefaultAxisId, BindingMode.Default, null, OnIdPropertyChanged, null, null, null);
+        public static readonly BindableProperty AxisIdProperty = BindableProperty.Create("AxisId", typeof(string), typeof(AxisCore), AxisCore.DefaultAxisId, BindingMode.Default, null, OnAxisIdPropertyChanged, null, null, null);
 
         public static readonly BindableProperty AxisTitleProperty = BindableProperty.Create("AxisTitle", typeof(string), typeof(AxisCore), null, BindingMode.Default, null, OnAxisTitlePropertyChanged, null, null, null);        
 
@@ -40,7 +48,7 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
 
         public static readonly BindableProperty VisibleRangeProperty = BindableProperty.Create("VisibleRange", typeof(IRange), typeof(AxisCore), null, BindingMode.Default, null, OnVisibleRangeProperty, null, null, null);
 
-        public static readonly BindableProperty GrowByProperty = BindableProperty.Create("GrowBy", typeof(IDoubleRange), typeof(AxisCore), null, BindingMode.Default, null, OnGrowByPropertyChanged, null, null, null);
+        public static readonly BindableProperty GrowByProperty = BindableProperty.Create("GrowBy", typeof(IRange), typeof(AxisCore), null, BindingMode.Default, null, OnGrowByPropertyChanged, null, null, null);
 
         public event EventHandler<VisibleRangeChangedEventArgs> VisibleRangeChanged;
 
@@ -99,103 +107,106 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
             set => SetValue(DrawMajorBandsProperty, value);
         }
 
+        [PropertyDeclaration("BrushStyle", "AxisBandsStyle")]
         public Color AxisBandsFill
         {
             get => (Color)GetValue(AxisBandsFillProperty);
             set => SetValue(AxisBandsFillProperty, value);
         }
 
+        [PropertyDeclaration("AutoRange")]
         public AutoRange AutoRange
         {
             get => (AutoRange)GetValue(AutoRangeProperty);
             set => SetValue(AutoRangeProperty, value);
         }
 
-        public string Id
+        public string AxisId
         {
-            get => (string) GetValue(IdProperty);
-            set => SetValue(IdProperty, value);
+            get => (string) GetValue(AxisIdProperty);
+            set => SetValue(AxisIdProperty, value);
         }
 
+        [PropertyDeclaration("Range")]
         public IRange VisibleRange
         {
             get => (IRange)GetValue(VisibleRangeProperty);
             set => SetValue(VisibleRangeProperty, value);
         }
 
-        public IDoubleRange GrowBy
+        [PropertyDeclaration("Range")]
+        public IRange GrowBy
         {
-            get => (IDoubleRange) GetValue(GrowByProperty);
+            get => (IRange) GetValue(GrowByProperty);
             set => SetValue(GrowByProperty, value);
         }
 
-        private static void OnIdPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
+        private static void OnAxisIdPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((AxisCore)bindable).NativeAxis.Id = (string)newvalue;
+            ((AxisCore)bindable).NativeSciChartObject.Cast<IAxisCore>().AxisId = (string)newvalue;
         }
 
         private static void OnAxisTitlePropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((AxisCore)bindable).NativeAxis.AxisTitle = (string)newvalue;
+            ((AxisCore)bindable).NativeSciChartObject.Cast<IAxisCore>().AxisTitle = (string)newvalue;
         }
         private static void OnFlipCoordinatesPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((AxisCore)bindable).NativeAxis.FlipCoordinates = (bool)newvalue;
+            ((AxisCore)bindable).NativeSciChartObject.Cast<IAxisCore>().FlipCoordinates = (bool)newvalue;
         }
         private static void OnTextFormattingPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((AxisCore)bindable).NativeAxis.TextFormatting = (string)newvalue;
+            ((AxisCore)bindable).NativeSciChartObject.Cast<IAxisCore>().TextFormatting = (string)newvalue;
         }
 
         private static void OnDrawMinorTicksPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((AxisCore)bindable).NativeAxis.DrawMinorTicks = (bool)newvalue;
+            ((AxisCore)bindable).NativeSciChartObject.Cast<IAxisCore>().DrawMinorTicks = (bool)newvalue;
         }
 
         private static void OnDrawLabelsPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((AxisCore)bindable).NativeAxis.DrawLabels = (bool)newvalue;
+            ((AxisCore)bindable).NativeSciChartObject.Cast<IAxisCore>().DrawLabels = (bool)newvalue;
         }
 
         private static void OnDrawMajorTicksPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((AxisCore)bindable).NativeAxis.DrawMajorTicks = (bool)newvalue;
+            ((AxisCore)bindable).NativeSciChartObject.Cast<IAxisCore>().DrawMajorTicks = (bool)newvalue;
         }
 
         private static void OnDrawMajorGridLinesPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((AxisCore)bindable).NativeAxis.DrawMajorGridLines = (bool)newvalue;
+            ((AxisCore)bindable).NativeSciChartObject.Cast<IAxisCore>().DrawMajorGridLines = (bool)newvalue;
         }
 
         private static void OnDrawMinorGridLinesPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((AxisCore)bindable).NativeAxis.DrawMinorGridLines = (bool)newvalue;
+            ((AxisCore)bindable).NativeSciChartObject.Cast<IAxisCore>().DrawMinorGridLines = (bool)newvalue;
         }
 
         private static void OnDrawMajorBandsPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((AxisCore)bindable).NativeAxis.DrawMajorBands = (bool)newvalue;
+            ((AxisCore)bindable).NativeSciChartObject.Cast<IAxisCore>().DrawMajorBands = (bool)newvalue;
         }
 
         private static void OnAxisBandsFillPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((AxisCore)bindable).NativeAxis.AxisBandsFill = (Color)newvalue;
+            ((AxisCore)bindable).NativeSciChartObject.Cast<IAxisCore>().AxisBandsFill = (Color)newvalue;
         }
 
         private static void OnAutoRangePropertyPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((AxisCore)bindable).NativeAxis.AutoRange = (AutoRange)newvalue;
+            ((AxisCore)bindable).NativeSciChartObject.Cast<IAxisCore>().AutoRange = (AutoRange)newvalue;
         }
 
         private static void OnVisibleRangeProperty(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((AxisCore)bindable).NativeAxis.VisibleRange = (IRange)newvalue;
+            ((AxisCore)bindable).NativeSciChartObject.Cast<IAxisCore>().VisibleRange = (IRange)newvalue;
         }
 
         private static void OnGrowByPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((AxisCore)bindable).NativeAxis.GrowBy = (IDoubleRange)newvalue;
+            ((AxisCore)bindable).NativeSciChartObject.Cast<IAxisCore>().GrowBy = (IDoubleRange)newvalue;
         }
-        **/
     }
 }

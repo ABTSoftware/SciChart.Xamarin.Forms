@@ -1,15 +1,15 @@
 ﻿using System;
+using SciChart.Xamarin.Views.Common;
+using SciChart.Xamarin.Views.Generation;
 using SciChart.Xamarin.Views.Model;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;
 using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views.Visuals.Axes
 {
-    public interface IAxisCore
+    public interface IAxisCore : INativeSciChartObjectWrapper
     {
 
-
-        /**
 
         /// <summary>
         /// Gets or sets the Axis Title
@@ -85,7 +85,7 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
         /// <summary>
         /// Gets or sets the String ID for this axis. An axis ID must be unique in the XAxes or YAxes collection of a <see cref="SciChartSurface"/>. RenderableSeries, Annotations and some modifiers are registered on an Axis via the properties like <see cref="IRenderableSeries.YAxisId"/> properties
         /// </summary>
-        string Id { get; set; }
+        string AxisId { get; set; }
 
         /// <summary>
         /// Gets or sets the VisibleRange of the Axis. In the case of XAxis, this will cause an align to X-Axis operation to take place
@@ -96,19 +96,12 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
         /// <summary>
         /// Gets or sets the GrowBy Factor. e.g. GrowBy(0.1, 0.2) will increase the axis extents by 10% (min) and 20% (max) outside of the data range
         /// </summary>
-        IDoubleRange GrowBy { get; set; }
+        IRange GrowBy { get; set; }
+
 
         /// <summary>
         /// Raised when the VisibleRange is changed
         /// </summary>
-        event EventHandler<VisibleRangeChangedEventArgs> VisibleRangeChanged;
-
-        **/
-
-
-        /// <summary>
-        /// Gets or sets the BindingContext for the axis 
-        /// </summary>
-        object BindingContext { get; set; }
+        // event EventHandler<VisibleRangeChangedEventArgs> VisibleRangeChanged;
     }
 }

@@ -30,7 +30,7 @@ namespace SciChart.Xamarin.Android.Renderer.DependencyService
 
         public void InsertItem(int index, IAxis item)
         {
-            base.Insert(index, item.NativeAxis as Charting.Visuals.Axes.IAxis);
+            base.Insert(index, item.NativeSciChartObject as Charting.Visuals.Axes.IAxis);
         }
 
         public void MoveItem(int oldIndex, int newIndex)
@@ -45,7 +45,7 @@ namespace SciChart.Xamarin.Android.Renderer.DependencyService
 
         public void SetItem(int index, IAxis item)
         {
-            base.Set(index, item.NativeAxis as Object);
+            base.Set(index, item.NativeSciChartObject as Object);
         }
     }
 
@@ -58,7 +58,7 @@ namespace SciChart.Xamarin.Android.Renderer.DependencyService
 
         public void InsertItem(int index, IRenderableSeries item)
         {
-            base.Insert(index, item.NativeRenderableSeries as Charting.Visuals.RenderableSeries.IRenderableSeries);
+            base.Insert(index, item.NativeSciChartObject as Charting.Visuals.RenderableSeries.IRenderableSeries);
         }
 
         public void MoveItem(int oldIndex, int newIndex)
@@ -73,7 +73,7 @@ namespace SciChart.Xamarin.Android.Renderer.DependencyService
 
         public void SetItem(int index, IRenderableSeries item)
         {
-            base.Set(index, item.NativeRenderableSeries as Object);
+            base.Set(index, item.NativeSciChartObject as Object);
         }
     }
 }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Specialized;
+using SciChart.Xamarin.Views.Common;
 using SciChart.Xamarin.Views.Core;
 using SciChart.Xamarin.Views.Visuals.Annotations;
 using SciChart.Xamarin.Views.Visuals.Axes;
@@ -129,10 +127,10 @@ namespace SciChart.Xamarin.Views.Visuals
 
         private void PropagateBindingContext()
         {
-            RenderableSeries.ForEachDo(x => x.BindingContext = BindingContext);
-            XAxes.ForEachDo(x => x.BindingContext = BindingContext);
-            YAxes.ForEachDo(x => x.BindingContext = BindingContext);
-            Annotations.ForEachDo(x => x.BindingContext = BindingContext);       
+            RenderableSeries.ForEachDo(x => x.Cast<IBindingContextProvider>().BindingContext = BindingContext);
+            XAxes.ForEachDo(x => x.Cast<IBindingContextProvider>().BindingContext = BindingContext);
+            YAxes.ForEachDo(x => x.Cast<IBindingContextProvider>().BindingContext = BindingContext);
+            Annotations.ForEachDo(x => x.Cast<IBindingContextProvider>().BindingContext = BindingContext);       
         }
     }
 }

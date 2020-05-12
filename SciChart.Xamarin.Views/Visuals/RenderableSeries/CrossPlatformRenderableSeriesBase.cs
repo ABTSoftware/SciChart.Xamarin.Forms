@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Diagnostics;
+using SciChart.Xamarin.Views.Common;
 using SciChart.Xamarin.Views.Core;
+using SciChart.Xamarin.Views.Generation;
 using SciChart.Xamarin.Views.Model.DataSeries;
 using SciChart.Xamarin.Views.Visuals.Axes;
 using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
 {
-    public abstract class CrossPlatformRenderableSeriesBase : View, IRenderableSeries
+    public abstract class CrossPlatformRenderableSeriesBase : View, IRenderableSeries, IBindingContextProvider
     {
         /// <summary>
         /// Defines the XAxisId BindableProperty
@@ -27,16 +29,16 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
         /// <summary>
         /// Defines the StrokeThickness BindableProperty
         /// </summary>
-        public static readonly BindableProperty StrokeThicknessProperty = BindableProperty.Create("StrokeThickness", typeof(int), typeof(SciChartSurface), 1, BindingMode.Default, null, OnStrokeThicknessPropertyChanged, null, null, null);
+        public static readonly BindableProperty StrokeThicknessProperty = BindableProperty.Create("StrokeThickness", typeof(float), typeof(SciChartSurface), 1f, BindingMode.Default, null, OnStrokeThicknessPropertyChanged, null, null, null);
 
         /// <summary>
         /// Defines the DataSeries BindableProperty
         /// </summary>
         public static readonly BindableProperty DataSeriesProperty = BindableProperty.Create("DataSeries", typeof(IDataSeries), typeof(SciChartSurface), null, BindingMode.Default, null, OnDataSeriesPropertyChanged, null, null, null);        
 
-        protected CrossPlatformRenderableSeriesBase(INativeRenderableSeries nativeRenderableSeries)
+        protected CrossPlatformRenderableSeriesBase(IRenderableSeries nativeRenderableSeries)
         {
-            NativeRenderableSeries = nativeRenderableSeries;
+            NativeSciChartObject = nativeRenderableSeries.NativeSciChartObject;
 
             this.BindingContextChanged += (s, e) =>
             {
@@ -44,13 +46,13 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
             };
         }
 
+        public INativeSciChartObject NativeSciChartObject { get; }
+
         public string XAxisId
         {
             get => (string)GetValue(XAxisIdProperty);
             set => SetValue(XAxisIdProperty, value);
         }
-
-        public INativeRenderableSeries NativeRenderableSeries { get; }
 
         public string YAxisId
         {
@@ -64,12 +66,13 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
             set => SetValue(StrokeProperty, value);
         }
 
-        public int StrokeThickness
+        public float StrokeThickness
         {
-            get => (int)GetValue(StrokeThicknessProperty);
+            get => (float)GetValue(StrokeThicknessProperty);
             set => SetValue(StrokeThicknessProperty, value);
         }
 
+        [PropertyDeclaration("DataSeries")]
         public IDataSeries DataSeries
         {
             get => (IDataSeries)GetValue(DataSeriesProperty);
@@ -78,25 +81,26 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
 
         private static void OnXAxisIdPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((CrossPlatformRenderableSeriesBase)bindable).NativeRenderableSeries.XAxisId = (string)newvalue;
+            ((IRenderableSeries)((CrossPlatformRenderableSeriesBase)bindable).NativeSciChartObject).XAxisId = (string)newvalue;
         }
 
         private static void OnYAxisIdPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((CrossPlatformRenderableSeriesBase)bindable).NativeRenderableSeries.YAxisId = (string)newvalue;
+            ((IRenderableSeries)((CrossPlatformRenderableSeriesBase)bindable).NativeSciChartObject).YAxisId = (string)newvalue;
         }
         private static void OnStrokePropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((CrossPlatformRenderableSeriesBase)bindable).NativeRenderableSeries.Stroke = (Color)newvalue;
+//            ((IRenderableSeries)((CrossPlatformRenderableSeriesBase)bindable).NativeSciChartObject).Stroke = (Color)newvalue;
         }
         private static void OnStrokeThicknessPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((CrossPlatformRenderableSeriesBase)bindable).NativeRenderableSeries.StrokeThickness = (int)newvalue;
+//            ((IRenderableSeries)((CrossPlatformRenderableSeriesBase)bindable).NativeSciChartObject).StrokeThickness = (int)newvalue;
         }
 
         private static void OnDataSeriesPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            ((CrossPlatformRenderableSeriesBase)bindable).NativeRenderableSeries.DataSeries = (IDataSeries)newvalue;
+            ((IRenderableSeries)((CrossPlatformRenderableSeriesBase)bindable).NativeSciChartObject).DataSeries = (IDataSeries)newvalue;
         }
+
     }
 }

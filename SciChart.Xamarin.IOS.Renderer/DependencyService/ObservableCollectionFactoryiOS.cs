@@ -30,7 +30,7 @@ namespace SciChart.Xamarin.iOS.Renderer.DependencyService
 
         public void InsertItem(int index, IAxis item)
         {
-            base.Insert(index, (SCINumericAxis)item.NativeAxis);
+            base.Insert(index, (SCINumericAxis)item.NativeSciChartObject);
         }
 
         public void MoveItem(int oldIndex, int newIndex)
@@ -47,7 +47,7 @@ namespace SciChart.Xamarin.iOS.Renderer.DependencyService
 
         public void SetItem(int index, IAxis item)
         {
-            base[index] = item.NativeAxis as IISCIAxis;
+            base[index] = item.NativeSciChartObject as IISCIAxis;
         }
     }
 
@@ -60,7 +60,7 @@ namespace SciChart.Xamarin.iOS.Renderer.DependencyService
 
         public void InsertItem(int index, IRenderableSeries item)
         {
-            base.Insert(index, item.NativeRenderableSeries as IISCIRenderableSeries);
+            base.Insert(index, item.NativeSciChartObject as IISCIRenderableSeries);
         }
 
         public void MoveItem(int oldIndex, int newIndex)
@@ -77,7 +77,7 @@ namespace SciChart.Xamarin.iOS.Renderer.DependencyService
 
         public void SetItem(int index, IRenderableSeries item)
         {
-            base[index] = item.NativeRenderableSeries as IISCIRenderableSeries;
+            base[index] = item.NativeSciChartObject as IISCIRenderableSeries;
         }
     }
 }

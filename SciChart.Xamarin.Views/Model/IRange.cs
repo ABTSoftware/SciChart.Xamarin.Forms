@@ -1,28 +1,22 @@
 ﻿using System;
 using System.ComponentModel;
+using SciChart.Xamarin.Views.Common;
 
 namespace SciChart.Xamarin.Views.Model
 {
     /// <summary>
     /// Defines the base interface to a Range (Min, Max), used throughout SciChart for visible, data and index range calculations
     /// </summary>
-    public interface IRange 
+    public interface IRange : INativeSciChartObjectWrapper 
     {
         /// <summary>
-        /// Gets or sets the Min value of this range
+        /// Gets the double representation of min value
         /// </summary>
-        IComparable Min { get; set; }
+        double MinAsDouble { get; }
 
         /// <summary>
-        /// Gets or sets the Max value of this range
+        /// Gets the double representation of max value
         /// </summary>
-        IComparable Max { get; set; }
-
-        /// <summary>
-        /// Converts this range to a <see cref="DoubleRange"/>, which are used internally for calculations
-        /// </summary>
-        /// <example>For numeric ranges, the conversion is simple. For <see cref="DateRange"/> instances, returns a new <see cref="DoubleRange"/> with the Min and Max Ticks</example>
-        /// <returns></returns>
-        IDoubleRange AsDoubleRange();
+        double MaxAsDouble { get; }
     }   
 }

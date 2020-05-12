@@ -8,7 +8,7 @@ namespace SciChart.Xamarin.Android.Renderer.Utility
 {
     public static class AxisHelper
     {
-        public static AxisAlignment ToXfAxisAlignemnt(Charting.Visuals.Axes.AxisAlignment androidAxisAlignment)
+        public static AxisAlignment AlignmentToXamarin(this Charting.Visuals.Axes.AxisAlignment androidAxisAlignment)
         {
             if (androidAxisAlignment == Charting.Visuals.Axes.AxisAlignment.Left) return AxisAlignment.Left;
             if (androidAxisAlignment == Charting.Visuals.Axes.AxisAlignment.Bottom) return AxisAlignment.Bottom;
@@ -20,7 +20,7 @@ namespace SciChart.Xamarin.Android.Renderer.Utility
                                               " has not been handled");
         }
 
-        public static Charting.Visuals.Axes.AxisAlignment FromXfAxisAlignment(AxisAlignment xfAxisAlignment)
+        public static Charting.Visuals.Axes.AxisAlignment AlignmentFromXamarin(this AxisAlignment xfAxisAlignment)
         {
             switch (xfAxisAlignment)
             {
@@ -35,7 +35,7 @@ namespace SciChart.Xamarin.Android.Renderer.Utility
             }
         }
 
-        public static XfAutoRange ToXfAutoRange(AndroidAutoRange nativeAutoRange)
+        public static XfAutoRange AutoRangeToXamarin(this AndroidAutoRange nativeAutoRange)
         {
             if (nativeAutoRange == AndroidAutoRange.Once) return XfAutoRange.Once;
             if (nativeAutoRange == AndroidAutoRange.Always) return XfAutoRange.Always;
@@ -44,7 +44,7 @@ namespace SciChart.Xamarin.Android.Renderer.Utility
             throw new NotImplementedException("The AutoRange value " + nativeAutoRange.ToString() + " has not been handled");
         }
 
-        public static AndroidAutoRange FromXfAutoRange(XfAutoRange xfAutoRange)
+        public static AndroidAutoRange AutoRangeFromXamarin(this XfAutoRange xfAutoRange)
         {
             switch (xfAutoRange)
             {

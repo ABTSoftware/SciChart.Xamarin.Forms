@@ -1,11 +1,13 @@
-﻿using SciChart.Xamarin.Views.Core;
+﻿using SciChart.Xamarin.Views.Common;
+using SciChart.Xamarin.Views.Core;
 using SciChart.Xamarin.Views.Model.DataSeries;
 using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
 {
-    public interface IRenderableSeries
+    public interface IRenderableSeries : INativeSciChartObjectWrapper
     {
+/*
         /// <summary>
         /// Gets or sets the Stroke. 
         /// </summary>
@@ -23,7 +25,8 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
         /// <summary>
         /// Gets or sets the StrokeThickness in pixels for this series 
         /// </summary>
-        int StrokeThickness { get; set; }
+        float StrokeThickness { get; set; }
+*/
 
         /// <summary>
         /// Gets or sets the DataSeries associated with this series
@@ -39,12 +42,5 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
         /// Gets or sets the ID of the X-Axis which this renderable series is measured against
         /// </summary>
         string XAxisId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the BindingContext (DataContext) to apply to the <see cref="IRenderableSeries"/>
-        /// </summary>        
-        object BindingContext { get; set; }
-
-        INativeRenderableSeries NativeRenderableSeries { get; }
     }
 }

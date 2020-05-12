@@ -14,15 +14,15 @@ namespace SciChart.Xamarin.Views.Model.DataSeries
         /// <param name="y">The Y Value.</param>
         void Append(TX x, TY y);
 
-        /// <summary>
-        /// Gets the X Values of this series.
-        /// </summary>
-        IList<TX> XValues { get; }
-
-        /// <summary>
-        /// Gets the Y Values of this series.
-        /// </summary>
-        IList<TY> YValues { get; }
+//        /// <summary>
+//        /// Gets the X Values of this series.
+//        /// </summary>
+//        IList<TX> XValues { get; }
+//
+//        /// <summary>
+//        /// Gets the Y Values of this series.
+//        /// </summary>
+//        IList<TY> YValues { get; }
 
     }
 }

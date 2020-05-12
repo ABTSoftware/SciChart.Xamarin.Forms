@@ -1,15 +1,13 @@
-﻿using SciChart.Xamarin.Views.Core;
+﻿using SciChart.Xamarin.Views.Common;
+using SciChart.Xamarin.Views.Core;
 using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views.Visuals.Axes
 {
-    public class AxisBase : AxisCore, IAxis
+    public abstract class AxisBase : AxisCore, IAxis
     {
-        protected AxisBase(INativeAxis nativeAxis)
+        protected AxisBase(IAxis nativeAxis) : base(nativeAxis)
         {
-            NativeAxis = nativeAxis;
         }
-
-        public INativeAxis NativeAxis { get; }
     }
 }

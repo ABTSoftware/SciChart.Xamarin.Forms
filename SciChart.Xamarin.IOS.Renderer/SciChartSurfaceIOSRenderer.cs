@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using SciChartSurfaceX = SciChart.Xamarin.Views.Visuals.SciChartSurface;
 
+[assembly: ExportRenderer(typeof(SciChartSurfaceX), typeof(SciChartSurfaceIosRenderer))]
 namespace SciChart.Xamarin.iOS.Renderer
 {
     public class SciChartSurfaceIosRenderer : ViewRenderer<SciChartSurfaceX, SCIChartSurface>

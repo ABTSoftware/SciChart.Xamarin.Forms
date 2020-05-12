@@ -1,25 +1,19 @@
 ﻿using System;
+using SciChart.Xamarin.Views.Common;
 using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views.Model
 {
-    public abstract class RangeBase
+    public abstract class RangeBase : IRange
     {
-        protected static readonly IRangeFactory Factory;
-
-        static RangeBase()
+        protected RangeBase(IRange nativeRange)
         {
-            Factory = DependencyService.Get<IRangeFactory>();
-            if (Factory == null)
-            {
-                if (Factory == null)
-                {
-                    throw new InvalidOperationException(
-                        "Cannot get Dependency IRangeFactory. Have you registered the dependency via attribute [assembly: Xamarin.Forms.Dependency(typeof(RangeFactory))] in your application?");
-                }
-            }
+            NativeRange = nativeRange;
         }
 
         public IRange NativeRange { get; protected set; }
+        public double MinAsDouble => NativeRange.MinAsDouble;
+        public double MaxAsDouble => NativeRange.MaxAsDouble;
+        public INativeSciChartObject NativeSciChartObject => NativeRange.NativeSciChartObject;
     }
 }

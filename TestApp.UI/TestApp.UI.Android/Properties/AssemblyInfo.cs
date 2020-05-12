@@ -34,9 +34,3 @@ using Xamarin.Forms;
 // Add some common permissions, these can be removed if not needed
 [assembly: UsesPermission(Android.Manifest.Permission.Internet)]
 [assembly: UsesPermission(Android.Manifest.Permission.WriteExternalStorage)]
-
-[assembly: ExportRenderer(typeof(SciChart.Xamarin.Views.Visuals.SciChartSurface), typeof(SciChartSurfaceAndroidRenderer))]
-[assembly: Xamarin.Forms.Dependency(typeof(SciChart.Xamarin.Android.Renderer.DependencyService.RangeFactoryAndroid))]
-[assembly: Xamarin.Forms.Dependency(typeof(SciChart.Xamarin.Android.Renderer.DependencyService.DataSeriesFactoryAndroid))]
-[assembly: Xamarin.Forms.Dependency(typeof(SciChart.Xamarin.Android.Renderer.DependencyService.AxisFactoryAndroid))]
-[assembly: Xamarin.Forms.Dependency(typeof(SciChart.Xamarin.Android.Renderer.DependencyService.RenderableSeriesFactoryAndroid))]

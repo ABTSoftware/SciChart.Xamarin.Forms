@@ -23,7 +23,11 @@ namespace TestApp.UI
             ChartTitle = "Hello World!";
             LineStroke = Color.FromHex("#FFFF6600");
             StrokeThickness = 1;
+
+            XRange = new DoubleRange(30, 50);
         }
+
+        public IRange XRange { get; set; }
 
         public IXyDataSeries<double, double> LineSeries
         {

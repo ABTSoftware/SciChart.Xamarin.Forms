@@ -7,7 +7,7 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
 {
     internal static class AxisHelper
     {
-        internal static AxisAlignment ToXfAxisAlignemnt(SCIAxisAlignment iosAxisAlignment)
+        internal static AxisAlignment AlignmentToXamarin(this SCIAxisAlignment iosAxisAlignment)
         {
             if (iosAxisAlignment == SCIAxisAlignment.Left) return AxisAlignment.Left;
             if (iosAxisAlignment == SCIAxisAlignment.Bottom) return AxisAlignment.Bottom;
@@ -19,7 +19,7 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
                                               " has not been handled");
         }
 
-        internal static SCIAxisAlignment FromXfAxisAlignment(AxisAlignment xfAxisAlignment)
+        internal static SCIAxisAlignment AlignmentFromXamarin(this AxisAlignment xfAxisAlignment)
         {
             switch (xfAxisAlignment)
             {
@@ -34,12 +34,12 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
             }
         }
 
-        public static AutoRange ToXfAutoRange(SCIAutoRange autoRange)
+        public static AutoRange AutoRangeToXamarin(this SCIAutoRange autoRange)
         {
             throw new NotImplementedException();
         }
 
-        public static SCIAutoRange FromXfAutoRange(AutoRange value)
+        public static SCIAutoRange AutoRangeFromXamarin(this AutoRange value)
         {
             throw new NotImplementedException();
         }

@@ -6,7 +6,7 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
 {
     public static class ColorUtil
     {
-        public static UIColor FromXamarinColor(Color xfColor)
+        public static UIColor ColorFromXamarin(this Color xfColor)
         {
             UIKit.UIColor uiColor = UIColor.FromRGBA(
                 (byte)(xfColor.R * 255),
@@ -17,21 +17,21 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
             return uiColor;
         }
 
-        private static Color ToXamarinColor(UIColor color)
+        private static Color ColorToXamarin(this UIColor color)
         {
             System.nfloat r, g, b, a;
             color.GetRGBA(out r, out g, out b, out a);
             return new Color(r, g, b, a);
         }
 
-        public static Color BrushToXamarinColor(SCIBrushStyle sciBrush)
+        public static Color BrushStyleToXamarin(this SCIBrushStyle sciBrush)
         {
-            return ToXamarinColor(sciBrush.Color);
+            return ColorToXamarin(sciBrush.Color);
         }        
 
-        public static SCIBrushStyle BrushFromXamarinColor(Color value)
+        public static SCIBrushStyle BrushStyleFromXamarin(this Color value)
         {
-            return new SCISolidBrushStyle(FromXamarinColor(value));
+            return new SCISolidBrushStyle(ColorFromXamarin(value));
         }
     }
 }

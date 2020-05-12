@@ -1,23 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SciChart.Xamarin.Views.Common;
+using SciChart.Xamarin.Views.Generation;
+using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views.Model
 {
     public interface IDoubleRange : IRange
     {
-        new double Min { get; set; }
-        new double Max { get; set; }
+        double Min { get; set; }
+        double Max { get; set; }
     }
 
     /// <summary>
     /// Defines a range of type <see cref="System.Double"/>
     /// </summary>
+    [ClassDeclaration(typeof(IDoubleRange), "DoubleRange", "SCIDoubleRange")]
     public class DoubleRange : RangeBase, IDoubleRange
-    {        
-        public DoubleRange()
+    {
+        public DoubleRange(IRange nativeRange) : base(nativeRange)
         {
-            NativeRange = Factory.NewDoubleRange(0,0);
+        }
+
+        public DoubleRange() : base(DependencyService.Get<INativeSciChartObjectFactory>().NewDoubleRange())
+        {
         }
 
         /// <summary>
@@ -26,9 +33,8 @@ namespace SciChart.Xamarin.Views.Model
         /// <param name="min">The min.</param>
         /// <param name="max">The max.</param>
         /// <remarks></remarks>
-        public DoubleRange(double min, double max) 
+        public DoubleRange(double min, double max) : base(DependencyService.Get<INativeSciChartObjectFactory>().NewDoubleRange(min, max)) 
         {
-            NativeRange = Factory.NewDoubleRange(min, max);
         }
 
         public double Min
@@ -41,18 +47,6 @@ namespace SciChart.Xamarin.Views.Model
         {
             get => ((IDoubleRange)NativeRange).Max;
             set => ((IDoubleRange)NativeRange).Max = value;
-        }
-
-        IComparable IRange.Min
-        {
-            get => ((IDoubleRange)NativeRange).Min;
-            set => ((IDoubleRange)NativeRange).Min = (double)value;
-        }
-
-        IComparable IRange.Max
-        {
-            get => ((IDoubleRange)NativeRange).Max;
-            set => ((IDoubleRange)NativeRange).Max = (double)value;
         }
 
         public IDoubleRange AsDoubleRange()

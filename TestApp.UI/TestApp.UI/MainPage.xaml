@@ -24,7 +24,7 @@
             </visuals:SciChartSurface.RenderableSeries>
 
             <visuals:SciChartSurface.XAxes>
-                <axes:NumericAxis/>
+                <axes:NumericAxis VisibleRange="{Binding XRange}"/>
             </visuals:SciChartSurface.XAxes>
 
             <visuals:SciChartSurface.YAxes>

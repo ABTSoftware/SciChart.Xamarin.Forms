@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using SciChart.Xamarin.Views.Common;
 
 namespace SciChart.Xamarin.Views.Model.DataSeries
 {
-    public interface IDataSeries
+    public interface IDataSeries : INativeSciChartObjectWrapper
     {
         /// <summary>
         /// Gets or sets the name of this series.
