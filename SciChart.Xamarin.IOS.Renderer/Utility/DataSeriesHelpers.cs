@@ -1,16 +1,17 @@
 ﻿using System;
 using SciChart.iOS.Charting;
+using IDataSeries = SciChart.Xamarin.Views.Model.DataSeries.IDataSeries;
 
 namespace SciChart.Xamarin.iOS.Renderer.Utility
 {
     public static class DataSeriesHelpers
     {
-        public static SciChart.iOS.Charting.IDataSeries DataSeriesFromXamarin(this Views.Model.DataSeries.IDataSeries dataSeries)
+        public static SciChart.iOS.Charting.IDataSeries DataSeriesFromXamarin(this IDataSeries dataSeries)
         {
             return dataSeries.NativeSciChartObject as SciChart.iOS.Charting.IDataSeries;
         }
 
-        public static Views.Model.DataSeries.IDataSeries DataSeriesToXamarin(this IISCIDataSeries dataSeries)
+        public static IDataSeries DataSeriesToXamarin(this IISCIDataSeries dataSeries)
         {
             switch (dataSeries)
             {
@@ -18,7 +19,7 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
                     return new Views.Model.DataSeries.XyDataSeries<double, double>(xyDataSeries);
 
                 default:
-                    throw new InvalidOperationException("Unsupported type of data series");
+                    return null;
             }
         }
     }

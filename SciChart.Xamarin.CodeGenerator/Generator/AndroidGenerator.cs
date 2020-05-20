@@ -3,15 +3,16 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using Mono.Cecil;
 using Mono.Cecil.Rocks;
-using SciChart.Xamarin.Views;
-using SciChart.Xamarin.Views.Generation;
+using SciChart.Xamarin.CodeGenerator.Information;
+using SciChart.Xamarin.CodeGenerator.Information.Extraction;
+using SciChart.Xamarin.CodeGenerator.Utility;
+using SciChart.Xamarin.Views.Core.Generation;
 
 namespace SciChart.Xamarin.CodeGenerator.Generator
 {
-    public class AndroidGenerator : GeneratorBase
+    public class AndroidGenerator : MobileGeneratorBase<AndroidTypeInformation>
     {
         private readonly List<TypeDefinition> _androidNativeTypes = new List<TypeDefinition>();
 
@@ -19,13 +20,16 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
         {
             {"Android.App.Application", "AndroidApplication"},
             {"Android.Content.Context", "AndroidContext" },
+            {"Android.Util.IAttributeSet", "IAndroidAttributesSet" }
         };
 
-        public AndroidGenerator(string sciChartAndroidVersion) : base("Android", "SciChart.Xamarin.Android.Renderer")
+        public AndroidGenerator(string sciChartAndroidVersion, ITypeInformationExtractor<AndroidTypeInformation> typeInformationExtractor) : base(typeInformationExtractor, "Android", "SciChart.Xamarin.Android.Renderer")
         {
             MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Data.Model"));
             MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Charting.Visuals.RenderableSeries"));
             MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Charting.Visuals.Axes"));
+            MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Charting.Visuals.Annotations"));
+            MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Charting.Modifiers"));
             MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Charting.Model.DataSeries"));
             MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Android.Renderer.Utility"));
 
@@ -56,12 +60,12 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
             }
         }
 
-        protected override void InitType(Type classType, PlatformTypeInformation information,
+        protected override void InitType(Type classType, AndroidTypeInformation information,
             CodeTypeDeclaration typeDeclaration)
         {
             base.InitType(classType, information, typeDeclaration);
 
-            if (Attribute.IsDefined(classType, typeof(InjectAndroidContext)))
+            if (information.InjectContextIntoConstructor)
             {
                 var constructor = new CodeConstructor()
                 {
@@ -76,7 +80,7 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
                 typeDeclaration.Members.Add(constructor);
             }
 
-            var nativeClassDefinition = _androidNativeTypes.Single(definition => definition.Name == information.ReflectionNativeTypeName);
+            var nativeClassDefinition = _androidNativeTypes.Single(definition => definition.Name == information.ReflectionBaseTypeName);
             foreach (var nativeConstructor in nativeClassDefinition.GetConstructors())
             {
                 // skip internal Xamarin.Android constructor
@@ -106,11 +110,6 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
              
                 typeDeclaration.Members.Add(constructor);
             }
-        }
-
-        protected override PlatformTypeInformation GetTypeInformation(ClassDeclaration declaration)
-        {
-            return declaration.GetInformationFor(SciChartPlatform.Android);
         }
     }
 }

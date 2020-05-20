@@ -62,6 +62,10 @@
     <Compile Include="Stubs\StubRenderableSeries.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SciChart.Xamarin.Views.Core\SciChart.Xamarin.Views.Core.csproj">
+      <Project>{DE5F45BB-0FE0-437C-A9AA-2C2A0819C4B9}</Project>
+      <Name>SciChart.Xamarin.Views.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SciChart.Xamarin.Views\SciChart.Xamarin.Views.csproj">
       <Project>{bb9c0929-f674-408e-9a1a-c58334248e7a}</Project>
       <Name>SciChart.Xamarin.Views</Name>

@@ -1,5 +1,4 @@
 ﻿using System;
-using SciChart.Xamarin.Views.Model;
 using SciChart.Xamarin.Views.Visuals.Axes;
 using AndroidAutoRange = SciChart.Charting.Visuals.Axes.AutoRange;
 using XfAutoRange = SciChart.Xamarin.Views.Visuals.Axes.AutoRange;

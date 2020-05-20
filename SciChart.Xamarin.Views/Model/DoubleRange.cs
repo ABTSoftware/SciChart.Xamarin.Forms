@@ -1,23 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SciChart.Xamarin.Views.Common;
-using SciChart.Xamarin.Views.Generation;
+﻿using SciChart.Xamarin.Views.Core.Common;
 using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views.Model
 {
-    public interface IDoubleRange : IRange
-    {
-        double Min { get; set; }
-        double Max { get; set; }
-    }
+
 
     /// <summary>
     /// Defines a range of type <see cref="System.Double"/>
     /// </summary>
-    [ClassDeclaration(typeof(IDoubleRange), "DoubleRange", "SCIDoubleRange")]
-    public class DoubleRange : RangeBase, IDoubleRange
+    public partial class DoubleRange : RangeBase, IDoubleRange
     {
         public DoubleRange(IRange nativeRange) : base(nativeRange)
         {
@@ -47,11 +38,6 @@ namespace SciChart.Xamarin.Views.Model
         {
             get => ((IDoubleRange)NativeRange).Max;
             set => ((IDoubleRange)NativeRange).Max = value;
-        }
-
-        public IDoubleRange AsDoubleRange()
-        {
-            return this;
         }
     }
 }

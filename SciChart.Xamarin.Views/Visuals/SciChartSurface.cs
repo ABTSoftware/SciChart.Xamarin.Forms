@@ -1,6 +1,7 @@
 ﻿using System.Collections.Specialized;
-using SciChart.Xamarin.Views.Common;
 using SciChart.Xamarin.Views.Core;
+using SciChart.Xamarin.Views.Core.Common;
+using SciChart.Xamarin.Views.Model.ObservableCollection;
 using SciChart.Xamarin.Views.Visuals.Annotations;
 using SciChart.Xamarin.Views.Visuals.Axes;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;

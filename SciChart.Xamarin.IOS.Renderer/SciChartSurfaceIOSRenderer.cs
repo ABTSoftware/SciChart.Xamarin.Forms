@@ -1,7 +1,5 @@
-﻿using System.ComponentModel;
-using SciChart.iOS.Charting;
+﻿using SciChart.iOS.Charting;
 using SciChart.Xamarin.iOS.Renderer;
-using SciChart.Xamarin.Views;
 using SciChart.Xamarin.Views.Utility;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;

@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using SciChart.Xamarin.Views.Core.Common;
 using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views
 {
-    public enum SciChartPlatform
-    {
-        iOS,
-        Android
-    }
-
     public class SciChartLicenseManager : IDisposable
     {
         private readonly IDictionary<SciChartPlatform, string> _licenses = new Dictionary<SciChartPlatform, string>();

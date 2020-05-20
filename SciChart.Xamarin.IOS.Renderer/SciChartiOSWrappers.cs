@@ -16,7 +16,7 @@ namespace SciChart.Xamarin.iOS.Renderer
 	using SciChart.Xamarin.iOS.Renderer.Utility;
 	
 	
-	public partial class FastLineRenderableSeriesiOS : SCIFastLineRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastLineRenderableSeries, SciChart.Xamarin.Views.Common.INativeSciChartObject
+	public partial class FastLineRenderableSeriesiOS : SCIFastLineRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastLineRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
 		public FastLineRenderableSeriesiOS()
@@ -35,7 +35,7 @@ namespace SciChart.Xamarin.iOS.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Common.INativeSciChartObject NativeSciChartObject
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
 			{
@@ -44,7 +44,7 @@ namespace SciChart.Xamarin.iOS.Renderer
 		}
 	}
 	
-	public partial class NumericAxisiOS : SCINumericAxis, SciChart.Xamarin.Views.Visuals.Axes.INumericAxis, SciChart.Xamarin.Views.Common.INativeSciChartObject
+	public partial class NumericAxisiOS : SCINumericAxis, SciChart.Xamarin.Views.Visuals.Axes.INumericAxis, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
 		public NumericAxisiOS()
@@ -99,7 +99,7 @@ namespace SciChart.Xamarin.iOS.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Common.INativeSciChartObject NativeSciChartObject
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
 			{
@@ -108,7 +108,23 @@ namespace SciChart.Xamarin.iOS.Renderer
 		}
 	}
 	
-	public partial class DoubleRangeiOS : SCIDoubleRange, SciChart.Xamarin.Views.Model.IDoubleRange, SciChart.Xamarin.Views.Common.INativeSciChartObject
+	public partial class BoxAnnotationiOS : SCIBoxAnnotation, SciChart.Xamarin.Views.Visuals.Annotations.IBoxAnnotation, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public BoxAnnotationiOS()
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class DoubleRangeiOS : SCIDoubleRange, SciChart.Xamarin.Views.Model.IDoubleRange, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
 		public DoubleRangeiOS()
@@ -125,7 +141,7 @@ namespace SciChart.Xamarin.iOS.Renderer
 		{
 		}
 		
-		public SciChart.Xamarin.Views.Common.INativeSciChartObject NativeSciChartObject
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
 			{
@@ -134,7 +150,7 @@ namespace SciChart.Xamarin.iOS.Renderer
 		}
 	}
 	
-	public partial class XyDataSeriesiOS<TX, TY> : XyDataSeries<TX,TY>, SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY>, SciChart.Xamarin.Views.Common.INativeSciChartObject
+	public partial class XyDataSeriesiOS<TX, TY> : XyDataSeries<TX,TY>, SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY>, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 		where TX : System.IComparable
 		where TY : System.IComparable
 	{
@@ -143,7 +159,28 @@ namespace SciChart.Xamarin.iOS.Renderer
 		{
 		}
 		
-		public SciChart.Xamarin.Views.Common.INativeSciChartObject NativeSciChartObject
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class ZoomPanModifieriOS : SCIZoomPanModifier, SciChart.Xamarin.Views.Core.Modifiers.IZoomPanModifier, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public ZoomPanModifieriOS()
+		{
+		}
+		
+		public ZoomPanModifieriOS(System.nuint defaultNumberOfTouches) : 
+				base(defaultNumberOfTouches)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
 			{

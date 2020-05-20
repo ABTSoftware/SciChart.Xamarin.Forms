@@ -1,6 +1,5 @@
 ﻿using System;
 using SciChart.iOS.Charting;
-using SciChart.Xamarin.Views.Model;
 using SciChart.Xamarin.Views.Visuals.Axes;
 
 namespace SciChart.Xamarin.iOS.Renderer.Utility

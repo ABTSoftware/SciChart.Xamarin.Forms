@@ -1,9 +1,9 @@
 ﻿using SciChart.iOS.Charting;
-using SciChart.Xamarin.iOS.Renderer.DependencyService;
 using SciChart.Xamarin.Views;
+using SciChart.Xamarin.Views.Core.Common;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(SciChartiOSLicenseProvider))]
+[assembly: Dependency(typeof(SciChart.Xamarin.iOS.Renderer.DependencyService.SciChartiOSLicenseProvider))]
 namespace SciChart.Xamarin.iOS.Renderer.DependencyService
 {
     public class SciChartiOSLicenseProvider : INativeSciChartLicenseProvider

@@ -1,6 +1,6 @@
 ﻿using Java.Lang;
 using SciChart.Xamarin.Android.Renderer.DependencyService;
-using SciChart.Xamarin.Views.Core;
+using SciChart.Xamarin.Views.Model.ObservableCollection;
 using SciChart.Xamarin.Views.Visuals.Axes;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;
 using Xamarin.Forms;

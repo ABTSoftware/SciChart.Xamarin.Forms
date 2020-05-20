@@ -5,16 +5,17 @@ using System.IO;
 using System.Linq;
 using Mono.Cecil;
 using Mono.Cecil.Rocks;
-using SciChart.Xamarin.Views;
-using SciChart.Xamarin.Views.Generation;
+using SciChart.Xamarin.CodeGenerator.Information;
+using SciChart.Xamarin.CodeGenerator.Information.Extraction;
+using SciChart.Xamarin.Views.Core.Generation;
 
 namespace SciChart.Xamarin.CodeGenerator.Generator
 {
-    public class iOSGenerator : GeneratorBase
+    public class iOSGenerator : MobileGeneratorBase<iOSTypeInformation>
     {
         private readonly List<TypeDefinition> _iOSNativeTypes = new List<TypeDefinition>();
 
-        public iOSGenerator(string sciChartiOSVersion) : base("iOS", "SciChart.Xamarin.iOS.Renderer")
+        public iOSGenerator(string sciChartiOSVersion, ITypeInformationExtractor<iOSTypeInformation> typeInformationExtractor) : base(typeInformationExtractor, "iOS", "SciChart.Xamarin.iOS.Renderer")
         {
             MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.iOS.Charting"));
             MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.iOS.Renderer.Utility"));
@@ -26,16 +27,11 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
             _iOSNativeTypes.AddRange(charting.Types);
         }
 
-        protected override PlatformTypeInformation GetTypeInformation(ClassDeclaration declaration)
-        {
-            return declaration.GetInformationFor(SciChartPlatform.iOS);
-        }
-
-        protected override void InitType(Type classType, PlatformTypeInformation information, CodeTypeDeclaration typeDeclaration)
+        protected override void InitType(Type classType, iOSTypeInformation information, CodeTypeDeclaration typeDeclaration)
         {
             base.InitType(classType, information, typeDeclaration);
 
-            var nativeClassDefinition = _iOSNativeTypes.Single(definition => definition.Name == information.ReflectionNativeTypeName);
+            var nativeClassDefinition = _iOSNativeTypes.Single(definition => definition.Name == information.ReflectionBaseTypeName);
             foreach (var nativeConstructor in nativeClassDefinition.GetConstructors())
             {
                 // skip internal Xamarin.iOS constructors

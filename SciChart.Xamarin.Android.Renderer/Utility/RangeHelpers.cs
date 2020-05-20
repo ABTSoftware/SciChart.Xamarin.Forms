@@ -17,10 +17,10 @@ namespace SciChart.Xamarin.Android.Renderer.Utility
             {
                 case DoubleRangeAndroid doubleRange:
                     return new DoubleRange(doubleRange);
-                    
+
 
                 default:
-                    throw new InvalidOperationException("Unsupported type of range");
+                    return null;
             }
         }
     }

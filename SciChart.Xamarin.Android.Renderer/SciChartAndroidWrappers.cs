@@ -9,6 +9,7 @@
 
 using AndroidApplication = Android.App.Application;
 using AndroidContext = Android.Content.Context;
+using IAndroidAttributesSet = Android.Util.IAttributeSet;
 using Xamarin.Forms;
 
 
@@ -17,11 +18,13 @@ namespace SciChart.Xamarin.Android.Renderer
 	using SciChart.Data.Model;
 	using SciChart.Charting.Visuals.RenderableSeries;
 	using SciChart.Charting.Visuals.Axes;
+	using SciChart.Charting.Visuals.Annotations;
+	using SciChart.Charting.Modifiers;
 	using SciChart.Charting.Model.DataSeries;
 	using SciChart.Xamarin.Android.Renderer.Utility;
 	
 	
-	public partial class FastLineRenderableSeriesAndroid : FastLineRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastLineRenderableSeries, SciChart.Xamarin.Views.Common.INativeSciChartObject
+	public partial class FastLineRenderableSeriesAndroid : FastLineRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastLineRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
 		public FastLineRenderableSeriesAndroid()
@@ -45,7 +48,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Common.INativeSciChartObject NativeSciChartObject
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
 			{
@@ -54,7 +57,7 @@ namespace SciChart.Xamarin.Android.Renderer
 		}
 	}
 	
-	public partial class NumericAxisAndroid : NumericAxis, SciChart.Xamarin.Views.Visuals.Axes.INumericAxis, SciChart.Xamarin.Views.Common.INativeSciChartObject
+	public partial class NumericAxisAndroid : NumericAxis, SciChart.Xamarin.Views.Visuals.Axes.INumericAxis, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
 		public NumericAxisAndroid() : 
@@ -125,7 +128,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Common.INativeSciChartObject NativeSciChartObject
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
 			{
@@ -134,7 +137,44 @@ namespace SciChart.Xamarin.Android.Renderer
 		}
 	}
 	
-	public partial class DoubleRangeAndroid : DoubleRange, SciChart.Xamarin.Views.Model.IDoubleRange, SciChart.Xamarin.Views.Common.INativeSciChartObject
+	public partial class BoxAnnotationAndroid : BoxAnnotation, SciChart.Xamarin.Views.Visuals.Annotations.IBoxAnnotation, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public BoxAnnotationAndroid() : 
+				base(AndroidApplication.Context)
+		{
+		}
+		
+		public BoxAnnotationAndroid(AndroidContext context) : 
+				base(context)
+		{
+		}
+		
+		public BoxAnnotationAndroid(AndroidContext context, IAndroidAttributesSet attrs) : 
+				base(context, attrs)
+		{
+		}
+		
+		public BoxAnnotationAndroid(AndroidContext context, IAndroidAttributesSet attrs, int defStyleAttr) : 
+				base(context, attrs, defStyleAttr)
+		{
+		}
+		
+		public BoxAnnotationAndroid(AndroidContext context, IAndroidAttributesSet attrs, int defStyleAttr, int defStyleRes) : 
+				base(context, attrs, defStyleAttr, defStyleRes)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class DoubleRangeAndroid : DoubleRange, SciChart.Xamarin.Views.Model.IDoubleRange, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
 		public DoubleRangeAndroid(double min, double max) : 
@@ -156,7 +196,7 @@ namespace SciChart.Xamarin.Android.Renderer
 		{
 		}
 		
-		public SciChart.Xamarin.Views.Common.INativeSciChartObject NativeSciChartObject
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
 			{
@@ -165,7 +205,7 @@ namespace SciChart.Xamarin.Android.Renderer
 		}
 	}
 	
-	public partial class XyDataSeriesAndroid<TX, TY> : XyDataSeries<TX,TY>, SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY>, SciChart.Xamarin.Views.Common.INativeSciChartObject
+	public partial class XyDataSeriesAndroid<TX, TY> : XyDataSeries<TX,TY>, SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY>, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 		where TX : System.IComparable
 		where TY : System.IComparable
 	{
@@ -174,7 +214,23 @@ namespace SciChart.Xamarin.Android.Renderer
 		{
 		}
 		
-		public SciChart.Xamarin.Views.Common.INativeSciChartObject NativeSciChartObject
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class ZoomPanModifierAndroid : ZoomPanModifier, SciChart.Xamarin.Views.Core.Modifiers.IZoomPanModifier, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public ZoomPanModifierAndroid()
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
 			{

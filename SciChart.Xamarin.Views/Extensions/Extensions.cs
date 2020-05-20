@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SciChart.Xamarin.Views.Core.Common;
+using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views
 {
@@ -25,6 +27,16 @@ namespace SciChart.Xamarin.Views
             }
 
             throw new InvalidCastException($"Target of type {target.GetType()} can't be cast to {typeof(T)}");
+        }
+
+        internal static T CastBindableWrapper<T>(this BindableObject bindable) where T : class
+        {
+            return bindable.Cast<INativeSciChartObjectWrapper>().NativeSciChartObject.Cast<T>();
+        }
+
+        internal static T CastSciChartObject<T>(this INativeSciChartObject sciChartObject) where T : class
+        {
+            return sciChartObject.Cast<T>();
         }
     }
 

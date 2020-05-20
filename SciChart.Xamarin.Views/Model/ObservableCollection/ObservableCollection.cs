@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
+using SciChart.Xamarin.Views.Core;
 
-namespace SciChart.Xamarin.Views.Core
+namespace SciChart.Xamarin.Views.Model.ObservableCollection
 {
     public class ObservableCollection<T> : System.Collections.ObjectModel.ObservableCollection<T>
     {

@@ -1,15 +1,18 @@
-﻿using SciChart.Xamarin.Views.Common;
-using SciChart.Xamarin.Views.Generation;
+﻿using SciChart.Xamarin.Views.Core.Common;
 using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views.Visuals.Axes
 {
-    [ClassDeclaration(typeof(INumericAxis), "NumericAxis", "SCINumericAxis")]
-    public class NumericAxis : AxisBase, INumericAxis
+    public partial class NumericAxis : AxisBase
     {
         public NumericAxis() : base(DependencyService.Get<INativeSciChartObjectFactory>().NewNumericAxis())
         {
 
+        }
+
+        private static object Test(BindableObject bindable)
+        {
+            return bindable.CastBindableWrapper<INumericAxis>().AutoRange;
         }
     }
 }

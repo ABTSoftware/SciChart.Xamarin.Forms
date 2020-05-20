@@ -20,7 +20,7 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
 
 
                 default:
-                    throw new InvalidOperationException();
+                    return null;
             }
         }
     }

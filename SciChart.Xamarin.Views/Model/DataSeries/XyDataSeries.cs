@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SciChart.Xamarin.Views.Common;
-using SciChart.Xamarin.Views.Generation;
+using SciChart.Xamarin.Views.Core.Common;
 using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views.Model.DataSeries
 {
-    [GenericClassDeclaration(typeof(IXyDataSeries<IComparable,IComparable>), "XyDataSeries", "XyDataSeries", "TX", "TY")]
-    public class XyDataSeries<TX,TY> : CrossPlatformDataSeriesBase, IXyDataSeries<TX,TY>  
+    public partial class XyDataSeries<TX,TY> : CrossPlatformDataSeriesBase, IXyDataSeries<TX,TY>  
         where TX:IComparable
         where TY:IComparable
     {
@@ -18,11 +14,6 @@ namespace SciChart.Xamarin.Views.Model.DataSeries
 
         public XyDataSeries() : base(DependencyService.Get<INativeSciChartObjectFactory>().NewXyDataSeries<TX, TY>())
         {
-        }
-
-        public void Append(TX x, TY y)
-        {
-            ((IXyDataSeries<TX,TY>)InnerSeries).Append(x,y);
         }
 //
 //        public IList<TX> XValues

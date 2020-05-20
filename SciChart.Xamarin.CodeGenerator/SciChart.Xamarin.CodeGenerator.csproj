@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SciChart.Xamarin.Views\SciChart.Xamarin.Views.csproj" />
+    <ProjectReference Include="..\SciChart.Xamarin.Views.Core\SciChart.Xamarin.Views.Core.csproj" />
   </ItemGroup>
 
 </Project>

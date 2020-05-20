@@ -1,5 +1,5 @@
 ﻿using SciChart.Xamarin.Android.Renderer;
-using SciChart.Xamarin.Views.Common;
+using SciChart.Xamarin.Views.Core.Common;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(AndroidFactory))]

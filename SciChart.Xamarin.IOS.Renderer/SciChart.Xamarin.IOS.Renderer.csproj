@@ -72,6 +72,10 @@
     <Compile Include="Utility\RangeHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SciChart.Xamarin.Views.Core\SciChart.Xamarin.Views.Core.csproj">
+      <Project>{de5f45bb-0fe0-437c-a9aa-2c2a0819c4b9}</Project>
+      <Name>SciChart.Xamarin.Views.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SciChart.Xamarin.Views\SciChart.Xamarin.Views.csproj">
       <Project>{BB9C0929-F674-408E-9A1A-C58334248E7A}</Project>
       <Name>SciChart.Xamarin.Views</Name>

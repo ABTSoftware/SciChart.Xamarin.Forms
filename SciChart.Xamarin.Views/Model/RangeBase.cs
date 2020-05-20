@@ -1,10 +1,8 @@
-﻿using System;
-using SciChart.Xamarin.Views.Common;
-using Xamarin.Forms;
+﻿using SciChart.Xamarin.Views.Core.Common;
 
 namespace SciChart.Xamarin.Views.Model
 {
-    public abstract class RangeBase : IRange
+    public abstract partial class RangeBase : IRange
     {
         protected RangeBase(IRange nativeRange)
         {

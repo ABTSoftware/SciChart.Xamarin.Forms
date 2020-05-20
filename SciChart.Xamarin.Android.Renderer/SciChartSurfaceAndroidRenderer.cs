@@ -1,14 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using Android.Content;
-using Java.Util;
+﻿using Android.Content;
 using SciChart.Charting.Visuals;
-using SciChart.Charting.Visuals.Axes;
-using SciChart.Data.Model;
 using SciChart.Drawing.Canvas;
-using SciChart.Drawing.OpenGL;
 using SciChart.Xamarin.Android.Renderer;
-using SciChart.Xamarin.Views;
 using SciChart.Xamarin.Views.Utility;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;

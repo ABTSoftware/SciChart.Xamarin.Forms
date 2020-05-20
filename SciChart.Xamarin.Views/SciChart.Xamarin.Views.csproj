@@ -18,6 +18,15 @@
 
   <ItemGroup>
     <Folder Include="Numerics\GenericMath\" />
+    <Folder Include="Visuals\Annotations\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SciChart.Xamarin.Views.Core\SciChart.Xamarin.Views.Core.csproj" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="&quot;$(SolutionDir)SciChart.Xamarin.CodeGenerator\bin\$(ConfigurationName)\netcoreapp3.1\SciChart.Xamarin.CodeGenerator.exe&quot; $(SolutionDir)" />
+  </Target>
 
 </Project>

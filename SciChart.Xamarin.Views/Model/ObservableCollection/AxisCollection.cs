@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using SciChart.Xamarin.Views.Core;
 using SciChart.Xamarin.Views.Visuals.Axes;
 using Xamarin.Forms;
 
-namespace SciChart.Xamarin.Views.Core
+namespace SciChart.Xamarin.Views.Model.ObservableCollection
 {
     public class AxisCollection : ObservableCollection<IAxis>
     {

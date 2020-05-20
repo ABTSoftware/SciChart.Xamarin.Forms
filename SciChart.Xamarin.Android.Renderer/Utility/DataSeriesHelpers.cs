@@ -19,7 +19,7 @@ namespace SciChart.Xamarin.Android.Renderer.Utility
                     return new XyDataSeries<double, double>(xyDataSeries);
 
                 default:
-                    throw new InvalidOperationException("Unsupported type of data series");
+                    return null;
             }
         }
     }

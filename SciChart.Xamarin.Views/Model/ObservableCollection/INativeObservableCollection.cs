@@ -1,11 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using SciChart.Xamarin.Views.Visuals.Axes;
+﻿using SciChart.Xamarin.Views.Visuals.Axes;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;
 
-namespace SciChart.Xamarin.Views.Core
+namespace SciChart.Xamarin.Views.Model.ObservableCollection
 {
     public interface INativeObservableCollection<T>
     {

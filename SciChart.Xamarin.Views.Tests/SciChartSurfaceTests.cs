@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using SciChart.Xamarin.Views.Core;
+using SciChart.Xamarin.Views.Model.ObservableCollection;
 using SciChart.Xamarin.Views.Tests.Stubs;
 using SciChart.Xamarin.Views.Visuals;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;

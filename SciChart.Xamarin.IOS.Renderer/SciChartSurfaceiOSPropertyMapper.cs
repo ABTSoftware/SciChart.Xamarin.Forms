@@ -1,7 +1,4 @@
-﻿using System;
-using SciChart.iOS.Charting;
-using SciChart.Xamarin.iOS.Renderer.DependencyService;
-using SciChart.Xamarin.iOS.Renderer.Utility;
+﻿using SciChart.iOS.Charting;
 using SciChart.Xamarin.Views.Utility;
 using SciChartSurfaceX = SciChart.Xamarin.Views.Visuals.SciChartSurface;
 
