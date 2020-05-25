@@ -1,6 +1,8 @@
 ﻿using Java.Lang;
 using SciChart.Xamarin.Android.Renderer.DependencyService;
 using SciChart.Xamarin.Views.Model.ObservableCollection;
+using SciChart.Xamarin.Views.Modifiers;
+using SciChart.Xamarin.Views.Visuals.Annotations;
 using SciChart.Xamarin.Views.Visuals.Axes;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;
 using Xamarin.Forms;
@@ -18,6 +20,16 @@ namespace SciChart.Xamarin.Android.Renderer.DependencyService
         public INativeObservableCollection<IAxis> NewAxisCollection()
         {
             return new AxisCollectionAndroid();
+        }
+
+        public INativeObservableCollection<IAnnotation> NewAnnotationCollection()
+        {
+            return new AnnotationsCollectionAndroid();
+        }
+
+        public INativeObservableCollection<IChartModifier> NewChartModifierCollection()
+        {
+            return new ChartModifierCollectionAndroid();
         }
     }
 
@@ -72,6 +84,62 @@ namespace SciChart.Xamarin.Android.Renderer.DependencyService
         }
 
         public void SetItem(int index, IRenderableSeries item)
+        {
+            base.Set(index, item.NativeSciChartObject as Object);
+        }
+    }
+
+    public class ChartModifierCollectionAndroid : Charting.Model.ChartModifierCollection, INativeObservableCollection<IChartModifier>
+    {
+        public void ClearItems()
+        {
+            base.Clear();
+        }
+
+        public void InsertItem(int index, IChartModifier item)
+        {
+            base.Insert(index, item.NativeSciChartObject as Charting.Modifiers.IChartModifier);
+        }
+
+        public void MoveItem(int oldIndex, int newIndex)
+        {
+            base.Insert(newIndex, (Charting.Modifiers.IChartModifier)base.Remove(oldIndex));
+        }
+
+        public void RemoveItem(int index)
+        {
+            base.RemoveAt(index);
+        }
+
+        public void SetItem(int index, IChartModifier item)
+        {
+            base.Set(index, item.NativeSciChartObject as Object);
+        }
+    }
+
+    public class AnnotationsCollectionAndroid : Charting.Model.AnnotationCollection, INativeObservableCollection<IAnnotation>
+    {
+        public void ClearItems()
+        {
+            base.Clear();
+        }
+
+        public void InsertItem(int index, IAnnotation item)
+        {
+            base.Insert(index, item.NativeSciChartObject as Charting.Visuals.Annotations.IAnnotation);
+        }
+
+        public void MoveItem(int oldIndex, int newIndex)
+        {
+            base.Insert(newIndex, (Charting.Visuals.Annotations.IAnnotation) base.Remove(oldIndex));
+        }
+
+        public void RemoveItem(int index)
+        {
+            base.RemoveAt(index);
+        }
+
+        public void SetItem(int index, IAnnotation item)
         {
             base.Set(index, item.NativeSciChartObject as Object);
         }

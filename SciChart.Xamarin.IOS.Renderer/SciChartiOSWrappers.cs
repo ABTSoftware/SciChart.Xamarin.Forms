@@ -115,6 +115,75 @@ namespace SciChart.Xamarin.iOS.Renderer
 		{
 		}
 		
+		public System.IComparable X1
+		{
+			get
+			{
+				return base.X1Value;
+			}
+			set
+			{
+				base.X1Value = value;
+			}
+		}
+		
+		public System.IComparable X2
+		{
+			get
+			{
+				return base.X2Value;
+			}
+			set
+			{
+				base.X2Value = value;
+			}
+		}
+		
+		public System.IComparable Y1
+		{
+			get
+			{
+				return base.Y1Value;
+			}
+			set
+			{
+				base.Y1Value = value;
+			}
+		}
+		
+		public System.IComparable Y2
+		{
+			get
+			{
+				return base.Y2Value;
+			}
+			set
+			{
+				base.Y2Value = value;
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class ZoomPanModifieriOS : SCIZoomPanModifier, SciChart.Xamarin.Views.Modifiers.IZoomPanModifier, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public ZoomPanModifieriOS()
+		{
+		}
+		
+		public ZoomPanModifieriOS(System.nuint defaultNumberOfTouches) : 
+				base(defaultNumberOfTouches)
+		{
+		}
+		
 		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
@@ -168,27 +237,6 @@ namespace SciChart.Xamarin.iOS.Renderer
 		}
 	}
 	
-	public partial class ZoomPanModifieriOS : SCIZoomPanModifier, SciChart.Xamarin.Views.Core.Modifiers.IZoomPanModifier, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
-	{
-		
-		public ZoomPanModifieriOS()
-		{
-		}
-		
-		public ZoomPanModifieriOS(System.nuint defaultNumberOfTouches) : 
-				base(defaultNumberOfTouches)
-		{
-		}
-		
-		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
-		{
-			get
-			{
-				return this;
-			}
-		}
-	}
-	
 	public partial class iOSFactory
 	{
 		
@@ -217,6 +265,16 @@ namespace SciChart.Xamarin.iOS.Renderer
 		public SciChart.Xamarin.Views.Model.IDoubleRange NewDoubleRange()
 		{
 			return new DoubleRangeiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.Annotations.IBoxAnnotation NewBoxAnnotation()
+		{
+			return new BoxAnnotationiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Modifiers.IZoomPanModifier NewZoomPanModifier()
+		{
+			return new ZoomPanModifieriOS();
 		}
 	}
 }

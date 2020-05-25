@@ -25,8 +25,8 @@ namespace SciChart.Xamarin.CodeGenerator
             var factories = types.Where(t => Attribute.IsDefined(t, typeof(SciChartObjectFactory)))
                 .SelectMany(factory => factory.GetMethods()).ToList();
             
-            var androidGenerator = new AndroidGenerator("3.1.0.4268", new AndroidTypeInformationExtractor());
-            var iosGenerator = new iOSGenerator("3.1.0.4935", new iOSTypeInformationExtractor());
+            var androidGenerator = new AndroidGenerator("3.1.0.4304", new AndroidTypeInformationExtractor());
+            var iosGenerator = new iOSGenerator("3.1.0.4942", new iOSTypeInformationExtractor());
             var formsGenerator = new FormsGenerator(new XamarinFormsTypeInformationExtractor());
 
             androidGenerator.AddTypes(classes);

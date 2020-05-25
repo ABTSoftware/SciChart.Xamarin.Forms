@@ -9,7 +9,7 @@ namespace SciChart.Xamarin.Views.Core.Generation
 
         public string NativeProperty { get; }
 
-        public NativePropertyConverterDeclaration(string converter, string nativeProperty = null)
+        public NativePropertyConverterDeclaration(string converter = null, string nativeProperty = null)
         {
             Converter = converter;
             NativeProperty = nativeProperty;

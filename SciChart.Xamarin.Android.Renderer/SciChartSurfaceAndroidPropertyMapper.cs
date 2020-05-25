@@ -12,6 +12,8 @@ namespace SciChart.Xamarin.Android.Renderer
             this.Add(SciChartSurfaceX.RenderableSeriesProperty.PropertyName, OnRenderableSeriesChanged);
             this.Add(SciChartSurfaceX.XAxesProperty.PropertyName, OnXAxesChanged);
             this.Add(SciChartSurfaceX.YAxesProperty.PropertyName, OnYAxesChanged);
+            this.Add(SciChartSurfaceX.AnnotationsProperty.PropertyName, OnAnnotationsChanged);
+            this.Add(SciChartSurfaceX.ChartModifiersProperty.PropertyName, OnChartModifiersChanged);
             this.Init();
         }
 
@@ -29,5 +31,16 @@ namespace SciChart.Xamarin.Android.Renderer
         {
             target.YAxes = source.YAxes.NativeObservableCollection as AxisCollection;
         }
+
+        private void OnChartModifiersChanged(SciChartSurfaceX source, SciChartSurface target)
+        {
+            target.ChartModifiers = source.ChartModifiers.NativeObservableCollection as ChartModifierCollection;
+        }
+
+        private void OnAnnotationsChanged(SciChartSurfaceX source, SciChartSurface target)
+        {
+            target.Annotations = source.Annotations.NativeObservableCollection as AnnotationCollection;
+        }
+
     }
 }

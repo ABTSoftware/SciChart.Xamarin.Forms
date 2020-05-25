@@ -165,6 +165,70 @@ namespace SciChart.Xamarin.Android.Renderer
 		{
 		}
 		
+		public System.IComparable X1
+		{
+			get
+			{
+				return base.X1Value;
+			}
+			set
+			{
+				base.X1Value = value;
+			}
+		}
+		
+		public System.IComparable X2
+		{
+			get
+			{
+				return base.X2Value;
+			}
+			set
+			{
+				base.X2Value = value;
+			}
+		}
+		
+		public System.IComparable Y1
+		{
+			get
+			{
+				return base.Y1Value;
+			}
+			set
+			{
+				base.Y1Value = value;
+			}
+		}
+		
+		public System.IComparable Y2
+		{
+			get
+			{
+				return base.Y2Value;
+			}
+			set
+			{
+				base.Y2Value = value;
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class ZoomPanModifierAndroid : ZoomPanModifier, SciChart.Xamarin.Views.Modifiers.IZoomPanModifier, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public ZoomPanModifierAndroid()
+		{
+		}
+		
 		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
@@ -223,22 +287,6 @@ namespace SciChart.Xamarin.Android.Renderer
 		}
 	}
 	
-	public partial class ZoomPanModifierAndroid : ZoomPanModifier, SciChart.Xamarin.Views.Core.Modifiers.IZoomPanModifier, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
-	{
-		
-		public ZoomPanModifierAndroid()
-		{
-		}
-		
-		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
-		{
-			get
-			{
-				return this;
-			}
-		}
-	}
-	
 	public partial class AndroidFactory
 	{
 		
@@ -267,6 +315,16 @@ namespace SciChart.Xamarin.Android.Renderer
 		public SciChart.Xamarin.Views.Model.IDoubleRange NewDoubleRange()
 		{
 			return new DoubleRangeAndroid();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.Annotations.IBoxAnnotation NewBoxAnnotation()
+		{
+			return new BoxAnnotationAndroid();
+		}
+		
+		public SciChart.Xamarin.Views.Modifiers.IZoomPanModifier NewZoomPanModifier()
+		{
+			return new ZoomPanModifierAndroid();
 		}
 	}
 }

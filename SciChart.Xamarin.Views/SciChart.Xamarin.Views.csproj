@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Numerics\GenericMath\" />
-    <Folder Include="Visuals\Annotations\" />
   </ItemGroup>
 
   <ItemGroup>

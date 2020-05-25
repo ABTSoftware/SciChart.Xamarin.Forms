@@ -471,6 +471,102 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
 	
 	public abstract partial class AnnotationBase : View, SciChart.Xamarin.Views.Visuals.Annotations.IAnnotation
 	{
+		
+		public static BindableProperty X1Property = BindableProperty.Create("X1", typeof(IComparable), typeof(AnnotationBase), null, BindingMode.Default, null, OnX1PropertyChanged, null, null, DefaultX1PropertyValueCreator);
+		
+		public static BindableProperty X2Property = BindableProperty.Create("X2", typeof(IComparable), typeof(AnnotationBase), null, BindingMode.Default, null, OnX2PropertyChanged, null, null, DefaultX2PropertyValueCreator);
+		
+		public static BindableProperty Y1Property = BindableProperty.Create("Y1", typeof(IComparable), typeof(AnnotationBase), null, BindingMode.Default, null, OnY1PropertyChanged, null, null, DefaultY1PropertyValueCreator);
+		
+		public static BindableProperty Y2Property = BindableProperty.Create("Y2", typeof(IComparable), typeof(AnnotationBase), null, BindingMode.Default, null, OnY2PropertyChanged, null, null, DefaultY2PropertyValueCreator);
+		
+		public IComparable X1
+		{
+			get
+			{
+				return ((IComparable)(this.GetValue(X1Property)));
+			}
+			set
+			{
+				this.SetValue(X1Property, value);
+			}
+		}
+		
+		public IComparable X2
+		{
+			get
+			{
+				return ((IComparable)(this.GetValue(X2Property)));
+			}
+			set
+			{
+				this.SetValue(X2Property, value);
+			}
+		}
+		
+		public IComparable Y1
+		{
+			get
+			{
+				return ((IComparable)(this.GetValue(Y1Property)));
+			}
+			set
+			{
+				this.SetValue(Y1Property, value);
+			}
+		}
+		
+		public IComparable Y2
+		{
+			get
+			{
+				return ((IComparable)(this.GetValue(Y2Property)));
+			}
+			set
+			{
+				this.SetValue(Y2Property, value);
+			}
+		}
+		
+		private static void OnX1PropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnnotation>().X1 = ((IComparable)(newValue));
+		}
+		
+		private static object DefaultX1PropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnnotation>().X1;
+		}
+		
+		private static void OnX2PropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnnotation>().X2 = ((IComparable)(newValue));
+		}
+		
+		private static object DefaultX2PropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnnotation>().X2;
+		}
+		
+		private static void OnY1PropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnnotation>().Y1 = ((IComparable)(newValue));
+		}
+		
+		private static object DefaultY1PropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnnotation>().Y1;
+		}
+		
+		private static void OnY2PropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnnotation>().Y2 = ((IComparable)(newValue));
+		}
+		
+		private static object DefaultY2PropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnnotation>().Y2;
+		}
 	}
 }
 namespace SciChart.Xamarin.Views.Visuals.Annotations
@@ -478,6 +574,30 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
 	
 	
 	public partial class BoxAnnotation : AnnotationBase, SciChart.Xamarin.Views.Visuals.Annotations.IBoxAnnotation
+	{
+	}
+}
+namespace SciChart.Xamarin.Views.Modifiers
+{
+	
+	
+	public abstract partial class ChartModifierBase : ChartModifierCore, SciChart.Xamarin.Views.Modifiers.IChartModifier
+	{
+	}
+}
+namespace SciChart.Xamarin.Views.Modifiers
+{
+	
+	
+	public abstract partial class ChartModifierCore : View, SciChart.Xamarin.Views.Modifiers.IChartModifierCore
+	{
+	}
+}
+namespace SciChart.Xamarin.Views.Modifiers
+{
+	
+	
+	public partial class ZoomPanModifier : ChartModifierBase, SciChart.Xamarin.Views.Modifiers.IZoomPanModifier
 	{
 	}
 }
@@ -542,29 +662,5 @@ namespace SciChart.Xamarin.Views.Model.DataSeries
 		{
 			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY>>().Append(x, y);
 		}
-	}
-}
-namespace SciChart.Xamarin.Views.Core.Modifiers
-{
-	
-	
-	public abstract partial class ChartModifierBase : ChartModifierCore, SciChart.Xamarin.Views.Core.Modifiers.IChartModifier
-	{
-	}
-}
-namespace SciChart.Xamarin.Views.Core.Modifiers
-{
-	
-	
-	public abstract partial class ChartModifierCore : View, SciChart.Xamarin.Views.Core.Modifiers.IChartModifierCore
-	{
-	}
-}
-namespace SciChart.Xamarin.Views.Core.Modifiers
-{
-	
-	
-	public partial class ZoomPanModifier : ChartModifierBase, SciChart.Xamarin.Views.Core.Modifiers.IZoomPanModifier
-	{
 	}
 }

@@ -1,6 +1,8 @@
 ﻿using SciChart.iOS.Charting;
 using SciChart.Xamarin.iOS.Renderer.DependencyService;
 using SciChart.Xamarin.Views.Model.ObservableCollection;
+using SciChart.Xamarin.Views.Modifiers;
+using SciChart.Xamarin.Views.Visuals.Annotations;
 using SciChart.Xamarin.Views.Visuals.Axes;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;
 using Xamarin.Forms;
@@ -18,6 +20,16 @@ namespace SciChart.Xamarin.iOS.Renderer.DependencyService
         public INativeObservableCollection<IAxis> NewAxisCollection()
         {
             return new AxisCollectionIOS();
+        }
+
+        public INativeObservableCollection<IAnnotation> NewAnnotationCollection()
+        {
+            return new AnnotationsCollectionIOS();
+        }
+
+        public INativeObservableCollection<IChartModifier> NewChartModifierCollection()
+        {
+            return new ChartModifierCollectionIOS();
         }
     }
 
@@ -78,6 +90,66 @@ namespace SciChart.Xamarin.iOS.Renderer.DependencyService
         public void SetItem(int index, IRenderableSeries item)
         {
             base[index] = item.NativeSciChartObject as IISCIRenderableSeries;
+        }
+    }
+
+    public class ChartModifierCollectionIOS : SCIChartModifierCollection, INativeObservableCollection<IChartModifier>
+    {
+        public void ClearItems()
+        {
+            base.Clear();
+        }
+
+        public void InsertItem(int index, IChartModifier item)
+        {
+            base.Insert(index, item.NativeSciChartObject as IISCIChartModifier);
+        }
+
+        public void MoveItem(int oldIndex, int newIndex)
+        {
+            var item = base[oldIndex];
+            base.RemoveAt(oldIndex);
+            base.Insert(newIndex, item);
+        }
+
+        public void RemoveItem(int index)
+        {
+            base.RemoveAt(index);
+        }
+
+        public void SetItem(int index, IChartModifier item)
+        {
+            base[index] = item.NativeSciChartObject as IISCIChartModifier;
+        }
+    }
+
+    public class AnnotationsCollectionIOS : SCIAnnotationCollection, INativeObservableCollection<IAnnotation>
+    {
+        public void ClearItems()
+        {
+            base.Clear();
+        }
+
+        public void InsertItem(int index, IAnnotation item)
+        {
+            base.Insert(index, item.NativeSciChartObject as IISCIAnnotation);
+        }
+
+        public void MoveItem(int oldIndex, int newIndex)
+        {
+            var item = base[oldIndex];
+            base.RemoveAt(oldIndex);
+            base.Insert(newIndex, item);
+        }
+
+        public void RemoveItem(int index)
+        {
+            base.RemoveAt(index);
+        }
+
+        public void SetItem(int index, IAnnotation item)
+        {
+            base[index] = item.NativeSciChartObject as IISCIAnnotation;
         }
     }
 }

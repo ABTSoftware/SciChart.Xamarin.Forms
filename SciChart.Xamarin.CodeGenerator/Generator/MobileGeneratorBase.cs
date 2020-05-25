@@ -77,6 +77,21 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
             var nativePropertyName = information.NativeName;
             var converter = information.Converter;
 
+            var nativeProperty = new CodePropertyReferenceExpression(new CodeBaseReferenceExpression(), nativePropertyName);
+
+            CodeExpression setter;
+            CodeExpression getter;
+            if (converter != null)
+            {
+                getter = new CodeMethodInvokeExpression(nativeProperty, $"{converter}ToXamarin");
+                setter = new CodeMethodInvokeExpression(new CodePropertySetValueReferenceExpression(), $"{converter}FromXamarin");
+            }
+            else
+            {
+                getter = nativeProperty;
+                setter = new CodePropertySetValueReferenceExpression();
+            }
+
             return new CodeMemberProperty()
             {
                 Name = propertyName,
@@ -86,15 +101,14 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
                 HasSet = true,
                 GetStatements =
                 {
-                    new CodeMethodReturnStatement(new CodeMethodInvokeExpression(new CodePropertyReferenceExpression(new CodeBaseReferenceExpression(), nativePropertyName), $"{converter}ToXamarin"))
+                    new CodeMethodReturnStatement(getter)
                 },
                 SetStatements =
                 { 
                     new CodeAssignStatement()
                     {
-                        Left = new CodePropertyReferenceExpression(new CodeBaseReferenceExpression(), nativePropertyName),
-                        Right = new CodeMethodInvokeExpression(new CodePropertySetValueReferenceExpression(), $"{converter}FromXamarin")
-                    }
+                        Left = nativeProperty,
+                        Right = setter                    }
                 }
             };
         }

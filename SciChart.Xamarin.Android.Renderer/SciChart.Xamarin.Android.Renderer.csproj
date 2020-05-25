@@ -82,7 +82,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SciChart.Android">
-      <Version>3.1.0.4259</Version>
+      <Version>3.1.0.4304</Version>
+    </PackageReference>
+    <PackageReference Include="SciChart.Android3D">
+      <Version>3.1.0.4304</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
       <Version>4.5.0.617</Version>

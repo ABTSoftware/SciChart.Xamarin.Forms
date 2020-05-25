@@ -1,6 +1,6 @@
 ﻿using SciChart.Xamarin.Views.Core.Generation;
 
-namespace SciChart.Xamarin.Views.Core.Modifiers
+namespace SciChart.Xamarin.Views.Modifiers
 {
     [ClassDeclaration("ChartModifierBase", "SCIChartModifierBase", typeof(IChartModifierCore))]
     [AbstractClassDefinition]

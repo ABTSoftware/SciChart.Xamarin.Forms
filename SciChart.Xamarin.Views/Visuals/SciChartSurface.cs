@@ -1,7 +1,7 @@
 ﻿using System.Collections.Specialized;
-using SciChart.Xamarin.Views.Core;
 using SciChart.Xamarin.Views.Core.Common;
 using SciChart.Xamarin.Views.Model.ObservableCollection;
+using SciChart.Xamarin.Views.Modifiers;
 using SciChart.Xamarin.Views.Visuals.Annotations;
 using SciChart.Xamarin.Views.Visuals.Axes;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;
@@ -14,7 +14,8 @@ namespace SciChart.Xamarin.Views.Visuals
         AxisCollection XAxes { get; set; }
         AxisCollection YAxes { get; set; }
         RenderableSeriesCollection RenderableSeries { get; set; }
-        System.Collections.ObjectModel.ObservableCollection<IAnnotation> Annotations { get; set; }
+        AnnotationCollection Annotations { get; set; }
+        ChartModifierCollection ChartModifiers { get; set; }
     }
 
     public class SciChartSurface : View, ISciChartSurface
@@ -53,9 +54,16 @@ namespace SciChart.Xamarin.Views.Visuals
         /// <summary>
         /// Defines the RenderableSeries BindableProperty
         /// </summary>
-        public static readonly BindableProperty AnnotationsProperty = BindableProperty.Create("Annotations", typeof(System.Collections.ObjectModel.ObservableCollection<IAnnotation>), typeof(SciChartSurface), null, BindingMode.Default, null, null, null, null, (s) =>
+        public static readonly BindableProperty AnnotationsProperty = BindableProperty.Create("Annotations", typeof(AnnotationCollection), typeof(SciChartSurface), null, BindingMode.Default, null, OnAnnotationsDependencyPropertyChanged, null, null, (s) =>
         {
-            var c = new System.Collections.ObjectModel.ObservableCollection<IAnnotation>();
+            var c = new AnnotationCollection();
+            c.CollectionChanged += ((SciChartSurface)s).OnAnyCollectionChanged;
+            return c;
+        });
+
+        public static readonly BindableProperty ChartModifiersProperty = BindableProperty.Create("ChartModifiers", typeof(ChartModifierCollection), typeof(SciChartSurface), null, BindingMode.Default, null, OnChartModifiersDependencyPropertyChanged, null, null, (s) =>
+        {
+            var c = new ChartModifierCollection();
             c.CollectionChanged += ((SciChartSurface)s).OnAnyCollectionChanged;
             return c;
         });
@@ -83,10 +91,16 @@ namespace SciChart.Xamarin.Views.Visuals
             set => SetValue(RenderableSeriesProperty, value);
         }
 
-        public System.Collections.ObjectModel.ObservableCollection<IAnnotation> Annotations
+        public AnnotationCollection Annotations
         {
-            get => (System.Collections.ObjectModel.ObservableCollection<IAnnotation>)GetValue(AnnotationsProperty);
+            get => (AnnotationCollection)GetValue(AnnotationsProperty);
             set => SetValue(AnnotationsProperty, value);
+        }
+
+        public ChartModifierCollection ChartModifiers
+        {
+            get => (ChartModifierCollection)GetValue(ChartModifiersProperty);
+            set => SetValue(ChartModifiersProperty, value);
         }
 
         private static void OnRenderableSeriesDependencyPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
@@ -101,6 +115,16 @@ namespace SciChart.Xamarin.Views.Visuals
         private static void OnYAxesDependencyPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
             WireUpCollectionChanged<IAxis>(bindable, oldvalue, newvalue, ((SciChartSurface)bindable).OnAnyCollectionChanged);
+        }
+
+        private static void OnAnnotationsDependencyPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            WireUpCollectionChanged<IAnnotation>(bindable, oldvalue, newvalue, ((SciChartSurface)bindable).OnAnyCollectionChanged);
+        }
+
+        private static void OnChartModifiersDependencyPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            WireUpCollectionChanged<IChartModifier>(bindable, oldvalue, newvalue, ((SciChartSurface)bindable).OnAnyCollectionChanged);
         }
 
         private static void WireUpCollectionChanged<T>(BindableObject bindable, object oldvalue, object newvalue, NotifyCollectionChangedEventHandler handler)
@@ -132,6 +156,7 @@ namespace SciChart.Xamarin.Views.Visuals
             XAxes.ForEachDo(x => x.Cast<IBindingContextProvider>().BindingContext = BindingContext);
             YAxes.ForEachDo(x => x.Cast<IBindingContextProvider>().BindingContext = BindingContext);
             Annotations.ForEachDo(x => x.Cast<IBindingContextProvider>().BindingContext = BindingContext);       
+            ChartModifiers.ForEachDo(x => x.Cast<IBindingContextProvider>().BindingContext = BindingContext);
         }
     }
 }

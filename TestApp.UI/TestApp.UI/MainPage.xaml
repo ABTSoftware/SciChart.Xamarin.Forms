@@ -5,7 +5,8 @@
              xmlns:visuals="clr-namespace:SciChart.Xamarin.Views.Visuals;assembly=SciChart.Xamarin.Views"
              xmlns:renderableSeries="clr-namespace:SciChart.Xamarin.Views.Visuals.RenderableSeries;assembly=SciChart.Xamarin.Views"
              xmlns:axes="clr-namespace:SciChart.Xamarin.Views.Visuals.Axes;assembly=SciChart.Xamarin.Views"
-             xmlns:model="clr-namespace:SciChart.Xamarin.Views.Model;assembly=SciChart.Xamarin.Views"
+             xmlns:annotations="clr-namespace:SciChart.Xamarin.Views.Visuals.Annotations;assembly=SciChart.Xamarin.Views"
+             xmlns:modifiers1="clr-namespace:SciChart.Xamarin.Views.Modifiers;assembly=SciChart.Xamarin.Views"
              x:Class="TestApp.UI.MainPage">
 
     <Grid>
@@ -30,6 +31,14 @@
             <visuals:SciChartSurface.YAxes>
                <axes:NumericAxis/>
             </visuals:SciChartSurface.YAxes>
+
+            <visuals:SciChartSurface.Annotations>
+                <annotations:BoxAnnotation X1="{Binding X1}" X2="{Binding X2}" Y1="{Binding Y1}" Y2="{Binding Y2}"/>
+            </visuals:SciChartSurface.Annotations>
+
+            <visuals:SciChartSurface.ChartModifiers>
+                <modifiers1:ZoomPanModifier/>
+            </visuals:SciChartSurface.ChartModifiers>
 
         </visuals:SciChartSurface>
     </Grid>

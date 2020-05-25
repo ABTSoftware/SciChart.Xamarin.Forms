@@ -23,6 +23,11 @@ namespace TestApp.UI
             StrokeThickness = 1;
 
             XRange = new DoubleRange(30, 50);
+
+            X1 = 30;
+            X2 = 50;
+            Y1 = 0;
+            Y2 = 0.7;
         }
 
         public IRange XRange { get; set; }
@@ -50,5 +55,10 @@ namespace TestApp.UI
             get;
             set;
         }
+
+        public IComparable X1 { get; set; }
+        public IComparable X2 { get; set; }
+        public IComparable Y1 { get; set; }
+        public IComparable Y2 { get; set; }
     }
 }
