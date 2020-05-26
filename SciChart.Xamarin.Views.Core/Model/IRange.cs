@@ -21,7 +21,9 @@ namespace SciChart.Xamarin.Views.Model
         double MaxAsDouble { get; }
     }
 
-    [ClassDeclaration("DoubleRange", "SCIDoubleRange", typeof(IRange))]
+    [ClassDeclaration("DoubleRange", typeof(IRange))]
+    [InjectNativeSciChartObject]
+    [InjectNativeSciChartObject(new []{"min", "max"}, new []{typeof(double), typeof(double)})]
     public interface IDoubleRange : IRange
     {
         double Min { get; set; }

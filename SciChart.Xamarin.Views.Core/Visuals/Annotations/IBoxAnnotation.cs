@@ -2,9 +2,8 @@
 
 namespace SciChart.Xamarin.Views.Visuals.Annotations
 {
-    [ClassDeclaration("BoxAnnotation", "SCIBoxAnnotation", typeof(IAnnotation))]
-    public interface IBoxAnnotation : IAnnotation
-    {
-        
+    [ClassDeclaration("BoxAnnotation", typeof(IAnnotation))]
+    [InjectNativeSciChartObject]
+    public interface IBoxAnnotation : IAnnotation { 
     }
 }

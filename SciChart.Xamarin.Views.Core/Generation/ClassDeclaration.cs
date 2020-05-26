@@ -1,5 +1,4 @@
 ﻿using System;
-using SciChart.Xamarin.Views.Core.Common;
 
 namespace SciChart.Xamarin.Views.Core.Generation
 {
@@ -15,6 +14,11 @@ namespace SciChart.Xamarin.Views.Core.Generation
             NativeAndroidType = nativeAndroidType;
             NativeIosType = nativeIOSType;
             BaseXamarinFormsType = baseXamarinFormsType;
+        }
+
+        public ClassDeclaration(string nativeType, Type baseXamarinFormsType) : this(nativeType, $"SCI{nativeType}", baseXamarinFormsType)
+        {
+
         }
     }
 }

@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views.Modifiers
 {
-    [ClassDeclaration("ChartModifierCore", "SCIChartModifierCore", typeof(View))]
+    [ClassDeclaration("ChartModifierCore", typeof(View))]
     [AbstractClassDefinition]
     public interface IChartModifierCore : INativeSciChartObjectWrapper
     {

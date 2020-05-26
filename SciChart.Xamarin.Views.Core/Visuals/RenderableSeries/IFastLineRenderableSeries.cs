@@ -2,7 +2,8 @@
 
 namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
 {
-    [ClassDeclaration("FastLineRenderableSeries", "SCIFastLineRenderableSeries", typeof(IRenderableSeries))]
+    [ClassDeclaration("FastLineRenderableSeries", typeof(IRenderableSeries))]
+    [InjectNativeSciChartObject]
     public interface IFastLineRenderableSeries : IRenderableSeries
     {
     }

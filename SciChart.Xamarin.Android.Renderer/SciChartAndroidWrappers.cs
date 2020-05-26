@@ -80,6 +80,18 @@ namespace SciChart.Xamarin.Android.Renderer
 		{
 		}
 		
+		public SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment AxisAlignment
+		{
+			get
+			{
+				return base.AxisAlignment.AlignmentToXamarin();
+			}
+			set
+			{
+				base.AxisAlignment = value.AlignmentFromXamarin();
+			}
+		}
+		
 		public Color AxisBandsFill
 		{
 			get
@@ -125,6 +137,90 @@ namespace SciChart.Xamarin.Android.Renderer
 			set
 			{
 				base.GrowBy = value.RangeFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Model.RangeClipMode VisibleRangeLimitMode
+		{
+			get
+			{
+				return base.VisibleRangeLimitMode.RangeClipModeToXamarin();
+			}
+			set
+			{
+				base.VisibleRangeLimitMode = value.RangeClipModeFromXamarin();
+			}
+		}
+		
+		public System.IComparable MinimalZoomConstrain
+		{
+			get
+			{
+				return base.MinimalZoomConstrain.ComparableToXamarin();
+			}
+			set
+			{
+				base.MinimalZoomConstrain = value.ComparableFromXamarin();
+			}
+		}
+		
+		public System.IComparable MaximumZoomConstrain
+		{
+			get
+			{
+				return base.MaximumZoomConstrain.ComparableToXamarin();
+			}
+			set
+			{
+				base.MaximumZoomConstrain = value.ComparableFromXamarin();
+			}
+		}
+		
+		public System.IComparable MajorDelta
+		{
+			get
+			{
+				return base.MajorDelta.ComparableToXamarin();
+			}
+			set
+			{
+				base.MajorDelta = value.ComparableFromXamarin();
+			}
+		}
+		
+		public System.IComparable MinorDelta
+		{
+			get
+			{
+				return base.MinorDelta.ComparableToXamarin();
+			}
+			set
+			{
+				base.MinorDelta = value.ComparableFromXamarin();
+			}
+		}
+		
+		public uint MaxAutoTicks
+		{
+			get
+			{
+				return base.MaxAutoTicks.UIntToXamarin();
+			}
+			set
+			{
+				base.MaxAutoTicks = value.UIntFromXamarin();
+			}
+		}
+		
+		public uint MinorsPerMajor
+		{
+			get
+			{
+				return base.MinorsPerMajor.UIntToXamarin();
+			}
+			set
+			{
+				base.MinorsPerMajor = value.UIntFromXamarin();
 			}
 		}
 		
@@ -211,6 +307,90 @@ namespace SciChart.Xamarin.Android.Renderer
 			{
 				base.Y2Value = value;
 			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class ModifierGroupAndroid : ModifierGroup, SciChart.Xamarin.Views.Modifiers.IModifierGroup, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public ModifierGroupAndroid()
+		{
+		}
+		
+		public ModifierGroupAndroid(SciChart.Charting.Modifiers.IChartModifier[] childModifiers) : 
+				base(childModifiers)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class PinchZoomModifierAndroid : PinchZoomModifier, SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public PinchZoomModifierAndroid()
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class TooltipModifierAndroid : TooltipModifier, SciChart.Xamarin.Views.Modifiers.ITooltipModifier, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public TooltipModifierAndroid()
+		{
+		}
+		
+		public TooltipModifierAndroid(SciChart.Charting.Modifiers.Behaviors.CrossDrawableBehavior crossDrawableBehavior) : 
+				base(crossDrawableBehavior)
+		{
+		}
+		
+		public TooltipModifierAndroid(SciChart.Charting.Modifiers.Behaviors.CrossDrawableBehavior crossDrawableBehavior, int tooltipContainerLayoutResId) : 
+				base(crossDrawableBehavior, tooltipContainerLayoutResId)
+		{
+		}
+		
+		public TooltipModifierAndroid(SciChart.Charting.Modifiers.Behaviors.TooltipBehavior tooltipBehavior, SciChart.Charting.Modifiers.Behaviors.CrossDrawableBehavior crossDrawableBehavior) : 
+				base(tooltipBehavior, crossDrawableBehavior)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class ZoomExtentsModifierAndroid : ZoomExtentsModifier, SciChart.Xamarin.Views.Modifiers.IZoomExtentsModifier, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public ZoomExtentsModifierAndroid()
+		{
 		}
 		
 		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
@@ -325,6 +505,26 @@ namespace SciChart.Xamarin.Android.Renderer
 		public SciChart.Xamarin.Views.Modifiers.IZoomPanModifier NewZoomPanModifier()
 		{
 			return new ZoomPanModifierAndroid();
+		}
+		
+		public SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier NewPinchZoomModifier()
+		{
+			return new PinchZoomModifierAndroid();
+		}
+		
+		public SciChart.Xamarin.Views.Modifiers.ITooltipModifier NewTooltipModifier()
+		{
+			return new TooltipModifierAndroid();
+		}
+		
+		public SciChart.Xamarin.Views.Modifiers.IZoomExtentsModifier NewZoomExtentsModifier()
+		{
+			return new ZoomExtentsModifierAndroid();
+		}
+		
+		public SciChart.Xamarin.Views.Modifiers.IModifierGroup NewModifierGroup()
+		{
+			return new ModifierGroupAndroid();
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using SciChart.Xamarin.Views.Core.Common;
+﻿using System;
+using SciChart.Xamarin.Views.Core.Common;
 using SciChart.Xamarin.Views.Core.Generation;
 using SciChart.Xamarin.Views.Model;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;
@@ -6,7 +7,7 @@ using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views.Visuals.Axes
 {
-    [ClassDeclaration("AxisCore", "SCIAxisCore", typeof(View))]
+    [ClassDeclaration("AxisCore", typeof(View))]
     [AbstractClassDefinition]
     public interface IAxisCore : INativeSciChartObjectWrapper
     {
@@ -116,6 +117,37 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
         [BindablePropertyDefinition]
         IRange GrowBy { get; set; }
 
+        [NativePropertyConverterDeclaration("RangeClipMode")]
+        [BindablePropertyDefinition]
+        RangeClipMode VisibleRangeLimitMode { get; set; }
+
+        [NativePropertyConverterDeclaration("Comparable")]
+        [BindablePropertyDefinition]
+        IComparable MinimalZoomConstrain { get; set; }
+
+        [NativePropertyConverterDeclaration("Comparable")]
+        [BindablePropertyDefinition]
+        IComparable MaximumZoomConstrain { get; set; }
+
+        [NativePropertyConverterDeclaration("Comparable")]
+        [BindablePropertyDefinition]
+        IComparable MajorDelta { get; set; }
+
+        [NativePropertyConverterDeclaration("Comparable")]
+        [BindablePropertyDefinition]
+        IComparable MinorDelta { get; set; }
+
+        [BindablePropertyDefinition]
+        bool AutoTicks { get; set; }
+
+        [BindablePropertyDefinition]
+        [NativePropertyConverterDeclaration("UInt")]
+        uint MaxAutoTicks { get; set; }
+
+        [BindablePropertyDefinition]
+        [NativePropertyConverterDeclaration("UInt")]
+
+        uint MinorsPerMajor { get; set; }
 
         /// <summary>
         /// Raised when the VisibleRange is changed

@@ -24,6 +24,13 @@ namespace SciChart.Xamarin.Views.Core.Common
 
         IBoxAnnotation NewBoxAnnotation();
 
+        #region Modifiers
         IZoomPanModifier NewZoomPanModifier();
+        IPinchZoomModifier NewPinchZoomModifier();
+        ITooltipModifier NewTooltipModifier();
+        IZoomExtentsModifier NewZoomExtentsModifier();
+        IModifierGroup NewModifierGroup();
+
+        #endregion
     }
 }

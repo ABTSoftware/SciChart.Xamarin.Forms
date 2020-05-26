@@ -23,6 +23,11 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
 	
 	public partial class FastLineRenderableSeries : CrossPlatformRenderableSeriesBase, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastLineRenderableSeries
 	{
+		
+		public FastLineRenderableSeries() : 
+				base(DependencyService.Get<SciChart.Xamarin.Views.Core.Common.INativeSciChartObjectFactory>().NewFastLineRenderableSeries())
+		{
+		}
 	}
 }
 namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
@@ -111,6 +116,30 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
 	
 	public abstract partial class AxisBase : AxisCore, SciChart.Xamarin.Views.Visuals.Axes.IAxis
 	{
+		
+		public static BindableProperty AxisAlignmentProperty = BindableProperty.Create("AxisAlignment", typeof(AxisAlignment), typeof(AxisBase), null, BindingMode.Default, null, OnAxisAlignmentPropertyChanged, null, null, DefaultAxisAlignmentPropertyValueCreator);
+		
+		public AxisAlignment AxisAlignment
+		{
+			get
+			{
+				return ((AxisAlignment)(this.GetValue(AxisAlignmentProperty)));
+			}
+			set
+			{
+				this.SetValue(AxisAlignmentProperty, value);
+			}
+		}
+		
+		private static void OnAxisAlignmentPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxis>().AxisAlignment = ((AxisAlignment)(newValue));
+		}
+		
+		private static object DefaultAxisAlignmentPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxis>().AxisAlignment;
+		}
 	}
 }
 namespace SciChart.Xamarin.Views.Visuals.Axes
@@ -147,6 +176,22 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
 		public static BindableProperty VisibleRangeProperty = BindableProperty.Create("VisibleRange", typeof(IRange), typeof(AxisCore), null, BindingMode.Default, null, OnVisibleRangePropertyChanged, null, null, DefaultVisibleRangePropertyValueCreator);
 		
 		public static BindableProperty GrowByProperty = BindableProperty.Create("GrowBy", typeof(IRange), typeof(AxisCore), null, BindingMode.Default, null, OnGrowByPropertyChanged, null, null, DefaultGrowByPropertyValueCreator);
+		
+		public static BindableProperty VisibleRangeLimitModeProperty = BindableProperty.Create("VisibleRangeLimitMode", typeof(RangeClipMode), typeof(AxisCore), null, BindingMode.Default, null, OnVisibleRangeLimitModePropertyChanged, null, null, DefaultVisibleRangeLimitModePropertyValueCreator);
+		
+		public static BindableProperty MinimalZoomConstrainProperty = BindableProperty.Create("MinimalZoomConstrain", typeof(IComparable), typeof(AxisCore), null, BindingMode.Default, null, OnMinimalZoomConstrainPropertyChanged, null, null, DefaultMinimalZoomConstrainPropertyValueCreator);
+		
+		public static BindableProperty MaximumZoomConstrainProperty = BindableProperty.Create("MaximumZoomConstrain", typeof(IComparable), typeof(AxisCore), null, BindingMode.Default, null, OnMaximumZoomConstrainPropertyChanged, null, null, DefaultMaximumZoomConstrainPropertyValueCreator);
+		
+		public static BindableProperty MajorDeltaProperty = BindableProperty.Create("MajorDelta", typeof(IComparable), typeof(AxisCore), null, BindingMode.Default, null, OnMajorDeltaPropertyChanged, null, null, DefaultMajorDeltaPropertyValueCreator);
+		
+		public static BindableProperty MinorDeltaProperty = BindableProperty.Create("MinorDelta", typeof(IComparable), typeof(AxisCore), null, BindingMode.Default, null, OnMinorDeltaPropertyChanged, null, null, DefaultMinorDeltaPropertyValueCreator);
+		
+		public static BindableProperty AutoTicksProperty = BindableProperty.Create("AutoTicks", typeof(Boolean), typeof(AxisCore), null, BindingMode.Default, null, OnAutoTicksPropertyChanged, null, null, DefaultAutoTicksPropertyValueCreator);
+		
+		public static BindableProperty MaxAutoTicksProperty = BindableProperty.Create("MaxAutoTicks", typeof(UInt32), typeof(AxisCore), null, BindingMode.Default, null, OnMaxAutoTicksPropertyChanged, null, null, DefaultMaxAutoTicksPropertyValueCreator);
+		
+		public static BindableProperty MinorsPerMajorProperty = BindableProperty.Create("MinorsPerMajor", typeof(UInt32), typeof(AxisCore), null, BindingMode.Default, null, OnMinorsPerMajorPropertyChanged, null, null, DefaultMinorsPerMajorPropertyValueCreator);
 		
 		public String AxisTitle
 		{
@@ -316,6 +361,102 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
 			}
 		}
 		
+		public RangeClipMode VisibleRangeLimitMode
+		{
+			get
+			{
+				return ((RangeClipMode)(this.GetValue(VisibleRangeLimitModeProperty)));
+			}
+			set
+			{
+				this.SetValue(VisibleRangeLimitModeProperty, value);
+			}
+		}
+		
+		public IComparable MinimalZoomConstrain
+		{
+			get
+			{
+				return ((IComparable)(this.GetValue(MinimalZoomConstrainProperty)));
+			}
+			set
+			{
+				this.SetValue(MinimalZoomConstrainProperty, value);
+			}
+		}
+		
+		public IComparable MaximumZoomConstrain
+		{
+			get
+			{
+				return ((IComparable)(this.GetValue(MaximumZoomConstrainProperty)));
+			}
+			set
+			{
+				this.SetValue(MaximumZoomConstrainProperty, value);
+			}
+		}
+		
+		public IComparable MajorDelta
+		{
+			get
+			{
+				return ((IComparable)(this.GetValue(MajorDeltaProperty)));
+			}
+			set
+			{
+				this.SetValue(MajorDeltaProperty, value);
+			}
+		}
+		
+		public IComparable MinorDelta
+		{
+			get
+			{
+				return ((IComparable)(this.GetValue(MinorDeltaProperty)));
+			}
+			set
+			{
+				this.SetValue(MinorDeltaProperty, value);
+			}
+		}
+		
+		public Boolean AutoTicks
+		{
+			get
+			{
+				return ((Boolean)(this.GetValue(AutoTicksProperty)));
+			}
+			set
+			{
+				this.SetValue(AutoTicksProperty, value);
+			}
+		}
+		
+		public UInt32 MaxAutoTicks
+		{
+			get
+			{
+				return ((UInt32)(this.GetValue(MaxAutoTicksProperty)));
+			}
+			set
+			{
+				this.SetValue(MaxAutoTicksProperty, value);
+			}
+		}
+		
+		public UInt32 MinorsPerMajor
+		{
+			get
+			{
+				return ((UInt32)(this.GetValue(MinorsPerMajorProperty)));
+			}
+			set
+			{
+				this.SetValue(MinorsPerMajorProperty, value);
+			}
+		}
+		
 		private static void OnAxisTitlePropertyChanged(BindableObject bindable, object oldValue, object newValue)
 		{
 			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxisCore>().AxisTitle = ((String)(newValue));
@@ -455,6 +596,86 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
 		{
 			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxisCore>().GrowBy;
 		}
+		
+		private static void OnVisibleRangeLimitModePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxisCore>().VisibleRangeLimitMode = ((RangeClipMode)(newValue));
+		}
+		
+		private static object DefaultVisibleRangeLimitModePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxisCore>().VisibleRangeLimitMode;
+		}
+		
+		private static void OnMinimalZoomConstrainPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxisCore>().MinimalZoomConstrain = ((IComparable)(newValue));
+		}
+		
+		private static object DefaultMinimalZoomConstrainPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxisCore>().MinimalZoomConstrain;
+		}
+		
+		private static void OnMaximumZoomConstrainPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxisCore>().MaximumZoomConstrain = ((IComparable)(newValue));
+		}
+		
+		private static object DefaultMaximumZoomConstrainPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxisCore>().MaximumZoomConstrain;
+		}
+		
+		private static void OnMajorDeltaPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxisCore>().MajorDelta = ((IComparable)(newValue));
+		}
+		
+		private static object DefaultMajorDeltaPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxisCore>().MajorDelta;
+		}
+		
+		private static void OnMinorDeltaPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxisCore>().MinorDelta = ((IComparable)(newValue));
+		}
+		
+		private static object DefaultMinorDeltaPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxisCore>().MinorDelta;
+		}
+		
+		private static void OnAutoTicksPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxisCore>().AutoTicks = ((Boolean)(newValue));
+		}
+		
+		private static object DefaultAutoTicksPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxisCore>().AutoTicks;
+		}
+		
+		private static void OnMaxAutoTicksPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxisCore>().MaxAutoTicks = ((UInt32)(newValue));
+		}
+		
+		private static object DefaultMaxAutoTicksPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxisCore>().MaxAutoTicks;
+		}
+		
+		private static void OnMinorsPerMajorPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxisCore>().MinorsPerMajor = ((UInt32)(newValue));
+		}
+		
+		private static object DefaultMinorsPerMajorPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IAxisCore>().MinorsPerMajor;
+		}
 	}
 }
 namespace SciChart.Xamarin.Views.Visuals.Axes
@@ -463,6 +684,11 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
 	
 	public partial class NumericAxis : AxisBase, SciChart.Xamarin.Views.Visuals.Axes.INumericAxis
 	{
+		
+		public NumericAxis() : 
+				base(DependencyService.Get<SciChart.Xamarin.Views.Core.Common.INativeSciChartObjectFactory>().NewNumericAxis())
+		{
+		}
 	}
 }
 namespace SciChart.Xamarin.Views.Visuals.Annotations
@@ -575,6 +801,11 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
 	
 	public partial class BoxAnnotation : AnnotationBase, SciChart.Xamarin.Views.Visuals.Annotations.IBoxAnnotation
 	{
+		
+		public BoxAnnotation() : 
+				base(DependencyService.Get<SciChart.Xamarin.Views.Core.Common.INativeSciChartObjectFactory>().NewBoxAnnotation())
+		{
+		}
 	}
 }
 namespace SciChart.Xamarin.Views.Modifiers
@@ -597,8 +828,65 @@ namespace SciChart.Xamarin.Views.Modifiers
 {
 	
 	
+	public partial class ModifierGroup : ChartModifierBase, SciChart.Xamarin.Views.Modifiers.IModifierGroup
+	{
+		
+		public ModifierGroup() : 
+				base(DependencyService.Get<SciChart.Xamarin.Views.Core.Common.INativeSciChartObjectFactory>().NewModifierGroup())
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Modifiers
+{
+	
+	
+	public partial class PinchZoomModifier : ChartModifierBase, SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier
+	{
+		
+		public PinchZoomModifier() : 
+				base(DependencyService.Get<SciChart.Xamarin.Views.Core.Common.INativeSciChartObjectFactory>().NewPinchZoomModifier())
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Modifiers
+{
+	
+	
+	public partial class TooltipModifier : ChartModifierBase, SciChart.Xamarin.Views.Modifiers.ITooltipModifier
+	{
+		
+		public TooltipModifier() : 
+				base(DependencyService.Get<SciChart.Xamarin.Views.Core.Common.INativeSciChartObjectFactory>().NewTooltipModifier())
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Modifiers
+{
+	
+	
+	public partial class ZoomExtentsModifier : ChartModifierBase, SciChart.Xamarin.Views.Modifiers.IZoomExtentsModifier
+	{
+		
+		public ZoomExtentsModifier() : 
+				base(DependencyService.Get<SciChart.Xamarin.Views.Core.Common.INativeSciChartObjectFactory>().NewZoomExtentsModifier())
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Modifiers
+{
+	
+	
 	public partial class ZoomPanModifier : ChartModifierBase, SciChart.Xamarin.Views.Modifiers.IZoomPanModifier
 	{
+		
+		public ZoomPanModifier() : 
+				base(DependencyService.Get<SciChart.Xamarin.Views.Core.Common.INativeSciChartObjectFactory>().NewZoomPanModifier())
+		{
+		}
 	}
 }
 namespace SciChart.Xamarin.Views.Model
@@ -607,6 +895,16 @@ namespace SciChart.Xamarin.Views.Model
 	
 	public partial class DoubleRange : RangeBase, SciChart.Xamarin.Views.Model.IDoubleRange
 	{
+		
+		public DoubleRange() : 
+				base(DependencyService.Get<SciChart.Xamarin.Views.Core.Common.INativeSciChartObjectFactory>().NewDoubleRange())
+		{
+		}
+		
+		public DoubleRange(double min, double max) : 
+				base(DependencyService.Get<SciChart.Xamarin.Views.Core.Common.INativeSciChartObjectFactory>().NewDoubleRange(min, max))
+		{
+		}
 	}
 }
 namespace SciChart.Xamarin.Views.Model.DataSeries

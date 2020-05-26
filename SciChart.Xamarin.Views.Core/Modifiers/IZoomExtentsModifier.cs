@@ -2,10 +2,11 @@
 
 namespace SciChart.Xamarin.Views.Modifiers
 {
-    [ClassDeclaration("ZoomPanModifier", typeof(IChartModifier))]
+    [ClassDeclaration("ZoomExtentsModifier", typeof(IChartModifier))]
     [InjectNativeSciChartObject]
-    public interface IZoomPanModifier : IChartModifier
+    public interface IZoomExtentsModifier : IChartModifier
+
     {
-        
+
     }
 }

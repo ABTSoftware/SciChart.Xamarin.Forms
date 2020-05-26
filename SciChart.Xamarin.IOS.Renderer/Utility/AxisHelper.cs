@@ -35,12 +35,49 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
 
         public static AutoRange AutoRangeToXamarin(this SCIAutoRange autoRange)
         {
-            throw new NotImplementedException();
+            switch (autoRange)
+            {
+                case SCIAutoRange.Once: return AutoRange.Once;
+                case SCIAutoRange.Always: return AutoRange.Always;
+                case SCIAutoRange.Never: return AutoRange.Never;
+                default: throw new NotImplementedException("The AutoRange value " + autoRange.ToString() + " has not been handled");
+            }
         }
 
-        public static SCIAutoRange AutoRangeFromXamarin(this AutoRange value)
+        public static SCIAutoRange AutoRangeFromXamarin(this AutoRange autoRange)
         {
-            throw new NotImplementedException();
+            switch (autoRange)
+            {
+                case AutoRange.Always: return SCIAutoRange.Always;
+                case AutoRange.Once: return SCIAutoRange.Once;
+                case AutoRange.Never: return SCIAutoRange.Never;
+                default:
+                    throw new NotImplementedException("The AutoRange value " + autoRange.ToString() + " has not been handled");
+            }
+        }
+
+        public static SciChart.Xamarin.Views.Model.RangeClipMode RangeClipModeToXamarin(this SCIRangeClipMode rangeClipMode)
+        {
+            switch (rangeClipMode)
+            {
+                case SCIRangeClipMode.MinMax: return Views.Model.RangeClipMode.MinMax;
+                case SCIRangeClipMode.Max: return Views.Model.RangeClipMode.Max;
+                case SCIRangeClipMode.Min: return Views.Model.RangeClipMode.Min;
+                default:
+                    throw new NotImplementedException("The RangeClipMode value " + rangeClipMode.ToString() + " has not been handled");
+            }
+        }
+
+        public static SCIRangeClipMode RangeClipModeFromXamarin(this SciChart.Xamarin.Views.Model.RangeClipMode rangeClipMode)
+        {
+            switch (rangeClipMode)
+            {
+                case SciChart.Xamarin.Views.Model.RangeClipMode.MinMax: return SCIRangeClipMode.MinMax;
+                case SciChart.Xamarin.Views.Model.RangeClipMode.Min: return SCIRangeClipMode.Min;
+                case SciChart.Xamarin.Views.Model.RangeClipMode.Max: return SCIRangeClipMode.Max;
+                default:
+                    throw new NotImplementedException("The RangeClipMode value " + rangeClipMode.ToString() + " has not been handled");
+            }
         }
     }
 }

@@ -11,5 +11,7 @@
         public override string ReflectionBaseTypeName => IsBaseTypeGeneric ? base.ReflectionBaseTypeName : BaseType;
 
         public override string GenericBaseTypeName => IsBaseTypeGeneric ? base.GenericBaseTypeName : BaseType;
+
+        public XamarinFormsFactoryCtorInformation[] FactoryConstructors { get; set; }
     }
 }

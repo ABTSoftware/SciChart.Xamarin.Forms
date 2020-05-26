@@ -6,7 +6,7 @@ namespace SciChart.Xamarin.Views.Model.DataSeries
 
     [XamarinFormsWrapperDefinition("CrossPlatformDataSeriesBase")]
     [AbstractClassDefinition]
-    [ClassDeclaration("DataSeries", "SCIDataSeries", null)]
+    [ClassDeclaration("DataSeries", null)]
     public interface IDataSeries : INativeSciChartObjectWrapper
     {
         /// <summary>

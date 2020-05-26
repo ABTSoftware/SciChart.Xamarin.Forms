@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using SciChart.Xamarin.CodeGenerator.Utility;
 using SciChart.Xamarin.Views.Core.Generation;
 
@@ -33,6 +34,13 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
                     }).ToArray()
                 })
                 .ToArray();
+
+            information.FactoryConstructors = type.GetCustomAttributes<InjectNativeSciChartObject>().Select(x =>
+                new XamarinFormsFactoryCtorInformation()
+                {
+                    ParamNames = x.ParamNames,
+                    ParamTypes = x.ParamTypes
+                }).ToArray();
         }
 
         protected override void ExtractClassDeclaration(Type type, ClassDeclaration classDeclaration,

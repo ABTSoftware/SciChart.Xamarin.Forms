@@ -6,7 +6,7 @@
              xmlns:renderableSeries="clr-namespace:SciChart.Xamarin.Views.Visuals.RenderableSeries;assembly=SciChart.Xamarin.Views"
              xmlns:axes="clr-namespace:SciChart.Xamarin.Views.Visuals.Axes;assembly=SciChart.Xamarin.Views"
              xmlns:annotations="clr-namespace:SciChart.Xamarin.Views.Visuals.Annotations;assembly=SciChart.Xamarin.Views"
-             xmlns:modifiers1="clr-namespace:SciChart.Xamarin.Views.Modifiers;assembly=SciChart.Xamarin.Views"
+             xmlns:modifiers="clr-namespace:SciChart.Xamarin.Views.Modifiers;assembly=SciChart.Xamarin.Views"
              x:Class="TestApp.UI.MainPage">
 
     <Grid>
@@ -37,7 +37,13 @@
             </visuals:SciChartSurface.Annotations>
 
             <visuals:SciChartSurface.ChartModifiers>
-                <modifiers1:ZoomPanModifier/>
+                <modifiers:ModifierGroup>
+
+                </modifiers:ModifierGroup>
+                <modifiers:PinchZoomModifier/>
+                <modifiers:ZoomPanModifier/>
+                <modifiers:ZoomExtentsModifier/>
+
             </visuals:SciChartSurface.ChartModifiers>
 
         </visuals:SciChartSurface>

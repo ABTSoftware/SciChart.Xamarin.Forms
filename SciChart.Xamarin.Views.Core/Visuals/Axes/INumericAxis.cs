@@ -2,7 +2,8 @@
 
 namespace SciChart.Xamarin.Views.Visuals.Axes
 {
-    [ClassDeclaration("NumericAxis", "SCINumericAxis", typeof(IAxis))]
+    [ClassDeclaration("NumericAxis", typeof(IAxis))]
+    [InjectNativeSciChartObject]
     public interface INumericAxis : IAxis
     {
         

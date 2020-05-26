@@ -27,7 +27,7 @@ namespace SciChart.Xamarin.CodeGenerator
             
             var androidGenerator = new AndroidGenerator("3.1.0.4304", new AndroidTypeInformationExtractor());
             var iosGenerator = new iOSGenerator("3.1.0.4942", new iOSTypeInformationExtractor());
-            var formsGenerator = new FormsGenerator(new XamarinFormsTypeInformationExtractor());
+            var formsGenerator = new XamarinFormsGenerator(new XamarinFormsTypeInformationExtractor());
 
             androidGenerator.AddTypes(classes);
             iosGenerator.AddTypes(classes);

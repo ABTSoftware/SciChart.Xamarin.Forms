@@ -12,9 +12,9 @@ using Xamarin.Forms;
 
 namespace SciChart.Xamarin.CodeGenerator.Generator
 {
-    public class FormsGenerator : GeneratorBase<XamarinFormsTypeInformation>
+    public class XamarinFormsGenerator : GeneratorBase<XamarinFormsTypeInformation>
     {
-        public FormsGenerator(ITypeInformationExtractor<XamarinFormsTypeInformation> typeInformationExtractor) : base(typeInformationExtractor, "Forms", "SciChart.Xamarin.Views")
+        public XamarinFormsGenerator(ITypeInformationExtractor<XamarinFormsTypeInformation> typeInformationExtractor) : base(typeInformationExtractor, "Forms", "SciChart.Xamarin.Views")
         {
             GlobalNamespace.Imports.Add(new CodeNamespaceImport("System"));
             GlobalNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Views.Model"));
@@ -69,6 +69,32 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
             CodeTypeDeclaration typeDeclaration)
         {
             var members = typeDeclaration.Members;
+
+            foreach (var factoryConstructor in information.FactoryConstructors)
+            {
+                var constructor = new CodeConstructor()
+                {
+                    Attributes = MemberAttributes.Public | MemberAttributes.Final,
+                };
+                var factory = new CodeMethodInvokeExpression(
+                    new CodeMethodReferenceExpression(
+                        new CodeTypeReferenceExpression("DependencyService"),
+                        "Get", new CodeTypeReference(typeof(INativeSciChartObjectFactory))));
+
+                var sciChartFactoryInvoke = new CodeMethodInvokeExpression(factory, $"New{information.Type}");
+
+                foreach (var (paramName, paramType) in factoryConstructor.Params)
+                {
+                    constructor.Parameters.Add(new CodeParameterDeclarationExpression(paramType, paramName));
+                    sciChartFactoryInvoke.Parameters.Add(new CodeArgumentReferenceExpression(paramName));
+
+                }
+                constructor.BaseConstructorArgs.Add(
+                    sciChartFactoryInvoke
+                );
+
+                members.Add(constructor);
+            }
 
             foreach (var propertyInfo in information.BindableProperties)
             {
