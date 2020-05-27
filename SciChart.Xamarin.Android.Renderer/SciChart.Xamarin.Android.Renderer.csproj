@@ -61,6 +61,7 @@
     <Compile Include="Utility\ComparableUtil.cs" />
     <Compile Include="Utility\DataSeriesHelpers.cs" />
     <Compile Include="Utility\RangeHelpers.cs" />
+    <Compile Include="Utility\StyleUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

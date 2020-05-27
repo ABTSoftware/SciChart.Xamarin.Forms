@@ -9,10 +9,8 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
 
         protected AxisCore(IAxisCore nativeAxis)
         {
-            NativeSciChartObject = nativeAxis.NativeSciChartObject;
+            _nativeSciChartObject = nativeAxis.NativeSciChartObject;
         }
-
-        public INativeSciChartObject NativeSciChartObject { get; }
 
         public event EventHandler<VisibleRangeChangedEventArgs> VisibleRangeChanged;
     }

@@ -6,9 +6,7 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
     {
         protected AnnotationBase(IAnnotation nativeAnnotation)
         {
-            NativeSciChartObject = nativeAnnotation.NativeSciChartObject;
+            _nativeSciChartObject = nativeAnnotation.NativeSciChartObject;
         }
-
-        public INativeSciChartObject NativeSciChartObject { get; }
     }
 }

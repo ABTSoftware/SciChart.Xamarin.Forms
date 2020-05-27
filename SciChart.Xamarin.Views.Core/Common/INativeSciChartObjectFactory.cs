@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using SciChart.Xamarin.Views.Drawing;
 using SciChart.Xamarin.Views.Core.Generation;
 using SciChart.Xamarin.Views.Model;
 using SciChart.Xamarin.Views.Model.DataSeries;
@@ -30,6 +32,17 @@ namespace SciChart.Xamarin.Views.Core.Common
         ITooltipModifier NewTooltipModifier();
         IZoomExtentsModifier NewZoomExtentsModifier();
         IModifierGroup NewModifierGroup();
+
+        #endregion
+
+        #region Style
+        ISolidPenStyle NewSolidPenStyle(Color color, float thickness, bool antiAliasing, float[] strokeDashArray);
+
+        ISolidBrushStyle NewSolidBrushStyle(Color color);
+
+        ILinearGradientBrushStyle NewLinearGradientBrushStyle(float x0, float y0, float x1, float y1, Color startColor, Color endColor);
+
+        IFontStyle NewFontStyle(float textSize, Color textColor);
 
         #endregion
     }

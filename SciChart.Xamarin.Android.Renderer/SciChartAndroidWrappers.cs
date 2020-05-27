@@ -8,7 +8,9 @@
 //------------------------------------------------------------------------------
 
 using AndroidApplication = Android.App.Application;
+using AndroidComplexUnitType = Android.Util.ComplexUnitType;
 using AndroidContext = Android.Content.Context;
+using AndroidTypeface = Android.Graphics.Typeface;
 using IAndroidAttributesSet = Android.Util.IAttributeSet;
 using Xamarin.Forms;
 
@@ -22,6 +24,7 @@ namespace SciChart.Xamarin.Android.Renderer
 	using SciChart.Charting.Modifiers;
 	using SciChart.Charting.Model.DataSeries;
 	using SciChart.Xamarin.Android.Renderer.Utility;
+	using SciChart.Drawing.Common;
 	
 	
 	public partial class FastLineRenderableSeriesAndroid : FastLineRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastLineRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
@@ -45,6 +48,18 @@ namespace SciChart.Xamarin.Android.Renderer
 			set
 			{
 				base.DataSeries = value.DataSeriesFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		{
+			get
+			{
+				return base.StrokeStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeStyle = value.PenStyleFromXamarin();
 			}
 		}
 		
@@ -467,6 +482,164 @@ namespace SciChart.Xamarin.Android.Renderer
 		}
 	}
 	
+	public partial class FontStyleAndroid : FontStyle, SciChart.Xamarin.Views.Drawing.IFontStyle, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public FontStyleAndroid(AndroidTypeface typeface, float textSize, uint textColor, bool antiAliasing) : 
+				base(typeface, textSize, textColor, antiAliasing)
+		{
+		}
+		
+		public FontStyleAndroid(AndroidTypeface typeface, float textSize, System.Drawing.Color textColor, bool antiAliasing) : 
+				base(typeface, textSize, textColor, antiAliasing)
+		{
+		}
+		
+		public FontStyleAndroid(AndroidContext context, AndroidTypeface typeface, float textSize, System.Drawing.Color textColor, AndroidComplexUnitType unit, bool antiAliasing) : 
+				base(context, typeface, textSize, textColor, unit, antiAliasing)
+		{
+		}
+		
+		public FontStyleAndroid(float textSize, uint textColor) : 
+				base(textSize, textColor)
+		{
+		}
+		
+		public FontStyleAndroid(float textSize, System.Drawing.Color textColor) : 
+				base(textSize, textColor)
+		{
+		}
+		
+		public FontStyleAndroid(AndroidContext context, float textSize, System.Drawing.Color textColor, AndroidComplexUnitType unit) : 
+				base(context, textSize, textColor, unit)
+		{
+		}
+		
+		public FontStyleAndroid(AndroidTypeface typeface, float textSize, int textColor, bool antiAliasing) : 
+				base(typeface, textSize, textColor, antiAliasing)
+		{
+		}
+		
+		public FontStyleAndroid(float textSize, int textColor) : 
+				base(textSize, textColor)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class LinearGradientBrushStyleAndroid : LinearGradientBrushStyle, SciChart.Xamarin.Views.Drawing.ILinearGradientBrushStyle, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public LinearGradientBrushStyleAndroid(float x0, float y0, float x1, float y1, System.Drawing.Color[] colors, float[] stops) : 
+				base(x0, y0, x1, y1, colors, stops)
+		{
+		}
+		
+		public LinearGradientBrushStyleAndroid(float x0, float y0, float x1, float y1, uint[] colors, float[] stops) : 
+				base(x0, y0, x1, y1, colors, stops)
+		{
+		}
+		
+		public LinearGradientBrushStyleAndroid(float x0, float y0, float x1, float y1, System.Drawing.Color startColor, System.Drawing.Color endColor) : 
+				base(x0, y0, x1, y1, startColor, endColor)
+		{
+		}
+		
+		public LinearGradientBrushStyleAndroid(float x0, float y0, float x1, float y1, uint startColor, uint endColor) : 
+				base(x0, y0, x1, y1, startColor, endColor)
+		{
+		}
+		
+		public LinearGradientBrushStyleAndroid(float x0, float y0, float x1, float y1, int startColor, int endColor) : 
+				base(x0, y0, x1, y1, startColor, endColor)
+		{
+		}
+		
+		public LinearGradientBrushStyleAndroid(float x0, float y0, float x1, float y1, int[] colors, float[] stops) : 
+				base(x0, y0, x1, y1, colors, stops)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class SolidBrushStyleAndroid : SolidBrushStyle, SciChart.Xamarin.Views.Drawing.ISolidBrushStyle, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public SolidBrushStyleAndroid(System.Drawing.Color color) : 
+				base(color)
+		{
+		}
+		
+		public SolidBrushStyleAndroid(uint color) : 
+				base(color)
+		{
+		}
+		
+		public SolidBrushStyleAndroid(int color) : 
+				base(color)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class SolidPenStyleAndroid : SolidPenStyle, SciChart.Xamarin.Views.Drawing.ISolidPenStyle, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public SolidPenStyleAndroid(uint color, float thickness, bool antiAliasing, float[] strokeDashArray) : 
+				base(color, thickness, antiAliasing, strokeDashArray)
+		{
+		}
+		
+		public SolidPenStyleAndroid(System.Drawing.Color color, float thickness, bool antiAliasing, float[] strokeDashArray) : 
+				base(color, thickness, antiAliasing, strokeDashArray)
+		{
+		}
+		
+		public SolidPenStyleAndroid(AndroidContext context, uint color, bool antiAliasing, float thickness, AndroidComplexUnitType unit, float[] strokeDashArray) : 
+				base(context, color, antiAliasing, thickness, unit, strokeDashArray)
+		{
+		}
+		
+		public SolidPenStyleAndroid(AndroidContext context, System.Drawing.Color color, bool antiAliasing, float thickness, AndroidComplexUnitType unit, float[] strokeDashArray) : 
+				base(context, color, antiAliasing, thickness, unit, strokeDashArray)
+		{
+		}
+		
+		public SolidPenStyleAndroid(int color, bool antiAliasing, float thickness, float[] strokeDashArray) : 
+				base(color, antiAliasing, thickness, strokeDashArray)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
 	public partial class AndroidFactory
 	{
 		
@@ -525,6 +698,26 @@ namespace SciChart.Xamarin.Android.Renderer
 		public SciChart.Xamarin.Views.Modifiers.IModifierGroup NewModifierGroup()
 		{
 			return new ModifierGroupAndroid();
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.ISolidPenStyle NewSolidPenStyle(System.Drawing.Color color, float thickness, bool antiAliasing, float[] strokeDashArray)
+		{
+			return new SolidPenStyleAndroid(color, thickness, antiAliasing, strokeDashArray);
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.ISolidBrushStyle NewSolidBrushStyle(System.Drawing.Color color)
+		{
+			return new SolidBrushStyleAndroid(color);
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.ILinearGradientBrushStyle NewLinearGradientBrushStyle(float x0, float y0, float x1, float y1, System.Drawing.Color startColor, System.Drawing.Color endColor)
+		{
+			return new LinearGradientBrushStyleAndroid(x0, y0, x1, y1, startColor, endColor);
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IFontStyle NewFontStyle(float textSize, System.Drawing.Color textColor)
+		{
+			return new FontStyleAndroid(textSize, textColor);
 		}
 	}
 }

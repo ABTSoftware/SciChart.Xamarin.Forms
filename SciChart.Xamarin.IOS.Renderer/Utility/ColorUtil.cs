@@ -24,6 +24,16 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
             return new Color(r, g, b, a);
         }
 
+        public static uint ColorFromXamarin(this System.Drawing.Color color)
+        {
+            return (uint) color.ToArgb();
+        }
+
+        private static System.Drawing.Color ColorToXamarin(this uint color)
+        {
+            return System.Drawing.Color.FromArgb((int) color);
+        }
+
         public static Color BrushStyleToXamarin(this SCIBrushStyle sciBrush)
         {
             return ColorToXamarin(sciBrush.Color);

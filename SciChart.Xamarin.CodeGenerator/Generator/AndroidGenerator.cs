@@ -20,7 +20,9 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
         {
             {"Android.App.Application", "AndroidApplication"},
             {"Android.Content.Context", "AndroidContext" },
-            {"Android.Util.IAttributeSet", "IAndroidAttributesSet" }
+            {"Android.Util.IAttributeSet", "IAndroidAttributesSet" },
+            {"Android.Util.ComplexUnitType", "AndroidComplexUnitType" },
+            {"Android.Graphics.Typeface", "AndroidTypeface" }
         };
 
         public AndroidGenerator(string sciChartAndroidVersion, ITypeInformationExtractor<AndroidTypeInformation> typeInformationExtractor) : base(typeInformationExtractor, "Android", "SciChart.Xamarin.Android.Renderer")
@@ -32,6 +34,7 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
             MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Charting.Modifiers"));
             MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Charting.Model.DataSeries"));
             MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Android.Renderer.Utility"));
+            MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Drawing.Common"));
 
             AddTypeAliases();
 

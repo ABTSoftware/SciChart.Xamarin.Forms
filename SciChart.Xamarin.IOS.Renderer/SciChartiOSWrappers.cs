@@ -35,6 +35,18 @@ namespace SciChart.Xamarin.iOS.Renderer
 			}
 		}
 		
+		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		{
+			get
+			{
+				return base.StrokeStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
 		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
@@ -412,6 +424,160 @@ namespace SciChart.Xamarin.iOS.Renderer
 		}
 	}
 	
+	public partial class FontStyleiOS : SCIFontStyle, SciChart.Xamarin.Views.Drawing.IFontStyle, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public FontStyleiOS()
+		{
+		}
+		
+		public FontStyleiOS(float fontSize, UIKit.UIColor textColor) : 
+				base(fontSize, textColor)
+		{
+		}
+		
+		public FontStyleiOS(float fontSize, uint textColor) : 
+				base(fontSize, textColor)
+		{
+		}
+		
+		public FontStyleiOS(string fontName, float fontSize, UIKit.UIColor textColor) : 
+				base(fontName, fontSize, textColor)
+		{
+		}
+		
+		public FontStyleiOS(string fontName, float fontSize, uint textColor) : 
+				base(fontName, fontSize, textColor)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class LinearGradientBrushStyleiOS : SCILinearGradientBrushStyle, SciChart.Xamarin.Views.Drawing.ILinearGradientBrushStyle, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public LinearGradientBrushStyleiOS(uint[] colors, float[] stops) : 
+				base(colors, stops)
+		{
+		}
+		
+		public LinearGradientBrushStyleiOS(CoreGraphics.CGPoint start, CoreGraphics.CGPoint end, uint[] colors, float[] stops) : 
+				base(start, end, colors, stops)
+		{
+		}
+		
+		public LinearGradientBrushStyleiOS()
+		{
+		}
+		
+		public LinearGradientBrushStyleiOS(UIKit.UIColor startColor, UIKit.UIColor endColor) : 
+				base(startColor, endColor)
+		{
+		}
+		
+		public LinearGradientBrushStyleiOS(CoreGraphics.CGPoint start, CoreGraphics.CGPoint end, UIKit.UIColor startColor, UIKit.UIColor endColor) : 
+				base(start, end, startColor, endColor)
+		{
+		}
+		
+		public LinearGradientBrushStyleiOS(uint startColor, uint endColor) : 
+				base(startColor, endColor)
+		{
+		}
+		
+		public LinearGradientBrushStyleiOS(CoreGraphics.CGPoint start, CoreGraphics.CGPoint end, uint startColor, uint endColor) : 
+				base(start, end, startColor, endColor)
+		{
+		}
+		
+		public LinearGradientBrushStyleiOS(CoreGraphics.CGPoint start, CoreGraphics.CGPoint end, SciChart.iOS.Charting.SCIUnsignedIntegerValues colors, SciChart.iOS.Charting.SCIFloatValues stops) : 
+				base(start, end, colors, stops)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class SolidBrushStyleiOS : SCISolidBrushStyle, SciChart.Xamarin.Views.Drawing.ISolidBrushStyle, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public SolidBrushStyleiOS()
+		{
+		}
+		
+		public SolidBrushStyleiOS(uint colorCode) : 
+				base(colorCode)
+		{
+		}
+		
+		public SolidBrushStyleiOS(UIKit.UIColor color) : 
+				base(color)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class SolidPenStyleiOS : SCISolidPenStyle, SciChart.Xamarin.Views.Drawing.ISolidPenStyle, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public SolidPenStyleiOS(uint color, float thickness, bool antiAliasing, float[] strokeDashArray) : 
+				base(color, thickness, antiAliasing, strokeDashArray)
+		{
+		}
+		
+		public SolidPenStyleiOS()
+		{
+		}
+		
+		public SolidPenStyleiOS(uint colorCode, float thickness) : 
+				base(colorCode, thickness)
+		{
+		}
+		
+		public SolidPenStyleiOS(UIKit.UIColor color, float thickness) : 
+				base(color, thickness)
+		{
+		}
+		
+		public SolidPenStyleiOS(UIKit.UIColor color, float thickness, Foundation.NSNumber[] strokeDashArray) : 
+				base(color, thickness, strokeDashArray)
+		{
+		}
+		
+		public SolidPenStyleiOS(uint colorCode, float thickness, Foundation.NSNumber[] strokeDashArray, bool antiAliasing) : 
+				base(colorCode, thickness, strokeDashArray, antiAliasing)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
 	public partial class iOSFactory
 	{
 		
@@ -470,6 +636,26 @@ namespace SciChart.Xamarin.iOS.Renderer
 		public SciChart.Xamarin.Views.Modifiers.IModifierGroup NewModifierGroup()
 		{
 			return new ModifierGroupiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.ISolidPenStyle NewSolidPenStyle(System.Drawing.Color color, float thickness, bool antiAliasing, float[] strokeDashArray)
+		{
+			return new SolidPenStyleiOS(color, thickness, antiAliasing, strokeDashArray);
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.ISolidBrushStyle NewSolidBrushStyle(System.Drawing.Color color)
+		{
+			return new SolidBrushStyleiOS(color);
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.ILinearGradientBrushStyle NewLinearGradientBrushStyle(float x0, float y0, float x1, float y1, System.Drawing.Color startColor, System.Drawing.Color endColor)
+		{
+			return new LinearGradientBrushStyleiOS(x0, y0, x1, y1, startColor, endColor);
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IFontStyle NewFontStyle(float textSize, System.Drawing.Color textColor)
+		{
+			return new FontStyleiOS(textSize, textColor);
 		}
 	}
 }

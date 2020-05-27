@@ -19,6 +19,7 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
             GlobalNamespace.Imports.Add(new CodeNamespaceImport("System"));
             GlobalNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Views.Model"));
             GlobalNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Views.Model.DataSeries"));
+            GlobalNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Views.Drawing"));
         }
 
         protected override void ProcessType(Type type, XamarinFormsTypeInformation information)
@@ -89,9 +90,12 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
                     sciChartFactoryInvoke.Parameters.Add(new CodeArgumentReferenceExpression(paramName));
 
                 }
-                constructor.BaseConstructorArgs.Add(
-                    sciChartFactoryInvoke
-                );
+
+                var constructorArgs = information.BaseType != null
+                    ? constructor.BaseConstructorArgs
+                    : constructor.ChainedConstructorArgs;
+
+                constructorArgs.Add(sciChartFactoryInvoke);
 
                 members.Add(constructor);
             }
@@ -137,6 +141,28 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
                 methodDeclaration.Parameters.AddRange(parameters.ToArray());
 
                 members.Add(methodDeclaration);
+            }
+
+            if (information.ImplementNativeObjectWrapperInterface)
+            {
+                const string variableName = "_nativeSciChartObject";
+                var fieldDeclaration = new CodeMemberField()
+                {
+                    Name = variableName,
+                    Type = new CodeTypeReference(typeof(INativeSciChartObject)),
+                    Attributes = MemberAttributes.Private,
+                };
+                var propertyDeclaration = new CodeMemberProperty()
+                {
+                    Name = "NativeSciChartObject",
+                    Type = new CodeTypeReference(typeof(INativeSciChartObject)),
+                    Attributes = MemberAttributes.Public | MemberAttributes.Final,
+                    HasGet = true,
+                    GetStatements = {new CodeMethodReturnStatement(new CodeVariableReferenceExpression(variableName))}
+                };
+
+                members.Add(fieldDeclaration);
+                members.Add(propertyDeclaration);
             }
         }
 

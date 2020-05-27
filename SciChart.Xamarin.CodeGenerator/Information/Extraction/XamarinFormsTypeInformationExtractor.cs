@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using SciChart.Xamarin.CodeGenerator.Utility;
+using SciChart.Xamarin.Views.Core.Common;
 using SciChart.Xamarin.Views.Core.Generation;
 
 namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
@@ -54,6 +55,11 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
                 information.IsBaseTypeGeneric = baseXamarinFormsType.IsGenericType;
                 information.BaseType = baseXamarinFormsType.ToXamarinFormsName();
             }
+
+            var allInterfaces = type.GetInterfaces();
+            var baseInterfaces = baseXamarinFormsType?.GetInterfaces() ?? new Type[0];
+
+            information.ImplementNativeObjectWrapperInterface = allInterfaces.Except(baseInterfaces).Any(t => t == typeof(INativeSciChartObjectWrapper));
         }
     }
 }

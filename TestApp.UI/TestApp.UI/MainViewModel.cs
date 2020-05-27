@@ -1,4 +1,5 @@
 ﻿using System;
+using SciChart.Xamarin.Views.Drawing;
 using SciChart.Xamarin.Views.Model;
 using SciChart.Xamarin.Views.Model.DataSeries;
 using Xamarin.Forms;
@@ -19,8 +20,8 @@ namespace TestApp.UI
             LineSeries = dataSeries;
 
             ChartTitle = "Hello World!";
-            LineStroke = Color.FromHex("#FFFF6600");
-            StrokeThickness = 1;
+
+            LineStyle = new SolidPenStyle(Color.Red, 1f, true, null);
 
             XRange = new DoubleRange(30, 50);
 
@@ -38,17 +39,7 @@ namespace TestApp.UI
             set;
         }
 
-        public Color LineStroke
-        {
-            get;
-            set;
-        }
-
-        public int StrokeThickness
-        {
-            get;
-            set;
-        }
+        public IPenStyle LineStyle { get; set; }
 
         public string ChartTitle
         {
@@ -60,5 +51,7 @@ namespace TestApp.UI
         public IComparable X2 { get; set; }
         public IComparable Y1 { get; set; }
         public IComparable Y2 { get; set; }
+
+
     }
 }

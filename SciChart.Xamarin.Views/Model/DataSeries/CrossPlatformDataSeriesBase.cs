@@ -7,7 +7,7 @@ namespace SciChart.Xamarin.Views.Model.DataSeries
     {
         protected CrossPlatformDataSeriesBase(IDataSeries nativeDataSeries)
         {
-            NativeSciChartObject = nativeDataSeries.NativeSciChartObject;
+            _nativeSciChartObject = nativeDataSeries.NativeSciChartObject;
             InnerSeries = nativeDataSeries;
         }
 
@@ -17,7 +17,5 @@ namespace SciChart.Xamarin.Views.Model.DataSeries
         {
             InnerSeries.Clear();
         }
-
-        public INativeSciChartObject NativeSciChartObject { get; }
     }
 }

@@ -71,6 +71,7 @@
     <Compile Include="Utility\ComparableUtil.cs" />
     <Compile Include="Utility\DataSeriesHelpers.cs" />
     <Compile Include="Utility\RangeHelpers.cs" />
+    <Compile Include="Utility\StyleUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SciChart.Xamarin.Views.Core\SciChart.Xamarin.Views.Core.csproj">

@@ -1,5 +1,6 @@
 ﻿using SciChart.Xamarin.Views.Core.Common;
 using SciChart.Xamarin.Views.Core.Generation;
+using SciChart.Xamarin.Views.Drawing;
 using SciChart.Xamarin.Views.Model.DataSeries;
 using Xamarin.Forms;
 
@@ -50,5 +51,9 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
         /// </summary>
         [BindablePropertyDefinition]
         string XAxisId { get; set; }
+
+        [BindablePropertyDefinition()]
+        [NativePropertyConverterDeclaration("PenStyle")]
+        IPenStyle StrokeStyle { get; set; }
     }
 }

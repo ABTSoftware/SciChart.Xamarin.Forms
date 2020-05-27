@@ -6,11 +6,7 @@ namespace SciChart.Xamarin.Views.Modifiers
     {
         protected ChartModifierCore(IChartModifierCore nativeChartModifier)
         {
-            NativeSciChartObject = nativeChartModifier.NativeSciChartObject;
+            _nativeSciChartObject = nativeChartModifier.NativeSciChartObject;
         }
-
-        public INativeSciChartObject NativeSciChartObject { get; }
-
-
     }
 }
