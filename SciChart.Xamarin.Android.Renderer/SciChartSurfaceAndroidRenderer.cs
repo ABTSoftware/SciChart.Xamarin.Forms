@@ -1,6 +1,5 @@
 ﻿using Android.Content;
 using SciChart.Charting.Visuals;
-using SciChart.Drawing.Canvas;
 using SciChart.Xamarin.Android.Renderer;
 using SciChart.Xamarin.Views.Utility;
 using Xamarin.Forms;
@@ -26,7 +25,6 @@ namespace SciChart.Xamarin.Android.Renderer
             {
                 // Create the native control 
                 this.SetNativeControl(new SciChartSurface(Context));
-                Control.RenderSurface = new RenderSurface(Context);
 
                 // Setup the property mapper 
                 _propertyMapper = new SciChartSurfaceAndroidPropertyMapper(e.NewElement, Control);                                        

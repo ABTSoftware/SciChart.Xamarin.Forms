@@ -36,6 +36,9 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
             MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Android.Renderer.Utility"));
             MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Drawing.Common"));
 
+            MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Charting3D.Visuals.RenderableSeries"));
+            MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Charting3D.Visuals.Axes"));
+
             AddTypeAliases();
 
             var userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);

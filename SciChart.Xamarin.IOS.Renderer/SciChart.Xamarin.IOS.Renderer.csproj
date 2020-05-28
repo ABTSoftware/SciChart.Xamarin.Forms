@@ -63,6 +63,8 @@
     <Compile Include="DependencyService\SciChartiOSLicenseProvider.cs" />
     <Compile Include="iOSFactory.cs" />
     <Compile Include="SciChartiOSWrappers.cs" />
+    <Compile Include="SciChartSurface3DiOSPropertyMapper.cs" />
+    <Compile Include="SciChartSurface3DiOSRenderer.cs" />
     <Compile Include="SciChartSurfaceiOSPropertyMapper.cs" />
     <Compile Include="SciChartSurfaceIOSRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

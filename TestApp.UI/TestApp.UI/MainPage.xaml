@@ -8,6 +8,7 @@
              xmlns:annotations="clr-namespace:SciChart.Xamarin.Views.Visuals.Annotations;assembly=SciChart.Xamarin.Views"
              xmlns:modifiers="clr-namespace:SciChart.Xamarin.Views.Modifiers;assembly=SciChart.Xamarin.Views"
              xmlns:drawing="clr-namespace:SciChart.Xamarin.Views.Drawing;assembly=SciChart.Xamarin.Views"
+             xmlns:axes3D="clr-namespace:SciChart.Xamarin.Views.Visuals.Axes3D;assembly=SciChart.Xamarin.Views"
              x:Class="TestApp.UI.MainPage">
 
     <Grid>
@@ -49,6 +50,21 @@
             </visuals:SciChartSurface.ChartModifiers>
 
         </visuals:SciChartSurface>
+
+        <!-- <visuals:SciChartSurface3D Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Fill"> -->
+        <!--     <visuals:SciChartSurface3D.XAxis> -->
+        <!--         <axes3D:NumericAxis3D/> -->
+        <!--     </visuals:SciChartSurface3D.XAxis> -->
+        <!-- -->
+        <!--     <visuals:SciChartSurface3D.YAxis> -->
+        <!--         <axes3D:NumericAxis3D/> -->
+        <!--     </visuals:SciChartSurface3D.YAxis> -->
+        <!-- -->
+        <!--     <visuals:SciChartSurface3D.ZAxis> -->
+        <!--         <axes3D:NumericAxis3D/> -->
+        <!--     </visuals:SciChartSurface3D.ZAxis> -->
+        <!-- -->
+        <!-- </visuals:SciChartSurface3D> -->
     </Grid>
 
 </ContentPage>

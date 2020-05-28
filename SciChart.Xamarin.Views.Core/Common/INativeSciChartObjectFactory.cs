@@ -7,12 +7,14 @@ using SciChart.Xamarin.Views.Model.DataSeries;
 using SciChart.Xamarin.Views.Modifiers;
 using SciChart.Xamarin.Views.Visuals.Annotations;
 using SciChart.Xamarin.Views.Visuals.Axes;
+using SciChart.Xamarin.Views.Visuals.Axes3D;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;
 
 namespace SciChart.Xamarin.Views.Core.Common
 {
+    // 2D Chart factory methods
     [SciChartObjectFactory]
-    public interface INativeSciChartObjectFactory
+    public partial interface INativeSciChartObjectFactory
     {
         #region RenderableSeries
 
@@ -55,5 +57,11 @@ namespace SciChart.Xamarin.Views.Core.Common
         IFontStyle NewFontStyle(float textSize, Color textColor);
 
         #endregion
+    }
+
+    // 3D Chart factory methods
+    public partial interface INativeSciChartObjectFactory
+    {
+        INumericAxis3D NewNumericAxis3D();
     }
 }

@@ -21,6 +21,7 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
             GlobalNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Views.Model"));
             GlobalNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Views.Model.DataSeries"));
             GlobalNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Views.Drawing"));
+            GlobalNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Views.Visuals.Axes"));
         }
 
         protected override void ProcessType(Type type, XamarinFormsTypeInformation information)

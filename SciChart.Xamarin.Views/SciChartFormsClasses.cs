@@ -11,6 +11,7 @@ using SciChart.Xamarin.Views.Core.Common;
 using SciChart.Xamarin.Views.Drawing;
 using SciChart.Xamarin.Views.Model;
 using SciChart.Xamarin.Views.Model.DataSeries;
+using SciChart.Xamarin.Views.Visuals.Axes;
 using System;
 using Xamarin.Forms;
 
@@ -874,6 +875,27 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
 		
 		public NumericAxis() : 
 				base(DependencyService.Get<SciChart.Xamarin.Views.Core.Common.INativeSciChartObjectFactory>().NewNumericAxis())
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.Axes3D
+{
+	
+	
+	public abstract partial class AxisBase3D : AxisCore, SciChart.Xamarin.Views.Visuals.Axes3D.IAxis3D
+	{
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.Axes3D
+{
+	
+	
+	public partial class NumericAxis3D : AxisBase3D, SciChart.Xamarin.Views.Visuals.Axes3D.INumericAxis3D
+	{
+		
+		public NumericAxis3D() : 
+				base(DependencyService.Get<SciChart.Xamarin.Views.Core.Common.INativeSciChartObjectFactory>().NewNumericAxis3D())
 		{
 		}
 	}

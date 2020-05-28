@@ -52,6 +52,8 @@
     <Compile Include="DependencyService\ObservableCollectionFactoryAndroid.cs" />
     <Compile Include="DependencyService\SciChartAndroidLicenseProvider.cs" />
     <Compile Include="SciChartAndroidWrappers.cs" />
+    <Compile Include="SciChartSurface3DAndroidPropertyMapper.cs" />
+    <Compile Include="SciChartSurface3DAndroidRenderer.cs" />
     <Compile Include="SciChartSurfaceAndroidPropertyMapper.cs" />
     <Compile Include="SciChartSurfaceAndroidRenderer.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

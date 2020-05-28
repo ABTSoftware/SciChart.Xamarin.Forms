@@ -304,6 +304,154 @@ namespace SciChart.Xamarin.iOS.Renderer
 		}
 	}
 	
+	public partial class NumericAxis3DiOS : SCINumericAxis3D, SciChart.Xamarin.Views.Visuals.Axes3D.INumericAxis3D, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public NumericAxis3DiOS()
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IBrushStyle AxisBandsFill
+		{
+			get
+			{
+				return base.AxisBandsStyle.BrushStyleToXamarin();
+			}
+			set
+			{
+				base.AxisBandsStyle = value.BrushStyleFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.Axes.AutoRange AutoRange
+		{
+			get
+			{
+				return base.AutoRange.AutoRangeToXamarin();
+			}
+			set
+			{
+				base.AutoRange = value.AutoRangeFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Model.IRange VisibleRange
+		{
+			get
+			{
+				return base.VisibleRange.RangeToXamarin();
+			}
+			set
+			{
+				base.VisibleRange = value.RangeFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Model.IRange GrowBy
+		{
+			get
+			{
+				return base.GrowBy.RangeToXamarin();
+			}
+			set
+			{
+				base.GrowBy = value.RangeFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Model.RangeClipMode VisibleRangeLimitMode
+		{
+			get
+			{
+				return base.VisibleRangeLimitMode.RangeClipModeToXamarin();
+			}
+			set
+			{
+				base.VisibleRangeLimitMode = value.RangeClipModeFromXamarin();
+			}
+		}
+		
+		public System.IComparable MinimalZoomConstrain
+		{
+			get
+			{
+				return base.MinimalZoomConstrain.ComparableToXamarin();
+			}
+			set
+			{
+				base.MinimalZoomConstrain = value.ComparableFromXamarin();
+			}
+		}
+		
+		public System.IComparable MaximumZoomConstrain
+		{
+			get
+			{
+				return base.MaximumZoomConstrain.ComparableToXamarin();
+			}
+			set
+			{
+				base.MaximumZoomConstrain = value.ComparableFromXamarin();
+			}
+		}
+		
+		public System.IComparable MajorDelta
+		{
+			get
+			{
+				return base.MajorDelta.ComparableToXamarin();
+			}
+			set
+			{
+				base.MajorDelta = value.ComparableFromXamarin();
+			}
+		}
+		
+		public System.IComparable MinorDelta
+		{
+			get
+			{
+				return base.MinorDelta.ComparableToXamarin();
+			}
+			set
+			{
+				base.MinorDelta = value.ComparableFromXamarin();
+			}
+		}
+		
+		public uint MaxAutoTicks
+		{
+			get
+			{
+				return base.MaxAutoTicks.UIntToXamarin();
+			}
+			set
+			{
+				base.MaxAutoTicks = value.UIntFromXamarin();
+			}
+		}
+		
+		public uint MinorsPerMajor
+		{
+			get
+			{
+				return base.MinorsPerMajor.UIntToXamarin();
+			}
+			set
+			{
+				base.MinorsPerMajor = value.UIntFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
 	public partial class BoxAnnotationiOS : SCIBoxAnnotation, SciChart.Xamarin.Views.Visuals.Annotations.IBoxAnnotation, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
@@ -798,6 +946,11 @@ namespace SciChart.Xamarin.iOS.Renderer
 		public SciChart.Xamarin.Views.Drawing.IFontStyle NewFontStyle(float textSize, System.Drawing.Color textColor)
 		{
 			return new FontStyleiOS(textSize, textColor);
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.Axes3D.INumericAxis3D NewNumericAxis3D()
+		{
+			return new NumericAxis3DiOS();
 		}
 	}
 }
