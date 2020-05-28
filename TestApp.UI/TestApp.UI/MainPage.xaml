@@ -7,6 +7,7 @@
              xmlns:axes="clr-namespace:SciChart.Xamarin.Views.Visuals.Axes;assembly=SciChart.Xamarin.Views"
              xmlns:annotations="clr-namespace:SciChart.Xamarin.Views.Visuals.Annotations;assembly=SciChart.Xamarin.Views"
              xmlns:modifiers="clr-namespace:SciChart.Xamarin.Views.Modifiers;assembly=SciChart.Xamarin.Views"
+             xmlns:drawing="clr-namespace:SciChart.Xamarin.Views.Drawing;assembly=SciChart.Xamarin.Views"
              x:Class="TestApp.UI.MainPage">
 
     <Grid>
@@ -22,6 +23,7 @@
         <visuals:SciChartSurface Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Fill">
             <visuals:SciChartSurface.RenderableSeries>
                 <renderableSeries:FastLineRenderableSeries DataSeries="{Binding LineSeries}" StrokeStyle="{Binding LineStyle}"/>
+                <renderableSeries:FastCandlestickRenderableSeries DataSeries="{Binding CandlestickSeries}" StrokeUpStyle="{Binding StrokeUpStyle}" StrokeDownStyle="{Binding StrokeDownStyle}" FillDownBrushStyle="{Binding FillDownStyle}" FillUpBrushStyle="{Binding FillUpStyle}"/>
             </visuals:SciChartSurface.RenderableSeries>
 
             <visuals:SciChartSurface.XAxes>

@@ -17,6 +17,7 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
         public XamarinFormsGenerator(ITypeInformationExtractor<XamarinFormsTypeInformation> typeInformationExtractor) : base(typeInformationExtractor, "Forms", "SciChart.Xamarin.Views")
         {
             GlobalNamespace.Imports.Add(new CodeNamespaceImport("System"));
+            GlobalNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Views.Core.Common"));
             GlobalNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Views.Model"));
             GlobalNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Views.Model.DataSeries"));
             GlobalNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Views.Drawing"));
@@ -82,13 +83,21 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
                         new CodeTypeReferenceExpression("DependencyService"),
                         "Get", new CodeTypeReference(typeof(INativeSciChartObjectFactory))));
 
-                var sciChartFactoryInvoke = new CodeMethodInvokeExpression(factory, $"New{information.Type}");
+                var factoryMethod = new CodeMethodReferenceExpression(factory, $"New{information.Type}");
 
+                if (information.GenericParams != null)
+                {
+                    foreach (var genericParam in information.GenericParams.Select(x => x.Item2))
+                    {
+                        factoryMethod.TypeArguments.Add(genericParam);
+                    }
+                }
+
+                var sciChartFactoryInvoke = new CodeMethodInvokeExpression(factoryMethod);
                 foreach (var (paramName, paramType) in factoryConstructor.Params)
                 {
                     constructor.Parameters.Add(new CodeParameterDeclarationExpression(paramType, paramName));
                     sciChartFactoryInvoke.Parameters.Add(new CodeArgumentReferenceExpression(paramName));
-
                 }
 
                 var constructorArgs = information.BaseType != null

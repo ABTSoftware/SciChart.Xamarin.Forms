@@ -31,7 +31,7 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
                     Params = x.GetParameters().Select(p => new ParameterInformation()
                     {
                         Name = p.Name,
-                        ParameterType = p.ParameterType
+                        ParameterType = p.ParameterType.ToGenericName()
                     }).ToArray()
                 })
                 .ToArray();
@@ -40,7 +40,7 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
                 new XamarinFormsFactoryCtorInformation()
                 {
                     ParamNames = x.ParamNames,
-                    ParamTypes = x.ParamTypes
+                    ParamTypes = x.ParamTypes,
                 }).ToArray();
         }
 

@@ -13,6 +13,6 @@ namespace SciChart.Xamarin.CodeGenerator.Information
     public struct ParameterInformation
     {
         public string Name { get; set; }
-        public Type ParameterType { get; set; }
+        public string ParameterType { get; set; }
     }
 }

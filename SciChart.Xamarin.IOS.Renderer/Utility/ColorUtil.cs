@@ -33,15 +33,5 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
         {
             return System.Drawing.Color.FromArgb((int) color);
         }
-
-        public static Color BrushStyleToXamarin(this SCIBrushStyle sciBrush)
-        {
-            return ColorToXamarin(sciBrush.Color);
-        }        
-
-        public static SCIBrushStyle BrushStyleFromXamarin(this Color value)
-        {
-            return new SCISolidBrushStyle(ColorFromXamarin(value));
-        }
     }
 }

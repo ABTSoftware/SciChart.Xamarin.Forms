@@ -11,6 +11,8 @@ namespace SciChart.Xamarin.iOS.Renderer
     {
     }
 
+    #region Style
+
     public partial class SolidPenStyleiOS
     {
         public SolidPenStyleiOS(System.Drawing.Color color, float thickness, bool antiAliasing, float[] strokeDashArray)
@@ -44,4 +46,23 @@ namespace SciChart.Xamarin.iOS.Renderer
 
         }
     }
+
+    #endregion
+
+    #region Annotations
+
+    public partial class BoxAnnotationiOS
+    {
+        public void MoveBasePointTo(float xCoord, float yCoord, int index)
+        {
+            base.MoveBasePointTo(new CGPoint(xCoord, yCoord), index);
+        }
+
+        public void MoveAnnotation(float horizontalOffset, float verticalOffset)
+        {
+            base.MoveAnnotationByXDelta(horizontalOffset, verticalOffset);
+        }
+    }
+
+    #endregion
 }

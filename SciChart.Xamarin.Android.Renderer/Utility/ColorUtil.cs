@@ -8,16 +8,6 @@ namespace SciChart.Xamarin.Android.Renderer.Utility
     {
         private const double OneOver255 = 1.0 / 255.0;
 
-        public static Color BrushStyleToXamarin(this BrushStyle axisBandsStyle)
-        {
-            return ColorToXamarin(axisBandsStyle.Color);
-        }
-
-        public static BrushStyle BrushStyleFromXamarin(this Color value)
-        {
-            return new SolidBrushStyle(ColorFromXamarin(value));
-        }
-
         private static Color ColorToXamarin(int color)
         {
             var androidColor = new global::Android.Graphics.Color(color);

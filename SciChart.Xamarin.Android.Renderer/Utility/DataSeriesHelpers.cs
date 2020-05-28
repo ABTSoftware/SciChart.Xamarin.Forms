@@ -18,6 +18,9 @@ namespace SciChart.Xamarin.Android.Renderer.Utility
                 case XyDataSeriesAndroid<double, double> xyDataSeries:
                     return new XyDataSeries<double, double>(xyDataSeries);
 
+                case OhlcDataSeriesAndroid<double, double> ohlcDataSeries:
+                    return new OhlcDataSeries<double, double>(ohlcDataSeries);
+
                 default:
                     return null;
             }

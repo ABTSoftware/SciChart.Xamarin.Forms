@@ -10,4 +10,11 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
             _nativeSciChartObject = nativeRenderableSeries.NativeSciChartObject;
         }
     }
+
+    public abstract partial class OhlcRenderableSeriesBase
+    {
+        protected OhlcRenderableSeriesBase(IOhlcRenderableSeriesBase nativeRenderableSeries) : base(nativeRenderableSeries)
+        {
+        }
+    }
 }

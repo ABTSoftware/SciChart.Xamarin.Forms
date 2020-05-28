@@ -18,6 +18,8 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
                 case XyDataSeriesiOS<double, double> xyDataSeries:
                     return new Views.Model.DataSeries.XyDataSeries<double, double>(xyDataSeries);
 
+                case OhlcDataSeriesiOS<double, double> ohlcDataSeries:
+                    return new Views.Model.DataSeries.OhlcDataSeries<double, double>(ohlcDataSeries);
                 default:
                     return null;
             }

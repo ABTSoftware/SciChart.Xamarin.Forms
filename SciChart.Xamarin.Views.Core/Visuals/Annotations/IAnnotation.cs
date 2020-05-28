@@ -26,5 +26,37 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
         [BindablePropertyDefinition()]
         [NativePropertyConverterDeclaration(nativeProperty: "Y2Value")]
         IComparable Y2 { get; set; }
+
+        [BindablePropertyDefinition()]
+        string XAxisId { get; set; }
+
+        [BindablePropertyDefinition()]
+        string YAxisId { get; set; }
+
+        [BindablePropertyDefinition()]
+        bool IsEditable { get; set; }
+
+        [BindablePropertyDefinition()]
+        bool IsHidden { get; set; }
+
+        [BindablePropertyDefinition()]
+        [NativePropertyConverterDeclaration("Direction2D")]
+        Direction2D DragDirections { get; set; }
+
+        [BindablePropertyDefinition()]
+        [NativePropertyConverterDeclaration("Direction2D")]
+        Direction2D ResizeDirections { get; set; }
+
+        [MethodDeclaration]
+        void Show();
+
+        [MethodDeclaration]
+        void Hide();
+
+        [MethodDeclaration]
+        void MoveBasePointTo(float xCoord, float yCoord, int index);
+
+        [MethodDeclaration]
+        void MoveAnnotation(float horizontalOffset, float verticalOffset);
     }
 }

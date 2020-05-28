@@ -16,6 +16,94 @@ namespace SciChart.Xamarin.iOS.Renderer
 	using SciChart.Xamarin.iOS.Renderer.Utility;
 	
 	
+	public partial class FastCandlestickRenderableSeriesiOS : SCIFastCandlestickRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastCandlestickRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public FastCandlestickRenderableSeriesiOS()
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IBrushStyle FillDownBrushStyle
+		{
+			get
+			{
+				return base.FillDownBrushStyle.BrushStyleToXamarin();
+			}
+			set
+			{
+				base.FillDownBrushStyle = value.BrushStyleFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IBrushStyle FillUpBrushStyle
+		{
+			get
+			{
+				return base.FillUpBrushStyle.BrushStyleToXamarin();
+			}
+			set
+			{
+				base.FillUpBrushStyle = value.BrushStyleFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeDownStyle
+		{
+			get
+			{
+				return base.StrokeDownStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeDownStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeUpStyle
+		{
+			get
+			{
+				return base.StrokeUpStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeUpStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Model.DataSeries.IDataSeries DataSeries
+		{
+			get
+			{
+				return base.DataSeries.DataSeriesToXamarin();
+			}
+			set
+			{
+				base.DataSeries = value.DataSeriesFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		{
+			get
+			{
+				return base.StrokeStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
 	public partial class FastLineRenderableSeriesiOS : SCIFastLineRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastLineRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
@@ -75,7 +163,7 @@ namespace SciChart.Xamarin.iOS.Renderer
 			}
 		}
 		
-		public Color AxisBandsFill
+		public SciChart.Xamarin.Views.Drawing.IBrushStyle AxisBandsFill
 		{
 			get
 			{
@@ -271,6 +359,30 @@ namespace SciChart.Xamarin.iOS.Renderer
 			}
 		}
 		
+		public SciChart.Xamarin.Views.Core.Common.Direction2D DragDirections
+		{
+			get
+			{
+				return base.DragDirections.Direction2DToXamarin();
+			}
+			set
+			{
+				base.DragDirections = value.Direction2DFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.Direction2D ResizeDirections
+		{
+			get
+			{
+				return base.ResizeDirections.Direction2DToXamarin();
+			}
+			set
+			{
+				base.ResizeDirections = value.Direction2DFromXamarin();
+			}
+		}
+		
 		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
@@ -394,6 +506,24 @@ namespace SciChart.Xamarin.iOS.Renderer
 		
 		public DoubleRangeiOS(SciChart.iOS.Charting.SCIDoubleRange range) : 
 				base(range)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class OhlcDataSeriesiOS<TX, TY> : OhlcDataSeries<TX,TY>, SciChart.Xamarin.Views.Model.DataSeries.IOhlcDataSeries<TX,TY>, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+		where TX : System.IComparable
+		where TY : System.IComparable
+	{
+		
+		public OhlcDataSeriesiOS()
 		{
 		}
 		
@@ -586,6 +716,11 @@ namespace SciChart.Xamarin.iOS.Renderer
 			return new FastLineRenderableSeriesiOS();
 		}
 		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastCandlestickRenderableSeries NewFastCandlestickRenderableSeries()
+		{
+			return new FastCandlestickRenderableSeriesiOS();
+		}
+		
 		public SciChart.Xamarin.Views.Visuals.Axes.INumericAxis NewNumericAxis()
 		{
 			return new NumericAxisiOS();
@@ -596,6 +731,13 @@ namespace SciChart.Xamarin.iOS.Renderer
 			where TY : System.IComparable
 		{
 			return new XyDataSeriesiOS<TX,TY>();
+		}
+		
+		public SciChart.Xamarin.Views.Model.DataSeries.IOhlcDataSeries<TX,TY> NewOhlcDataSeries<TX, TY>()
+			where TX : System.IComparable
+			where TY : System.IComparable
+		{
+			return new OhlcDataSeriesiOS<TX,TY>();
 		}
 		
 		public SciChart.Xamarin.Views.Model.IDoubleRange NewDoubleRange(double min, double max)

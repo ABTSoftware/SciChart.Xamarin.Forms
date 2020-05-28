@@ -39,4 +39,12 @@
 
         }
     }
+
+    public partial class LinearGradientBrushStyle : BrushStyle
+    {
+        public LinearGradientBrushStyle(ILinearGradientBrushStyle style) : base(style)
+        {
+
+        }
+    }
 }

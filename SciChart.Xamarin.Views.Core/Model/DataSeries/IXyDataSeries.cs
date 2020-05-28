@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using SciChart.Xamarin.Views.Core.Generation;
 
 namespace SciChart.Xamarin.Views.Model.DataSeries
 {
     [ClassDeclaration("XyDataSeries", "XyDataSeries", typeof(IDataSeries))]
     [GenericParamsDeclaration(new []{"TX", "TY"}, new Type[]{typeof(IComparable), typeof(IComparable)})]
+    [InjectNativeSciChartObject]
     public interface IXyDataSeries<TX,TY> : IDataSeries 
         where TX:IComparable 
         where TY:IComparable
@@ -17,15 +19,7 @@ namespace SciChart.Xamarin.Views.Model.DataSeries
         [MethodDeclaration]
         void Append(TX x, TY y);
 
-//        /// <summary>
-//        /// Gets the X Values of this series.
-//        /// </summary>
-//        IList<TX> XValues { get; }
-//
-//        /// <summary>
-//        /// Gets the Y Values of this series.
-//        /// </summary>
-//        IList<TY> YValues { get; }
-
+        [MethodDeclaration]
+        void Append(IEnumerable<TX> xValues, IEnumerable<TY> yValues);
     }
 }

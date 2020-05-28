@@ -60,6 +60,9 @@ namespace SciChart.Xamarin.CodeGenerator.Utility
                 return $"{type.Namespace}.{name}<{genericParamsString}>";
             }
 
+            if (type.IsGenericParameter)
+                return type.Name;
+
             return $"{type.Namespace}.{type.Name}";
         }
 

@@ -16,5 +16,22 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
 
             return null;
         }
+
+
+        public static SCIBrushStyle BrushStyleFromXamarin(this SciChart.Xamarin.Views.Drawing.IBrushStyle brushStyle)
+        {
+            return brushStyle.NativeSciChartObject as SCIBrushStyle;
+        }
+
+        public static SciChart.Xamarin.Views.Drawing.IBrushStyle BrushStyleToXamarin(this SCIBrushStyle brushStyle)
+        {
+            if (brushStyle is SolidBrushStyleiOS solidBrushStyle)
+                return new SciChart.Xamarin.Views.Drawing.SolidBrushStyle(solidBrushStyle);
+
+            if (brushStyle is LinearGradientBrushStyleiOS linearGradientBrushStyle)
+                return new SciChart.Xamarin.Views.Drawing.LinearGradientBrushStyle(linearGradientBrushStyle);
+
+            return null;
+        }
     }
 }

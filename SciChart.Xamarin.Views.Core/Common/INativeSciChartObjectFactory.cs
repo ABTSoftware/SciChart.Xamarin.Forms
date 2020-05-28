@@ -14,11 +14,21 @@ namespace SciChart.Xamarin.Views.Core.Common
     [SciChartObjectFactory]
     public interface INativeSciChartObjectFactory
     {
+        #region RenderableSeries
+
         IFastLineRenderableSeries NewFastLineRenderableSeries();
+        IFastCandlestickRenderableSeries NewFastCandlestickRenderableSeries();
+
+        #endregion
 
         INumericAxis NewNumericAxis();
 
+        #region DataSeries
+
         IXyDataSeries<TX, TY> NewXyDataSeries<TX, TY>() where TX : IComparable where TY : IComparable;
+        IOhlcDataSeries<TX, TY> NewOhlcDataSeries<TX, TY>() where TX : IComparable where TY : IComparable;
+
+        #endregion
 
         IDoubleRange NewDoubleRange(double min, double max);
 

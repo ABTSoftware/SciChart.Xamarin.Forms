@@ -8,22 +8,8 @@ namespace SciChart.Xamarin.Views.Model.DataSeries
         where TX:IComparable
         where TY:IComparable
     {
-        public XyDataSeries(IDataSeries nativeDataSeries) : base(nativeDataSeries)
+        public XyDataSeries(IXyDataSeries<TX, TY> nativeDataSeries) : base(nativeDataSeries)
         {
         }
-
-        public XyDataSeries() : base(DependencyService.Get<INativeSciChartObjectFactory>().NewXyDataSeries<TX, TY>())
-        {
-        }
-//
-//        public IList<TX> XValues
-//        {
-//            get => ((IXyDataSeries<TX, TY>)InnerSeries).XValues;
-//        }
-//
-//        public IList<TY> YValues
-//        {
-//            get => ((IXyDataSeries<TX, TY>)InnerSeries).YValues;
-//        }
     }
 }

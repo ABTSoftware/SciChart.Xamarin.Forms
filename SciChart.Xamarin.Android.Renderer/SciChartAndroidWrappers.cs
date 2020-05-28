@@ -27,6 +27,99 @@ namespace SciChart.Xamarin.Android.Renderer
 	using SciChart.Drawing.Common;
 	
 	
+	public partial class FastCandlestickRenderableSeriesAndroid : FastCandlestickRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastCandlestickRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public FastCandlestickRenderableSeriesAndroid()
+		{
+		}
+		
+		public FastCandlestickRenderableSeriesAndroid(SciChart.Charting.Visuals.RenderableSeries.Data.OhlcRenderPassData currentRenderPassData, SciChart.Charting.Visuals.RenderableSeries.HitTest.IHitProvider hitProvider, SciChart.Charting.Visuals.RenderableSeries.HitTest.INearestPointProvider nearestPointProvider) : 
+				base(currentRenderPassData, hitProvider, nearestPointProvider)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IBrushStyle FillDownBrushStyle
+		{
+			get
+			{
+				return base.FillDownBrushStyle.BrushStyleToXamarin();
+			}
+			set
+			{
+				base.FillDownBrushStyle = value.BrushStyleFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IBrushStyle FillUpBrushStyle
+		{
+			get
+			{
+				return base.FillUpBrushStyle.BrushStyleToXamarin();
+			}
+			set
+			{
+				base.FillUpBrushStyle = value.BrushStyleFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeDownStyle
+		{
+			get
+			{
+				return base.StrokeDownStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeDownStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeUpStyle
+		{
+			get
+			{
+				return base.StrokeUpStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeUpStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Model.DataSeries.IDataSeries DataSeries
+		{
+			get
+			{
+				return base.DataSeries.DataSeriesToXamarin();
+			}
+			set
+			{
+				base.DataSeries = value.DataSeriesFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		{
+			get
+			{
+				return base.StrokeStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
 	public partial class FastLineRenderableSeriesAndroid : FastLineRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastLineRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
@@ -107,7 +200,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public Color AxisBandsFill
+		public SciChart.Xamarin.Views.Drawing.IBrushStyle AxisBandsFill
 		{
 			get
 			{
@@ -324,6 +417,30 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
+		public SciChart.Xamarin.Views.Core.Common.Direction2D DragDirections
+		{
+			get
+			{
+				return base.DragDirections.Direction2DToXamarin();
+			}
+			set
+			{
+				base.DragDirections = value.Direction2DFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.Direction2D ResizeDirections
+		{
+			get
+			{
+				return base.ResizeDirections.Direction2DToXamarin();
+			}
+			set
+			{
+				base.ResizeDirections = value.Direction2DFromXamarin();
+			}
+		}
+		
 		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
@@ -452,6 +569,24 @@ namespace SciChart.Xamarin.Android.Renderer
 		
 		public DoubleRangeAndroid(Java.Lang.Double min, Java.Lang.Double max) : 
 				base(min, max)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class OhlcDataSeriesAndroid<TX, TY> : OhlcDataSeries<TX,TY>, SciChart.Xamarin.Views.Model.DataSeries.IOhlcDataSeries<TX,TY>, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+		where TX : System.IComparable
+		where TY : System.IComparable
+	{
+		
+		public OhlcDataSeriesAndroid()
 		{
 		}
 		
@@ -648,6 +783,11 @@ namespace SciChart.Xamarin.Android.Renderer
 			return new FastLineRenderableSeriesAndroid();
 		}
 		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastCandlestickRenderableSeries NewFastCandlestickRenderableSeries()
+		{
+			return new FastCandlestickRenderableSeriesAndroid();
+		}
+		
 		public SciChart.Xamarin.Views.Visuals.Axes.INumericAxis NewNumericAxis()
 		{
 			return new NumericAxisAndroid();
@@ -658,6 +798,13 @@ namespace SciChart.Xamarin.Android.Renderer
 			where TY : System.IComparable
 		{
 			return new XyDataSeriesAndroid<TX,TY>();
+		}
+		
+		public SciChart.Xamarin.Views.Model.DataSeries.IOhlcDataSeries<TX,TY> NewOhlcDataSeries<TX, TY>()
+			where TX : System.IComparable
+			where TY : System.IComparable
+		{
+			return new OhlcDataSeriesAndroid<TX,TY>();
 		}
 		
 		public SciChart.Xamarin.Views.Model.IDoubleRange NewDoubleRange(double min, double max)

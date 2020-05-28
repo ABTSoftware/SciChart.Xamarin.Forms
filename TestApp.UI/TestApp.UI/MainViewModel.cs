@@ -10,18 +10,23 @@ namespace TestApp.UI
     {
         public MainViewModel()
         {
-            var dataSeries = new XyDataSeries<double, double>();
+            CandlestickSeries = new OhlcDataSeries<double, double>();
+            LineSeries = new XyDataSeries<double, double>();
+
+            var random = new Random();
 
             for (int i = 0; i < 100; i++)
             {
-                dataSeries.Append(i, Math.Sin(i * 0.05));
+                var y = Math.Sin(i * 0.05);
+                LineSeries.Append(i, y);
+                CandlestickSeries.Append(i, y, y + random.NextDouble(), y - random.NextDouble(), y + random.NextDouble() - 0.5);
             }
 
-            LineSeries = dataSeries;
-
-            ChartTitle = "Hello World!";
-
             LineStyle = new SolidPenStyle(Color.Red, 1f, true, null);
+            StrokeUpStyle = new SolidPenStyle(Color.GreenYellow, 1f, true, null);
+            StrokeDownStyle = new SolidPenStyle(Color.Olive, 1f, true, null);
+            FillUpStyle = new SolidBrushStyle(Color.GreenYellow);
+            FillDownStyle = new SolidBrushStyle(Color.Olive);
 
             XRange = new DoubleRange(30, 50);
 
@@ -39,13 +44,14 @@ namespace TestApp.UI
             set;
         }
 
+        public IOhlcDataSeries<double, double> CandlestickSeries { get; set; }
+
         public IPenStyle LineStyle { get; set; }
 
-        public string ChartTitle
-        {
-            get;
-            set;
-        }
+        public IPenStyle StrokeUpStyle { get; set; }
+        public IPenStyle StrokeDownStyle { get; set; }
+        public IBrushStyle FillUpStyle { get; set; }
+        public IBrushStyle FillDownStyle { get; set; }
 
         public IComparable X1 { get; set; }
         public IComparable X2 { get; set; }

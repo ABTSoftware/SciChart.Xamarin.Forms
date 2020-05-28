@@ -1,6 +1,7 @@
 ﻿using System;
 using SciChart.Xamarin.Views.Core.Common;
 using SciChart.Xamarin.Views.Core.Generation;
+using SciChart.Xamarin.Views.Drawing;
 using SciChart.Xamarin.Views.Model;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;
 using Xamarin.Forms;
@@ -84,7 +85,7 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
         /// <remarks></remarks>
         [NativePropertyConverterDeclaration("BrushStyle", "AxisBandsStyle")]
         [BindablePropertyDefinition]
-        Color AxisBandsFill { get; set; }
+        IBrushStyle AxisBandsFill { get; set; }
 
         /// <summary>
         /// Gets or sets whether this current axis <see cref="AutoRange"/>. Default is AutoRange.Once
@@ -146,7 +147,6 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
 
         [BindablePropertyDefinition]
         [NativePropertyConverterDeclaration("UInt")]
-
         uint MinorsPerMajor { get; set; }
 
         /// <summary>
