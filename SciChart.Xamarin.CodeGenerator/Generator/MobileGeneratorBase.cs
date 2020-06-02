@@ -13,8 +13,22 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
 {
     public abstract class MobileGeneratorBase<T> : GeneratorBase<T> where T : MobileTypeInformation
     {
+        private readonly CodeTypeDeclaration _factoryDeclaration;
+
         protected MobileGeneratorBase(ITypeInformationExtractor<T> typeInformationExtractor, string platform, string mainNamespace) : base(typeInformationExtractor, platform, mainNamespace)
         {
+            _factoryDeclaration = new CodeTypeDeclaration($"{Platform}Factory")
+            {
+                IsPartial = true,
+            };
+
+        }
+
+        public override void AddTypes(IEnumerable<Type> types)
+        {
+            base.AddTypes(types);
+
+            MainNamespace.Types.Add(_factoryDeclaration);
         }
 
         protected override void ProcessType(Type type, T information)
@@ -35,6 +49,11 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
             TryAddGenericTypeParameters(information, typeDeclaration.TypeParameters);
 
             MainNamespace.Types.Add(typeDeclaration);
+
+            foreach (var factoryCtorInformation in information.FactoryConstructors)
+            {
+                ProcessFactory(factoryCtorInformation);
+            }
         }
 
         private void TryAddGenericTypeParameters(T information, CodeTypeParameterCollection typeParameters)
@@ -113,7 +132,7 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
             };
         }
 
-        protected string GetTypeName(Type type)
+        protected override string GetTypeName(Type type)
         {
             var typeName = type.FullName;
             if (typeName.StartsWith("Xamarin.Forms.")) return typeName.Replace("Xamarin.Forms.", "");
@@ -121,32 +140,17 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
             return typeName;
         }
 
-        public void AddFactories(IEnumerable<MethodInfo> factoryMethods)
-        {
-            var factory = new CodeTypeDeclaration($"{Platform}Factory")
-            {
-                IsPartial = true,
-            };
-
-            foreach (var factoryMethod in factoryMethods)
-            {
-                ProcessFactory(factoryMethod, factory);
-            }
-
-            MainNamespace.Types.Add(factory);
-        }
-
-        private void ProcessFactory(MethodInfo factoryMethodInfo, CodeTypeDeclaration factory)
+        private void ProcessFactory(FactoryCtorInformation factoryMethodInfo)
         {
             var returnType = factoryMethodInfo.ReturnType;
             var information = _typeInformationExtractor.GetInformationAboutType(returnType);
 
             var parameters = new List<CodeParameterDeclarationExpression>();
             var arguments = new List<CodeExpression>();
-            foreach (var parameterInfo in factoryMethodInfo.GetParameters())
+            foreach (var (paramName, paramType) in factoryMethodInfo.Params)
             {
-                parameters.Add(new CodeParameterDeclarationExpression(parameterInfo.ParameterType, parameterInfo.Name));
-                arguments.Add(new CodeArgumentReferenceExpression(parameterInfo.Name));
+                parameters.Add(new CodeParameterDeclarationExpression(GetTypeName(paramType), paramName));
+                arguments.Add(new CodeArgumentReferenceExpression(paramName));
             }
 
             var factoryMethod = new CodeMemberMethod()
@@ -164,7 +168,7 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
 
             TryAddGenericTypeParameters(information, factoryMethod.TypeParameters);
 
-            factory.Members.Add(factoryMethod);
+            _factoryDeclaration.Members.Add(factoryMethod);
         }
     }
 }

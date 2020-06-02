@@ -10,10 +10,6 @@ namespace SciChart.Xamarin.Views.Model
     /// </summary>
     public partial class DoubleRange : RangeBase, IDoubleRange
     {
-        public DoubleRange(IRange nativeRange) : base(nativeRange)
-        {
-        }
-
         public double Min
         {
             get => ((IDoubleRange)NativeRange).Min;

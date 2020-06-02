@@ -19,28 +19,14 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
         private readonly Dictionary<string, string> _typeMappings = new Dictionary<string, string>()
         {
             {"Android.App.Application", "AndroidApplication"},
-            {"Android.Content.Context", "AndroidContext" },
-            {"Android.Util.IAttributeSet", "IAndroidAttributesSet" },
-            {"Android.Util.ComplexUnitType", "AndroidComplexUnitType" },
-            {"Android.Graphics.Typeface", "AndroidTypeface" }
+            {"Android.Content.Context", "AndroidContext"},
+            {"Android.Util.IAttributeSet", "IAndroidAttributesSet"},
+            {"Android.Util.ComplexUnitType", "AndroidComplexUnitType"},
+            {"Android.Graphics.Typeface", "AndroidTypeface"},
         };
 
         public AndroidGenerator(string sciChartAndroidVersion, ITypeInformationExtractor<AndroidTypeInformation> typeInformationExtractor) : base(typeInformationExtractor, "Android", "SciChart.Xamarin.Android.Renderer")
         {
-            MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Data.Model"));
-            MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Charting.Visuals.RenderableSeries"));
-            MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Charting.Visuals.Axes"));
-            MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Charting.Visuals.Annotations"));
-            MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Charting.Modifiers"));
-            MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Charting.Model.DataSeries"));
-            MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Android.Renderer.Utility"));
-            MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Drawing.Common"));
-
-            MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Charting3D.Visuals.RenderableSeries"));
-            MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Charting3D.Visuals.Axes"));
-
-            AddTypeAliases();
-
             var userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             var sciChartAndroid = Path.Combine(userFolder, ".nuget", "packages", "scichart.android", sciChartAndroidVersion, "lib", "MonoAndroid440");
             var sciChartAndroid3d = Path.Combine(userFolder, ".nuget", "packages", "scichart.android3d", sciChartAndroidVersion, "lib", "MonoAndroid440");
@@ -56,6 +42,16 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
             _androidNativeTypes.AddRange(drawing.Types);
             _androidNativeTypes.AddRange(charting.Types);
             _androidNativeTypes.AddRange(charting3d.Types);
+
+            // import all SciChart namespaces in Xamarin.Android wrapper
+            foreach (var androidNativeNamespace in _androidNativeTypes.Select(x => x.Namespace).Where(x => x.StartsWith("SciChart.")))
+            {
+                MainNamespace.Imports.Add(new CodeNamespaceImport(androidNativeNamespace));
+            }
+            
+            MainNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Android.Renderer.Utility"));
+
+            AddTypeAliases();
         }
 
         private void AddTypeAliases()

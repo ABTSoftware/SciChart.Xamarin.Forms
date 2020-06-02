@@ -6,32 +6,19 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
 {
     public static class ColorUtil
     {
-        public static UIColor ColorFromXamarin(this Color xfColor)
+        public static uint ColorFromXamarin(this Color xfColor)
         {
-            UIKit.UIColor uiColor = UIColor.FromRGBA(
-                (byte)(xfColor.R * 255),
-                (byte)(xfColor.G * 255),
-                (byte)(xfColor.B * 255),
-                (byte)(xfColor.A * 255));
+            var a = (byte)(xfColor.A * 255);
+            var r = (byte)(xfColor.R * 255);
+            var g = (byte)(xfColor.G * 255);
+            var b = (byte)(xfColor.B * 255);
 
-            return uiColor;
+            return (uint) (a << 24 | r << 16| g << 8 | b);
         }
 
-        private static Color ColorToXamarin(this UIColor color)
+        public static Color ColorToXamarin(this uint color)
         {
-            System.nfloat r, g, b, a;
-            color.GetRGBA(out r, out g, out b, out a);
-            return new Color(r, g, b, a);
-        }
-
-        public static uint ColorFromXamarin(this System.Drawing.Color color)
-        {
-            return (uint) color.ToArgb();
-        }
-
-        private static System.Drawing.Color ColorToXamarin(this uint color)
-        {
-            return System.Drawing.Color.FromArgb((int) color);
+            return Color.FromUint(color);
         }
     }
 }

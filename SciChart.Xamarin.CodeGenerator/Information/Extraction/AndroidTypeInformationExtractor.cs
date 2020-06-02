@@ -25,6 +25,19 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
             information.Type = wrapperType;
         }
 
+        protected override NativePropertyConverterInformation GetPropertyDeclarationFrom(PropertyInfo property)
+
+        {
+            var attribute = property.GetCustomAttribute<NativePropertyConverterDeclaration>();
+
+            return new NativePropertyConverterInformation()
+            {
+                Converter = attribute.AndroidConverter,
+                Name = property.Name,
+                NativeName = attribute.AndroidNativeProperty ?? property.Name,
+                PropertyType = property.PropertyType
+            };
+        }
 
     }
 }

@@ -21,5 +21,7 @@ namespace SciChart.Xamarin.CodeGenerator.Information
 
         public virtual string GenericBaseTypeName => BaseType.ToGenericName(GenericParams);
         public virtual string GenericTypeName => Type.ToGenericName(GenericParams);
+
+        public FactoryCtorInformation[] FactoryConstructors { get; set; }
     }
 }

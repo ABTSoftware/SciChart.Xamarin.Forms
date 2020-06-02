@@ -2,6 +2,7 @@
 using SciChart.Xamarin.Views.Visuals.Annotations;
 using SciChart.Xamarin.Views.Visuals.Axes;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;
+using SciChart.Xamarin.Views.Visuals.RenderableSeries3D;
 
 namespace SciChart.Xamarin.Views.Model.ObservableCollection
 {
@@ -27,5 +28,8 @@ namespace SciChart.Xamarin.Views.Model.ObservableCollection
 
         INativeObservableCollection<IAnnotation> NewAnnotationCollection();
         INativeObservableCollection<IChartModifier> NewChartModifierCollection();
+
+        INativeObservableCollection<IRenderableSeries3D> NewRenderableSeries3DCollection();
+        INativeObservableCollection<IChartModifier3D> NewChartModifier3DCollection();
     }
 }

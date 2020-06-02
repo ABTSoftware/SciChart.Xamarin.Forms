@@ -15,7 +15,7 @@ namespace SciChart.Xamarin.iOS.Renderer
 
     public partial class SolidPenStyleiOS
     {
-        public SolidPenStyleiOS(System.Drawing.Color color, float thickness, bool antiAliasing, float[] strokeDashArray)
+        public SolidPenStyleiOS(Color color, float thickness, bool antiAliasing, float[] strokeDashArray)
             : base(color.ColorFromXamarin(), thickness, antiAliasing, strokeDashArray)
         {
 
@@ -24,15 +24,14 @@ namespace SciChart.Xamarin.iOS.Renderer
 
     public partial class SolidBrushStyleiOS
     {
-        public SolidBrushStyleiOS(in System.Drawing.Color colorCode) : base(colorCode.ColorFromXamarin())
+        public SolidBrushStyleiOS(Color colorCode) : base(colorCode.ColorFromXamarin())
         {
         }
     }
 
     public partial class LinearGradientBrushStyleiOS
     {
-        public LinearGradientBrushStyleiOS(float x0, float y0, float x1, float y1, System.Drawing.Color startColor,
-            System.Drawing.Color endColor) : base(new CGPoint(x0, y0), new CGPoint(x1, y1),
+        public LinearGradientBrushStyleiOS(float x0, float y0, float x1, float y1, Color startColor, Color endColor) : base(new CGPoint(x0, y0), new CGPoint(x1, y1),
             startColor.ColorFromXamarin(), endColor.ColorFromXamarin())
         {
 
@@ -41,7 +40,7 @@ namespace SciChart.Xamarin.iOS.Renderer
 
     public partial class FontStyleiOS
     {
-        public FontStyleiOS(float textSize, System.Drawing.Color textColor) : base(textSize, textColor.ColorFromXamarin())
+        public FontStyleiOS(float textSize, Color textColor) : base(textSize, textColor.ColorFromXamarin())
         {
 
         }
@@ -61,6 +60,25 @@ namespace SciChart.Xamarin.iOS.Renderer
         public void MoveAnnotation(float horizontalOffset, float verticalOffset)
         {
             base.MoveAnnotationByXDelta(horizontalOffset, verticalOffset);
+        }
+    }
+
+    #endregion
+
+    #region PointMarkers
+
+    public partial class EllipsePointMarkeriOS
+    {
+        public int Width
+        {
+            get => (int) base.Size.Width;
+            set => base.Size = new CGSize(value, base.Size.Height);
+        }
+
+        public int Height
+        {
+            get => (int) base.Size.Height;
+            set => base.Size = new CGSize(base.Size.Width, value);
         }
     }
 

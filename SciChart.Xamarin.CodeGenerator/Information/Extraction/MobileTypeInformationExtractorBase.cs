@@ -17,17 +17,6 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
                 .Select(GetPropertyDeclarationFrom).ToArray();
         }
 
-        private static NativePropertyConverterInformation GetPropertyDeclarationFrom(PropertyInfo property)
-        {
-            var attribute = property.GetCustomAttribute<NativePropertyConverterDeclaration>();
-
-            return new NativePropertyConverterInformation()
-            {
-                Converter = attribute.Converter,
-                Name = property.Name,
-                NativeName = attribute.NativeProperty ?? property.Name,
-                PropertyType = property.PropertyType
-            };
-        }
+        protected abstract NativePropertyConverterInformation GetPropertyDeclarationFrom(PropertyInfo property);
     }
 }

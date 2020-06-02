@@ -1,6 +1,5 @@
-﻿using System;
-using SciChart.Drawing.Common;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 
 namespace SciChart.Xamarin.Android.Renderer.Utility
 {
@@ -8,19 +7,16 @@ namespace SciChart.Xamarin.Android.Renderer.Utility
     {
         private const double OneOver255 = 1.0 / 255.0;
 
-        private static Color ColorToXamarin(int color)
+        public static Color ColorToXamarin(this int color)
         {
             var androidColor = new global::Android.Graphics.Color(color);
             return new Color(androidColor.R * OneOver255, androidColor.G * OneOver255, androidColor.B * OneOver255,
                 androidColor.A * OneOver255);
-        }        
+        }
 
-        public static global::Android.Graphics.Color ColorFromXamarin(Color xfColor)
+        public static int ColorFromXamarin(this Color color)
         {
-            return new global::Android.Graphics.Color((byte) (xfColor.R * 255),
-                (byte) (xfColor.G * 255),
-                (byte) (xfColor.B * 255),
-                (byte) (xfColor.A * 255));
+            return color.ToAndroid().ToArgb();
         }
     }
 }

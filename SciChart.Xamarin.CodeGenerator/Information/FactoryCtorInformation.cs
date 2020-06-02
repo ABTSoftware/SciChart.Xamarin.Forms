@@ -3,10 +3,12 @@ using System.Collections.Generic;
 
 namespace SciChart.Xamarin.CodeGenerator.Information
 {
-    public class XamarinFormsFactoryCtorInformation
+    public class FactoryCtorInformation
     {
         public string[] ParamNames { get; set; }
         public Type[] ParamTypes { get; set; }
+
+        public Type ReturnType { get; set; }
 
         public IEnumerable<(string, Type)> Params
         {

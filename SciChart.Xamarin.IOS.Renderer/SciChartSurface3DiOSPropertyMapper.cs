@@ -12,6 +12,8 @@ namespace SciChart.Xamarin.iOS.Renderer
             this.Add(SciChartSurface3D.XAxisProperty.PropertyName, OnXAxisChanged);
             this.Add(SciChartSurface3D.YAxisProperty.PropertyName, OnYAxisChanged);
             this.Add(SciChartSurface3D.ZAxisProperty.PropertyName, OnZAxisChanged);
+            this.Add(SciChartSurface3D.RenderableSeriesProperty.PropertyName, OnRenderableSeriesChanged);
+            this.Add(SciChartSurface3D.ChartModifiersProperty.PropertyName, OnChartModifiersChanged);
             this.Init();
         }
 
@@ -28,6 +30,17 @@ namespace SciChart.Xamarin.iOS.Renderer
         private void OnZAxisChanged(SciChartSurface3D source, SCIChartSurface3D target)
         {
             target.ZAxis = source.ZAxis.NativeSciChartObject as IISCIAxis3D;
+        }
+
+
+        private void OnRenderableSeriesChanged(SciChartSurface3D source, SCIChartSurface3D target)
+        {
+            target.RenderableSeries = (SCIRenderableSeries3DCollection)source.RenderableSeries.NativeObservableCollection;
+        }
+
+        private void OnChartModifiersChanged(SciChartSurface3D source, SCIChartSurface3D target)
+        {
+            target.ChartModifiers = source.ChartModifiers.NativeObservableCollection as SCIChartModifier3DCollection;
         }
     }
 }

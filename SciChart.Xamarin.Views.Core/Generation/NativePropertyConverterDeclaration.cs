@@ -5,14 +5,25 @@ namespace SciChart.Xamarin.Views.Core.Generation
     [AttributeUsage(AttributeTargets.Property)]
     public class NativePropertyConverterDeclaration : Attribute
     {
-        public string Converter { get; }
+        public string AndroidConverter { get; }
 
-        public string NativeProperty { get; }
+        public string IOSConverter { get; }
 
-        public NativePropertyConverterDeclaration(string converter = null, string nativeProperty = null)
+        public string AndroidNativeProperty { get; }
+
+        public string IOSNativeProperty { get; }
+
+        public NativePropertyConverterDeclaration(string converter = null, string nativeProperty = null) : this(converter, nativeProperty, converter, nativeProperty)
         {
-            Converter = converter;
-            NativeProperty = nativeProperty;
+        }
+
+        public NativePropertyConverterDeclaration(string androidConverter, string androidNativeProperty,
+            string iOSConverter, string iOSNativeProperty)
+        {
+            AndroidConverter = androidConverter;
+            AndroidNativeProperty = androidNativeProperty;
+            IOSConverter = iOSConverter;
+            IOSNativeProperty = iOSNativeProperty;
         }
     }
 }

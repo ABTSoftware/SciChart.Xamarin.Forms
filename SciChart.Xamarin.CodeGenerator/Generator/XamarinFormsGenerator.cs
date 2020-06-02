@@ -14,14 +14,41 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
 {
     public class XamarinFormsGenerator : GeneratorBase<XamarinFormsTypeInformation>
     {
+        private readonly Dictionary<Type, string> _typeMappings = new Dictionary<Type, string>()
+        {
+            {typeof(Color), "XFColor"},
+        };
+
+        private readonly CodeTypeDeclaration _factoryInterfaceDeclaration;
         public XamarinFormsGenerator(ITypeInformationExtractor<XamarinFormsTypeInformation> typeInformationExtractor) : base(typeInformationExtractor, "Forms", "SciChart.Xamarin.Views")
         {
             GlobalNamespace.Imports.Add(new CodeNamespaceImport("System"));
-            GlobalNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Views.Core.Common"));
-            GlobalNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Views.Model"));
-            GlobalNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Views.Model.DataSeries"));
-            GlobalNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Views.Drawing"));
-            GlobalNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Views.Visuals.Axes"));
+
+            foreach (var xamarinFormsNamespace in Assembly.GetAssembly(typeof(INativeSciChartObject)).GetTypes().Select(x => x.Namespace).Where(x => x.StartsWith("SciChart.Xamarin.Views")))
+            {
+                GlobalNamespace.Imports.Add(new CodeNamespaceImport(xamarinFormsNamespace));
+            }
+
+            _factoryInterfaceDeclaration = new CodeTypeDeclaration("INativeSciChartObjectFactory")
+            {
+                IsPartial = true,
+                IsInterface = true
+            };
+
+            CompileUnit.Namespaces.Add(new CodeNamespace("SciChart.Xamarin.Views.Core.Common")
+            {
+                Types = { _factoryInterfaceDeclaration }
+            });
+
+            AddTypeAliases();
+        }
+
+        private void AddTypeAliases()
+        {
+            foreach (var mapping in _typeMappings)
+            {
+                GlobalNamespace.Imports.Add(new CodeNamespaceImport($"{mapping.Value} = {mapping.Key}"));
+            }
         }
 
         protected override void ProcessType(Type type, XamarinFormsTypeInformation information)
@@ -82,32 +109,51 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
                 var factory = new CodeMethodInvokeExpression(
                     new CodeMethodReferenceExpression(
                         new CodeTypeReferenceExpression("DependencyService"),
-                        "Get", new CodeTypeReference(typeof(INativeSciChartObjectFactory))));
+                        "Get", new CodeTypeReference("INativeSciChartObjectFactory")));
 
-                var factoryMethod = new CodeMethodReferenceExpression(factory, $"New{information.Type}");
+                var factoryName = $"New{information.Type}";
+                var factoryMethod = new CodeMethodReferenceExpression(factory, factoryName);
+
+                var factoryInterfaceMethod = new CodeMemberMethod()
+                {
+                    ReturnType = new CodeTypeReference(factoryConstructor.ReturnType.ToGenericName()),
+                    Name = factoryName,
+                };
 
                 if (information.GenericParams != null)
                 {
-                    foreach (var genericParam in information.GenericParams.Select(x => x.Item2))
+                    foreach (var (paramType, paramName) in information.GenericParams)
                     {
-                        factoryMethod.TypeArguments.Add(genericParam);
+                        factoryMethod.TypeArguments.Add(paramName);
+
+                        var codeTypeParameter = new CodeTypeParameter(paramName);
+                        codeTypeParameter.Constraints.Add(paramType);
+                        factoryInterfaceMethod.TypeParameters.Add(codeTypeParameter);
+
                     }
                 }
 
                 var sciChartFactoryInvoke = new CodeMethodInvokeExpression(factoryMethod);
                 foreach (var (paramName, paramType) in factoryConstructor.Params)
                 {
-                    constructor.Parameters.Add(new CodeParameterDeclarationExpression(paramType, paramName));
+                    var mappedParamType = GetTypeName(paramType);
+                    constructor.Parameters.Add(new CodeParameterDeclarationExpression(mappedParamType, paramName));
                     sciChartFactoryInvoke.Parameters.Add(new CodeArgumentReferenceExpression(paramName));
+                    factoryInterfaceMethod.Parameters.Add(new CodeParameterDeclarationExpression(mappedParamType, paramName));
                 }
 
-                var constructorArgs = information.BaseType != null
-                    ? constructor.BaseConstructorArgs
-                    : constructor.ChainedConstructorArgs;
-
-                constructorArgs.Add(sciChartFactoryInvoke);
+                constructor.ChainedConstructorArgs.Add(sciChartFactoryInvoke);
 
                 members.Add(constructor);
+
+                _factoryInterfaceDeclaration.Members.Add(factoryInterfaceMethod);
+            }
+
+            AddWrapperConstructor(type, information, typeDeclaration);
+
+            if (information.BaseType == "View")
+            {
+                typeDeclaration.BaseTypes.Add(typeof(IBindingContextProvider));
             }
 
             foreach (var propertyInfo in information.BindableProperties)
@@ -133,7 +179,7 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
                 var methodDeclaration = new CodeMemberMethod()
                 {
                     Name = methodInfo.Name,
-                    ReturnType = new CodeTypeReference(methodInfo.ReturnType),
+                    ReturnType = new CodeTypeReference(GetTypeName(methodInfo.ReturnType)),
                     Attributes = MemberAttributes.Public | MemberAttributes.Final,
                     Statements =
                     {
@@ -176,10 +222,11 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
             }
         }
 
+
         protected virtual void CreatePropertyFrom(Type type, PropertyInformation property, XamarinFormsTypeInformation information, CodeTypeMemberCollection members)
         {
             var propertyName = property.Name;
-            var propertyType = property.PropertyType.Name;
+            var propertyType = GetTypeName(property.PropertyType);
 
             var nativePropertyReference = new CodePropertyReferenceExpression(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(
                     new CodeVariableReferenceExpression("NativeSciChartObject"),
@@ -217,7 +264,7 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
         protected virtual void CreateBindablePropertyFrom(Type type, BindablePropertyInformation property, XamarinFormsTypeInformation information, CodeTypeMemberCollection members)
         {
             var propertyName = property.Name;
-            var propertyType = property.PropertyType.Name;
+            var propertyType = GetTypeName(property.PropertyType);
 
             var callbackName = $"On{propertyName}PropertyChanged";
             var defaultValueCreator = $"Default{propertyName}PropertyValueCreator";
@@ -306,7 +353,34 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
             members.Add(propertyDeclaration);
             members.Add(propertyChangedCallback);
             members.Add(defaultValueCreatorCallback);
+        }
 
+        private static void AddWrapperConstructor(Type type, XamarinFormsTypeInformation information, CodeTypeDeclaration typeDeclaration)
+        {
+            var wrapperConstructor = new CodeConstructor()
+            {
+                Attributes = MemberAttributes.Public | MemberAttributes.Final,
+                Parameters = { new CodeParameterDeclarationExpression(type.ToGenericName(), "nativeObject") }
+            };
+
+            if (information.BaseType == null || information.BaseType == "View")
+            {
+                wrapperConstructor.Statements.Add(new CodeAssignStatement(
+                    new CodeVariableReferenceExpression("_nativeSciChartObject"),
+                    new CodePropertyReferenceExpression(new CodeVariableReferenceExpression("nativeObject"),
+                        "NativeSciChartObject")));
+            }
+            else
+            {
+                wrapperConstructor.BaseConstructorArgs.Add(new CodeVariableReferenceExpression("nativeObject"));
+            }
+
+            typeDeclaration.Members.Add(wrapperConstructor);
+        }
+
+        protected override string GetTypeName(Type type)
+        {
+            return _typeMappings.TryGetValue(type, out var mappedType) ? mappedType : type.FullName;
         }
     }
 }

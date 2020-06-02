@@ -63,6 +63,7 @@
     <Compile Include="Utility\ColorUtil.cs" />
     <Compile Include="Utility\ComparableUtil.cs" />
     <Compile Include="Utility\DataSeriesHelpers.cs" />
+    <Compile Include="Utility\PointMarkerHelper.cs" />
     <Compile Include="Utility\RangeHelpers.cs" />
     <Compile Include="Utility\StyleUtil.cs" />
   </ItemGroup>

@@ -41,7 +41,7 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
 
         protected CodeNamespace GlobalNamespace { get; }
 
-        public void AddTypes(IEnumerable<Type> types)
+        public virtual void AddTypes(IEnumerable<Type> types)
         {
             foreach (var type in types)
             {
@@ -67,6 +67,11 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
             }
 
             Console.WriteLine($"{path}: File was generate successfully");
+        }
+
+        protected virtual string GetTypeName(Type type)
+        {
+            return type.FullName;
         }
     }
 }

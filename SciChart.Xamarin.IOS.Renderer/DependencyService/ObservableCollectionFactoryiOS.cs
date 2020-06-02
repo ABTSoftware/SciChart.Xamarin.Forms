@@ -5,6 +5,7 @@ using SciChart.Xamarin.Views.Modifiers;
 using SciChart.Xamarin.Views.Visuals.Annotations;
 using SciChart.Xamarin.Views.Visuals.Axes;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;
+using SciChart.Xamarin.Views.Visuals.RenderableSeries3D;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(ObservableCollectionFactoryiOS))]
@@ -30,6 +31,16 @@ namespace SciChart.Xamarin.iOS.Renderer.DependencyService
         public INativeObservableCollection<IChartModifier> NewChartModifierCollection()
         {
             return new ChartModifierCollectionIOS();
+        }
+
+        public INativeObservableCollection<IRenderableSeries3D> NewRenderableSeries3DCollection()
+        {
+            return new RenderableSeries3DCollectionIOS();
+        }
+
+        public INativeObservableCollection<IChartModifier3D> NewChartModifier3DCollection()
+        {
+            return new ChartModifier3DCollectionIOS();
         }
     }
 
@@ -150,6 +161,66 @@ namespace SciChart.Xamarin.iOS.Renderer.DependencyService
         public void SetItem(int index, IAnnotation item)
         {
             base[index] = item.NativeSciChartObject as IISCIAnnotation;
+        }
+    }
+
+    public class RenderableSeries3DCollectionIOS : SCIRenderableSeries3DCollection, INativeObservableCollection<IRenderableSeries3D>
+    {
+        public void ClearItems()
+        {
+            base.Clear();
+        }
+
+        public void InsertItem(int index, IRenderableSeries3D item)
+        {
+            base.Insert(index, item.NativeSciChartObject as IISCIRenderableSeries3D);
+        }
+
+        public void MoveItem(int oldIndex, int newIndex)
+        {
+            var item = base[oldIndex];
+            base.RemoveAt(oldIndex);
+            base.Insert(newIndex, item);
+        }
+
+        public void RemoveItem(int index)
+        {
+            base.RemoveAt(index);
+        }
+
+        public void SetItem(int index, IRenderableSeries3D item)
+        {
+            base[index] = item.NativeSciChartObject as IISCIRenderableSeries3D;
+        }
+    }
+
+    public class ChartModifier3DCollectionIOS : SCIChartModifier3DCollection, INativeObservableCollection<IChartModifier3D>
+    {
+        public void ClearItems()
+        {
+            base.Clear();
+        }
+
+        public void InsertItem(int index, IChartModifier3D item)
+        {
+            base.Insert(index, item.NativeSciChartObject as IISCIChartModifier3D);
+        }
+
+        public void MoveItem(int oldIndex, int newIndex)
+        {
+            var item = base[oldIndex];
+            base.RemoveAt(oldIndex);
+            base.Insert(newIndex, item);
+        }
+
+        public void RemoveItem(int index)
+        {
+            base.RemoveAt(index);
+        }
+
+        public void SetItem(int index, IChartModifier3D item)
+        {
+            base[index] = item.NativeSciChartObject as IISCIChartModifier3D;
         }
     }
 }

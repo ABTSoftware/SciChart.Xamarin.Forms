@@ -2,6 +2,7 @@
 using SciChart.Xamarin.Views.Drawing;
 using SciChart.Xamarin.Views.Model;
 using SciChart.Xamarin.Views.Model.DataSeries;
+using SciChart.Xamarin.Views.Model.DataSeries3D;
 using Xamarin.Forms;
 
 namespace TestApp.UI
@@ -12,6 +13,7 @@ namespace TestApp.UI
         {
             CandlestickSeries = new OhlcDataSeries<double, double>();
             LineSeries = new XyDataSeries<double, double>();
+            Scatter3DSeries = new XyzDataSeries3D<double, double, double>();
 
             var random = new Random();
 
@@ -27,6 +29,11 @@ namespace TestApp.UI
             StrokeDownStyle = new SolidPenStyle(Color.Olive, 1f, true, null);
             FillUpStyle = new SolidBrushStyle(Color.GreenYellow);
             FillDownStyle = new SolidBrushStyle(Color.Olive);
+
+            for (int i = 0; i < 1000; i++)
+            {
+                Scatter3DSeries.Append(random.NextDouble(), random.NextDouble(), random.NextDouble());
+            }
 
             XRange = new DoubleRange(30, 50);
 
@@ -45,6 +52,8 @@ namespace TestApp.UI
         }
 
         public IOhlcDataSeries<double, double> CandlestickSeries { get; set; }
+
+        public IXyzDataSeries3D<double, double, double> Scatter3DSeries { get; set; }
 
         public IPenStyle LineStyle { get; set; }
 

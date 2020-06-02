@@ -12,8 +12,6 @@
 
         public override string GenericBaseTypeName => IsBaseTypeGeneric ? base.GenericBaseTypeName : BaseType;
 
-        public XamarinFormsFactoryCtorInformation[] FactoryConstructors { get; set; }
-
         public bool ImplementNativeObjectWrapperInterface { get; set; }
     }
 }

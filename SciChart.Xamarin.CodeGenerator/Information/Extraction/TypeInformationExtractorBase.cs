@@ -35,6 +35,15 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
                     HasSet = x.GetSetMethod() != null,
                     HasGet = x.GetGetMethod() != null,
                 }).ToArray();
+
+
+            information.FactoryConstructors = type.GetCustomAttributes<InjectNativeSciChartObject>().Select(x =>
+                new FactoryCtorInformation()
+                {
+                    ParamNames = x.ParamNames,
+                    ParamTypes = x.ParamTypes,
+                    ReturnType = type
+                }).ToArray();
         }
 
         protected abstract void ExtractClassDeclaration(Type type, ClassDeclaration classDeclaration, T information);

@@ -17,16 +17,97 @@ using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Android.Renderer
 {
+	using SciChart.Core;
+	using SciChart.Core.Licensing;
+	using SciChart.Core.Common;
+	using SciChart.Core.Utility;
+	using SciChart.Core.Utility.Touch;
+	using SciChart.Core.Utility.ObjectPooling;
+	using SciChart.Core.Utility.Messaging;
+	using SciChart.Core.Observable;
+	using SciChart.Core.Model;
+	using SciChart.Core.Framework;
+	using SciChart.Data.Numerics;
+	using SciChart.Data.Numerics.PointResamplers;
+	using SciChart.Data.Numerics.Math;
 	using SciChart.Data.Model;
-	using SciChart.Charting.Visuals.RenderableSeries;
-	using SciChart.Charting.Visuals.Axes;
-	using SciChart.Charting.Visuals.Annotations;
-	using SciChart.Charting.Modifiers;
-	using SciChart.Charting.Model.DataSeries;
-	using SciChart.Xamarin.Android.Renderer.Utility;
+	using SciChart.Drawing.Utility;
+	using SciChart.Drawing.OpenGL;
+	using SciChart.Drawing.Canvas;
 	using SciChart.Drawing.Common;
-	using SciChart.Charting3D.Visuals.RenderableSeries;
+	using SciChart.Charting;
+	using SciChart.Charting.ViewportManagers;
+	using SciChart.Charting.Utility;
+	using SciChart.Charting.Utility.PropertyHelpers;
+	using SciChart.Charting.Themes;
+	using SciChart.Charting.StrategyManager;
+	using SciChart.Charting.LayoutManagers;
+	using SciChart.Charting.Visuals;
+	using SciChart.Charting.Visuals.Rendering;
+	using SciChart.Charting.Visuals.PointMarkers;
+	using SciChart.Charting.Visuals.Legend;
+	using SciChart.Charting.Visuals.Layout;
+	using SciChart.Charting.Visuals.Axes;
+	using SciChart.Charting.Visuals.Axes.RangeCalculators;
+	using SciChart.Charting.Visuals.Axes.RangeAnimators;
+	using SciChart.Charting.Visuals.Axes.ChangeListener;
+	using SciChart.Charting.Visuals.RenderableSeries;
+	using SciChart.Charting.Visuals.RenderableSeries.SeriesAnimators;
+	using SciChart.Charting.Visuals.RenderableSeries.Data;
+	using SciChart.Charting.Visuals.RenderableSeries.Tooltips;
+	using SciChart.Charting.Visuals.RenderableSeries.PaletteProviders;
+	using SciChart.Charting.Visuals.RenderableSeries.HitTest;
+	using SciChart.Charting.Visuals.Annotations;
+	using SciChart.Charting.Visuals.Animations;
+	using SciChart.Charting.Numerics;
+	using SciChart.Charting.Numerics.TickProviders;
+	using SciChart.Charting.Numerics.TickCoordinatesProviders;
+	using SciChart.Charting.Numerics.DeltaCalculators;
+	using SciChart.Charting.Numerics.CoordinateCalculators;
+	using SciChart.Charting.Numerics.LabelProviders;
+	using SciChart.Charting.Modifiers;
+	using SciChart.Charting.Modifiers.Behaviors;
+	using SciChart.Charting.Model;
+	using SciChart.Charting.Model.DataDistributionCalculator;
+	using SciChart.Charting.Model.DataSeries;
+	using SciChart.Charting3D.ViewportManagers;
+	using SciChart.Charting3D.Interop;
+	using SciChart.Charting3D.Common.Utils;
+	using SciChart.Charting3D.Common.Math;
+	using SciChart.Charting3D.Visuals;
+	using SciChart.Charting3D.Visuals.Rendering;
+	using SciChart.Charting3D.Visuals.Legend;
+	using SciChart.Charting3D.Visuals.Camera;
 	using SciChart.Charting3D.Visuals.Axes;
+	using SciChart.Charting3D.Visuals.Axes.RangeCalculators;
+	using SciChart.Charting3D.Visuals.Annotations;
+	using SciChart.Charting3D.Visuals.PointMarkers;
+	using SciChart.Charting3D.Visuals.RenderableSeries;
+	using SciChart.Charting3D.Visuals.RenderableSeries.Waterfall;
+	using SciChart.Charting3D.Visuals.RenderableSeries.Tooltips;
+	using SciChart.Charting3D.Visuals.RenderableSeries.SurfaceMesh;
+	using SciChart.Charting3D.Visuals.RenderableSeries.Scatter;
+	using SciChart.Charting3D.Visuals.RenderableSeries.PointLine;
+	using SciChart.Charting3D.Visuals.RenderableSeries.MetadataProviders;
+	using SciChart.Charting3D.Visuals.RenderableSeries.Impulse;
+	using SciChart.Charting3D.Visuals.RenderableSeries.HitTest;
+	using SciChart.Charting3D.Visuals.RenderableSeries.FreeSurface;
+	using SciChart.Charting3D.Visuals.RenderableSeries.Data;
+	using SciChart.Charting3D.Visuals.RenderableSeries.Columns;
+	using SciChart.Charting3D.Visuals.Primitives;
+	using SciChart.Charting3D.Visuals.Primitives.DrawContext;
+	using SciChart.Charting3D.Visuals.Primitives.Mesh;
+	using SciChart.Charting3D.Utility;
+	using SciChart.Charting3D.Utility.PropertyHelpers;
+	using SciChart.Charting3D.Modifiers;
+	using SciChart.Charting3D.Modifiers.Behaviors;
+	using SciChart.Charting3D.Model;
+	using SciChart.Charting3D.Model.DataSeries;
+	using SciChart.Charting3D.Model.DataSeries.Xyz;
+	using SciChart.Charting3D.Model.DataSeries.Waterfall;
+	using SciChart.Charting3D.Model.DataSeries.Grid;
+	using SciChart.Charting3D.Model.DataSeries.FreeSurface;
+	using SciChart.Xamarin.Android.Renderer.Utility;
 	
 	
 	public partial class FastCandlestickRenderableSeriesAndroid : FastCandlestickRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastCandlestickRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
@@ -113,6 +194,18 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
+		public SciChart.Xamarin.Views.Visuals.PointMarkers.IPointMarker PointMarker
+		{
+			get
+			{
+				return base.PointMarker.PointMarkerToXamarin();
+			}
+			set
+			{
+				base.PointMarker = value.PointMarkerFromXamarin();
+			}
+		}
+		
 		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
@@ -155,6 +248,131 @@ namespace SciChart.Xamarin.Android.Renderer
 			set
 			{
 				base.StrokeStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.PointMarkers.IPointMarker PointMarker
+		{
+			get
+			{
+				return base.PointMarker.PointMarkerToXamarin();
+			}
+			set
+			{
+				base.PointMarker = value.PointMarkerFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class ScatterRenderableSeries3DAndroid : ScatterRenderableSeries3D, SciChart.Xamarin.Views.Visuals.RenderableSeries3D.IScatterRenderableSeries3D, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public ScatterRenderableSeries3DAndroid()
+		{
+		}
+		
+		public ScatterRenderableSeries3DAndroid(SciChart.Charting3D.Visuals.RenderableSeries.Scatter.ScatterRenderPassData3D currentRenderPassData, SciChart.Charting3D.Visuals.RenderableSeries.BaseRenderableSeriesSceneEntity3D sceneEntity) : 
+				base(currentRenderPassData, sceneEntity)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Model.DataSeries3D.IDataSeries3D DataSeries
+		{
+			get
+			{
+				return base.DataSeries.DataSeriesToXamarin();
+			}
+			set
+			{
+				base.DataSeries = value.DataSeriesFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.PointMarkers3D.IPointMarker3D PointMarker
+		{
+			get
+			{
+				return base.PointMarker.PointMarker3DToXamarin();
+			}
+			set
+			{
+				base.PointMarker = value.PointMarker3DFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class EllipsePointMarkerAndroid : EllipsePointMarker, SciChart.Xamarin.Views.Visuals.PointMarkers.IEllipsePointMarker, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public EllipsePointMarkerAndroid()
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		{
+			get
+			{
+				return base.StrokeStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IBrushStyle FillStyle
+		{
+			get
+			{
+				return base.FillStyle.BrushStyleToXamarin();
+			}
+			set
+			{
+				base.FillStyle = value.BrushStyleFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class EllipsePointMarker3DAndroid : EllipsePointMarker3D, SciChart.Xamarin.Views.Visuals.PointMarkers3D.IEllipsePointMarker3D, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public EllipsePointMarker3DAndroid()
+		{
+		}
+		
+		public Color Fill
+		{
+			get
+			{
+				return base.Fill.ColorToXamarin();
+			}
+			set
+			{
+				base.Fill = value.ColorFromXamarin();
 			}
 		}
 		
@@ -772,6 +990,25 @@ namespace SciChart.Xamarin.Android.Renderer
 		}
 	}
 	
+	public partial class XyzDataSeries3DAndroid<TX, TY, TZ> : XyzDataSeries3D<TX,TY,TZ>, SciChart.Xamarin.Views.Model.DataSeries3D.IXyzDataSeries3D<TX,TY,TZ>, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+		where TX : System.IComparable
+		where TY : System.IComparable
+		where TZ : System.IComparable
+	{
+		
+		public XyzDataSeries3DAndroid()
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
 	public partial class FontStyleAndroid : FontStyle, SciChart.Xamarin.Views.Drawing.IFontStyle, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
@@ -933,14 +1170,29 @@ namespace SciChart.Xamarin.Android.Renderer
 	public partial class AndroidFactory
 	{
 		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastCandlestickRenderableSeries NewFastCandlestickRenderableSeries()
+		{
+			return new FastCandlestickRenderableSeriesAndroid();
+		}
+		
 		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastLineRenderableSeries NewFastLineRenderableSeries()
 		{
 			return new FastLineRenderableSeriesAndroid();
 		}
 		
-		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastCandlestickRenderableSeries NewFastCandlestickRenderableSeries()
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries3D.IScatterRenderableSeries3D NewScatterRenderableSeries3D()
 		{
-			return new FastCandlestickRenderableSeriesAndroid();
+			return new ScatterRenderableSeries3DAndroid();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.PointMarkers.IEllipsePointMarker NewEllipsePointMarker()
+		{
+			return new EllipsePointMarkerAndroid();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.PointMarkers3D.IEllipsePointMarker3D NewEllipsePointMarker3D()
+		{
+			return new EllipsePointMarker3DAndroid();
 		}
 		
 		public SciChart.Xamarin.Views.Visuals.Axes.INumericAxis NewNumericAxis()
@@ -948,28 +1200,9 @@ namespace SciChart.Xamarin.Android.Renderer
 			return new NumericAxisAndroid();
 		}
 		
-		public SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY> NewXyDataSeries<TX, TY>()
-			where TX : System.IComparable
-			where TY : System.IComparable
+		public SciChart.Xamarin.Views.Visuals.Axes3D.INumericAxis3D NewNumericAxis3D()
 		{
-			return new XyDataSeriesAndroid<TX,TY>();
-		}
-		
-		public SciChart.Xamarin.Views.Model.DataSeries.IOhlcDataSeries<TX,TY> NewOhlcDataSeries<TX, TY>()
-			where TX : System.IComparable
-			where TY : System.IComparable
-		{
-			return new OhlcDataSeriesAndroid<TX,TY>();
-		}
-		
-		public SciChart.Xamarin.Views.Model.IDoubleRange NewDoubleRange(double min, double max)
-		{
-			return new DoubleRangeAndroid(min, max);
-		}
-		
-		public SciChart.Xamarin.Views.Model.IDoubleRange NewDoubleRange()
-		{
-			return new DoubleRangeAndroid();
+			return new NumericAxis3DAndroid();
 		}
 		
 		public SciChart.Xamarin.Views.Visuals.Annotations.IBoxAnnotation NewBoxAnnotation()
@@ -977,9 +1210,9 @@ namespace SciChart.Xamarin.Android.Renderer
 			return new BoxAnnotationAndroid();
 		}
 		
-		public SciChart.Xamarin.Views.Modifiers.IZoomPanModifier NewZoomPanModifier()
+		public SciChart.Xamarin.Views.Modifiers.IModifierGroup NewModifierGroup()
 		{
-			return new ZoomPanModifierAndroid();
+			return new ModifierGroupAndroid();
 		}
 		
 		public SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier NewPinchZoomModifier()
@@ -997,34 +1230,61 @@ namespace SciChart.Xamarin.Android.Renderer
 			return new ZoomExtentsModifierAndroid();
 		}
 		
-		public SciChart.Xamarin.Views.Modifiers.IModifierGroup NewModifierGroup()
+		public SciChart.Xamarin.Views.Modifiers.IZoomPanModifier NewZoomPanModifier()
 		{
-			return new ModifierGroupAndroid();
+			return new ZoomPanModifierAndroid();
 		}
 		
-		public SciChart.Xamarin.Views.Drawing.ISolidPenStyle NewSolidPenStyle(System.Drawing.Color color, float thickness, bool antiAliasing, float[] strokeDashArray)
+		public SciChart.Xamarin.Views.Model.IDoubleRange NewDoubleRange()
 		{
-			return new SolidPenStyleAndroid(color, thickness, antiAliasing, strokeDashArray);
+			return new DoubleRangeAndroid();
 		}
 		
-		public SciChart.Xamarin.Views.Drawing.ISolidBrushStyle NewSolidBrushStyle(System.Drawing.Color color)
+		public SciChart.Xamarin.Views.Model.IDoubleRange NewDoubleRange(double min, double max)
 		{
-			return new SolidBrushStyleAndroid(color);
+			return new DoubleRangeAndroid(min, max);
 		}
 		
-		public SciChart.Xamarin.Views.Drawing.ILinearGradientBrushStyle NewLinearGradientBrushStyle(float x0, float y0, float x1, float y1, System.Drawing.Color startColor, System.Drawing.Color endColor)
+		public SciChart.Xamarin.Views.Model.DataSeries.IOhlcDataSeries<TX,TY> NewOhlcDataSeries<TX, TY>()
+			where TX : System.IComparable
+			where TY : System.IComparable
 		{
-			return new LinearGradientBrushStyleAndroid(x0, y0, x1, y1, startColor, endColor);
+			return new OhlcDataSeriesAndroid<TX,TY>();
 		}
 		
-		public SciChart.Xamarin.Views.Drawing.IFontStyle NewFontStyle(float textSize, System.Drawing.Color textColor)
+		public SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY> NewXyDataSeries<TX, TY>()
+			where TX : System.IComparable
+			where TY : System.IComparable
+		{
+			return new XyDataSeriesAndroid<TX,TY>();
+		}
+		
+		public SciChart.Xamarin.Views.Model.DataSeries3D.IXyzDataSeries3D<TX,TY,TZ> NewXyzDataSeries3D<TX, TY, TZ>()
+			where TX : System.IComparable
+			where TY : System.IComparable
+			where TZ : System.IComparable
+		{
+			return new XyzDataSeries3DAndroid<TX,TY,TZ>();
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IFontStyle NewFontStyle(float textSize, Color textColor)
 		{
 			return new FontStyleAndroid(textSize, textColor);
 		}
 		
-		public SciChart.Xamarin.Views.Visuals.Axes3D.INumericAxis3D NewNumericAxis3D()
+		public SciChart.Xamarin.Views.Drawing.ILinearGradientBrushStyle NewLinearGradientBrushStyle(float x1, float y1, float x2, float y2, Color startColor, Color endColor)
 		{
-			return new NumericAxis3DAndroid();
+			return new LinearGradientBrushStyleAndroid(x1, y1, x2, y2, startColor, endColor);
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.ISolidBrushStyle NewSolidBrushStyle(Color color)
+		{
+			return new SolidBrushStyleAndroid(color);
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.ISolidPenStyle NewSolidPenStyle(Color color, float thickness, bool antiAliasing, float[] strokeDashArray)
+		{
+			return new SolidPenStyleAndroid(color, thickness, antiAliasing, strokeDashArray);
 		}
 	}
 }
