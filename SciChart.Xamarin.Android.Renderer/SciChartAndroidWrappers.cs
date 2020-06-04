@@ -122,7 +122,7 @@ namespace SciChart.Xamarin.Android.Renderer
 		{
 		}
 		
-		public SciChart.Xamarin.Views.Drawing.IBrushStyle FillDownBrushStyle
+		public new SciChart.Xamarin.Views.Drawing.IBrushStyle FillDownBrushStyle
 		{
 			get
 			{
@@ -134,7 +134,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Drawing.IBrushStyle FillUpBrushStyle
+		public new SciChart.Xamarin.Views.Drawing.IBrushStyle FillUpBrushStyle
 		{
 			get
 			{
@@ -146,7 +146,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeDownStyle
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeDownStyle
 		{
 			get
 			{
@@ -158,7 +158,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeUpStyle
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeUpStyle
 		{
 			get
 			{
@@ -170,7 +170,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Model.DataSeries.IDataSeries DataSeries
+		public new SciChart.Xamarin.Views.Model.DataSeries.IDataSeries DataSeries
 		{
 			get
 			{
@@ -182,7 +182,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
 		{
 			get
 			{
@@ -194,7 +194,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Visuals.PointMarkers.IPointMarker PointMarker
+		public new SciChart.Xamarin.Views.Visuals.PointMarkers.IPointMarker PointMarker
 		{
 			get
 			{
@@ -227,7 +227,7 @@ namespace SciChart.Xamarin.Android.Renderer
 		{
 		}
 		
-		public SciChart.Xamarin.Views.Model.DataSeries.IDataSeries DataSeries
+		public new SciChart.Xamarin.Views.Model.DataSeries.IDataSeries DataSeries
 		{
 			get
 			{
@@ -239,7 +239,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
 		{
 			get
 			{
@@ -251,7 +251,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Visuals.PointMarkers.IPointMarker PointMarker
+		public new SciChart.Xamarin.Views.Visuals.PointMarkers.IPointMarker PointMarker
 		{
 			get
 			{
@@ -284,7 +284,7 @@ namespace SciChart.Xamarin.Android.Renderer
 		{
 		}
 		
-		public SciChart.Xamarin.Views.Model.DataSeries3D.IDataSeries3D DataSeries
+		public new SciChart.Xamarin.Views.Model.DataSeries3D.IDataSeries3D DataSeries
 		{
 			get
 			{
@@ -296,7 +296,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Visuals.PointMarkers3D.IPointMarker3D PointMarker
+		public new SciChart.Xamarin.Views.Visuals.PointMarkers3D.IPointMarker3D PointMarker
 		{
 			get
 			{
@@ -324,7 +324,7 @@ namespace SciChart.Xamarin.Android.Renderer
 		{
 		}
 		
-		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
 		{
 			get
 			{
@@ -336,7 +336,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Drawing.IBrushStyle FillStyle
+		public new SciChart.Xamarin.Views.Drawing.IBrushStyle FillStyle
 		{
 			get
 			{
@@ -364,7 +364,7 @@ namespace SciChart.Xamarin.Android.Renderer
 		{
 		}
 		
-		public Color Fill
+		public new Color Fill
 		{
 			get
 			{
@@ -408,7 +408,7 @@ namespace SciChart.Xamarin.Android.Renderer
 		{
 		}
 		
-		public SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment AxisAlignment
+		public new SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment AxisAlignment
 		{
 			get
 			{
@@ -432,7 +432,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Visuals.Axes.AutoRange AutoRange
+		public new SciChart.Xamarin.Views.Visuals.Axes.AutoRange AutoRange
 		{
 			get
 			{
@@ -444,7 +444,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Model.IRange VisibleRange
+		public new SciChart.Xamarin.Views.Model.IRange VisibleRange
 		{
 			get
 			{
@@ -456,7 +456,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Model.IRange GrowBy
+		public new SciChart.Xamarin.Views.Model.IRange GrowBy
 		{
 			get
 			{
@@ -468,7 +468,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Model.RangeClipMode VisibleRangeLimitMode
+		public new SciChart.Xamarin.Views.Model.RangeClipMode VisibleRangeLimitMode
 		{
 			get
 			{
@@ -480,7 +480,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public System.IComparable MinimalZoomConstrain
+		public new System.IComparable MinimalZoomConstrain
 		{
 			get
 			{
@@ -492,7 +492,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public System.IComparable MaximumZoomConstrain
+		public new System.IComparable MaximumZoomConstrain
 		{
 			get
 			{
@@ -504,7 +504,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public System.IComparable MajorDelta
+		public new System.IComparable MajorDelta
 		{
 			get
 			{
@@ -516,7 +516,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public System.IComparable MinorDelta
+		public new System.IComparable MinorDelta
 		{
 			get
 			{
@@ -528,7 +528,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public uint MaxAutoTicks
+		public new uint MaxAutoTicks
 		{
 			get
 			{
@@ -540,7 +540,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public uint MinorsPerMajor
+		public new uint MinorsPerMajor
 		{
 			get
 			{
@@ -585,7 +585,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Visuals.Axes.AutoRange AutoRange
+		public new SciChart.Xamarin.Views.Visuals.Axes.AutoRange AutoRange
 		{
 			get
 			{
@@ -597,7 +597,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Model.IRange VisibleRange
+		public new SciChart.Xamarin.Views.Model.IRange VisibleRange
 		{
 			get
 			{
@@ -609,7 +609,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Model.IRange GrowBy
+		public new SciChart.Xamarin.Views.Model.IRange GrowBy
 		{
 			get
 			{
@@ -621,7 +621,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Model.RangeClipMode VisibleRangeLimitMode
+		public new SciChart.Xamarin.Views.Model.RangeClipMode VisibleRangeLimitMode
 		{
 			get
 			{
@@ -633,7 +633,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public System.IComparable MinimalZoomConstrain
+		public new System.IComparable MinimalZoomConstrain
 		{
 			get
 			{
@@ -645,7 +645,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public System.IComparable MaximumZoomConstrain
+		public new System.IComparable MaximumZoomConstrain
 		{
 			get
 			{
@@ -657,7 +657,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public System.IComparable MajorDelta
+		public new System.IComparable MajorDelta
 		{
 			get
 			{
@@ -669,7 +669,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public System.IComparable MinorDelta
+		public new System.IComparable MinorDelta
 		{
 			get
 			{
@@ -681,7 +681,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public uint MaxAutoTicks
+		public new uint MaxAutoTicks
 		{
 			get
 			{
@@ -693,7 +693,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public uint MinorsPerMajor
+		public new uint MinorsPerMajor
 		{
 			get
 			{
@@ -790,7 +790,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Core.Common.Direction2D DragDirections
+		public new SciChart.Xamarin.Views.Core.Common.Direction2D DragDirections
 		{
 			get
 			{
@@ -802,7 +802,7 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
-		public SciChart.Xamarin.Views.Core.Common.Direction2D ResizeDirections
+		public new SciChart.Xamarin.Views.Core.Common.Direction2D ResizeDirections
 		{
 			get
 			{

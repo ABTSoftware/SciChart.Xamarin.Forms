@@ -111,11 +111,15 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
                 setter = new CodePropertySetValueReferenceExpression();
             }
 
+            var attributes = MemberAttributes.Public | MemberAttributes.Final;
+            if (propertyName == nativePropertyName)
+                attributes |= MemberAttributes.New;
+
             return new CodeMemberProperty()
             {
                 Name = propertyName,
                 Type = new CodeTypeReference(GetTypeName(information.PropertyType)),
-                Attributes = MemberAttributes.Public | MemberAttributes.Final,
+                Attributes = attributes,
                 HasGet = true,
                 HasSet = true,
                 GetStatements =
