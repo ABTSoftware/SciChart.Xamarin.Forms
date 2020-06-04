@@ -1,4 +1,5 @@
 ﻿using SciChart.Xamarin.Views.Core.Generation;
+using SciChart.Xamarin.Views.Model.ObservableCollection;
 
 namespace SciChart.Xamarin.Views.Modifiers
 {
@@ -6,6 +7,6 @@ namespace SciChart.Xamarin.Views.Modifiers
     [InjectNativeSciChartObject]
     public interface IModifierGroup : IChartModifier
     {
-        
+        ChartModifierCollection ChildModifiers { get; } 
     }
 }

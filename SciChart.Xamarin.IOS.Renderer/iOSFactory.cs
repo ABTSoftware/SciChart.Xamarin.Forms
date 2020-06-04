@@ -1,7 +1,11 @@
-﻿using CoreGraphics;
+﻿using System;
+using CoreGraphics;
+using SciChart.iOS.Charting;
 using SciChart.Xamarin.iOS.Renderer;
+using SciChart.Xamarin.iOS.Renderer.DependencyService;
 using SciChart.Xamarin.iOS.Renderer.Utility;
 using SciChart.Xamarin.Views.Core.Common;
+using SciChart.Xamarin.Views.Model.ObservableCollection;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(iOSFactory))]
@@ -82,5 +86,24 @@ namespace SciChart.Xamarin.iOS.Renderer
         }
     }
 
+    #endregion
+
+    #region ChartModifiers
+    public partial class ModifierGroupiOS
+    {
+        public new ChartModifierCollection ChildModifiers => new FormsChartModifierCollectionIOS(base.ChildModifiers);
+
+        public new bool IsEnabled
+        {
+            get => base.IsEnabled;
+            set => ((SCIChartModifierCore) this).IsEnabled = value;
+        }
+
+        public new bool ReceiveHandledEvents
+        {
+            get => base.ReceiveHandledEvents;
+            set => ((SCIChartModifierCore)this).ReceiveHandledEvents = value;
+        }
+    }
     #endregion
 }

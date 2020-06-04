@@ -814,6 +814,30 @@ namespace SciChart.Xamarin.Android.Renderer
 			}
 		}
 		
+		public new SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface AnnotationSurface
+		{
+			get
+			{
+				return base.AnnotationSurface.AnnotationSurfaceToXamarin();
+			}
+			set
+			{
+				base.AnnotationSurface = value.AnnotationSurfaceFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode CoordinateMode
+		{
+			get
+			{
+				return base.CoordinateMode.AnnotationCoordinateModeToXamarin();
+			}
+			set
+			{
+				base.CoordinateMode = value.AnnotationCoordinateModeFromXamarin();
+			}
+		}
+		
 		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get

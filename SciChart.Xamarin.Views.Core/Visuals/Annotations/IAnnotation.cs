@@ -47,6 +47,17 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
         [NativePropertyConverterDeclaration("Direction2D")]
         Direction2D ResizeDirections { get; set; }
 
+        [BindablePropertyDefinition()]
+        int ZIndex { get; set; }
+
+        [BindablePropertyDefinition()]
+        [NativePropertyConverterDeclaration("AnnotationSurface")]
+        AnnotationSurface AnnotationSurface { get; set; }
+
+        [BindablePropertyDefinition()]
+        [NativePropertyConverterDeclaration("AnnotationCoordinateMode")]
+        AnnotationCoordinateMode CoordinateMode { get; set; }
+
         [MethodDeclaration]
         void Show();
 

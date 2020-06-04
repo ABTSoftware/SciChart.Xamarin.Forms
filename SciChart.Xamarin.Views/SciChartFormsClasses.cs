@@ -13,6 +13,7 @@ using SciChart.Xamarin.Views.Drawing;
 using SciChart.Xamarin.Views.Model;
 using SciChart.Xamarin.Views.Model.DataSeries;
 using SciChart.Xamarin.Views.Model.DataSeries3D;
+using SciChart.Xamarin.Views.Model.ObservableCollection;
 using SciChart.Xamarin.Views.Modifiers;
 using SciChart.Xamarin.Views.Visuals.Annotations;
 using SciChart.Xamarin.Views.Visuals.Axes;
@@ -1384,6 +1385,12 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
 		
 		public static BindableProperty ResizeDirectionsProperty = BindableProperty.Create("ResizeDirections", typeof(SciChart.Xamarin.Views.Core.Common.Direction2D), typeof(AnnotationBase), null, BindingMode.Default, null, OnResizeDirectionsPropertyChanged, null, null, DefaultResizeDirectionsPropertyValueCreator);
 		
+		public static BindableProperty ZIndexProperty = BindableProperty.Create("ZIndex", typeof(int), typeof(AnnotationBase), null, BindingMode.Default, null, OnZIndexPropertyChanged, null, null, DefaultZIndexPropertyValueCreator);
+		
+		public static BindableProperty AnnotationSurfaceProperty = BindableProperty.Create("AnnotationSurface", typeof(SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface), typeof(AnnotationBase), null, BindingMode.Default, null, OnAnnotationSurfacePropertyChanged, null, null, DefaultAnnotationSurfacePropertyValueCreator);
+		
+		public static BindableProperty CoordinateModeProperty = BindableProperty.Create("CoordinateMode", typeof(SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode), typeof(AnnotationBase), null, BindingMode.Default, null, OnCoordinateModePropertyChanged, null, null, DefaultCoordinateModePropertyValueCreator);
+		
 		private SciChart.Xamarin.Views.Core.Common.INativeSciChartObject _nativeSciChartObject;
 		
 		public AnnotationBase(SciChart.Xamarin.Views.Visuals.Annotations.IAnnotation nativeObject)
@@ -1511,6 +1518,42 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
 			}
 		}
 		
+		public int ZIndex
+		{
+			get
+			{
+				return ((int)(this.GetValue(ZIndexProperty)));
+			}
+			set
+			{
+				this.SetValue(ZIndexProperty, value);
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface AnnotationSurface
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface)(this.GetValue(AnnotationSurfaceProperty)));
+			}
+			set
+			{
+				this.SetValue(AnnotationSurfaceProperty, value);
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode CoordinateMode
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode)(this.GetValue(CoordinateModeProperty)));
+			}
+			set
+			{
+				this.SetValue(CoordinateModeProperty, value);
+			}
+		}
+		
 		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
@@ -1619,6 +1662,36 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
 			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnnotation>().ResizeDirections;
 		}
 		
+		private static void OnZIndexPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnnotation>().ZIndex = ((int)(newValue));
+		}
+		
+		private static object DefaultZIndexPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnnotation>().ZIndex;
+		}
+		
+		private static void OnAnnotationSurfacePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnnotation>().AnnotationSurface = ((SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface)(newValue));
+		}
+		
+		private static object DefaultAnnotationSurfacePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnnotation>().AnnotationSurface;
+		}
+		
+		private static void OnCoordinateModePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnnotation>().CoordinateMode = ((SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode)(newValue));
+		}
+		
+		private static object DefaultCoordinateModePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnnotation>().CoordinateMode;
+		}
+		
 		public void Show()
 		{
 			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Visuals.Annotations.IAnnotation>().Show();
@@ -1678,11 +1751,39 @@ namespace SciChart.Xamarin.Views.Modifiers
 	public abstract partial class ChartModifierCore : View, SciChart.Xamarin.Views.Modifiers.IChartModifierCore, SciChart.Xamarin.Views.Core.Common.IBindingContextProvider
 	{
 		
+		public static BindableProperty IsEnabledProperty = BindableProperty.Create("IsEnabled", typeof(bool), typeof(ChartModifierCore), null, BindingMode.Default, null, OnIsEnabledPropertyChanged, null, null, DefaultIsEnabledPropertyValueCreator);
+		
+		public static BindableProperty ReceiveHandledEventsProperty = BindableProperty.Create("ReceiveHandledEvents", typeof(bool), typeof(ChartModifierCore), null, BindingMode.Default, null, OnReceiveHandledEventsPropertyChanged, null, null, DefaultReceiveHandledEventsPropertyValueCreator);
+		
 		private SciChart.Xamarin.Views.Core.Common.INativeSciChartObject _nativeSciChartObject;
 		
 		public ChartModifierCore(SciChart.Xamarin.Views.Modifiers.IChartModifierCore nativeObject)
 		{
 			_nativeSciChartObject = nativeObject.NativeSciChartObject;
+		}
+		
+		public bool IsEnabled
+		{
+			get
+			{
+				return ((bool)(this.GetValue(IsEnabledProperty)));
+			}
+			set
+			{
+				this.SetValue(IsEnabledProperty, value);
+			}
+		}
+		
+		public bool ReceiveHandledEvents
+		{
+			get
+			{
+				return ((bool)(this.GetValue(ReceiveHandledEventsProperty)));
+			}
+			set
+			{
+				this.SetValue(ReceiveHandledEventsProperty, value);
+			}
 		}
 		
 		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
@@ -1691,6 +1792,26 @@ namespace SciChart.Xamarin.Views.Modifiers
 			{
 				return _nativeSciChartObject;
 			}
+		}
+		
+		private static void OnIsEnabledPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IChartModifierCore>().IsEnabled = ((bool)(newValue));
+		}
+		
+		private static object DefaultIsEnabledPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IChartModifierCore>().IsEnabled;
+		}
+		
+		private static void OnReceiveHandledEventsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IChartModifierCore>().ReceiveHandledEvents = ((bool)(newValue));
+		}
+		
+		private static object DefaultReceiveHandledEventsPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IChartModifierCore>().ReceiveHandledEvents;
 		}
 	}
 }

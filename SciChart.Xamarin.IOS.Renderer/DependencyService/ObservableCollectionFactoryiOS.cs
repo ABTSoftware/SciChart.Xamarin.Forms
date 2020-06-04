@@ -223,4 +223,43 @@ namespace SciChart.Xamarin.iOS.Renderer.DependencyService
             base[index] = item.NativeSciChartObject as IISCIChartModifier3D;
         }
     }
+
+    internal class ChartModifierCollectionWrapperIOS : INativeObservableCollection<IChartModifier>
+    {
+        private readonly SCIChartModifierCollection _nativeObservableCollection;
+        public ChartModifierCollectionWrapperIOS(SCIChartModifierCollection nativeObservableCollection)
+        {
+            _nativeObservableCollection = nativeObservableCollection;
+        }
+
+        public void ClearItems()
+        {
+            _nativeObservableCollection.Clear();
+        }
+
+        public void InsertItem(int index, IChartModifier item)
+        {
+            _nativeObservableCollection.Insert(index, item.NativeSciChartObject as IISCIChartModifier);
+        }
+
+        public void MoveItem(int oldIndex, int newIndex)
+        {
+        }
+
+        public void RemoveItem(int index)
+        {
+        }
+
+        public void SetItem(int index, IChartModifier item)
+        {
+        }
+    }
+
+    internal class FormsChartModifierCollectionIOS : ChartModifierCollection
+    {
+        public FormsChartModifierCollectionIOS(SCIChartModifierCollection nativeChartModifierCollection) : base(new ChartModifierCollectionWrapperIOS(nativeChartModifierCollection))
+        {
+
+        }
+    }
 }

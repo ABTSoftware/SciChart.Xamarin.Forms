@@ -8,6 +8,10 @@ namespace SciChart.Xamarin.Views.Modifiers
     [AbstractClassDefinition]
     public interface IChartModifierCore : INativeSciChartObjectWrapper
     {
-        
+        [BindablePropertyDefinition()]
+        bool IsEnabled { get; set; }
+
+        [BindablePropertyDefinition()]
+        bool ReceiveHandledEvents { get; set; }
     }
 }

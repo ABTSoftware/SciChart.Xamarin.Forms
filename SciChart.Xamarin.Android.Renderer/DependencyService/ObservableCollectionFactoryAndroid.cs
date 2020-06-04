@@ -211,4 +211,44 @@ namespace SciChart.Xamarin.Android.Renderer.DependencyService
             base.Set(index, item.NativeSciChartObject as Object);
         }
     }
+
+    internal class ChartModifierCollectionWrapperAndroid : INativeObservableCollection<IChartModifier>
+    {
+        private readonly Charting.Model.ChartModifierCollection _nativeObservableCollection;
+        public ChartModifierCollectionWrapperAndroid(Charting.Model.ChartModifierCollection nativeObservableCollection)
+        {
+            _nativeObservableCollection = nativeObservableCollection;
+        }
+
+        public void ClearItems()
+        {
+            _nativeObservableCollection.Clear();
+        }
+
+        public void InsertItem(int index, IChartModifier item)
+        {
+            _nativeObservableCollection.Insert(index, item.NativeSciChartObject as Charting.Modifiers.IChartModifier); 
+        }
+
+        public void MoveItem(int oldIndex, int newIndex)
+        {
+        }
+
+        public void RemoveItem(int index)
+        {
+        }
+
+        public void SetItem(int index, IChartModifier item)
+        {
+        }
+    }
+
+
+    internal class FormsChartModifierCollectionAndroid : ChartModifierCollection
+    {
+        public FormsChartModifierCollectionAndroid(Charting.Model.ChartModifierCollection nativeChartModifierCollection) : base(new ChartModifierCollectionWrapperAndroid(nativeChartModifierCollection))
+        {
+
+        }
+    }
 }
