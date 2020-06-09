@@ -1,4 +1,5 @@
 ﻿using SciChart.iOS.Charting;
+using SciChart.Xamarin.Views.Drawing;
 
 namespace SciChart.Xamarin.iOS.Renderer.Utility
 {
@@ -30,6 +31,19 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
 
             if (brushStyle is LinearGradientBrushStyleiOS linearGradientBrushStyle)
                 return new SciChart.Xamarin.Views.Drawing.LinearGradientBrushStyle(linearGradientBrushStyle);
+
+            return null;
+        }
+
+        public static SCIFontStyle FontStyleFromXamarin(this SciChart.Xamarin.Views.Drawing.IFontStyle fontStyle)
+        {
+            return fontStyle.NativeSciChartObject as SCIFontStyle;
+        }
+
+        public static SciChart.Xamarin.Views.Drawing.IFontStyle FontStyleToXamarin(this SCIFontStyle fontStyle)
+        {
+            if(fontStyle is FontStyleiOS fontStyleiOS)
+                return new FontStyle(fontStyleiOS);
 
             return null;
         }

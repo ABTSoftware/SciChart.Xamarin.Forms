@@ -9,9 +9,5 @@ namespace SciChart.Xamarin.Views.Model.ObservableCollection
         public RenderableSeriesCollection() : base(DependencyService.Get<INativeObservableCollectionFactory>().NewRenderableSeriesCollection())
         {
         }
-
-        public RenderableSeriesCollection(IEnumerable<IRenderableSeries> collection) : base(DependencyService.Get<INativeObservableCollectionFactory>().NewRenderableSeriesCollection(), collection)
-        {
-        }
     }
 }

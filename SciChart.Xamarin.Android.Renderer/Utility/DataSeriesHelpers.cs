@@ -23,6 +23,9 @@ namespace SciChart.Xamarin.Android.Renderer.Utility
                 case OhlcDataSeriesAndroid<double, double> ohlcDataSeries:
                     return new OhlcDataSeries<double, double>(ohlcDataSeries);
 
+                case OhlcDataSeriesAndroid<DateTime, double> ohlcDataSeries:
+                    return new OhlcDataSeries<DateTime, double>(ohlcDataSeries);
+
                 default:
                     return null;
             }

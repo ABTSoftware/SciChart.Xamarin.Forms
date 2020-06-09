@@ -20,41 +20,41 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackLayout Orientation="Vertical" Grid.Row="0">
-            <Label Text="Hello Xamarin.Forms world!"></Label>
-            <Label Text="This is a test ..."/>
+            <Label Text="Xamarin.Forms Demo"/>
         </StackLayout>
+        <ListView ItemsSource="{Binding Examples}" ItemSelected="OnExampleItemSelected" Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Fill"/>
          
-         <visuals:SciChartSurface Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Fill"> 
-             <visuals:SciChartSurface.RenderableSeries>
-                <renderableSeries:FastLineRenderableSeries DataSeries="{Binding LineSeries}" StrokeStyle="{Binding LineStyle}">
-                    <renderableSeries:FastLineRenderableSeries.PointMarker>
-                        <pointMarkers:EllipsePointMarker Width="20" Height="20"/>
-                    </renderableSeries:FastLineRenderableSeries.PointMarker>
-                </renderableSeries:FastLineRenderableSeries>
-                 <renderableSeries:FastCandlestickRenderableSeries DataSeries="{Binding CandlestickSeries}" StrokeUpStyle="{Binding StrokeUpStyle}" StrokeDownStyle="{Binding StrokeDownStyle}" FillDownBrushStyle="{Binding FillDownStyle}" FillUpBrushStyle="{Binding FillUpStyle}"/>
-             </visuals:SciChartSurface.RenderableSeries>
-         
-             <visuals:SciChartSurface.XAxes> 
-                 <axes:NumericAxis VisibleRange="{Binding XRange}"/> 
-             </visuals:SciChartSurface.XAxes> 
-         
-             <visuals:SciChartSurface.YAxes> 
-                <axes:NumericAxis/> 
-             </visuals:SciChartSurface.YAxes> 
-         
-             <!-- <visuals:SciChartSurface.Annotations>  -->
-             <!--     <annotations:BoxAnnotation X1="{Binding X1}" X2="{Binding X2}" Y1="{Binding Y1}" Y2="{Binding Y2}"/>  -->
-             <!-- </visuals:SciChartSurface.Annotations>  -->
-         
-             <visuals:SciChartSurface.ChartModifiers> 
-                 <modifiers:ModifierGroup>
-                     <modifiers:PinchZoomModifier/>
-                     <modifiers:ZoomPanModifier ReceiveHandledEvents="true"/>
-                     <modifiers:ZoomExtentsModifier/>
-                 </modifiers:ModifierGroup> 
-             </visuals:SciChartSurface.ChartModifiers> 
-         
-         </visuals:SciChartSurface> 
+         <!-- <visuals:SciChartSurface Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Fill">  -->
+         <!--     <visuals:SciChartSurface.RenderableSeries> -->
+         <!--        <renderableSeries:FastLineRenderableSeries DataSeries="{Binding LineSeries}"> -->
+         <!--            <renderableSeries:FastLineRenderableSeries.PointMarker> -->
+         <!--                <pointMarkers:EllipsePointMarker Width="20" Height="20"/> -->
+         <!--            </renderableSeries:FastLineRenderableSeries.PointMarker> -->
+         <!--        </renderableSeries:FastLineRenderableSeries> -->
+         <!--         <renderableSeries:FastCandlestickRenderableSeries DataSeries="{Binding CandlestickSeries}" StrokeUpStyle="{Binding StrokeUpStyle}" StrokeDownStyle="{Binding StrokeDownStyle}" FillDownBrushStyle="{Binding FillDownStyle}" FillUpBrushStyle="{Binding FillUpStyle}"/> -->
+         <!--     </visuals:SciChartSurface.RenderableSeries> -->
+         <!-- -->
+         <!--     <visuals:SciChartSurface.XAxes>  -->
+         <!--         <axes:NumericAxis VisibleRange="{Binding XRange}"/>  -->
+         <!--     </visuals:SciChartSurface.XAxes>  -->
+         <!-- -->
+         <!--     <visuals:SciChartSurface.YAxes>  -->
+         <!--        <axes:NumericAxis/>  -->
+         <!--     </visuals:SciChartSurface.YAxes>  -->
+         <!-- -->
+         <!--     <visuals:SciChartSurface.Annotations> -->
+         <!--         <annotations:BoxAnnotation X1="{Binding X1}" X2="{Binding X2}" Y1="{Binding Y1}" Y2="{Binding Y2}" BackgroundColor="Red"/> -->
+         <!--     </visuals:SciChartSurface.Annotations> -->
+         <!-- -->
+         <!--     <visuals:SciChartSurface.ChartModifiers>  -->
+         <!--         <modifiers:ModifierGroup> -->
+         <!--             <modifiers:PinchZoomModifier/> -->
+         <!--             <modifiers:ZoomPanModifier ReceiveHandledEvents="true"/> -->
+         <!--             <modifiers:ZoomExtentsModifier/> -->
+         <!--         </modifiers:ModifierGroup>  -->
+         <!--     </visuals:SciChartSurface.ChartModifiers>  -->
+         <!-- -->
+         <!-- </visuals:SciChartSurface>  -->
 
          <!-- <visuals:SciChartSurface3D Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Fill">  -->
          <!--     <visuals:SciChartSurface3D.XAxis>  -->

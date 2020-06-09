@@ -157,10 +157,11 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
                 arguments.Add(new CodeArgumentReferenceExpression(paramName));
             }
 
+            var factoryName = $"New{returnType.ToXamarinFormsName()}";
             var factoryMethod = new CodeMemberMethod()
             {
                 ReturnType = new CodeTypeReference(returnType.ToGenericName()),
-                Name = $"New{information.Type.Replace(Platform, "")}",
+                Name = factoryName,
                 Attributes = MemberAttributes.Public | MemberAttributes.Final,
                 Statements =
                 {

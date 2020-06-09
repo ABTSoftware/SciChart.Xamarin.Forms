@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using SciChart.Xamarin.Views.Modifiers;
+﻿using SciChart.Xamarin.Views.Modifiers;
 using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views.Model.ObservableCollection
@@ -13,10 +12,6 @@ namespace SciChart.Xamarin.Views.Model.ObservableCollection
         public ChartModifierCollection(INativeObservableCollection<IChartModifier> nativeObservableCollection) : base(nativeObservableCollection)
         {
 
-        }
-
-        public ChartModifierCollection(IEnumerable<IChartModifier> collection) : base(DependencyService.Get<INativeObservableCollectionFactory>().NewChartModifierCollection(), collection)
-        {
         }
     }
 }

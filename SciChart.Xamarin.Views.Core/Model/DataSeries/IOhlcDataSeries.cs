@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SciChart.Xamarin.Views.Core.Generation;
 
 namespace SciChart.Xamarin.Views.Model.DataSeries
@@ -12,5 +13,8 @@ namespace SciChart.Xamarin.Views.Model.DataSeries
     {
         [MethodDeclaration]
         void Append(TX x, TY open, TY high, TY low, TY close);
+
+        [MethodDeclaration]
+        void Append(IEnumerable<TX> xValues, IEnumerable<TY> openValues, IEnumerable<TY> highValues, IEnumerable<TY> lowValues, IEnumerable<TY> closeValues);
     }
 }

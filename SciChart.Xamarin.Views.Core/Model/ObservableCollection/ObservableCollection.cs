@@ -1,18 +1,10 @@
-﻿using System.Collections.Generic;
-using SciChart.Xamarin.Views.Core;
-
-namespace SciChart.Xamarin.Views.Model.ObservableCollection
+﻿namespace SciChart.Xamarin.Views.Model.ObservableCollection
 {
     public class ObservableCollection<T> : System.Collections.ObjectModel.ObservableCollection<T>
     {
         public INativeObservableCollection<T> NativeObservableCollection { get; }
 
         public ObservableCollection(INativeObservableCollection<T> nativeObservableCollection)
-        {
-            NativeObservableCollection = nativeObservableCollection;
-        }
-
-        public ObservableCollection(INativeObservableCollection<T> nativeObservableCollection, IEnumerable<T> collection) : base(collection)
         {
             NativeObservableCollection = nativeObservableCollection;
         }

@@ -67,6 +67,64 @@ namespace SciChart.Xamarin.iOS.Renderer
         }
     }
 
+    public partial class LineArrowAnnotationiOS
+    {
+        public void MoveBasePointTo(float xCoord, float yCoord, int index)
+        {
+            base.MoveBasePointTo(new CGPoint(xCoord, yCoord), index);
+        }
+
+        public void MoveAnnotation(float horizontalOffset, float verticalOffset)
+        {
+            base.MoveAnnotationByXDelta(horizontalOffset, verticalOffset);
+        }
+    }
+
+    public partial class LineAnnotationiOS
+    {
+        public void MoveBasePointTo(float xCoord, float yCoord, int index)
+        {
+            base.MoveBasePointTo(new CGPoint(xCoord, yCoord), index);
+        }
+
+        public void MoveAnnotation(float horizontalOffset, float verticalOffset)
+        {
+            base.MoveAnnotationByXDelta(horizontalOffset, verticalOffset);
+        }
+    }
+
+    public partial class TextAnnotationiOS
+    {
+        public void MoveBasePointTo(float xCoord, float yCoord, int index)
+        {
+            base.MoveBasePointTo(new CGPoint(xCoord, yCoord), index);
+        }
+
+        public void MoveAnnotation(float horizontalOffset, float verticalOffset)
+        {
+            base.MoveAnnotationByXDelta(horizontalOffset, verticalOffset);
+        }
+    }
+
+    public partial class AxisMarkerAnnotationiOS
+    {
+        public int MarkerPointWidth
+        {
+            get => (int) base.MarkerPointSize;
+            set => base.MarkerPointSize = value;
+        }
+
+        public void MoveBasePointTo(float xCoord, float yCoord, int index)
+        {
+            base.MoveBasePointTo(new CGPoint(xCoord, yCoord), index);
+        }
+
+        public void MoveAnnotation(float horizontalOffset, float verticalOffset)
+        {
+            base.MoveAnnotationByXDelta(horizontalOffset, verticalOffset);
+        }
+    }
+
     #endregion
 
     #region PointMarkers
@@ -97,6 +155,23 @@ namespace SciChart.Xamarin.iOS.Renderer
         {
             get => base.IsEnabled;
             set => ((SCIChartModifierCore) this).IsEnabled = value;
+        }
+
+        public new bool ReceiveHandledEvents
+        {
+            get => base.ReceiveHandledEvents;
+            set => ((SCIChartModifierCore)this).ReceiveHandledEvents = value;
+        }
+    }
+
+    public partial class ModifierGroup3DiOS
+    {
+        public new ChartModifier3DCollection ChildModifiers => new FormsChartModifier3DCollectionIOS(base.ChildModifiers);
+
+        public new bool IsEnabled
+        {
+            get => base.IsEnabled;
+            set => ((SCIChartModifierCore)this).IsEnabled = value;
         }
 
         public new bool ReceiveHandledEvents

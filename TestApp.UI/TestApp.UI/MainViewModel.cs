@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using SciChart.Xamarin.Views.Drawing;
 using SciChart.Xamarin.Views.Model;
 using SciChart.Xamarin.Views.Model.DataSeries;
 using SciChart.Xamarin.Views.Model.DataSeries3D;
+using TestApp.UI.Application;
 using Xamarin.Forms;
 
 namespace TestApp.UI
@@ -11,6 +13,8 @@ namespace TestApp.UI
     {
         public MainViewModel()
         {
+            Examples = ExampleManager.Instance.Examples;
+
             CandlestickSeries = new OhlcDataSeries<double, double>();
             LineSeries = new XyDataSeries<double, double>();
             Scatter3DSeries = new XyzDataSeries3D<double, double, double>();
@@ -68,5 +72,6 @@ namespace TestApp.UI
         public IComparable Y2 { get; set; }
 
 
+        public IList<Example> Examples { get; private set; }
     }
 }

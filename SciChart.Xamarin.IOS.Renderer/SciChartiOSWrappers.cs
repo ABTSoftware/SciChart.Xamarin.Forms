@@ -276,6 +276,166 @@ namespace SciChart.Xamarin.iOS.Renderer
 		}
 	}
 	
+	public partial class CategoryDateAxisiOS : SCICategoryDateAxis, SciChart.Xamarin.Views.Visuals.Axes.ICategoryDateTimeAxis, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public CategoryDateAxisiOS()
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment AxisAlignment
+		{
+			get
+			{
+				return base.AxisAlignment.AlignmentToXamarin();
+			}
+			set
+			{
+				base.AxisAlignment = value.AlignmentFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IBrushStyle AxisBandsFill
+		{
+			get
+			{
+				return base.AxisBandsStyle.BrushStyleToXamarin();
+			}
+			set
+			{
+				base.AxisBandsStyle = value.BrushStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Axes.AutoRange AutoRange
+		{
+			get
+			{
+				return base.AutoRange.AutoRangeToXamarin();
+			}
+			set
+			{
+				base.AutoRange = value.AutoRangeFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Model.IRange VisibleRange
+		{
+			get
+			{
+				return base.VisibleRange.RangeToXamarin();
+			}
+			set
+			{
+				base.VisibleRange = value.RangeFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Model.IRange GrowBy
+		{
+			get
+			{
+				return base.GrowBy.RangeToXamarin();
+			}
+			set
+			{
+				base.GrowBy = value.RangeFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Model.RangeClipMode VisibleRangeLimitMode
+		{
+			get
+			{
+				return base.VisibleRangeLimitMode.RangeClipModeToXamarin();
+			}
+			set
+			{
+				base.VisibleRangeLimitMode = value.RangeClipModeFromXamarin();
+			}
+		}
+		
+		public new System.IComparable MinimalZoomConstrain
+		{
+			get
+			{
+				return base.MinimalZoomConstrain.ComparableToXamarin();
+			}
+			set
+			{
+				base.MinimalZoomConstrain = value.ComparableFromXamarin();
+			}
+		}
+		
+		public new System.IComparable MaximumZoomConstrain
+		{
+			get
+			{
+				return base.MaximumZoomConstrain.ComparableToXamarin();
+			}
+			set
+			{
+				base.MaximumZoomConstrain = value.ComparableFromXamarin();
+			}
+		}
+		
+		public new System.IComparable MajorDelta
+		{
+			get
+			{
+				return base.MajorDelta.ComparableToXamarin();
+			}
+			set
+			{
+				base.MajorDelta = value.ComparableFromXamarin();
+			}
+		}
+		
+		public new System.IComparable MinorDelta
+		{
+			get
+			{
+				return base.MinorDelta.ComparableToXamarin();
+			}
+			set
+			{
+				base.MinorDelta = value.ComparableFromXamarin();
+			}
+		}
+		
+		public new uint MaxAutoTicks
+		{
+			get
+			{
+				return base.MaxAutoTicks.UIntToXamarin();
+			}
+			set
+			{
+				base.MaxAutoTicks = value.UIntFromXamarin();
+			}
+		}
+		
+		public new uint MinorsPerMajor
+		{
+			get
+			{
+				return base.MinorsPerMajor.UIntToXamarin();
+			}
+			set
+			{
+				base.MinorsPerMajor = value.UIntFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
 	public partial class NumericAxisiOS : SCINumericAxis, SciChart.Xamarin.Views.Visuals.Axes.INumericAxis, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
@@ -584,11 +744,555 @@ namespace SciChart.Xamarin.iOS.Renderer
 		}
 	}
 	
+	public partial class AxisMarkerAnnotationiOS : SCIAxisMarkerAnnotation, SciChart.Xamarin.Views.Visuals.Annotations.IAxisMarkerAnnotation, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public AxisMarkerAnnotationiOS()
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IFontStyle FontStyle
+		{
+			get
+			{
+				return base.FontStyle.FontStyleToXamarin();
+			}
+			set
+			{
+				base.FontStyle = value.FontStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Annotations.HorizontalAnchorPoint HorizontalAnchorPoint
+		{
+			get
+			{
+				return base.HorizontalAnchorPoint.HorizontalAnchorPointToXamarin();
+			}
+			set
+			{
+				base.HorizontalAnchorPoint = value.HorizontalAnchorPointFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Annotations.VerticalAnchorPoint VerticalAnchorPoint
+		{
+			get
+			{
+				return base.VerticalAnchorPoint.VerticalAnchorPointToXamarin();
+			}
+			set
+			{
+				base.VerticalAnchorPoint = value.VerticalAnchorPointFromXamarin();
+			}
+		}
+		
+		public System.IComparable X1
+		{
+			get
+			{
+				return base.X1Value;
+			}
+			set
+			{
+				base.X1Value = value;
+			}
+		}
+		
+		public System.IComparable X2
+		{
+			get
+			{
+				return base.X2Value;
+			}
+			set
+			{
+				base.X2Value = value;
+			}
+		}
+		
+		public System.IComparable Y1
+		{
+			get
+			{
+				return base.Y1Value;
+			}
+			set
+			{
+				base.Y1Value = value;
+			}
+		}
+		
+		public System.IComparable Y2
+		{
+			get
+			{
+				return base.Y2Value;
+			}
+			set
+			{
+				base.Y2Value = value;
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Core.Common.Direction2D DragDirections
+		{
+			get
+			{
+				return base.DragDirections.Direction2DToXamarin();
+			}
+			set
+			{
+				base.DragDirections = value.Direction2DFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Core.Common.Direction2D ResizeDirections
+		{
+			get
+			{
+				return base.ResizeDirections.Direction2DToXamarin();
+			}
+			set
+			{
+				base.ResizeDirections = value.Direction2DFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface AnnotationSurface
+		{
+			get
+			{
+				return base.AnnotationSurface.AnnotationSurfaceToXamarin();
+			}
+			set
+			{
+				base.AnnotationSurface = value.AnnotationSurfaceFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode CoordinateMode
+		{
+			get
+			{
+				return base.CoordinateMode.AnnotationCoordinateModeToXamarin();
+			}
+			set
+			{
+				base.CoordinateMode = value.AnnotationCoordinateModeFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
 	public partial class BoxAnnotationiOS : SCIBoxAnnotation, SciChart.Xamarin.Views.Visuals.Annotations.IBoxAnnotation, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
 		public BoxAnnotationiOS()
 		{
+		}
+		
+		public System.IComparable X1
+		{
+			get
+			{
+				return base.X1Value;
+			}
+			set
+			{
+				base.X1Value = value;
+			}
+		}
+		
+		public System.IComparable X2
+		{
+			get
+			{
+				return base.X2Value;
+			}
+			set
+			{
+				base.X2Value = value;
+			}
+		}
+		
+		public System.IComparable Y1
+		{
+			get
+			{
+				return base.Y1Value;
+			}
+			set
+			{
+				base.Y1Value = value;
+			}
+		}
+		
+		public System.IComparable Y2
+		{
+			get
+			{
+				return base.Y2Value;
+			}
+			set
+			{
+				base.Y2Value = value;
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Core.Common.Direction2D DragDirections
+		{
+			get
+			{
+				return base.DragDirections.Direction2DToXamarin();
+			}
+			set
+			{
+				base.DragDirections = value.Direction2DFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Core.Common.Direction2D ResizeDirections
+		{
+			get
+			{
+				return base.ResizeDirections.Direction2DToXamarin();
+			}
+			set
+			{
+				base.ResizeDirections = value.Direction2DFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface AnnotationSurface
+		{
+			get
+			{
+				return base.AnnotationSurface.AnnotationSurfaceToXamarin();
+			}
+			set
+			{
+				base.AnnotationSurface = value.AnnotationSurfaceFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode CoordinateMode
+		{
+			get
+			{
+				return base.CoordinateMode.AnnotationCoordinateModeToXamarin();
+			}
+			set
+			{
+				base.CoordinateMode = value.AnnotationCoordinateModeFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class LineAnnotationiOS : SCILineAnnotation, SciChart.Xamarin.Views.Visuals.Annotations.ILineAnnotation, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public LineAnnotationiOS()
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle Stroke
+		{
+			get
+			{
+				return base.Stroke.PenStyleToXamarin();
+			}
+			set
+			{
+				base.Stroke = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public System.IComparable X1
+		{
+			get
+			{
+				return base.X1Value;
+			}
+			set
+			{
+				base.X1Value = value;
+			}
+		}
+		
+		public System.IComparable X2
+		{
+			get
+			{
+				return base.X2Value;
+			}
+			set
+			{
+				base.X2Value = value;
+			}
+		}
+		
+		public System.IComparable Y1
+		{
+			get
+			{
+				return base.Y1Value;
+			}
+			set
+			{
+				base.Y1Value = value;
+			}
+		}
+		
+		public System.IComparable Y2
+		{
+			get
+			{
+				return base.Y2Value;
+			}
+			set
+			{
+				base.Y2Value = value;
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Core.Common.Direction2D DragDirections
+		{
+			get
+			{
+				return base.DragDirections.Direction2DToXamarin();
+			}
+			set
+			{
+				base.DragDirections = value.Direction2DFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Core.Common.Direction2D ResizeDirections
+		{
+			get
+			{
+				return base.ResizeDirections.Direction2DToXamarin();
+			}
+			set
+			{
+				base.ResizeDirections = value.Direction2DFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface AnnotationSurface
+		{
+			get
+			{
+				return base.AnnotationSurface.AnnotationSurfaceToXamarin();
+			}
+			set
+			{
+				base.AnnotationSurface = value.AnnotationSurfaceFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode CoordinateMode
+		{
+			get
+			{
+				return base.CoordinateMode.AnnotationCoordinateModeToXamarin();
+			}
+			set
+			{
+				base.CoordinateMode = value.AnnotationCoordinateModeFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class LineArrowAnnotationiOS : SCILineArrowAnnotation, SciChart.Xamarin.Views.Visuals.Annotations.ILineArrowAnnotation, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public LineArrowAnnotationiOS()
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle Stroke
+		{
+			get
+			{
+				return base.Stroke.PenStyleToXamarin();
+			}
+			set
+			{
+				base.Stroke = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public System.IComparable X1
+		{
+			get
+			{
+				return base.X1Value;
+			}
+			set
+			{
+				base.X1Value = value;
+			}
+		}
+		
+		public System.IComparable X2
+		{
+			get
+			{
+				return base.X2Value;
+			}
+			set
+			{
+				base.X2Value = value;
+			}
+		}
+		
+		public System.IComparable Y1
+		{
+			get
+			{
+				return base.Y1Value;
+			}
+			set
+			{
+				base.Y1Value = value;
+			}
+		}
+		
+		public System.IComparable Y2
+		{
+			get
+			{
+				return base.Y2Value;
+			}
+			set
+			{
+				base.Y2Value = value;
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Core.Common.Direction2D DragDirections
+		{
+			get
+			{
+				return base.DragDirections.Direction2DToXamarin();
+			}
+			set
+			{
+				base.DragDirections = value.Direction2DFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Core.Common.Direction2D ResizeDirections
+		{
+			get
+			{
+				return base.ResizeDirections.Direction2DToXamarin();
+			}
+			set
+			{
+				base.ResizeDirections = value.Direction2DFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface AnnotationSurface
+		{
+			get
+			{
+				return base.AnnotationSurface.AnnotationSurfaceToXamarin();
+			}
+			set
+			{
+				base.AnnotationSurface = value.AnnotationSurfaceFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode CoordinateMode
+		{
+			get
+			{
+				return base.CoordinateMode.AnnotationCoordinateModeToXamarin();
+			}
+			set
+			{
+				base.CoordinateMode = value.AnnotationCoordinateModeFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class TextAnnotationiOS : SCITextAnnotation, SciChart.Xamarin.Views.Visuals.Annotations.ITextAnnotation, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public TextAnnotationiOS()
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IFontStyle FontStyle
+		{
+			get
+			{
+				return base.FontStyle.FontStyleToXamarin();
+			}
+			set
+			{
+				base.FontStyle = value.FontStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Annotations.HorizontalAnchorPoint HorizontalAnchorPoint
+		{
+			get
+			{
+				return base.HorizontalAnchorPoint.HorizontalAnchorPointToXamarin();
+			}
+			set
+			{
+				base.HorizontalAnchorPoint = value.HorizontalAnchorPointFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Annotations.VerticalAnchorPoint VerticalAnchorPoint
+		{
+			get
+			{
+				return base.VerticalAnchorPoint.VerticalAnchorPointToXamarin();
+			}
+			set
+			{
+				base.VerticalAnchorPoint = value.VerticalAnchorPointFromXamarin();
+			}
 		}
 		
 		public System.IComparable X1
@@ -717,10 +1421,68 @@ namespace SciChart.Xamarin.iOS.Renderer
 		}
 	}
 	
+	public partial class ModifierGroup3DiOS : SCIModifierGroup3D, SciChart.Xamarin.Views.Modifiers.IModifierGroup3D, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public ModifierGroup3DiOS()
+		{
+		}
+		
+		public ModifierGroup3DiOS(SciChart.iOS.Charting.IISCIChartModifier3D[] childModifiers) : 
+				base(childModifiers)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class OrbitModifier3DiOS : SCIOrbitModifier3D, SciChart.Xamarin.Views.Modifiers.IOrbitModifier3D, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public OrbitModifier3DiOS()
+		{
+		}
+		
+		public OrbitModifier3DiOS(System.nuint defaultNumberOfTouches) : 
+				base(defaultNumberOfTouches)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
 	public partial class PinchZoomModifieriOS : SCIPinchZoomModifier, SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
 		public PinchZoomModifieriOS()
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class PinchZoomModifier3DiOS : SCIPinchZoomModifier3D, SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier3D, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public PinchZoomModifier3DiOS()
 		{
 		}
 		
@@ -763,6 +1525,22 @@ namespace SciChart.Xamarin.iOS.Renderer
 	{
 		
 		public ZoomExtentsModifieriOS()
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class ZoomExtentsModifier3DiOS : SCIZoomExtentsModifier3D, SciChart.Xamarin.Views.Modifiers.IZoomExtentsModifier3D, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public ZoomExtentsModifier3DiOS()
 		{
 		}
 		
@@ -1059,6 +1837,11 @@ namespace SciChart.Xamarin.iOS.Renderer
 			return new EllipsePointMarker3DiOS();
 		}
 		
+		public SciChart.Xamarin.Views.Visuals.Axes.ICategoryDateTimeAxis NewCategoryDateTimeAxis()
+		{
+			return new CategoryDateAxisiOS();
+		}
+		
 		public SciChart.Xamarin.Views.Visuals.Axes.INumericAxis NewNumericAxis()
 		{
 			return new NumericAxisiOS();
@@ -1069,9 +1852,29 @@ namespace SciChart.Xamarin.iOS.Renderer
 			return new NumericAxis3DiOS();
 		}
 		
+		public SciChart.Xamarin.Views.Visuals.Annotations.IAxisMarkerAnnotation NewAxisMarkerAnnotation()
+		{
+			return new AxisMarkerAnnotationiOS();
+		}
+		
 		public SciChart.Xamarin.Views.Visuals.Annotations.IBoxAnnotation NewBoxAnnotation()
 		{
 			return new BoxAnnotationiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.Annotations.ILineAnnotation NewLineAnnotation()
+		{
+			return new LineAnnotationiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.Annotations.ILineArrowAnnotation NewLineArrowAnnotation()
+		{
+			return new LineArrowAnnotationiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.Annotations.ITextAnnotation NewTextAnnotation()
+		{
+			return new TextAnnotationiOS();
 		}
 		
 		public SciChart.Xamarin.Views.Modifiers.IModifierGroup NewModifierGroup()
@@ -1079,9 +1882,24 @@ namespace SciChart.Xamarin.iOS.Renderer
 			return new ModifierGroupiOS();
 		}
 		
+		public SciChart.Xamarin.Views.Modifiers.IModifierGroup3D NewModifierGroup3D()
+		{
+			return new ModifierGroup3DiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Modifiers.IOrbitModifier3D NewOrbitModifier3D()
+		{
+			return new OrbitModifier3DiOS();
+		}
+		
 		public SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier NewPinchZoomModifier()
 		{
 			return new PinchZoomModifieriOS();
+		}
+		
+		public SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier3D NewPinchZoomModifier3D()
+		{
+			return new PinchZoomModifier3DiOS();
 		}
 		
 		public SciChart.Xamarin.Views.Modifiers.ITooltipModifier NewTooltipModifier()
@@ -1092,6 +1910,11 @@ namespace SciChart.Xamarin.iOS.Renderer
 		public SciChart.Xamarin.Views.Modifiers.IZoomExtentsModifier NewZoomExtentsModifier()
 		{
 			return new ZoomExtentsModifieriOS();
+		}
+		
+		public SciChart.Xamarin.Views.Modifiers.IZoomExtentsModifier3D NewZoomExtentsModifier3D()
+		{
+			return new ZoomExtentsModifier3DiOS();
 		}
 		
 		public SciChart.Xamarin.Views.Modifiers.IZoomPanModifier NewZoomPanModifier()

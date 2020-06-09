@@ -32,5 +32,18 @@ namespace SciChart.Xamarin.Android.Renderer.Utility
 
             return null;
         }
+
+        public static FontStyle FontStyleFromXamarin(this SciChart.Xamarin.Views.Drawing.IFontStyle fontStyle)
+        {
+            return fontStyle.NativeSciChartObject as FontStyle;
+        }
+
+        public static SciChart.Xamarin.Views.Drawing.IFontStyle FontStyleToXamarin(this FontStyle fontStyle)
+        {
+            if (fontStyle is FontStyleAndroid fontStyleAndroid)
+                return new Views.Drawing.FontStyle(fontStyleAndroid);
+
+            return null;
+        }
     }
 }

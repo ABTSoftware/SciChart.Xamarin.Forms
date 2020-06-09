@@ -46,19 +46,15 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
 
         public static AnnotationCoordinateMode AnnotationCoordinateModeToXamarin(this SCIAnnotationCoordinateMode annotationCoordinateMode)
         {
-            if (annotationCoordinateMode == SCIAnnotationCoordinateMode.Absolute)
-                return AnnotationCoordinateMode.Absolute;
-
-            if (annotationCoordinateMode == SCIAnnotationCoordinateMode.Relative)
-                return AnnotationCoordinateMode.Relative;
-
-            if (annotationCoordinateMode == SCIAnnotationCoordinateMode.RelativeX)
-                return AnnotationCoordinateMode.RelativeX;
-
-            if (annotationCoordinateMode == SCIAnnotationCoordinateMode.RelativeY)
-                return AnnotationCoordinateMode.RelativeY;
-
-            throw new NotImplementedException("The SCIAnnotationCoordinateMode value " + annotationCoordinateMode.ToString() + " has not been handled");
+            switch (annotationCoordinateMode)
+            {
+                case SCIAnnotationCoordinateMode.Absolute: return AnnotationCoordinateMode.Absolute;
+                case SCIAnnotationCoordinateMode.Relative: return AnnotationCoordinateMode.Relative;
+                case SCIAnnotationCoordinateMode.RelativeX: return AnnotationCoordinateMode.RelativeX;
+                case SCIAnnotationCoordinateMode.RelativeY: return AnnotationCoordinateMode.RelativeY;
+                default:
+                    throw new NotImplementedException("The SCIAnnotationCoordinateMode value " + annotationCoordinateMode.ToString() + " has not been handled");
+            }
         }
 
         public static SCIAnnotationSurfaceEnum AnnotationSurfaceFromXamarin(this AnnotationSurface annotationSurface)
@@ -76,12 +72,77 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
 
         public static AnnotationSurface AnnotationSurfaceToXamarin(this SCIAnnotationSurfaceEnum annotationSurface)
         {
-            if (annotationSurface == SCIAnnotationSurfaceEnum.AboveChart) return AnnotationSurface.AboveChart;
-            if (annotationSurface == SCIAnnotationSurfaceEnum.BelowChart) return AnnotationSurface.BelowChart;
-            if (annotationSurface == SCIAnnotationSurfaceEnum.XAxis) return AnnotationSurface.XAxis;
-            if (annotationSurface == SCIAnnotationSurfaceEnum.YAxis) return AnnotationSurface.YAxis;
+            switch (annotationSurface)
+            {
+                case SCIAnnotationSurfaceEnum.AboveChart: return AnnotationSurface.AboveChart;
+                case SCIAnnotationSurfaceEnum.BelowChart: return AnnotationSurface.BelowChart;
+                case SCIAnnotationSurfaceEnum.XAxis: return AnnotationSurface.XAxis;
+                case SCIAnnotationSurfaceEnum.YAxis: return AnnotationSurface.YAxis;
+                default:
+                    throw new NotImplementedException("The SCIAnnotationSurfaceEnum value " + annotationSurface.ToString() + " has not been handled");
+            }
+        }
 
-            throw new NotImplementedException("The SCIAnnotationSurfaceEnum value " + annotationSurface.ToString() + " has not been handled");
+        public static SCIHorizontalAnchorPoint HorizontalAnchorPointFromXamarin(this HorizontalAnchorPoint horizontalAnchorPoint)
+        {
+            switch (horizontalAnchorPoint)
+            {
+                case HorizontalAnchorPoint.Left:
+                    return SCIHorizontalAnchorPoint.Left;
+                case HorizontalAnchorPoint.Center:
+                    return SCIHorizontalAnchorPoint.Center;
+                case HorizontalAnchorPoint.Right:
+                    return SCIHorizontalAnchorPoint.Right;
+                default:
+                    throw new NotImplementedException("The HorizontalAnchorPoint value " + horizontalAnchorPoint.ToString() + " has not been handled");
+            }
+
+        }
+
+        public static HorizontalAnchorPoint HorizontalAnchorPointToXamarin(this SCIHorizontalAnchorPoint horizontalAnchorPoint)
+        {
+            switch (horizontalAnchorPoint)
+            {
+                case SCIHorizontalAnchorPoint.Left:
+                    return HorizontalAnchorPoint.Left;
+                case SCIHorizontalAnchorPoint.Center:
+                    return HorizontalAnchorPoint.Center;
+                case SCIHorizontalAnchorPoint.Right:
+                    return HorizontalAnchorPoint.Right;
+                default:
+                    throw new NotImplementedException("The SCIHorizontalAnchorPoint value " + horizontalAnchorPoint.ToString() + " has not been handled");
+            }
+        }
+
+        public static SCIVerticalAnchorPoint VerticalAnchorPointFromXamarin(this VerticalAnchorPoint verticalAnchorPoint)
+        {
+            switch (verticalAnchorPoint)
+            {
+                case VerticalAnchorPoint.Top:
+                    return SCIVerticalAnchorPoint.Top;
+                case VerticalAnchorPoint.Center:
+                    return SCIVerticalAnchorPoint.Center;
+                case VerticalAnchorPoint.Bottom:
+                    return SCIVerticalAnchorPoint.Bottom;
+                default:
+                    throw new NotImplementedException("The VerticalAnchorPoint value " + verticalAnchorPoint.ToString() + " has not been handled");
+            }
+
+        }
+
+        public static VerticalAnchorPoint VerticalAnchorPointToXamarin(this SCIVerticalAnchorPoint verticalAnchorPoint)
+        {
+            switch (verticalAnchorPoint)
+            {
+                case SCIVerticalAnchorPoint.Top:
+                    return VerticalAnchorPoint.Top;
+                case SCIVerticalAnchorPoint.Center:
+                    return VerticalAnchorPoint.Center;
+                case SCIVerticalAnchorPoint.Bottom:
+                    return VerticalAnchorPoint.Bottom;
+                default:
+                    throw new NotImplementedException("The SCIVerticalAnchorPoint value " + verticalAnchorPoint.ToString() + " has not been handled");
+            }
         }
     }
 }

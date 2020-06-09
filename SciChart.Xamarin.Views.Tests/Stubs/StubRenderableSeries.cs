@@ -3,7 +3,6 @@ using SciChart.Xamarin.Views.Drawing;
 using SciChart.Xamarin.Views.Model.DataSeries;
 using SciChart.Xamarin.Views.Visuals.PointMarkers;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;
-using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views.Tests.Stubs
 {

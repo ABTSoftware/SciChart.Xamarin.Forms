@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SciChart.Xamarin.Views.Model.DataSeries;
+using TestApp.UI.Application;
 using Xamarin.Forms;
 
 namespace TestApp.UI
@@ -24,5 +20,18 @@ namespace TestApp.UI
 			
 		    this.BindingContext = new MainViewModel();            
 		}
-	}
+
+        private void OnExampleItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var example = e.SelectedItem as Example;
+            if (example != null)
+            {
+                var examplePage = (Page) Activator.CreateInstance(example.ExampleType);
+               
+                examplePage.Title = example.Title;
+
+                Navigation.PushAsync(examplePage);
+            }
+        }
+    }
 }

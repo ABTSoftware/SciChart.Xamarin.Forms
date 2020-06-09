@@ -244,20 +244,69 @@ namespace SciChart.Xamarin.iOS.Renderer.DependencyService
 
         public void MoveItem(int oldIndex, int newIndex)
         {
+            var item = _nativeObservableCollection[oldIndex];
+            _nativeObservableCollection.RemoveAt(oldIndex);
+            _nativeObservableCollection.Insert(newIndex, item);
         }
 
         public void RemoveItem(int index)
         {
+            _nativeObservableCollection.RemoveAt(index);
         }
 
         public void SetItem(int index, IChartModifier item)
         {
+            _nativeObservableCollection[index] = item.NativeSciChartObject as IISCIChartModifier;
         }
     }
 
     internal class FormsChartModifierCollectionIOS : ChartModifierCollection
     {
         public FormsChartModifierCollectionIOS(SCIChartModifierCollection nativeChartModifierCollection) : base(new ChartModifierCollectionWrapperIOS(nativeChartModifierCollection))
+        {
+
+        }
+    }
+
+    internal class ChartModifier3DCollectionWrapperIOS : INativeObservableCollection<IChartModifier3D>
+    {
+        private readonly SCIChartModifier3DCollection _nativeObservableCollection;
+        public ChartModifier3DCollectionWrapperIOS(SCIChartModifier3DCollection nativeObservableCollection)
+        {
+            _nativeObservableCollection = nativeObservableCollection;
+        }
+
+        public void ClearItems()
+        {
+            _nativeObservableCollection.Clear();
+        }
+
+        public void InsertItem(int index, IChartModifier3D item)
+        {
+            _nativeObservableCollection.Insert(index, item.NativeSciChartObject as IISCIChartModifier3D);
+        }
+
+        public void MoveItem(int oldIndex, int newIndex)
+        {
+            var item = _nativeObservableCollection[oldIndex];
+            _nativeObservableCollection.RemoveAt(oldIndex);
+            _nativeObservableCollection.Insert(newIndex, item);
+        }
+
+        public void RemoveItem(int index)
+        {
+            _nativeObservableCollection.RemoveAt(index);
+        }
+
+        public void SetItem(int index, IChartModifier3D item)
+        {
+            _nativeObservableCollection[index] = item.NativeSciChartObject as IISCIChartModifier3D;
+        }
+    }
+
+    internal class FormsChartModifier3DCollectionIOS : ChartModifier3DCollection
+    {
+        public FormsChartModifier3DCollectionIOS(SCIChartModifier3DCollection nativeChartModifierCollection) : base(new ChartModifier3DCollectionWrapperIOS(nativeChartModifierCollection))
         {
 
         }

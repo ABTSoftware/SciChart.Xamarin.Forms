@@ -49,19 +49,37 @@ namespace SciChart.Xamarin.Views.Core.Common
 		
 		SciChart.Xamarin.Views.Visuals.PointMarkers3D.IEllipsePointMarker3D NewEllipsePointMarker3D();
 		
+		SciChart.Xamarin.Views.Visuals.Axes.ICategoryDateTimeAxis NewCategoryDateTimeAxis();
+		
 		SciChart.Xamarin.Views.Visuals.Axes.INumericAxis NewNumericAxis();
 		
 		SciChart.Xamarin.Views.Visuals.Axes3D.INumericAxis3D NewNumericAxis3D();
 		
+		SciChart.Xamarin.Views.Visuals.Annotations.IAxisMarkerAnnotation NewAxisMarkerAnnotation();
+		
 		SciChart.Xamarin.Views.Visuals.Annotations.IBoxAnnotation NewBoxAnnotation();
+		
+		SciChart.Xamarin.Views.Visuals.Annotations.ILineAnnotation NewLineAnnotation();
+		
+		SciChart.Xamarin.Views.Visuals.Annotations.ILineArrowAnnotation NewLineArrowAnnotation();
+		
+		SciChart.Xamarin.Views.Visuals.Annotations.ITextAnnotation NewTextAnnotation();
 		
 		SciChart.Xamarin.Views.Modifiers.IModifierGroup NewModifierGroup();
 		
+		SciChart.Xamarin.Views.Modifiers.IModifierGroup3D NewModifierGroup3D();
+		
+		SciChart.Xamarin.Views.Modifiers.IOrbitModifier3D NewOrbitModifier3D();
+		
 		SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier NewPinchZoomModifier();
+		
+		SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier3D NewPinchZoomModifier3D();
 		
 		SciChart.Xamarin.Views.Modifiers.ITooltipModifier NewTooltipModifier();
 		
 		SciChart.Xamarin.Views.Modifiers.IZoomExtentsModifier NewZoomExtentsModifier();
+		
+		SciChart.Xamarin.Views.Modifiers.IZoomExtentsModifier3D NewZoomExtentsModifier3D();
 		
 		SciChart.Xamarin.Views.Modifiers.IZoomPanModifier NewZoomPanModifier();
 		
@@ -1313,6 +1331,24 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
 {
 	
 	
+	public partial class CategoryDateTimeAxis : AxisBase, SciChart.Xamarin.Views.Visuals.Axes.ICategoryDateTimeAxis
+	{
+		
+		public CategoryDateTimeAxis() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewCategoryDateTimeAxis())
+		{
+		}
+		
+		public CategoryDateTimeAxis(SciChart.Xamarin.Views.Visuals.Axes.ICategoryDateTimeAxis nativeObject) : 
+				base(nativeObject)
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.Axes
+{
+	
+	
 	public partial class NumericAxis : AxisBase, SciChart.Xamarin.Views.Visuals.Axes.INumericAxis
 	{
 		
@@ -1355,6 +1391,67 @@ namespace SciChart.Xamarin.Views.Visuals.Axes3D
 		public NumericAxis3D(SciChart.Xamarin.Views.Visuals.Axes3D.INumericAxis3D nativeObject) : 
 				base(nativeObject)
 		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.Annotations
+{
+	
+	
+	public abstract partial class AnchorPointAnnotation : AnnotationBase, SciChart.Xamarin.Views.Visuals.Annotations.IAnchorPointAnnotation
+	{
+		
+		public static BindableProperty HorizontalAnchorPointProperty = BindableProperty.Create("HorizontalAnchorPoint", typeof(SciChart.Xamarin.Views.Visuals.Annotations.HorizontalAnchorPoint), typeof(AnchorPointAnnotation), null, BindingMode.Default, null, OnHorizontalAnchorPointPropertyChanged, null, null, DefaultHorizontalAnchorPointPropertyValueCreator);
+		
+		public static BindableProperty VerticalAnchorPointProperty = BindableProperty.Create("VerticalAnchorPoint", typeof(SciChart.Xamarin.Views.Visuals.Annotations.VerticalAnchorPoint), typeof(AnchorPointAnnotation), null, BindingMode.Default, null, OnVerticalAnchorPointPropertyChanged, null, null, DefaultVerticalAnchorPointPropertyValueCreator);
+		
+		public AnchorPointAnnotation(SciChart.Xamarin.Views.Visuals.Annotations.IAnchorPointAnnotation nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.Annotations.HorizontalAnchorPoint HorizontalAnchorPoint
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Visuals.Annotations.HorizontalAnchorPoint)(this.GetValue(HorizontalAnchorPointProperty)));
+			}
+			set
+			{
+				this.SetValue(HorizontalAnchorPointProperty, value);
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.Annotations.VerticalAnchorPoint VerticalAnchorPoint
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Visuals.Annotations.VerticalAnchorPoint)(this.GetValue(VerticalAnchorPointProperty)));
+			}
+			set
+			{
+				this.SetValue(VerticalAnchorPointProperty, value);
+			}
+		}
+		
+		private static void OnHorizontalAnchorPointPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnchorPointAnnotation>().HorizontalAnchorPoint = ((SciChart.Xamarin.Views.Visuals.Annotations.HorizontalAnchorPoint)(newValue));
+		}
+		
+		private static object DefaultHorizontalAnchorPointPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnchorPointAnnotation>().HorizontalAnchorPoint;
+		}
+		
+		private static void OnVerticalAnchorPointPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnchorPointAnnotation>().VerticalAnchorPoint = ((SciChart.Xamarin.Views.Visuals.Annotations.VerticalAnchorPoint)(newValue));
+		}
+		
+		private static object DefaultVerticalAnchorPointPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAnchorPointAnnotation>().VerticalAnchorPoint;
 		}
 	}
 }
@@ -1717,6 +1814,96 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
 {
 	
 	
+	public partial class AxisMarkerAnnotation : AnchorPointAnnotation, SciChart.Xamarin.Views.Visuals.Annotations.IAxisMarkerAnnotation
+	{
+		
+		public static BindableProperty FormattedValueProperty = BindableProperty.Create("FormattedValue", typeof(string), typeof(AxisMarkerAnnotation), null, BindingMode.Default, null, OnFormattedValuePropertyChanged, null, null, DefaultFormattedValuePropertyValueCreator);
+		
+		public static BindableProperty FontStyleProperty = BindableProperty.Create("FontStyle", typeof(SciChart.Xamarin.Views.Drawing.IFontStyle), typeof(AxisMarkerAnnotation), null, BindingMode.Default, null, OnFontStylePropertyChanged, null, null, DefaultFontStylePropertyValueCreator);
+		
+		public static BindableProperty MarkerPointWidthProperty = BindableProperty.Create("MarkerPointWidth", typeof(int), typeof(AxisMarkerAnnotation), null, BindingMode.Default, null, OnMarkerPointWidthPropertyChanged, null, null, DefaultMarkerPointWidthPropertyValueCreator);
+		
+		public AxisMarkerAnnotation() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewAxisMarkerAnnotation())
+		{
+		}
+		
+		public AxisMarkerAnnotation(SciChart.Xamarin.Views.Visuals.Annotations.IAxisMarkerAnnotation nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public string FormattedValue
+		{
+			get
+			{
+				return ((string)(this.GetValue(FormattedValueProperty)));
+			}
+			set
+			{
+				this.SetValue(FormattedValueProperty, value);
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IFontStyle FontStyle
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Drawing.IFontStyle)(this.GetValue(FontStyleProperty)));
+			}
+			set
+			{
+				this.SetValue(FontStyleProperty, value);
+			}
+		}
+		
+		public int MarkerPointWidth
+		{
+			get
+			{
+				return ((int)(this.GetValue(MarkerPointWidthProperty)));
+			}
+			set
+			{
+				this.SetValue(MarkerPointWidthProperty, value);
+			}
+		}
+		
+		private static void OnFormattedValuePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAxisMarkerAnnotation>().FormattedValue = ((string)(newValue));
+		}
+		
+		private static object DefaultFormattedValuePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAxisMarkerAnnotation>().FormattedValue;
+		}
+		
+		private static void OnFontStylePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAxisMarkerAnnotation>().FontStyle = ((SciChart.Xamarin.Views.Drawing.IFontStyle)(newValue));
+		}
+		
+		private static object DefaultFontStylePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAxisMarkerAnnotation>().FontStyle;
+		}
+		
+		private static void OnMarkerPointWidthPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAxisMarkerAnnotation>().MarkerPointWidth = ((int)(newValue));
+		}
+		
+		private static object DefaultMarkerPointWidthPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IAxisMarkerAnnotation>().MarkerPointWidth;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.Annotations
+{
+	
+	
 	public partial class BoxAnnotation : AnnotationBase, SciChart.Xamarin.Views.Visuals.Annotations.IBoxAnnotation
 	{
 		
@@ -1731,6 +1918,241 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
 		}
 	}
 }
+namespace SciChart.Xamarin.Views.Visuals.Annotations
+{
+	
+	
+	public partial class LineAnnotation : LineAnnotationBase, SciChart.Xamarin.Views.Visuals.Annotations.ILineAnnotation
+	{
+		
+		public LineAnnotation() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewLineAnnotation())
+		{
+		}
+		
+		public LineAnnotation(SciChart.Xamarin.Views.Visuals.Annotations.ILineAnnotation nativeObject) : 
+				base(nativeObject)
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.Annotations
+{
+	
+	
+	public abstract partial class LineAnnotationBase : AnnotationBase, SciChart.Xamarin.Views.Visuals.Annotations.ILineAnnotationBase
+	{
+		
+		public static BindableProperty StrokeProperty = BindableProperty.Create("Stroke", typeof(SciChart.Xamarin.Views.Drawing.IPenStyle), typeof(LineAnnotationBase), null, BindingMode.Default, null, OnStrokePropertyChanged, null, null, DefaultStrokePropertyValueCreator);
+		
+		public LineAnnotationBase(SciChart.Xamarin.Views.Visuals.Annotations.ILineAnnotationBase nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IPenStyle Stroke
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Drawing.IPenStyle)(this.GetValue(StrokeProperty)));
+			}
+			set
+			{
+				this.SetValue(StrokeProperty, value);
+			}
+		}
+		
+		private static void OnStrokePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.ILineAnnotationBase>().Stroke = ((SciChart.Xamarin.Views.Drawing.IPenStyle)(newValue));
+		}
+		
+		private static object DefaultStrokePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.ILineAnnotationBase>().Stroke;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.Annotations
+{
+	
+	
+	public partial class LineArrowAnnotation : LineAnnotationBase, SciChart.Xamarin.Views.Visuals.Annotations.ILineArrowAnnotation
+	{
+		
+		public static BindableProperty HeadWidthProperty = BindableProperty.Create("HeadWidth", typeof(float), typeof(LineArrowAnnotation), null, BindingMode.Default, null, OnHeadWidthPropertyChanged, null, null, DefaultHeadWidthPropertyValueCreator);
+		
+		public static BindableProperty HeadLengthProperty = BindableProperty.Create("HeadLength", typeof(float), typeof(LineArrowAnnotation), null, BindingMode.Default, null, OnHeadLengthPropertyChanged, null, null, DefaultHeadLengthPropertyValueCreator);
+		
+		public LineArrowAnnotation() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewLineArrowAnnotation())
+		{
+		}
+		
+		public LineArrowAnnotation(SciChart.Xamarin.Views.Visuals.Annotations.ILineArrowAnnotation nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public float HeadWidth
+		{
+			get
+			{
+				return ((float)(this.GetValue(HeadWidthProperty)));
+			}
+			set
+			{
+				this.SetValue(HeadWidthProperty, value);
+			}
+		}
+		
+		public float HeadLength
+		{
+			get
+			{
+				return ((float)(this.GetValue(HeadLengthProperty)));
+			}
+			set
+			{
+				this.SetValue(HeadLengthProperty, value);
+			}
+		}
+		
+		private static void OnHeadWidthPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.ILineArrowAnnotation>().HeadWidth = ((float)(newValue));
+		}
+		
+		private static object DefaultHeadWidthPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.ILineArrowAnnotation>().HeadWidth;
+		}
+		
+		private static void OnHeadLengthPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.ILineArrowAnnotation>().HeadLength = ((float)(newValue));
+		}
+		
+		private static object DefaultHeadLengthPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.ILineArrowAnnotation>().HeadLength;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.Annotations
+{
+	
+	
+	public partial class TextAnnotation : AnchorPointAnnotation, SciChart.Xamarin.Views.Visuals.Annotations.ITextAnnotation
+	{
+		
+		public static BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(TextAnnotation), null, BindingMode.Default, null, OnTextPropertyChanged, null, null, DefaultTextPropertyValueCreator);
+		
+		public static BindableProperty FontStyleProperty = BindableProperty.Create("FontStyle", typeof(SciChart.Xamarin.Views.Drawing.IFontStyle), typeof(TextAnnotation), null, BindingMode.Default, null, OnFontStylePropertyChanged, null, null, DefaultFontStylePropertyValueCreator);
+		
+		public static BindableProperty CanEditTextProperty = BindableProperty.Create("CanEditText", typeof(bool), typeof(TextAnnotation), null, BindingMode.Default, null, OnCanEditTextPropertyChanged, null, null, DefaultCanEditTextPropertyValueCreator);
+		
+		public static BindableProperty RotationAngleProperty = BindableProperty.Create("RotationAngle", typeof(float), typeof(TextAnnotation), null, BindingMode.Default, null, OnRotationAnglePropertyChanged, null, null, DefaultRotationAnglePropertyValueCreator);
+		
+		public TextAnnotation() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewTextAnnotation())
+		{
+		}
+		
+		public TextAnnotation(SciChart.Xamarin.Views.Visuals.Annotations.ITextAnnotation nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public string Text
+		{
+			get
+			{
+				return ((string)(this.GetValue(TextProperty)));
+			}
+			set
+			{
+				this.SetValue(TextProperty, value);
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IFontStyle FontStyle
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Drawing.IFontStyle)(this.GetValue(FontStyleProperty)));
+			}
+			set
+			{
+				this.SetValue(FontStyleProperty, value);
+			}
+		}
+		
+		public bool CanEditText
+		{
+			get
+			{
+				return ((bool)(this.GetValue(CanEditTextProperty)));
+			}
+			set
+			{
+				this.SetValue(CanEditTextProperty, value);
+			}
+		}
+		
+		public float RotationAngle
+		{
+			get
+			{
+				return ((float)(this.GetValue(RotationAngleProperty)));
+			}
+			set
+			{
+				this.SetValue(RotationAngleProperty, value);
+			}
+		}
+		
+		private static void OnTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.ITextAnnotation>().Text = ((string)(newValue));
+		}
+		
+		private static object DefaultTextPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.ITextAnnotation>().Text;
+		}
+		
+		private static void OnFontStylePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.ITextAnnotation>().FontStyle = ((SciChart.Xamarin.Views.Drawing.IFontStyle)(newValue));
+		}
+		
+		private static object DefaultFontStylePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.ITextAnnotation>().FontStyle;
+		}
+		
+		private static void OnCanEditTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.ITextAnnotation>().CanEditText = ((bool)(newValue));
+		}
+		
+		private static object DefaultCanEditTextPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.ITextAnnotation>().CanEditText;
+		}
+		
+		private static void OnRotationAnglePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.ITextAnnotation>().RotationAngle = ((float)(newValue));
+		}
+		
+		private static object DefaultRotationAnglePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.ITextAnnotation>().RotationAngle;
+		}
+	}
+}
 namespace SciChart.Xamarin.Views.Modifiers
 {
 	
@@ -1739,6 +2161,19 @@ namespace SciChart.Xamarin.Views.Modifiers
 	{
 		
 		public ChartModifierBase(SciChart.Xamarin.Views.Modifiers.IChartModifier nativeObject) : 
+				base(nativeObject)
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Modifiers
+{
+	
+	
+	public abstract partial class ChartModifier3DBase : ChartModifierCore, SciChart.Xamarin.Views.Modifiers.IChartModifier3D
+	{
+		
+		public ChartModifier3DBase(SciChart.Xamarin.Views.Modifiers.IChartModifier3D nativeObject) : 
 				base(nativeObject)
 		{
 		}
@@ -1837,6 +2272,42 @@ namespace SciChart.Xamarin.Views.Modifiers
 {
 	
 	
+	public partial class ModifierGroup3D : ChartModifier3DBase, SciChart.Xamarin.Views.Modifiers.IModifierGroup3D
+	{
+		
+		public ModifierGroup3D() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewModifierGroup3D())
+		{
+		}
+		
+		public ModifierGroup3D(SciChart.Xamarin.Views.Modifiers.IModifierGroup3D nativeObject) : 
+				base(nativeObject)
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Modifiers
+{
+	
+	
+	public partial class OrbitModifier3D : ChartModifier3DBase, SciChart.Xamarin.Views.Modifiers.IOrbitModifier3D
+	{
+		
+		public OrbitModifier3D() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewOrbitModifier3D())
+		{
+		}
+		
+		public OrbitModifier3D(SciChart.Xamarin.Views.Modifiers.IOrbitModifier3D nativeObject) : 
+				base(nativeObject)
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Modifiers
+{
+	
+	
 	public partial class PinchZoomModifier : ChartModifierBase, SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier
 	{
 		
@@ -1846,6 +2317,24 @@ namespace SciChart.Xamarin.Views.Modifiers
 		}
 		
 		public PinchZoomModifier(SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier nativeObject) : 
+				base(nativeObject)
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Modifiers
+{
+	
+	
+	public partial class PinchZoomModifier3D : ChartModifier3DBase, SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier3D
+	{
+		
+		public PinchZoomModifier3D() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewPinchZoomModifier3D())
+		{
+		}
+		
+		public PinchZoomModifier3D(SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier3D nativeObject) : 
 				base(nativeObject)
 		{
 		}
@@ -1882,6 +2371,24 @@ namespace SciChart.Xamarin.Views.Modifiers
 		}
 		
 		public ZoomExtentsModifier(SciChart.Xamarin.Views.Modifiers.IZoomExtentsModifier nativeObject) : 
+				base(nativeObject)
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Modifiers
+{
+	
+	
+	public partial class ZoomExtentsModifier3D : ChartModifier3DBase, SciChart.Xamarin.Views.Modifiers.IZoomExtentsModifier3D
+	{
+		
+		public ZoomExtentsModifier3D() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewZoomExtentsModifier3D())
+		{
+		}
+		
+		public ZoomExtentsModifier3D(SciChart.Xamarin.Views.Modifiers.IZoomExtentsModifier3D nativeObject) : 
 				base(nativeObject)
 		{
 		}
@@ -2023,6 +2530,11 @@ namespace SciChart.Xamarin.Views.Model.DataSeries
 		public void Append(TX x, TY open, TY high, TY low, TY close)
 		{
 			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IOhlcDataSeries<TX,TY>>().Append(x, open, high, low, close);
+		}
+		
+		public void Append(System.Collections.Generic.IEnumerable<TX> xValues, System.Collections.Generic.IEnumerable<TY> openValues, System.Collections.Generic.IEnumerable<TY> highValues, System.Collections.Generic.IEnumerable<TY> lowValues, System.Collections.Generic.IEnumerable<TY> closeValues)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IOhlcDataSeries<TX,TY>>().Append(xValues, openValues, highValues, lowValues, closeValues);
 		}
 	}
 }

@@ -3,6 +3,7 @@ using SciChart.Charting.Visuals.Annotations;
 using SciChart.Xamarin.Views.Core.Common;
 using AnnotationCoordinateMode = SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode;
 using AnnotationSurface = SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface;
+using VerticalAnchorPoint = SciChart.Charting.Visuals.Annotations.VerticalAnchorPoint;
 
 namespace SciChart.Xamarin.Android.Renderer.Utility
 {
@@ -80,6 +81,65 @@ namespace SciChart.Xamarin.Android.Renderer.Utility
             if (annotationSurface == AnnotationSurfaceEnum.YAxis) return AnnotationSurface.YAxis;
 
             throw new NotImplementedException("The AnnotationSurfaceEnum value " + annotationSurface.ToString() + " has not been handled");
+        }
+
+        public static HorizontalAnchorPoint HorizontalAnchorPointFromXamarin(this Views.Visuals.Annotations.HorizontalAnchorPoint horizontalAnchorPoint)
+        {
+            switch (horizontalAnchorPoint)
+            {
+                case Views.Visuals.Annotations.HorizontalAnchorPoint.Left:
+                    return HorizontalAnchorPoint.Left;
+                case Views.Visuals.Annotations. HorizontalAnchorPoint.Center:
+                    return HorizontalAnchorPoint.Center;
+                case Views.Visuals.Annotations.HorizontalAnchorPoint.Right:
+                    return HorizontalAnchorPoint.Right;
+                default:
+                    throw new NotImplementedException("The HorizontalAnchorPoint value " + horizontalAnchorPoint.ToString() + " has not been handled");
+            }
+        }
+
+        public static Views.Visuals.Annotations.HorizontalAnchorPoint HorizontalAnchorPointToXamarin(this HorizontalAnchorPoint horizontalAnchorPoint)
+        {
+            if (horizontalAnchorPoint == HorizontalAnchorPoint.Left)
+                return Views.Visuals.Annotations.HorizontalAnchorPoint.Left;
+
+            if (horizontalAnchorPoint == HorizontalAnchorPoint.Center)
+                return Views.Visuals.Annotations.HorizontalAnchorPoint.Center;
+
+            if (horizontalAnchorPoint == HorizontalAnchorPoint.Right)
+                return Views.Visuals.Annotations.HorizontalAnchorPoint.Right;
+
+            throw new NotImplementedException("The HorizontalAnchorPoint value " + horizontalAnchorPoint.ToString() + " has not been handled");
+        }
+
+        public static VerticalAnchorPoint VerticalAnchorPointFromXamarin(this Views.Visuals.Annotations.VerticalAnchorPoint verticalAnchorPoint)
+        {
+            switch (verticalAnchorPoint)
+            {
+                case Views.Visuals.Annotations.VerticalAnchorPoint.Top:
+                    return VerticalAnchorPoint.Top;
+                case Views.Visuals.Annotations.VerticalAnchorPoint.Center:
+                    return VerticalAnchorPoint.Center;
+                case Views.Visuals.Annotations.VerticalAnchorPoint.Bottom:
+                    return VerticalAnchorPoint.Bottom;
+                default:
+                    throw new NotImplementedException("The VerticalAnchorPoint value " + verticalAnchorPoint.ToString() + " has not been handled");
+            }
+
+        }
+
+        public static Views.Visuals.Annotations.VerticalAnchorPoint VerticalAnchorPointToXamarin(this VerticalAnchorPoint verticalAnchorPoint)
+        {
+            if (verticalAnchorPoint == VerticalAnchorPoint.Top)
+                return Views.Visuals.Annotations.VerticalAnchorPoint.Top;
+
+            if (verticalAnchorPoint == VerticalAnchorPoint.Center)
+                return Views.Visuals.Annotations.VerticalAnchorPoint.Center;
+
+            if (verticalAnchorPoint == VerticalAnchorPoint.Bottom)
+                return Views.Visuals.Annotations.VerticalAnchorPoint.Bottom;
+
+            throw new NotImplementedException("The VerticalAnchorPoint value " + verticalAnchorPoint.ToString() + " has not been handled");
         }
     }
 }

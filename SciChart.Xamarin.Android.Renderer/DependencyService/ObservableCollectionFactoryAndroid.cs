@@ -227,19 +227,22 @@ namespace SciChart.Xamarin.Android.Renderer.DependencyService
 
         public void InsertItem(int index, IChartModifier item)
         {
-            _nativeObservableCollection.Insert(index, item.NativeSciChartObject as Charting.Modifiers.IChartModifier); 
+            _nativeObservableCollection.Insert(index, item.NativeSciChartObject as Charting.Modifiers.IChartModifier);
         }
 
         public void MoveItem(int oldIndex, int newIndex)
         {
+            _nativeObservableCollection.Insert(newIndex, (Charting.Modifiers.IChartModifier)_nativeObservableCollection.Remove(oldIndex));
         }
 
         public void RemoveItem(int index)
         {
+            _nativeObservableCollection.RemoveAt(index);
         }
 
         public void SetItem(int index, IChartModifier item)
         {
+            _nativeObservableCollection.Set(index, item.NativeSciChartObject as Object);
         }
     }
 
@@ -247,6 +250,49 @@ namespace SciChart.Xamarin.Android.Renderer.DependencyService
     internal class FormsChartModifierCollectionAndroid : ChartModifierCollection
     {
         public FormsChartModifierCollectionAndroid(Charting.Model.ChartModifierCollection nativeChartModifierCollection) : base(new ChartModifierCollectionWrapperAndroid(nativeChartModifierCollection))
+        {
+
+        }
+    }
+
+    internal class ChartModifier3DCollectionWrapperAndroid : INativeObservableCollection<IChartModifier3D>
+    {
+        private readonly Charting3D.Model.ChartModifier3DCollection _nativeObservableCollection;
+        public ChartModifier3DCollectionWrapperAndroid(Charting3D.Model.ChartModifier3DCollection nativeObservableCollection)
+        {
+            _nativeObservableCollection = nativeObservableCollection;
+        }
+
+        public void ClearItems()
+        {
+            _nativeObservableCollection.Clear();
+        }
+
+        public void InsertItem(int index, IChartModifier3D item)
+        {
+            _nativeObservableCollection.Insert(index, item.NativeSciChartObject as Charting3D.Modifiers.IChartModifier3D);
+        }
+
+        public void MoveItem(int oldIndex, int newIndex)
+        {
+            _nativeObservableCollection.Insert(newIndex, (Charting3D.Modifiers.IChartModifier3D)_nativeObservableCollection.Remove(oldIndex));
+        }
+
+        public void RemoveItem(int index)
+        {
+            _nativeObservableCollection.RemoveAt(index);
+        }
+
+        public void SetItem(int index, IChartModifier3D item)
+        {
+            _nativeObservableCollection.Set(index, item.NativeSciChartObject as Object);
+        }
+    }
+
+
+    internal class FormsChartModifier3DCollectionAndroid : ChartModifier3DCollection
+    {
+        public FormsChartModifier3DCollectionAndroid(Charting3D.Model.ChartModifier3DCollection nativeChartModifierCollection) : base(new ChartModifier3DCollectionWrapperAndroid(nativeChartModifierCollection))
         {
 
         }

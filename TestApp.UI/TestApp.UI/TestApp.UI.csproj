@@ -5,10 +5,43 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\Resources\EURUSD_Daily.csv" />
+    <None Remove="Data\Resources\FourierTransform.txt" />
+    <None Remove="Data\Resources\INDU_Daily.csv" />
+    <None Remove="Data\Resources\TradeTicks.csv" />
+    <None Remove="Data\Resources\WaterfallData.txt" />
+    <None Remove="Data\Resources\waveform.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Resources\FourierTransform.txt" />
+    <EmbeddedResource Include="Data\Resources\INDU_Daily.csv" />
+    <EmbeddedResource Include="Data\Resources\TradeTicks.csv" />
+    <EmbeddedResource Include="Data\Resources\WaterfallData.txt" />
+    <EmbeddedResource Include="Data\Resources\waveform.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.617" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\SciChart.Xamarin.Views\SciChart.Xamarin.Views.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Data\Resources\EURUSD_Daily.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Examples\CandlestickChart.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Examples\LineChart.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Examples\Scatter3DChart.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

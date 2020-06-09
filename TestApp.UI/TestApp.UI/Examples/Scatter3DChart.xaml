@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:visuals="clr-namespace:SciChart.Xamarin.Views.Visuals;assembly=SciChart.Xamarin.Views"
+             xmlns:renderableSeries3D="clr-namespace:SciChart.Xamarin.Views.Visuals.RenderableSeries3D;assembly=SciChart.Xamarin.Views"
+             xmlns:pointMarkers3D="clr-namespace:SciChart.Xamarin.Views.Visuals.PointMarkers3D;assembly=SciChart.Xamarin.Views"
+             xmlns:axes3D="clr-namespace:SciChart.Xamarin.Views.Visuals.Axes3D;assembly=SciChart.Xamarin.Views"
+             xmlns:modifiers3D="clr-namespace:SciChart.Xamarin.Views.Modifiers;assembly=SciChart.Xamarin.Views"
+             mc:Ignorable="d"
+             x:Class="TestApp.UI.Examples.Scatter3DChart">
+    <ContentPage.Content>
+         <visuals:SciChartSurface3D Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Fill">  
+             <visuals:SciChartSurface3D.XAxis>  
+                 <axes3D:NumericAxis3D/>  
+             </visuals:SciChartSurface3D.XAxis>  
+         
+             <visuals:SciChartSurface3D.YAxis>  
+                 <axes3D:NumericAxis3D/>  
+             </visuals:SciChartSurface3D.YAxis>  
+         
+             <visuals:SciChartSurface3D.ZAxis>  
+                 <axes3D:NumericAxis3D/>  
+             </visuals:SciChartSurface3D.ZAxis>  
+         
+             <visuals:SciChartSurface3D.RenderableSeries> 
+                <renderableSeries3D:ScatterRenderableSeries3D x:Name="ScatterRenderableSeries3D"> 
+                    <renderableSeries3D:ScatterRenderableSeries3D.PointMarker> 
+                        <pointMarkers3D:EllipsePointMarker3D Size="5" Fill="Green"/> 
+                    </renderableSeries3D:ScatterRenderableSeries3D.PointMarker> 
+                </renderableSeries3D:ScatterRenderableSeries3D> 
+             </visuals:SciChartSurface3D.RenderableSeries> 
+
+             <visuals:SciChartSurface3D.ChartModifiers>
+                <modifiers3D:ModifierGroup3D>
+                    <modifiers3D:PinchZoomModifier3D/>
+                    <modifiers3D:OrbitModifier3D ReceiveHandledEvents="True"/>
+                    <modifiers3D:ZoomExtentsModifier3D/>
+                </modifiers3D:ModifierGroup3D>
+            </visuals:SciChartSurface3D.ChartModifiers>
+         
+         </visuals:SciChartSurface3D>  
+    </ContentPage.Content>
+</ContentPage>

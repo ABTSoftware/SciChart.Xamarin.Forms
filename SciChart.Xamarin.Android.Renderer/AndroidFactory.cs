@@ -61,5 +61,51 @@ namespace SciChart.Xamarin.Android.Renderer
             set => SetIsEnabled(value);
         }
     }
+
+    public partial class ModifierGroup3DAndroid
+    {
+        public new ChartModifier3DCollection ChildModifiers => new FormsChartModifier3DCollectionAndroid(base.ChildModifiers);
+
+        public new bool IsEnabled
+        {
+            get => base.IsEnabled;
+            set => SetIsEnabled(value);
+        }
+    }
+
+    public partial class ZoomExtentsModifier3DAndroid
+    {
+        public new bool IsEnabled
+        {
+            get => base.IsEnabled;
+            set => SetIsEnabled(value);
+        }
+    }
+
+    public partial class PinchZoomModifier3DAndroid
+    {
+        public new bool IsEnabled
+        {
+            get => base.IsEnabled;
+            set => SetIsEnabled(value);
+        }
+    }
+
+    public partial class OrbitModifier3DAndroid
+    {
+        public new bool IsEnabled
+        {
+            get => base.IsEnabled;
+            set => SetIsEnabled(value);
+        }
+    }
+    #endregion
+
+    #region Annotations 
+
+    public partial class BoxAnnotationAndroid
+    {
+        public Color BackgroundColor { get; set; }
+    }
     #endregion
 }
