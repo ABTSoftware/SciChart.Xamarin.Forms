@@ -10,10 +10,12 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
     {
         [BindablePropertyDefinition()]
         [NativePropertyConverterDeclaration("PenStyle")]
+        [TypeConverterDeclaration("PenStyleConverter")]
         IPenStyle StrokeDownStyle { get; set; }
 
         [BindablePropertyDefinition()]
         [NativePropertyConverterDeclaration("PenStyle")]
+        [TypeConverterDeclaration("PenStyleConverter")]
         IPenStyle StrokeUpStyle { get; set; }
 
         [BindablePropertyDefinition()]

@@ -10,7 +10,7 @@
              mc:Ignorable="d"
              x:Class="TestApp.UI.Examples.CandlestickChart">
     <ContentPage.Content>
-        <visuals:SciChartSurface Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Fill">
+        <visuals:SciChartSurface HorizontalOptions="Fill" VerticalOptions="Fill">
             <visuals:SciChartSurface.RenderableSeries>
                 <renderableSeries:FastCandlestickRenderableSeries x:Name="CandlestickSeries"/>
             </visuals:SciChartSurface.RenderableSeries>

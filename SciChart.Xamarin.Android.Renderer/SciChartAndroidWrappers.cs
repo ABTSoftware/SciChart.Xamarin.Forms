@@ -407,11 +407,11 @@ namespace SciChart.Xamarin.Android.Renderer
 		{
 			get
 			{
-				return base.AxisAlignment.AlignmentToXamarin();
+				return base.AxisAlignment.AxisAlignmentToXamarin();
 			}
 			set
 			{
-				base.AxisAlignment = value.AlignmentFromXamarin();
+				base.AxisAlignment = value.AxisAlignmentFromXamarin();
 			}
 		}
 		
@@ -583,11 +583,11 @@ namespace SciChart.Xamarin.Android.Renderer
 		{
 			get
 			{
-				return base.AxisAlignment.AlignmentToXamarin();
+				return base.AxisAlignment.AxisAlignmentToXamarin();
 			}
 			set
 			{
-				base.AxisAlignment = value.AlignmentFromXamarin();
+				base.AxisAlignment = value.AxisAlignmentFromXamarin();
 			}
 		}
 		
@@ -1646,6 +1646,43 @@ namespace SciChart.Xamarin.Android.Renderer
 		}
 	}
 	
+	public partial class LegendModifierAndroid : LegendModifier, SciChart.Xamarin.Views.Modifiers.ILegendModifier, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public LegendModifierAndroid() : 
+				base(AndroidApplication.Context)
+		{
+		}
+		
+		public LegendModifierAndroid(AndroidContext context) : 
+				base(context)
+		{
+		}
+		
+		public LegendModifierAndroid(SciChart.Charting.Visuals.Legend.SciChartLegend legend) : 
+				base(legend)
+		{
+		}
+		
+		public LegendModifierAndroid(SciChart.Charting.Visuals.Legend.SciChartLegend legend, bool useAutoPlacement) : 
+				base(legend, useAutoPlacement)
+		{
+		}
+		
+		public LegendModifierAndroid(SciChart.Charting.Visuals.Legend.SciChartLegend legend, SciChart.Charting.Visuals.Legend.SeriesInfoLegendAdapter legendAdapter, bool useAutoPlacement) : 
+				base(legend, legendAdapter, useAutoPlacement)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
 	public partial class ModifierGroupAndroid : ModifierGroup, SciChart.Xamarin.Views.Modifiers.IModifierGroup, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
@@ -2127,6 +2164,11 @@ namespace SciChart.Xamarin.Android.Renderer
 			return new TextAnnotationAndroid();
 		}
 		
+		public SciChart.Xamarin.Views.Modifiers.ILegendModifier NewLegendModifier()
+		{
+			return new LegendModifierAndroid();
+		}
+		
 		public SciChart.Xamarin.Views.Modifiers.IModifierGroup NewModifierGroup()
 		{
 			return new ModifierGroupAndroid();
@@ -2224,4 +2266,413 @@ namespace SciChart.Xamarin.Android.Renderer
 			return new SolidPenStyleAndroid(color, thickness, antiAliasing, strokeDashArray);
 		}
 	}
+	
+	#region AutoRange extensions
+	static
+	public class AutoRangeMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Visuals.Axes.AutoRange AutoRangeToXamarin(this AutoRange nativeValue)
+		{
+			if ((nativeValue == AutoRange.Once))
+			{
+				return SciChart.Xamarin.Views.Visuals.Axes.AutoRange.Once;
+			}
+			if ((nativeValue == AutoRange.Always))
+			{
+				return SciChart.Xamarin.Views.Visuals.Axes.AutoRange.Always;
+			}
+			if ((nativeValue == AutoRange.Never))
+			{
+				return SciChart.Xamarin.Views.Visuals.Axes.AutoRange.Never;
+			}
+			throw new System.ArgumentOutOfRangeException("The AutoRange value has not been handled");
+		}
+		
+		public static AutoRange AutoRangeFromXamarin(this SciChart.Xamarin.Views.Visuals.Axes.AutoRange xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Axes.AutoRange.Once))
+			{
+				return AutoRange.Once;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Axes.AutoRange.Always))
+			{
+				return AutoRange.Always;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Axes.AutoRange.Never))
+			{
+				return AutoRange.Never;
+			}
+			throw new System.ArgumentOutOfRangeException("The AutoRange value has not been handled");
+		}
+	}
+	#endregion
+	
+	#region AxisAlignment extensions
+	static
+	public class AxisAlignmentMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment AxisAlignmentToXamarin(this AxisAlignment nativeValue)
+		{
+			if ((nativeValue == AxisAlignment.Right))
+			{
+				return SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment.Right;
+			}
+			if ((nativeValue == AxisAlignment.Left))
+			{
+				return SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment.Left;
+			}
+			if ((nativeValue == AxisAlignment.Top))
+			{
+				return SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment.Top;
+			}
+			if ((nativeValue == AxisAlignment.Bottom))
+			{
+				return SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment.Bottom;
+			}
+			if ((nativeValue == AxisAlignment.Auto))
+			{
+				return SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment.Auto;
+			}
+			throw new System.ArgumentOutOfRangeException("The AxisAlignment value has not been handled");
+		}
+		
+		public static AxisAlignment AxisAlignmentFromXamarin(this SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment.Right))
+			{
+				return AxisAlignment.Right;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment.Left))
+			{
+				return AxisAlignment.Left;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment.Top))
+			{
+				return AxisAlignment.Top;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment.Bottom))
+			{
+				return AxisAlignment.Bottom;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment.Auto))
+			{
+				return AxisAlignment.Auto;
+			}
+			throw new System.ArgumentOutOfRangeException("The AxisAlignment value has not been handled");
+		}
+	}
+	#endregion
+	
+	#region AnnotationCoordinateMode extensions
+	static
+	public class AnnotationCoordinateModeMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode AnnotationCoordinateModeToXamarin(this AnnotationCoordinateMode nativeValue)
+		{
+			if ((nativeValue == AnnotationCoordinateMode.Absolute))
+			{
+				return SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode.Absolute;
+			}
+			if ((nativeValue == AnnotationCoordinateMode.Relative))
+			{
+				return SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode.Relative;
+			}
+			if ((nativeValue == AnnotationCoordinateMode.RelativeX))
+			{
+				return SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode.RelativeX;
+			}
+			if ((nativeValue == AnnotationCoordinateMode.RelativeY))
+			{
+				return SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode.RelativeY;
+			}
+			throw new System.ArgumentOutOfRangeException("The AnnotationCoordinateMode value has not been handled");
+		}
+		
+		public static AnnotationCoordinateMode AnnotationCoordinateModeFromXamarin(this SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode.Absolute))
+			{
+				return AnnotationCoordinateMode.Absolute;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode.Relative))
+			{
+				return AnnotationCoordinateMode.Relative;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode.RelativeX))
+			{
+				return AnnotationCoordinateMode.RelativeX;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode.RelativeY))
+			{
+				return AnnotationCoordinateMode.RelativeY;
+			}
+			throw new System.ArgumentOutOfRangeException("The AnnotationCoordinateMode value has not been handled");
+		}
+	}
+	#endregion
+	
+	#region AnnotationSurface extensions
+	static
+	public class AnnotationSurfaceMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface AnnotationSurfaceToXamarin(this AnnotationSurfaceEnum nativeValue)
+		{
+			if ((nativeValue == AnnotationSurfaceEnum.AboveChart))
+			{
+				return SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface.AboveChart;
+			}
+			if ((nativeValue == AnnotationSurfaceEnum.BelowChart))
+			{
+				return SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface.BelowChart;
+			}
+			if ((nativeValue == AnnotationSurfaceEnum.XAxis))
+			{
+				return SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface.XAxis;
+			}
+			if ((nativeValue == AnnotationSurfaceEnum.YAxis))
+			{
+				return SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface.YAxis;
+			}
+			throw new System.ArgumentOutOfRangeException("The AnnotationSurface value has not been handled");
+		}
+		
+		public static AnnotationSurfaceEnum AnnotationSurfaceFromXamarin(this SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface.AboveChart))
+			{
+				return AnnotationSurfaceEnum.AboveChart;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface.BelowChart))
+			{
+				return AnnotationSurfaceEnum.BelowChart;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface.XAxis))
+			{
+				return AnnotationSurfaceEnum.XAxis;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface.YAxis))
+			{
+				return AnnotationSurfaceEnum.YAxis;
+			}
+			throw new System.ArgumentOutOfRangeException("The AnnotationSurface value has not been handled");
+		}
+	}
+	#endregion
+	
+	#region HorizontalAnchorPoint extensions
+	static
+	public class HorizontalAnchorPointMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Visuals.Annotations.HorizontalAnchorPoint HorizontalAnchorPointToXamarin(this HorizontalAnchorPoint nativeValue)
+		{
+			if ((nativeValue == HorizontalAnchorPoint.Left))
+			{
+				return SciChart.Xamarin.Views.Visuals.Annotations.HorizontalAnchorPoint.Left;
+			}
+			if ((nativeValue == HorizontalAnchorPoint.Center))
+			{
+				return SciChart.Xamarin.Views.Visuals.Annotations.HorizontalAnchorPoint.Center;
+			}
+			if ((nativeValue == HorizontalAnchorPoint.Right))
+			{
+				return SciChart.Xamarin.Views.Visuals.Annotations.HorizontalAnchorPoint.Right;
+			}
+			throw new System.ArgumentOutOfRangeException("The HorizontalAnchorPoint value has not been handled");
+		}
+		
+		public static HorizontalAnchorPoint HorizontalAnchorPointFromXamarin(this SciChart.Xamarin.Views.Visuals.Annotations.HorizontalAnchorPoint xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Annotations.HorizontalAnchorPoint.Left))
+			{
+				return HorizontalAnchorPoint.Left;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Annotations.HorizontalAnchorPoint.Center))
+			{
+				return HorizontalAnchorPoint.Center;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Annotations.HorizontalAnchorPoint.Right))
+			{
+				return HorizontalAnchorPoint.Right;
+			}
+			throw new System.ArgumentOutOfRangeException("The HorizontalAnchorPoint value has not been handled");
+		}
+	}
+	#endregion
+	
+	#region VerticalAnchorPoint extensions
+	static
+	public class VerticalAnchorPointMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Visuals.Annotations.VerticalAnchorPoint VerticalAnchorPointToXamarin(this VerticalAnchorPoint nativeValue)
+		{
+			if ((nativeValue == VerticalAnchorPoint.Top))
+			{
+				return SciChart.Xamarin.Views.Visuals.Annotations.VerticalAnchorPoint.Top;
+			}
+			if ((nativeValue == VerticalAnchorPoint.Center))
+			{
+				return SciChart.Xamarin.Views.Visuals.Annotations.VerticalAnchorPoint.Center;
+			}
+			if ((nativeValue == VerticalAnchorPoint.Bottom))
+			{
+				return SciChart.Xamarin.Views.Visuals.Annotations.VerticalAnchorPoint.Bottom;
+			}
+			throw new System.ArgumentOutOfRangeException("The VerticalAnchorPoint value has not been handled");
+		}
+		
+		public static VerticalAnchorPoint VerticalAnchorPointFromXamarin(this SciChart.Xamarin.Views.Visuals.Annotations.VerticalAnchorPoint xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Annotations.VerticalAnchorPoint.Top))
+			{
+				return VerticalAnchorPoint.Top;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Annotations.VerticalAnchorPoint.Center))
+			{
+				return VerticalAnchorPoint.Center;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Annotations.VerticalAnchorPoint.Bottom))
+			{
+				return VerticalAnchorPoint.Bottom;
+			}
+			throw new System.ArgumentOutOfRangeException("The VerticalAnchorPoint value has not been handled");
+		}
+	}
+	#endregion
+	
+	#region SourceMode extensions
+	static
+	public class SourceModeMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Modifiers.SourceMode SourceModeToXamarin(this SourceMode nativeValue)
+		{
+			if ((nativeValue == SourceMode.AllSeries))
+			{
+				return SciChart.Xamarin.Views.Modifiers.SourceMode.AllSeries;
+			}
+			if ((nativeValue == SourceMode.AllVisibleSeries))
+			{
+				return SciChart.Xamarin.Views.Modifiers.SourceMode.AllVisibleSeries;
+			}
+			if ((nativeValue == SourceMode.SelectedSeries))
+			{
+				return SciChart.Xamarin.Views.Modifiers.SourceMode.SelectedSeries;
+			}
+			if ((nativeValue == SourceMode.UnselectedSeries))
+			{
+				return SciChart.Xamarin.Views.Modifiers.SourceMode.UnselectedSeries;
+			}
+			throw new System.ArgumentOutOfRangeException("The SourceMode value has not been handled");
+		}
+		
+		public static SourceMode SourceModeFromXamarin(this SciChart.Xamarin.Views.Modifiers.SourceMode xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Modifiers.SourceMode.AllSeries))
+			{
+				return SourceMode.AllSeries;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Modifiers.SourceMode.AllVisibleSeries))
+			{
+				return SourceMode.AllVisibleSeries;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Modifiers.SourceMode.SelectedSeries))
+			{
+				return SourceMode.SelectedSeries;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Modifiers.SourceMode.UnselectedSeries))
+			{
+				return SourceMode.UnselectedSeries;
+			}
+			throw new System.ArgumentOutOfRangeException("The SourceMode value has not been handled");
+		}
+	}
+	#endregion
+	
+	#region RangeClipMode extensions
+	static
+	public class RangeClipModeMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Model.RangeClipMode RangeClipModeToXamarin(this RangeClipMode nativeValue)
+		{
+			if ((nativeValue == RangeClipMode.MinMax))
+			{
+				return SciChart.Xamarin.Views.Model.RangeClipMode.MinMax;
+			}
+			if ((nativeValue == RangeClipMode.Max))
+			{
+				return SciChart.Xamarin.Views.Model.RangeClipMode.Max;
+			}
+			if ((nativeValue == RangeClipMode.Min))
+			{
+				return SciChart.Xamarin.Views.Model.RangeClipMode.Min;
+			}
+			throw new System.ArgumentOutOfRangeException("The RangeClipMode value has not been handled");
+		}
+		
+		public static RangeClipMode RangeClipModeFromXamarin(this SciChart.Xamarin.Views.Model.RangeClipMode xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Model.RangeClipMode.MinMax))
+			{
+				return RangeClipMode.MinMax;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Model.RangeClipMode.Max))
+			{
+				return RangeClipMode.Max;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Model.RangeClipMode.Min))
+			{
+				return RangeClipMode.Min;
+			}
+			throw new System.ArgumentOutOfRangeException("The RangeClipMode value has not been handled");
+		}
+	}
+	#endregion
+	
+	#region Direction2D extensions
+	static
+	public class Direction2DMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Core.Common.Direction2D Direction2DToXamarin(this Direction2D nativeValue)
+		{
+			if ((nativeValue == Direction2D.XDirection))
+			{
+				return SciChart.Xamarin.Views.Core.Common.Direction2D.XDirection;
+			}
+			if ((nativeValue == Direction2D.YDirection))
+			{
+				return SciChart.Xamarin.Views.Core.Common.Direction2D.YDirection;
+			}
+			if ((nativeValue == Direction2D.XyDirection))
+			{
+				return SciChart.Xamarin.Views.Core.Common.Direction2D.XyDirection;
+			}
+			throw new System.ArgumentOutOfRangeException("The Direction2D value has not been handled");
+		}
+		
+		public static Direction2D Direction2DFromXamarin(this SciChart.Xamarin.Views.Core.Common.Direction2D xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.Direction2D.XDirection))
+			{
+				return Direction2D.XDirection;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.Direction2D.YDirection))
+			{
+				return Direction2D.YDirection;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.Direction2D.XyDirection))
+			{
+				return Direction2D.XyDirection;
+			}
+			throw new System.ArgumentOutOfRangeException("The Direction2D value has not been handled");
+		}
+	}
+	#endregion
 }

@@ -20,10 +20,11 @@ namespace SciChart.Xamarin.CodeGenerator.Utility
 
         public static bool HasInjectAndroidContext(this Type type)
         {
+            var injectAndroidContextAttribute = typeof(InjectAndroidContext);
             if (!type.IsInterface)
-                return Attribute.IsDefined(type, typeof(InjectAndroidContext));
+                return Attribute.IsDefined(type, injectAndroidContextAttribute);
 
-            return type.GetInterfaces().Any(t => Attribute.IsDefined(t, typeof(InjectAndroidContext)));
+            return Attribute.IsDefined(type, injectAndroidContextAttribute) || type.GetInterfaces().Any(t => Attribute.IsDefined(t, injectAndroidContextAttribute));
 
         }
 

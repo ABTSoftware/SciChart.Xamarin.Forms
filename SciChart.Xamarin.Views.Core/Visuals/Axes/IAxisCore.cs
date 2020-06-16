@@ -85,6 +85,7 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
         /// <remarks></remarks>
         [NativePropertyConverterDeclaration("BrushStyle", "AxisBandsStyle")]
         [BindablePropertyDefinition]
+        [TypeConverterDeclaration("BrushStyleConverter")]
         IBrushStyle AxisBandsFill { get; set; }
 
         /// <summary>

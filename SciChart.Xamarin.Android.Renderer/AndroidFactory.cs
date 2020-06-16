@@ -1,7 +1,9 @@
-﻿using SciChart.Xamarin.Android.Renderer;
+﻿using Java.Lang;
+using SciChart.Xamarin.Android.Renderer;
 using SciChart.Xamarin.Android.Renderer.DependencyService;
 using SciChart.Xamarin.Views.Core.Common;
 using SciChart.Xamarin.Views.Model.ObservableCollection;
+using SciChart.Xamarin.Views.Modifiers;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(AndroidFactory))]
@@ -61,6 +63,21 @@ namespace SciChart.Xamarin.Android.Renderer
             set => SetIsEnabled(value);
         }
     }
+
+    public partial class LegendModifierAndroid
+    {
+        public new bool IsEnabled
+        {
+            get => base.IsEnabled;
+            set => SetIsEnabled(value);
+        }
+
+        public void SetSourceMode(SourceMode sourceMode)
+        {
+            base.SetSourceMode(sourceMode.SourceModeFromXamarin()); 
+        }
+    }
+
 
     public partial class ModifierGroup3DAndroid
     {

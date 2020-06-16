@@ -18,5 +18,21 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
         }
 
         protected abstract NativePropertyConverterInformation GetPropertyDeclarationFrom(PropertyInfo property);
+
+        public EnumConvertorInformation ExtractEnumInformation(Type enumType)
+        {
+            var enumDeclaration = enumType.GetCustomAttribute<EnumDefinition>();
+
+            var information = new EnumConvertorInformation();
+
+            ExtractionEnumInformationFrom(enumType, enumDeclaration, information);
+
+            return information;
+        }
+
+        protected virtual void ExtractionEnumInformationFrom(Type enumType, EnumDefinition enumDefinition, EnumConvertorInformation information)
+        {
+            information.EnumValues = Enum.GetNames(enumType).Select(x => (x, x)).ToArray();
+        }
     }
 }

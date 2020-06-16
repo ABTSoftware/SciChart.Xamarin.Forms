@@ -58,14 +58,13 @@
     <Compile Include="SciChartSurfaceAndroidRenderer.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utility\AnnotationHelper.cs" />
-    <Compile Include="Utility\AxisHelper.cs" />
     <Compile Include="Utility\ColorUtil.cs" />
     <Compile Include="Utility\ComparableUtil.cs" />
     <Compile Include="Utility\DataSeriesHelpers.cs" />
     <Compile Include="Utility\PointMarkerHelper.cs" />
     <Compile Include="Utility\RangeHelpers.cs" />
     <Compile Include="Utility\StyleUtil.cs" />
+    <Compile Include="ViewRendererBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

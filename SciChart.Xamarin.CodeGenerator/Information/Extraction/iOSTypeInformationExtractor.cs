@@ -34,5 +34,12 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
                 PropertyType = property.PropertyType
             };
         }
+
+        protected override void ExtractionEnumInformationFrom(Type enumType, EnumDefinition enumDefinition, EnumConvertorInformation information)
+        {
+            base.ExtractionEnumInformationFrom(enumType, enumDefinition, information);
+
+            information.NativeEnumType = enumDefinition.IOSEnumName ?? $"SCI{enumType.Name}";
+        }
     }
 }

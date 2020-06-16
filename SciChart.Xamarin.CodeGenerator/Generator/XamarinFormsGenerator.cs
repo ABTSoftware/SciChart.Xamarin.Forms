@@ -7,7 +7,6 @@ using SciChart.Xamarin.CodeGenerator.Information;
 using SciChart.Xamarin.CodeGenerator.Information.Extraction;
 using SciChart.Xamarin.CodeGenerator.Utility;
 using SciChart.Xamarin.Views.Core.Common;
-using SciChart.Xamarin.Views.Core.Generation;
 using Xamarin.Forms;
 
 namespace SciChart.Xamarin.CodeGenerator.Generator
@@ -17,6 +16,7 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
         private readonly Dictionary<Type, string> _typeMappings = new Dictionary<Type, string>()
         {
             {typeof(Color), "XFColor"},
+            {typeof(TypeConverterAttribute), "XTypeConverter" }
         };
 
         private readonly CodeTypeDeclaration _factoryInterfaceDeclaration;
@@ -28,6 +28,8 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
             {
                 GlobalNamespace.Imports.Add(new CodeNamespaceImport(xamarinFormsNamespace));
             }
+
+            GlobalNamespace.Imports.Add(new CodeNamespaceImport("SciChart.Xamarin.Views.Utility.Converters"));
 
             _factoryInterfaceDeclaration = new CodeTypeDeclaration("INativeSciChartObjectFactory")
             {
@@ -306,6 +308,14 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
                     new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), "SetValue", new CodeArgumentReferenceExpression(bindablePropertyName), new CodePropertySetValueReferenceExpression())
                 }
             };
+
+            var propertyTypeConverter = property.TypeConverter;
+            if (propertyTypeConverter != null)
+            {
+                var typeConverter = GetTypeName(typeof(TypeConverterAttribute));
+                var typeConverterAttribute = new CodeAttributeDeclaration(new CodeTypeReference(typeConverter), new CodeAttributeArgument(new CodeTypeOfExpression(propertyTypeConverter)));
+                propertyDeclaration.CustomAttributes.Add(typeConverterAttribute);
+            }
 
             var nativePropertyReference = new CodePropertyReferenceExpression(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(
                     new CodeVariableReferenceExpression("bindable"),

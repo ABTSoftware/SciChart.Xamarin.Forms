@@ -1,5 +1,8 @@
-﻿namespace SciChart.Xamarin.Views.Visuals.Axes
+﻿using SciChart.Xamarin.Views.Core.Generation;
+
+namespace SciChart.Xamarin.Views.Visuals.Axes
 {
+    [EnumDefinition]
     public enum AxisAlignment
     {
         /// <summary>
@@ -25,6 +28,6 @@
         /// <summary>
         /// Axis is on the Bottom-edge of the chart surface
         /// </summary>
-        Default
+        Auto
     }
 }

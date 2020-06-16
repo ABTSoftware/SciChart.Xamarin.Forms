@@ -53,7 +53,7 @@ namespace SciChart.Xamarin.iOS.Renderer.DependencyService
 
         public void InsertItem(int index, IAxis item)
         {
-            base.Insert(index, (SCINumericAxis)item.NativeSciChartObject);
+            base.Insert(index, item.NativeSciChartObject as IISCIAxis);
         }
 
         public void MoveItem(int oldIndex, int newIndex)

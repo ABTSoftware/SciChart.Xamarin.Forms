@@ -6,6 +6,7 @@ using SciChart.Xamarin.iOS.Renderer.DependencyService;
 using SciChart.Xamarin.iOS.Renderer.Utility;
 using SciChart.Xamarin.Views.Core.Common;
 using SciChart.Xamarin.Views.Model.ObservableCollection;
+using SciChart.Xamarin.Views.Modifiers;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(iOSFactory))]
@@ -161,6 +162,41 @@ namespace SciChart.Xamarin.iOS.Renderer
         {
             get => base.ReceiveHandledEvents;
             set => ((SCIChartModifierCore)this).ReceiveHandledEvents = value;
+        }
+    }
+
+    public partial class LegendModifieriOS
+    {
+        public new bool IsEnabled
+        {
+            get => base.IsEnabled;
+            set => ((SCIChartModifierCore)this).IsEnabled = value;
+        }
+
+        public new bool ReceiveHandledEvents
+        {
+            get => base.ReceiveHandledEvents;
+            set => ((SCIChartModifierCore)this).ReceiveHandledEvents = value;
+        }
+
+        public void SetShowLegend(bool showLegend)
+        {
+            base.ShowLegend = showLegend;
+        }
+
+        public void SetShowCheckboxes(bool showCheckboxes)
+        {
+            base.ShowCheckBoxes = showCheckboxes;
+        }
+
+        public void SetShowSeriesMarkers(bool showSeriesMarkers)
+        {
+            base.ShowSeriesMarkers = showSeriesMarkers;
+        }
+
+        public void SetSourceMode(SourceMode sourceMode)
+        {
+            base.SourceMode = sourceMode.SourceModeFromXamarin();
         }
     }
 

@@ -32,6 +32,7 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
 
         [BindablePropertyDefinition()]
         [NativePropertyConverterDeclaration("PenStyle")]
+        [TypeConverterDeclaration("PenStyleConverter")]
         IPenStyle StrokeStyle { get; set; }
 
         [BindablePropertyDefinition()]

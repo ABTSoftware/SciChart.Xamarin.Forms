@@ -15,6 +15,7 @@ using SciChart.Xamarin.Views.Model.DataSeries;
 using SciChart.Xamarin.Views.Model.DataSeries3D;
 using SciChart.Xamarin.Views.Model.ObservableCollection;
 using SciChart.Xamarin.Views.Modifiers;
+using SciChart.Xamarin.Views.Utility.Converters;
 using SciChart.Xamarin.Views.Visuals.Annotations;
 using SciChart.Xamarin.Views.Visuals.Axes;
 using SciChart.Xamarin.Views.Visuals.Axes3D;
@@ -25,6 +26,7 @@ using SciChart.Xamarin.Views.Visuals.RenderableSeries;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries3D;
 using System;
 using XFColor = Xamarin.Forms.Color;
+using XTypeConverter = Xamarin.Forms.TypeConverterAttribute;
 using Xamarin.Forms;
 
 
@@ -64,6 +66,8 @@ namespace SciChart.Xamarin.Views.Core.Common
 		SciChart.Xamarin.Views.Visuals.Annotations.ILineArrowAnnotation NewLineArrowAnnotation();
 		
 		SciChart.Xamarin.Views.Visuals.Annotations.ITextAnnotation NewTextAnnotation();
+		
+		SciChart.Xamarin.Views.Modifiers.ILegendModifier NewLegendModifier();
 		
 		SciChart.Xamarin.Views.Modifiers.IModifierGroup NewModifierGroup();
 		
@@ -130,6 +134,7 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
 		{
 		}
 		
+		[XTypeConverter(typeof(BrushStyleConverter))]
 		public SciChart.Xamarin.Views.Drawing.IBrushStyle FillDownBrushStyle
 		{
 			get
@@ -142,6 +147,7 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
 			}
 		}
 		
+		[XTypeConverter(typeof(BrushStyleConverter))]
 		public SciChart.Xamarin.Views.Drawing.IBrushStyle FillUpBrushStyle
 		{
 			get
@@ -211,6 +217,7 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
 		{
 		}
 		
+		[XTypeConverter(typeof(PenStyleConverter))]
 		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeDownStyle
 		{
 			get
@@ -223,6 +230,7 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
 			}
 		}
 		
+		[XTypeConverter(typeof(PenStyleConverter))]
 		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeUpStyle
 		{
 			get
@@ -336,6 +344,7 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
 			}
 		}
 		
+		[XTypeConverter(typeof(PenStyleConverter))]
 		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
 		{
 			get
@@ -553,6 +562,7 @@ namespace SciChart.Xamarin.Views.Visuals.PointMarkers
 			_nativeSciChartObject = nativeObject.NativeSciChartObject;
 		}
 		
+		[XTypeConverter(typeof(PenStyleConverter))]
 		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
 		{
 			get
@@ -565,6 +575,7 @@ namespace SciChart.Xamarin.Views.Visuals.PointMarkers
 			}
 		}
 		
+		[XTypeConverter(typeof(BrushStyleConverter))]
 		public SciChart.Xamarin.Views.Drawing.IBrushStyle FillStyle
 		{
 			get
@@ -942,6 +953,7 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
 			}
 		}
 		
+		[XTypeConverter(typeof(BrushStyleConverter))]
 		public SciChart.Xamarin.Views.Drawing.IBrushStyle AxisBandsFill
 		{
 			get
@@ -1950,6 +1962,7 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
 		{
 		}
 		
+		[XTypeConverter(typeof(PenStyleConverter))]
 		public SciChart.Xamarin.Views.Drawing.IPenStyle Stroke
 		{
 			get
@@ -2247,6 +2260,44 @@ namespace SciChart.Xamarin.Views.Modifiers
 		private static object DefaultReceiveHandledEventsPropertyValueCreator(BindableObject bindable)
 		{
 			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IChartModifierCore>().ReceiveHandledEvents;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Modifiers
+{
+	
+	
+	public partial class LegendModifier : ChartModifierBase, SciChart.Xamarin.Views.Modifiers.ILegendModifier
+	{
+		
+		public LegendModifier() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewLegendModifier())
+		{
+		}
+		
+		public LegendModifier(SciChart.Xamarin.Views.Modifiers.ILegendModifier nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public void SetShowLegend(bool showLegend)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Modifiers.ILegendModifier>().SetShowLegend(showLegend);
+		}
+		
+		public void SetShowCheckboxes(bool showCheckboxes)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Modifiers.ILegendModifier>().SetShowCheckboxes(showCheckboxes);
+		}
+		
+		public void SetShowSeriesMarkers(bool showSeriesMarkers)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Modifiers.ILegendModifier>().SetShowSeriesMarkers(showSeriesMarkers);
+		}
+		
+		public void SetSourceMode(SciChart.Xamarin.Views.Modifiers.SourceMode sourceMode)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Modifiers.ILegendModifier>().SetSourceMode(sourceMode);
 		}
 	}
 }

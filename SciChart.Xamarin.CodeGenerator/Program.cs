@@ -31,6 +31,11 @@ namespace SciChart.Xamarin.CodeGenerator
             iosGenerator.AddTypes(classes);
             formsGenerator.AddTypes(classes);
 
+            var enums = types.Where(t => Attribute.IsDefined(t, typeof(EnumDefinition))).ToList();
+
+            androidGenerator.AddEnumMappings(enums);
+            iosGenerator.AddEnumMappings(enums);
+
             androidGenerator.SaveTo(androidFile);
             iosGenerator.SaveTo(iosFile);
             formsGenerator.SaveTo(formsFile);

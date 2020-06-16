@@ -39,5 +39,11 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
             };
         }
 
+        protected override void ExtractionEnumInformationFrom(Type enumType, EnumDefinition enumDefinition, EnumConvertorInformation information)
+        {
+            base.ExtractionEnumInformationFrom(enumType, enumDefinition, information);
+
+            information.NativeEnumType = enumDefinition.AndroidEnumName ?? enumType.Name;
+        }
     }
 }

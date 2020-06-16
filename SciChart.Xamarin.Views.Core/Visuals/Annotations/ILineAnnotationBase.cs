@@ -10,6 +10,7 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
     {
         [BindablePropertyDefinition()]
         [NativePropertyConverterDeclaration("PenStyle")]
+        [TypeConverterDeclaration("PenStyleConverter")]
         IPenStyle Stroke { get; set; }
     }
 }

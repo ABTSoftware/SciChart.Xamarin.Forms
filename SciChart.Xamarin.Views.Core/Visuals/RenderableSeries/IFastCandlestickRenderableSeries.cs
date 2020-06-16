@@ -9,10 +9,12 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
     {
         [BindablePropertyDefinition()]
         [NativePropertyConverterDeclaration("BrushStyle")]
+        [TypeConverterDeclaration("BrushStyleConverter")]
         IBrushStyle FillDownBrushStyle { get; set; }
 
         [BindablePropertyDefinition()]
         [NativePropertyConverterDeclaration("BrushStyle")]
+        [TypeConverterDeclaration("BrushStyleConverter")]
         IBrushStyle FillUpBrushStyle { get; set; }
     }
 }

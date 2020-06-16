@@ -4,35 +4,45 @@ using System.ComponentModel;
 
 namespace SciChart.Xamarin.Views.Utility
 {
-    public class PropertyMapper<TSourceType, TDestType> : Dictionary<string, Action<TSourceType, TDestType>>
-        where TSourceType:class, INotifyPropertyChanged
-        where TDestType:class
+    public class PropertyMapper<TSourceType, TDestType> where TSourceType : class, INotifyPropertyChanged where TDestType : class
     {
-        private readonly TSourceType _xamarinType;
-        private readonly TDestType _nativeType;
+        private readonly Dictionary<string, Action<TSourceType, TDestType>> _propertyMappingDictionary = new Dictionary<string, Action<TSourceType, TDestType>>();
 
-        public PropertyMapper(TSourceType xamarinType, TDestType nativeType)
-        {
-            _xamarinType = xamarinType;
-            _nativeType = nativeType;
-            xamarinType.PropertyChanged += OnSourcePropertyChanged;
-        }        
+        private TSourceType _source = null;
+        private TDestType _dest = null;
 
-        public void Init()
+        public bool IsAttached { get; private set; }
+
+        public void AddMapping(string propertyName, Action<TSourceType, TDestType> propertyMapping)
         {
-            foreach (var key in Keys)
-            {
-                var handler = this[key];
-                handler(_xamarinType, _nativeType);
-            }
+            _propertyMappingDictionary[propertyName] = propertyMapping;
         }
 
-        private void OnSourcePropertyChanged(object sender, PropertyChangedEventArgs e)
+        public void Attach(TSourceType source, TDestType dest)
         {
-            if (this.TryGetValue(e.PropertyName, out var handler))
+            _source = source;
+            _dest = dest;
+
+            foreach (var action in _propertyMappingDictionary.Values)
             {
-                var sourceControl = sender as TSourceType;
-                handler(sourceControl, _nativeType);
+                action(source, dest);
+            }
+
+            IsAttached = true;
+        }
+
+        public void Detach()
+        {
+            IsAttached = false;
+            _source = null;
+            _dest = null;
+        }
+
+        public void OnSourcePropertyChanged(string propertyName)
+        {
+            if (IsAttached && _propertyMappingDictionary.TryGetValue(propertyName, out var handler))
+            {
+                handler(_source, _dest);
             }
         }
     }

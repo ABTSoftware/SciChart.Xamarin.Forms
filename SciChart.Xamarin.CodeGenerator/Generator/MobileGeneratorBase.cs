@@ -175,5 +175,76 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
 
             _factoryDeclaration.Members.Add(factoryMethod);
         }
+
+        public void AddEnumMappings(IEnumerable<Type> enums)
+        {
+            if(!(_typeInformationExtractor is MobileTypeInformationExtractorBase<T> mobileInformationExtractor)) return;
+
+            foreach (var enumToMap in enums)
+            {
+                var information = mobileInformationExtractor.ExtractEnumInformation(enumToMap);
+                DefineEnumMapping(enumToMap, information);
+            }
+        }
+
+        private void DefineEnumMapping(Type enumToMap, EnumConvertorInformation information)
+        {
+            var name = enumToMap.Name;
+
+            var helperClassDeclaration = new CodeTypeDeclaration($"{name}Mapper")
+            {
+                Attributes = MemberAttributes.Public
+            };
+
+            // CodeDom doesn't support static classes so need to hack it to add static keyword
+            helperClassDeclaration.StartDirectives.Add(new CodeRegionDirective(CodeRegionMode.Start, $"{name} extensions" + Environment.NewLine + "\tstatic"));
+            helperClassDeclaration.EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, string.Empty));
+
+            var nativeValue = "nativeValue";
+            var formsValue = "xamarinFormsValue";
+
+            // CodeDom doesn't support extensions so need to hack it to add this as part of type declaration
+            var toXamarinMethod = new CodeMemberMethod()
+            {
+                Name = $"{name}ToXamarin",
+                Attributes = MemberAttributes.Public | MemberAttributes.Static,
+                Parameters = { new CodeParameterDeclarationExpression($"this {information.NativeEnumType}", nativeValue)},
+                ReturnType = new CodeTypeReference(enumToMap)
+            };
+
+            var fromXamarinMethod = new CodeMemberMethod()
+            {
+                Name = $"{name}FromXamarin",
+                Attributes = MemberAttributes.Public | MemberAttributes.Static,
+                Parameters = { new CodeParameterDeclarationExpression($"this {enumToMap.FullName}", formsValue)},
+                ReturnType = new CodeTypeReference(information.NativeEnumType)
+            };
+
+            var enumNames = Enum.GetNames(enumToMap);
+            foreach (var enumName in enumNames)
+            {
+                var nativeEnumValue = new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(new CodeTypeReference(information.NativeEnumType)), enumName);
+                var nativeValueEqualCheck = new CodeBinaryOperatorExpression(new CodeVariableReferenceExpression(nativeValue), CodeBinaryOperatorType.IdentityEquality, nativeEnumValue);
+
+                var xamarinEnumValue = new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(enumToMap), enumName);
+                var xamarinValueEqualCheck = new CodeBinaryOperatorExpression(new CodeVariableReferenceExpression(formsValue), CodeBinaryOperatorType.IdentityEquality, xamarinEnumValue);
+
+                var xamarinMapping = new CodeConditionStatement(xamarinValueEqualCheck, new CodeMethodReturnStatement(nativeEnumValue));
+                var nativeMapping = new CodeConditionStatement(nativeValueEqualCheck, new CodeMethodReturnStatement(xamarinEnumValue));
+
+                fromXamarinMethod.Statements.Add(xamarinMapping);
+                toXamarinMethod.Statements.Add(nativeMapping);
+            }
+
+            // throw exception if there is no mapping
+            var codeThrowExceptionStatement = new CodeThrowExceptionStatement( new CodeObjectCreateExpression(new CodeTypeReference(typeof(ArgumentOutOfRangeException)), new CodePrimitiveExpression($"The {name} value has not been handled")));
+            toXamarinMethod.Statements.Add(codeThrowExceptionStatement);
+            fromXamarinMethod.Statements.Add(codeThrowExceptionStatement);
+
+            helperClassDeclaration.Members.Add(toXamarinMethod);
+            helperClassDeclaration.Members.Add(fromXamarinMethod);
+
+            MainNamespace.Types.Add(helperClassDeclaration);
+        }
     }
 }

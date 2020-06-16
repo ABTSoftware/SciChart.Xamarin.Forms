@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SciChart.Xamarin.Views.Model.DataSeries3D;
+﻿using SciChart.Xamarin.Views.Model.DataSeries3D;
+using SciChart.Xamarin.Views.Visuals.PointMarkers3D;
 using TestApp.UI.Application;
 using TestApp.UI.Data;
 using Xamarin.Forms;
@@ -38,6 +34,13 @@ namespace TestApp.UI.Examples
             }
 
             ScatterRenderableSeries3D.DataSeries = dataSeries3D;
+
+            // need to set point marker after creation of SciChartSurface3D because otherwise it crashes
+            ScatterRenderableSeries3D.PointMarker = new EllipsePointMarker3D()
+            {
+                Fill = Color.Green,
+                Size = 5
+            };
         }
     }
 }

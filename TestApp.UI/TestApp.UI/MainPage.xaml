@@ -22,62 +22,7 @@
         <StackLayout Orientation="Vertical" Grid.Row="0">
             <Label Text="Xamarin.Forms Demo"/>
         </StackLayout>
-        <ListView ItemsSource="{Binding Examples}" ItemSelected="OnExampleItemSelected" Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Fill"/>
-         
-         <!-- <visuals:SciChartSurface Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Fill">  -->
-         <!--     <visuals:SciChartSurface.RenderableSeries> -->
-         <!--        <renderableSeries:FastLineRenderableSeries DataSeries="{Binding LineSeries}"> -->
-         <!--            <renderableSeries:FastLineRenderableSeries.PointMarker> -->
-         <!--                <pointMarkers:EllipsePointMarker Width="20" Height="20"/> -->
-         <!--            </renderableSeries:FastLineRenderableSeries.PointMarker> -->
-         <!--        </renderableSeries:FastLineRenderableSeries> -->
-         <!--         <renderableSeries:FastCandlestickRenderableSeries DataSeries="{Binding CandlestickSeries}" StrokeUpStyle="{Binding StrokeUpStyle}" StrokeDownStyle="{Binding StrokeDownStyle}" FillDownBrushStyle="{Binding FillDownStyle}" FillUpBrushStyle="{Binding FillUpStyle}"/> -->
-         <!--     </visuals:SciChartSurface.RenderableSeries> -->
-         <!-- -->
-         <!--     <visuals:SciChartSurface.XAxes>  -->
-         <!--         <axes:NumericAxis VisibleRange="{Binding XRange}"/>  -->
-         <!--     </visuals:SciChartSurface.XAxes>  -->
-         <!-- -->
-         <!--     <visuals:SciChartSurface.YAxes>  -->
-         <!--        <axes:NumericAxis/>  -->
-         <!--     </visuals:SciChartSurface.YAxes>  -->
-         <!-- -->
-         <!--     <visuals:SciChartSurface.Annotations> -->
-         <!--         <annotations:BoxAnnotation X1="{Binding X1}" X2="{Binding X2}" Y1="{Binding Y1}" Y2="{Binding Y2}" BackgroundColor="Red"/> -->
-         <!--     </visuals:SciChartSurface.Annotations> -->
-         <!-- -->
-         <!--     <visuals:SciChartSurface.ChartModifiers>  -->
-         <!--         <modifiers:ModifierGroup> -->
-         <!--             <modifiers:PinchZoomModifier/> -->
-         <!--             <modifiers:ZoomPanModifier ReceiveHandledEvents="true"/> -->
-         <!--             <modifiers:ZoomExtentsModifier/> -->
-         <!--         </modifiers:ModifierGroup>  -->
-         <!--     </visuals:SciChartSurface.ChartModifiers>  -->
-         <!-- -->
-         <!-- </visuals:SciChartSurface>  -->
-
-         <!-- <visuals:SciChartSurface3D Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Fill">  -->
-         <!--     <visuals:SciChartSurface3D.XAxis>  -->
-         <!--         <axes3D:NumericAxis3D/>  -->
-         <!--     </visuals:SciChartSurface3D.XAxis>  -->
-         <!-- -->
-         <!--     <visuals:SciChartSurface3D.YAxis>  -->
-         <!--         <axes3D:NumericAxis3D/>  -->
-         <!--     </visuals:SciChartSurface3D.YAxis>  -->
-         <!-- -->
-         <!--     <visuals:SciChartSurface3D.ZAxis>  -->
-         <!--         <axes3D:NumericAxis3D/>  -->
-         <!--     </visuals:SciChartSurface3D.ZAxis>  -->
-         <!-- -->
-         <!--     <visuals:SciChartSurface3D.RenderableSeries> -->
-         <!--        <renderableSeries3D:ScatterRenderableSeries3D DataSeries="{Binding Scatter3DSeries}"> -->
-         <!--            <renderableSeries3D:ScatterRenderableSeries3D.PointMarker> -->
-         <!--                <pointMarkers3D:EllipsePointMarker3D Size="5" Fill="Green"/> -->
-         <!--            </renderableSeries3D:ScatterRenderableSeries3D.PointMarker> -->
-         <!--        </renderableSeries3D:ScatterRenderableSeries3D> -->
-         <!--     </visuals:SciChartSurface3D.RenderableSeries> -->
-         <!-- -->
-         <!-- </visuals:SciChartSurface3D>  -->
+        <ListView ItemsSource="{Binding Examples}" ItemSelected="OnExampleItemSelected" Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="White"/>
     </Grid>
 
 </ContentPage>

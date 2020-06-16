@@ -14,16 +14,10 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
 
         public static IDataSeries DataSeriesToXamarin(this IISCIDataSeries dataSeries)
         {
-            switch (dataSeries)
-            {
-                case XyDataSeriesiOS<double, double> xyDataSeries:
-                    return new Views.Model.DataSeries.XyDataSeries<double, double>(xyDataSeries);
+            if (dataSeries == null) return null;
 
-                case OhlcDataSeriesiOS<double, double> ohlcDataSeries:
-                    return new Views.Model.DataSeries.OhlcDataSeries<double, double>(ohlcDataSeries);
-                default:
-                    return null;
-            }
+            // since we don't provide default data series for renderable series so there will be no need in reverse conversion
+            throw new NotImplementedException();
         }
 
         public static SciChart.iOS.Charting.IISCIDataSeries3D DataSeriesFromXamarin(this IDataSeries3D dataSeries)
@@ -33,14 +27,10 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
 
         public static IDataSeries3D DataSeriesToXamarin(this IISCIDataSeries3D dataSeries)
         {
-            switch (dataSeries)
-            {
-                case XyzDataSeries3DiOS<double, double, double> xyzDataSeries3D:
-                    return new Views.Model.DataSeries3D.XyzDataSeries3D<double, double, double>(xyzDataSeries3D);
+            if (dataSeries == null) return null;
 
-                default:
-                    return null;
-            }
+            // since we don't provide default data series for renderable series so there will be no need in reverse conversion
+            throw new NotImplementedException();
         }
     }
 }

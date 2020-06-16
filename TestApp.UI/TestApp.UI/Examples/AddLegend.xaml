@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:visuals="clr-namespace:SciChart.Xamarin.Views.Visuals;assembly=SciChart.Xamarin.Views"
+             xmlns:renderableSeries="clr-namespace:SciChart.Xamarin.Views.Visuals.RenderableSeries;assembly=SciChart.Xamarin.Views"
+             xmlns:axes="clr-namespace:SciChart.Xamarin.Views.Visuals.Axes;assembly=SciChart.Xamarin.Views"
+             xmlns:modifiers="clr-namespace:SciChart.Xamarin.Views.Modifiers;assembly=SciChart.Xamarin.Views"
+             mc:Ignorable="d"
+             x:Class="TestApp.UI.Examples.AddLegend">
+    <ContentPage.Content>
+            <visuals:SciChartSurface HorizontalOptions="Fill" VerticalOptions="Fill">
+                <visuals:SciChartSurface.RenderableSeries>
+                    <renderableSeries:FastLineRenderableSeries x:Name="LineSeries1" StrokeStyle="#FFFF00, 2"/>
+                    <renderableSeries:FastLineRenderableSeries x:Name="LineSeries2" StrokeStyle="#279B27, 2"/>
+                    <renderableSeries:FastLineRenderableSeries x:Name="LineSeries3" StrokeStyle="#FF1919, 2"/>
+                    <renderableSeries:FastLineRenderableSeries x:Name="LineSeries4" StrokeStyle="#1964FF, 2"/>
+                </visuals:SciChartSurface.RenderableSeries>
+
+                <visuals:SciChartSurface.XAxes>
+                    <axes:NumericAxis/>
+                </visuals:SciChartSurface.XAxes>
+
+                <visuals:SciChartSurface.YAxes>
+                    <axes:NumericAxis/>
+                </visuals:SciChartSurface.YAxes>
+
+                <visuals:SciChartSurface.ChartModifiers>
+                    <modifiers:LegendModifier x:Name="LegendModifier"/>
+                </visuals:SciChartSurface.ChartModifiers>
+
+            </visuals:SciChartSurface>
+    </ContentPage.Content>
+</ContentPage>

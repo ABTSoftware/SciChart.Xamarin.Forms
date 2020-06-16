@@ -12,10 +12,13 @@ namespace SciChart.Xamarin.Views.Visuals.PointMarkers
     {
         [BindablePropertyDefinition()]
         [NativePropertyConverterDeclaration("PenStyle")]
+        [TypeConverterDeclaration("PenStyleConverter")]
+
         IPenStyle StrokeStyle { get; set; }
 
         [BindablePropertyDefinition()]
         [NativePropertyConverterDeclaration("BrushStyle")]
+        [TypeConverterDeclaration("BrushStyleConverter")]
         IBrushStyle FillStyle { get; set; }
 
         [BindablePropertyDefinition()]

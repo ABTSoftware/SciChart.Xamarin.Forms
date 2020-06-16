@@ -19,7 +19,8 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
                     new BindablePropertyInformation()
                     {
                         Name = x.Name,
-                        PropertyType = x.PropertyType
+                        PropertyType = x.PropertyType,
+                        TypeConverter = TryGetTypeConverter(x)
                     }).ToArray();
 
             information.Methods = type.GetMethods()
@@ -31,7 +32,7 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
                     Params = x.GetParameters().Select(p => new ParameterInformation()
                     {
                         Name = p.Name,
-                        ParameterType = p.ParameterType.ToGenericName()
+                        ParameterType = p.ParameterType.ToGenericName(),
                     }).ToArray()
                 })
                 .ToArray();
@@ -53,6 +54,13 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
             var baseInterfaces = baseXamarinFormsType?.GetInterfaces() ?? new Type[0];
 
             information.ImplementNativeObjectWrapperInterface = allInterfaces.Except(baseInterfaces).Any(t => t == typeof(INativeSciChartObjectWrapper));
+        }
+
+        private static string TryGetTypeConverter(PropertyInfo property)
+        {
+            return Attribute.IsDefined(property, typeof(TypeConverterDeclaration)) 
+                ? property.GetCustomAttribute<TypeConverterDeclaration>().TypeConverter
+                : null;
         }
     }
 }

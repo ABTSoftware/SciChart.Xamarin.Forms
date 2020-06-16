@@ -11,7 +11,7 @@
              mc:Ignorable="d"
              x:Class="TestApp.UI.Examples.Scatter3DChart">
     <ContentPage.Content>
-         <visuals:SciChartSurface3D Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Fill">  
+         <visuals:SciChartSurface3D HorizontalOptions="Fill" VerticalOptions="Fill">  
              <visuals:SciChartSurface3D.XAxis>  
                  <axes3D:NumericAxis3D/>  
              </visuals:SciChartSurface3D.XAxis>  
@@ -24,15 +24,11 @@
                  <axes3D:NumericAxis3D/>  
              </visuals:SciChartSurface3D.ZAxis>  
          
-             <visuals:SciChartSurface3D.RenderableSeries> 
-                <renderableSeries3D:ScatterRenderableSeries3D x:Name="ScatterRenderableSeries3D"> 
-                    <renderableSeries3D:ScatterRenderableSeries3D.PointMarker> 
-                        <pointMarkers3D:EllipsePointMarker3D Size="5" Fill="Green"/> 
-                    </renderableSeries3D:ScatterRenderableSeries3D.PointMarker> 
-                </renderableSeries3D:ScatterRenderableSeries3D> 
-             </visuals:SciChartSurface3D.RenderableSeries> 
-
-             <visuals:SciChartSurface3D.ChartModifiers>
+             <visuals:SciChartSurface3D.RenderableSeries>
+                <renderableSeries3D:ScatterRenderableSeries3D x:Name="ScatterRenderableSeries3D"/>
+            </visuals:SciChartSurface3D.RenderableSeries>
+            <!-- -->
+            <visuals:SciChartSurface3D.ChartModifiers>
                 <modifiers3D:ModifierGroup3D>
                     <modifiers3D:PinchZoomModifier3D/>
                     <modifiers3D:OrbitModifier3D ReceiveHandledEvents="True"/>

@@ -13,7 +13,7 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
         /// Gets or sets the Alignment for this axis, e.g. Left, Right, Bottom, Top
         /// </summary>
         [BindablePropertyDefinition()]
-        [NativePropertyConverterDeclaration("Alignment")]
+        [NativePropertyConverterDeclaration("AxisAlignment")]
         AxisAlignment AxisAlignment { get; set; }
     }
 }

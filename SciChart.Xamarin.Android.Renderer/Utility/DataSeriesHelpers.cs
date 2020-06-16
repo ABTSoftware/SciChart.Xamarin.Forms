@@ -1,4 +1,5 @@
 ﻿using System;
+using Java.Lang;
 using SciChart.Xamarin.Views.Model.DataSeries;
 using SciChart.Xamarin.Views.Model.DataSeries3D;
 using IDataSeries = SciChart.Charting.Model.DataSeries.IDataSeries;
@@ -15,20 +16,10 @@ namespace SciChart.Xamarin.Android.Renderer.Utility
 
         public static Views.Model.DataSeries.IDataSeries DataSeriesToXamarin(this IDataSeries dataSeries)
         {
-            switch (dataSeries)
-            {
-                case XyDataSeriesAndroid<double, double> xyDataSeries:
-                    return new XyDataSeries<double, double>(xyDataSeries);
+            if (dataSeries == null) return null;
 
-                case OhlcDataSeriesAndroid<double, double> ohlcDataSeries:
-                    return new OhlcDataSeries<double, double>(ohlcDataSeries);
-
-                case OhlcDataSeriesAndroid<DateTime, double> ohlcDataSeries:
-                    return new OhlcDataSeries<DateTime, double>(ohlcDataSeries);
-
-                default:
-                    return null;
-            }
+            // since we don't provide default data series for renderable series so there will be no need in reverse conversion
+            throw new NotImplementedException();
         }
 
         public static IDataSeries3D DataSeriesFromXamarin(this Views.Model.DataSeries3D.IDataSeries3D dataSeries)
@@ -38,14 +29,10 @@ namespace SciChart.Xamarin.Android.Renderer.Utility
 
         public static Views.Model.DataSeries3D.IDataSeries3D DataSeriesToXamarin(this IDataSeries3D dataSeries)
         {
-            switch (dataSeries)
-            {
-                case XyzDataSeries3DAndroid<double, double, double> xyzDataSeries3D:
-                    return new XyzDataSeries3D<double, double, double>(xyzDataSeries3D);
+            if (dataSeries == null) return null;
 
-                default:
-                    return null;
-            }
+            // since we don't provide default data series for renderable series so there will be no need in reverse conversion
+            throw new NotImplementedException();
         }
     }
 }

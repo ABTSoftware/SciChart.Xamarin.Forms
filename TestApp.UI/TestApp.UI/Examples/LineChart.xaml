@@ -10,9 +10,9 @@
              mc:Ignorable="d"
              x:Class="TestApp.UI.Examples.LineChart">
     <ContentPage.Content>
-        <visuals:SciChartSurface Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Fill">
+        <visuals:SciChartSurface HorizontalOptions="Fill" VerticalOptions="Fill">
             <visuals:SciChartSurface.RenderableSeries>
-                <renderableSeries:FastLineRenderableSeries x:Name="LineSeries"/>
+                <renderableSeries:FastLineRenderableSeries x:Name="LineSeries" StrokeStyle="#FF279B27, 2"/>
             </visuals:SciChartSurface.RenderableSeries>
 
             <visuals:SciChartSurface.XAxes>
