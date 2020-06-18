@@ -6,6 +6,8 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
     [InjectNativeSciChartObject]
     public interface ICategoryDateTimeAxis : IAxis
     {
-        
+        // TODO implement setter in iOS
+        // [BindablePropertyDefinition()]
+        // double BarTimeFrame { get; set; } 
     }
 }

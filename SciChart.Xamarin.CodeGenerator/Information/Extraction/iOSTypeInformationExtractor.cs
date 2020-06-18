@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
+using SciChart.Xamarin.CodeGenerator.Utility;
 using SciChart.Xamarin.Views.Core.Generation;
 
 namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
@@ -35,11 +37,31 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
             };
         }
 
+        protected override NativeMethodConverterInformation GetMethodDeclarationFrom(MethodInfo method)
+        {
+            var attribute = method.GetCustomAttribute<NativeMethodConverterDeclaration>();
+
+            return new NativeMethodConverterInformation()
+            {
+                Name = method.Name,
+                ReturnType = method.ReturnType,
+                Params = method.GetParameters().Select(p => new ParameterInformation()
+                {
+                    Name = p.Name,
+                    ParameterType = p.ParameterType.ToGenericName(),
+                }).ToArray(),
+
+                Converter = attribute.IOSConverter,
+                NativeMethodName = attribute.IOSNativeMethod ?? method.Name
+            };
+        }
+
+
         protected override void ExtractionEnumInformationFrom(Type enumType, EnumDefinition enumDefinition, EnumConvertorInformation information)
         {
-            base.ExtractionEnumInformationFrom(enumType, enumDefinition, information);
-
             information.NativeEnumType = enumDefinition.IOSEnumName ?? $"SCI{enumType.Name}";
+
+            information.EnumValues = Enum.GetNames(enumType).Select(x => (x, enumType.GetField(x).GetAttribute<EnumValueDefinition>()?.IOSName ?? x)).ToArray();
         }
     }
 }

@@ -7,6 +7,7 @@ using Mono.Cecil;
 using Mono.Cecil.Rocks;
 using SciChart.Xamarin.CodeGenerator.Information;
 using SciChart.Xamarin.CodeGenerator.Information.Extraction;
+using SciChart.Xamarin.CodeGenerator.Utility;
 using SciChart.Xamarin.Views.Core.Generation;
 
 namespace SciChart.Xamarin.CodeGenerator.Generator
@@ -50,7 +51,7 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
 
                 foreach (var parameter in nativeConstructor.Parameters)
                 {
-                    var parameterType = parameter.ParameterType.FullName;
+                    var parameterType = parameter.ParameterType.ToGenericName();
              
                     constructor.Parameters.Add(
                         new CodeParameterDeclarationExpression(parameterType, parameter.Name));

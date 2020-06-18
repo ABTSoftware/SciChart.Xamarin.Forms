@@ -100,7 +100,7 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
 
                 foreach (var parameter in nativeConstructor.Parameters)
                 {
-                    var parameterType = parameter.ParameterType.FullName;
+                    var parameterType = parameter.ParameterType.ToGenericName();
 
                     if (_typeMappings.TryGetValue(parameterType, out var mappedType))
                         parameterType = mappedType;

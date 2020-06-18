@@ -25,8 +25,7 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Condition="'$(IsOSX)'=='false'" Command="&quot;$(SolutionDir)SciChart.Xamarin.CodeGenerator\bin\$(ConfigurationName)\netcoreapp3.1\SciChart.Xamarin.CodeGenerator.exe&quot; $(SolutionDir)" />
-    <Exec Condition="'$(IsOSX)'=='true'" Command="dotnet &quot;$(SolutionDir)SciChart.Xamarin.CodeGenerator\bin\$(ConfigurationName)\netcoreapp3.1\SciChart.Xamarin.CodeGenerator.dll&quot; $(SolutionDir)" />
+    <Exec Command="dotnet &quot;$(SolutionDir)SciChart.Xamarin.CodeGenerator\bin\$(ConfigurationName)\netcoreapp3.1\SciChart.Xamarin.CodeGenerator.dll&quot; $(SolutionDir)" />
   </Target>
 
 </Project>

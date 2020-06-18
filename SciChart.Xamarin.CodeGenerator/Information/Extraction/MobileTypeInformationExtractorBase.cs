@@ -15,9 +15,15 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
             information.NativePropertyConverters = type.GetPublicProperties()
                 .Where(property => Attribute.IsDefined(property, typeof(NativePropertyConverterDeclaration)))
                 .Select(GetPropertyDeclarationFrom).ToArray();
+
+            information.NativeMethodConverters = type.GetPublicMethods()
+                .Where(method => Attribute.IsDefined(method, typeof(NativeMethodConverterDeclaration)))
+                .Select(GetMethodDeclarationFrom).ToArray();
         }
 
         protected abstract NativePropertyConverterInformation GetPropertyDeclarationFrom(PropertyInfo property);
+
+        protected abstract NativeMethodConverterInformation GetMethodDeclarationFrom(MethodInfo method);
 
         public EnumConvertorInformation ExtractEnumInformation(Type enumType)
         {
@@ -30,9 +36,6 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
             return information;
         }
 
-        protected virtual void ExtractionEnumInformationFrom(Type enumType, EnumDefinition enumDefinition, EnumConvertorInformation information)
-        {
-            information.EnumValues = Enum.GetNames(enumType).Select(x => (x, x)).ToArray();
-        }
+        protected abstract void ExtractionEnumInformationFrom(Type enumType, EnumDefinition enumDefinition, EnumConvertorInformation information);
     }
 }

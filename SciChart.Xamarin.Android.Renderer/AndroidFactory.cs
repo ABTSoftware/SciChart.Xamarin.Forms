@@ -1,10 +1,13 @@
-﻿using Java.Lang;
+﻿using System.Linq;
+using Java.Lang;
 using SciChart.Xamarin.Android.Renderer;
 using SciChart.Xamarin.Android.Renderer.DependencyService;
+using SciChart.Xamarin.Android.Renderer.Utility;
 using SciChart.Xamarin.Views.Core.Common;
 using SciChart.Xamarin.Views.Model.ObservableCollection;
 using SciChart.Xamarin.Views.Modifiers;
 using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 
 [assembly: Dependency(typeof(AndroidFactory))]
 namespace SciChart.Xamarin.Android.Renderer
@@ -124,5 +127,23 @@ namespace SciChart.Xamarin.Android.Renderer
     {
         public Color BackgroundColor { get; set; }
     }
+    #endregion
+
+
+    #region RenderableSeries
+
+    public partial class ColorMapAndroid
+    {
+        public ColorMapAndroid(Color startColor, Color endColor) : base(startColor.ColorFromXamarin(), endColor.ColorFromXamarin())
+        {
+
+        }
+
+        public ColorMapAndroid(Color[] colors, float[] stops) : base(colors.Select(x => x.ColorFromXamarin()).ToArray(), stops)
+        {
+
+        }
+    }
+
     #endregion
 }

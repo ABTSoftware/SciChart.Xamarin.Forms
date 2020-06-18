@@ -6,5 +6,7 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
     [InjectNativeSciChartObject]
     public interface IFastLineRenderableSeries : IRenderableSeries
     {
+        [BindablePropertyDefinition()]
+        bool IsDigitalLine { get; set; }
     }
 }

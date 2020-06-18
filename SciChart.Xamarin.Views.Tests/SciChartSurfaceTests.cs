@@ -51,7 +51,7 @@ namespace SciChart.Xamarin.Views.Tests
             scs.BindingContext = "ABindingContext";
 
             // Set binding context then series add
-            scs.RenderableSeries = new RenderableSeriesCollection(new [] { rs });
+            scs.RenderableSeries = new RenderableSeriesCollection(){rs};
 
             Assert.That(rs.BindingContext, Is.EqualTo("ABindingContext"));
         }

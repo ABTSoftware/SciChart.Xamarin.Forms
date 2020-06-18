@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using CoreGraphics;
 using SciChart.iOS.Charting;
 using SciChart.Xamarin.iOS.Renderer;
@@ -8,6 +9,7 @@ using SciChart.Xamarin.Views.Core.Common;
 using SciChart.Xamarin.Views.Model.ObservableCollection;
 using SciChart.Xamarin.Views.Modifiers;
 using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 [assembly: Dependency(typeof(iOSFactory))]
 namespace SciChart.Xamarin.iOS.Renderer
@@ -216,5 +218,22 @@ namespace SciChart.Xamarin.iOS.Renderer
             set => ((SCIChartModifierCore)this).ReceiveHandledEvents = value;
         }
     }
+    #endregion
+
+    #region RenderableSeries
+
+    public partial class ColorMapiOS
+    {
+        public ColorMapiOS(Color startColor, Color endColor) : base(startColor.ToUIColor(), endColor.ToUIColor())
+        {
+
+        }
+
+        public ColorMapiOS(Color[] colors, float[] stops) : base(colors.Select(x => x.ToUIColor()).ToArray(), stops)
+        {
+
+        }
+    }
+
     #endregion
 }

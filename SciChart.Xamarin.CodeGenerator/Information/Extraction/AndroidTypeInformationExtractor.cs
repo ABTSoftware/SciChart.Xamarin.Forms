@@ -39,11 +39,30 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
             };
         }
 
+        protected override NativeMethodConverterInformation GetMethodDeclarationFrom(MethodInfo method)
+        {
+            var attribute = method.GetCustomAttribute<NativeMethodConverterDeclaration>();
+
+            return new NativeMethodConverterInformation()
+            {
+                Name = method.Name,
+                ReturnType = method.ReturnType,
+                Params = method.GetParameters().Select(p => new ParameterInformation()
+                {
+                    Name = p.Name,
+                    ParameterType = p.ParameterType.ToGenericName(),
+                }).ToArray(),
+
+                Converter =attribute.AndroidConverter,
+                NativeMethodName = attribute.AndroidNativeMethod ?? method.Name
+            };
+        }
+
         protected override void ExtractionEnumInformationFrom(Type enumType, EnumDefinition enumDefinition, EnumConvertorInformation information)
         {
-            base.ExtractionEnumInformationFrom(enumType, enumDefinition, information);
-
             information.NativeEnumType = enumDefinition.AndroidEnumName ?? enumType.Name;
+
+            information.EnumValues = Enum.GetNames(enumType).Select(x => (x, enumType.GetField(x).GetAttribute<EnumValueDefinition>()?.AndroidName ?? x)).ToArray();
         }
     }
 }

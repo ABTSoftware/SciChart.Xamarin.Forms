@@ -41,9 +41,37 @@ namespace SciChart.Xamarin.Views.Core.Common
 	public partial interface INativeSciChartObjectFactory
 	{
 		
+		SciChart.Xamarin.Views.Visuals.RenderableSeries.IColorMap NewColorMap(XFColor[] colors, float[] stops);
+		
+		SciChart.Xamarin.Views.Visuals.RenderableSeries.IColorMap NewColorMap(XFColor startColor, XFColor endColor);
+		
+		SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastBandRenderableSeries NewFastBandRenderableSeries();
+		
+		SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastBubbleRenderableSeries NewFastBubbleRenderableSeries();
+		
 		SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastCandlestickRenderableSeries NewFastCandlestickRenderableSeries();
 		
+		SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastColumnRenderableSeries NewFastColumnRenderableSeries();
+		
+		SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastErrorBarsRenderableSeries NewFastErrorBarsRenderableSeries();
+		
+		SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries NewFastFixedErrorBarsRenderableSeries();
+		
+		SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastImpulseRenderableSeries NewFastImpulseRenderableSeries();
+		
 		SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastLineRenderableSeries NewFastLineRenderableSeries();
+		
+		SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastMountainRenderableSeries NewFastMountainRenderableSeries();
+		
+		SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastOhlcRenderableSeries NewFastOhlcRenderableSeries();
+		
+		SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastUniformHeatmapRenderableSeries NewFastUniformHeatmapRenderableSeries();
+		
+		SciChart.Xamarin.Views.Visuals.RenderableSeries.ISplineBandRenderableSeries NewSplineBandRenderableSeries();
+		
+		SciChart.Xamarin.Views.Visuals.RenderableSeries.ISplineLineRenderableSeries NewSplineLineRenderableSeries();
+		
+		SciChart.Xamarin.Views.Visuals.RenderableSeries.IXyScatterRenderableSeries NewXyScatterRenderableSeries();
 		
 		SciChart.Xamarin.Views.Visuals.RenderableSeries3D.IScatterRenderableSeries3D NewScatterRenderableSeries3D();
 		
@@ -52,6 +80,10 @@ namespace SciChart.Xamarin.Views.Core.Common
 		SciChart.Xamarin.Views.Visuals.PointMarkers3D.IEllipsePointMarker3D NewEllipsePointMarker3D();
 		
 		SciChart.Xamarin.Views.Visuals.Axes.ICategoryDateTimeAxis NewCategoryDateTimeAxis();
+		
+		SciChart.Xamarin.Views.Visuals.Axes.IDateTimeAxis NewDateTimeAxis();
+		
+		SciChart.Xamarin.Views.Visuals.Axes.ILogarithmicNumericAxis NewLogarithmicNumericAxis();
 		
 		SciChart.Xamarin.Views.Visuals.Axes.INumericAxis NewNumericAxis();
 		
@@ -91,13 +123,31 @@ namespace SciChart.Xamarin.Views.Core.Common
 		
 		SciChart.Xamarin.Views.Model.IDoubleRange NewDoubleRange(double min, double max);
 		
+		SciChart.Xamarin.Views.Model.DataSeries.IHlDataSeries<TX,TY> NewHlDataSeries<TX, TY>()
+			where TX : System.IComparable
+			where TY : System.IComparable;
+		
 		SciChart.Xamarin.Views.Model.DataSeries.IOhlcDataSeries<TX,TY> NewOhlcDataSeries<TX, TY>()
 			where TX : System.IComparable
 			where TY : System.IComparable;
 		
+		SciChart.Xamarin.Views.Model.DataSeries.IUniformHeatmapDataSeries<TX,TY,TZ> NewUniformHeatmapDataSeries<TX, TY, TZ>(int xSize, int ySize)
+			where TX : System.IComparable
+			where TY : System.IComparable
+			where TZ : System.IComparable;
+		
 		SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY> NewXyDataSeries<TX, TY>()
 			where TX : System.IComparable
 			where TY : System.IComparable;
+		
+		SciChart.Xamarin.Views.Model.DataSeries.IXyyDataSeries<TX,TY> NewXyyDataSeries<TX, TY>()
+			where TX : System.IComparable
+			where TY : System.IComparable;
+		
+		SciChart.Xamarin.Views.Model.DataSeries.IXyzDataSeries<TX,TY,TZ> NewXyzDataSeries<TX, TY, TZ>()
+			where TX : System.IComparable
+			where TY : System.IComparable
+			where TZ : System.IComparable;
 		
 		SciChart.Xamarin.Views.Model.DataSeries3D.IXyzDataSeries3D<TX,TY,TZ> NewXyzDataSeries3D<TX, TY, TZ>()
 			where TX : System.IComparable
@@ -111,6 +161,408 @@ namespace SciChart.Xamarin.Views.Core.Common
 		SciChart.Xamarin.Views.Drawing.ISolidBrushStyle NewSolidBrushStyle(XFColor color);
 		
 		SciChart.Xamarin.Views.Drawing.ISolidPenStyle NewSolidPenStyle(XFColor color, float thickness, bool antiAliasing, float[] strokeDashArray);
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
+{
+	
+	
+	public abstract partial class BaseBandRenderableSeries : RenderableSeriesBase, SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseBandRenderableSeries
+	{
+		
+		public static BindableProperty StrokeY1StyleProperty = BindableProperty.Create("StrokeY1Style", typeof(SciChart.Xamarin.Views.Drawing.IPenStyle), typeof(BaseBandRenderableSeries), null, BindingMode.Default, null, OnStrokeY1StylePropertyChanged, null, null, DefaultStrokeY1StylePropertyValueCreator);
+		
+		public static BindableProperty FillBrushStyleProperty = BindableProperty.Create("FillBrushStyle", typeof(SciChart.Xamarin.Views.Drawing.IBrushStyle), typeof(BaseBandRenderableSeries), null, BindingMode.Default, null, OnFillBrushStylePropertyChanged, null, null, DefaultFillBrushStylePropertyValueCreator);
+		
+		public static BindableProperty FillY1BrushStyleProperty = BindableProperty.Create("FillY1BrushStyle", typeof(SciChart.Xamarin.Views.Drawing.IBrushStyle), typeof(BaseBandRenderableSeries), null, BindingMode.Default, null, OnFillY1BrushStylePropertyChanged, null, null, DefaultFillY1BrushStylePropertyValueCreator);
+		
+		public BaseBandRenderableSeries(SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseBandRenderableSeries nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		[XTypeConverter(typeof(PenStyleConverter))]
+		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeY1Style
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Drawing.IPenStyle)(this.GetValue(StrokeY1StyleProperty)));
+			}
+			set
+			{
+				this.SetValue(StrokeY1StyleProperty, value);
+			}
+		}
+		
+		[XTypeConverter(typeof(BrushStyleConverter))]
+		public SciChart.Xamarin.Views.Drawing.IBrushStyle FillBrushStyle
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Drawing.IBrushStyle)(this.GetValue(FillBrushStyleProperty)));
+			}
+			set
+			{
+				this.SetValue(FillBrushStyleProperty, value);
+			}
+		}
+		
+		[XTypeConverter(typeof(BrushStyleConverter))]
+		public SciChart.Xamarin.Views.Drawing.IBrushStyle FillY1BrushStyle
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Drawing.IBrushStyle)(this.GetValue(FillY1BrushStyleProperty)));
+			}
+			set
+			{
+				this.SetValue(FillY1BrushStyleProperty, value);
+			}
+		}
+		
+		private static void OnStrokeY1StylePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseBandRenderableSeries>().StrokeY1Style = ((SciChart.Xamarin.Views.Drawing.IPenStyle)(newValue));
+		}
+		
+		private static object DefaultStrokeY1StylePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseBandRenderableSeries>().StrokeY1Style;
+		}
+		
+		private static void OnFillBrushStylePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseBandRenderableSeries>().FillBrushStyle = ((SciChart.Xamarin.Views.Drawing.IBrushStyle)(newValue));
+		}
+		
+		private static object DefaultFillBrushStylePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseBandRenderableSeries>().FillBrushStyle;
+		}
+		
+		private static void OnFillY1BrushStylePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseBandRenderableSeries>().FillY1BrushStyle = ((SciChart.Xamarin.Views.Drawing.IBrushStyle)(newValue));
+		}
+		
+		private static object DefaultFillY1BrushStylePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseBandRenderableSeries>().FillY1BrushStyle;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
+{
+	
+	
+	public abstract partial class BaseColumnRenderableSeries : RenderableSeriesBase, SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseColumnRenderableSeries
+	{
+		
+		public static BindableProperty FillBrushStyleProperty = BindableProperty.Create("FillBrushStyle", typeof(SciChart.Xamarin.Views.Drawing.IBrushStyle), typeof(BaseColumnRenderableSeries), null, BindingMode.Default, null, OnFillBrushStylePropertyChanged, null, null, DefaultFillBrushStylePropertyValueCreator);
+		
+		public static BindableProperty DataPointWidthProperty = BindableProperty.Create("DataPointWidth", typeof(double), typeof(BaseColumnRenderableSeries), null, BindingMode.Default, null, OnDataPointWidthPropertyChanged, null, null, DefaultDataPointWidthPropertyValueCreator);
+		
+		public static BindableProperty FillBrushMappingModeProperty = BindableProperty.Create("FillBrushMappingMode", typeof(SciChart.Xamarin.Views.Drawing.TextureMappingMode), typeof(BaseColumnRenderableSeries), null, BindingMode.Default, null, OnFillBrushMappingModePropertyChanged, null, null, DefaultFillBrushMappingModePropertyValueCreator);
+		
+		public BaseColumnRenderableSeries(SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseColumnRenderableSeries nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		[XTypeConverter(typeof(BrushStyleConverter))]
+		public SciChart.Xamarin.Views.Drawing.IBrushStyle FillBrushStyle
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Drawing.IBrushStyle)(this.GetValue(FillBrushStyleProperty)));
+			}
+			set
+			{
+				this.SetValue(FillBrushStyleProperty, value);
+			}
+		}
+		
+		public double DataPointWidth
+		{
+			get
+			{
+				return ((double)(this.GetValue(DataPointWidthProperty)));
+			}
+			set
+			{
+				this.SetValue(DataPointWidthProperty, value);
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.TextureMappingMode FillBrushMappingMode
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Drawing.TextureMappingMode)(this.GetValue(FillBrushMappingModeProperty)));
+			}
+			set
+			{
+				this.SetValue(FillBrushMappingModeProperty, value);
+			}
+		}
+		
+		private static void OnFillBrushStylePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseColumnRenderableSeries>().FillBrushStyle = ((SciChart.Xamarin.Views.Drawing.IBrushStyle)(newValue));
+		}
+		
+		private static object DefaultFillBrushStylePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseColumnRenderableSeries>().FillBrushStyle;
+		}
+		
+		private static void OnDataPointWidthPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseColumnRenderableSeries>().DataPointWidth = ((double)(newValue));
+		}
+		
+		private static object DefaultDataPointWidthPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseColumnRenderableSeries>().DataPointWidth;
+		}
+		
+		private static void OnFillBrushMappingModePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseColumnRenderableSeries>().FillBrushMappingMode = ((SciChart.Xamarin.Views.Drawing.TextureMappingMode)(newValue));
+		}
+		
+		private static object DefaultFillBrushMappingModePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseColumnRenderableSeries>().FillBrushMappingMode;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
+{
+	
+	
+	public abstract partial class BaseMountainRenderableSeries : RenderableSeriesBase, SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseMountainRenderableSeries
+	{
+		
+		public static BindableProperty AreaStyleProperty = BindableProperty.Create("AreaStyle", typeof(SciChart.Xamarin.Views.Drawing.IBrushStyle), typeof(BaseMountainRenderableSeries), null, BindingMode.Default, null, OnAreaStylePropertyChanged, null, null, DefaultAreaStylePropertyValueCreator);
+		
+		public static BindableProperty IsDigitalLineProperty = BindableProperty.Create("IsDigitalLine", typeof(bool), typeof(BaseMountainRenderableSeries), null, BindingMode.Default, null, OnIsDigitalLinePropertyChanged, null, null, DefaultIsDigitalLinePropertyValueCreator);
+		
+		public BaseMountainRenderableSeries(SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseMountainRenderableSeries nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		[XTypeConverter(typeof(BrushStyleConverter))]
+		public SciChart.Xamarin.Views.Drawing.IBrushStyle AreaStyle
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Drawing.IBrushStyle)(this.GetValue(AreaStyleProperty)));
+			}
+			set
+			{
+				this.SetValue(AreaStyleProperty, value);
+			}
+		}
+		
+		public bool IsDigitalLine
+		{
+			get
+			{
+				return ((bool)(this.GetValue(IsDigitalLineProperty)));
+			}
+			set
+			{
+				this.SetValue(IsDigitalLineProperty, value);
+			}
+		}
+		
+		private static void OnAreaStylePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseMountainRenderableSeries>().AreaStyle = ((SciChart.Xamarin.Views.Drawing.IBrushStyle)(newValue));
+		}
+		
+		private static object DefaultAreaStylePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseMountainRenderableSeries>().AreaStyle;
+		}
+		
+		private static void OnIsDigitalLinePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseMountainRenderableSeries>().IsDigitalLine = ((bool)(newValue));
+		}
+		
+		private static object DefaultIsDigitalLinePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IBaseMountainRenderableSeries>().IsDigitalLine;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
+{
+	
+	
+	public partial class ColorMap : SciChart.Xamarin.Views.Visuals.RenderableSeries.IColorMap
+	{
+		
+		private SciChart.Xamarin.Views.Core.Common.INativeSciChartObject _nativeSciChartObject;
+		
+		public ColorMap(XFColor[] colors, float[] stops) : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewColorMap(colors, stops))
+		{
+		}
+		
+		public ColorMap(XFColor startColor, XFColor endColor) : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewColorMap(startColor, endColor))
+		{
+		}
+		
+		public ColorMap(SciChart.Xamarin.Views.Visuals.RenderableSeries.IColorMap nativeObject)
+		{
+			_nativeSciChartObject = nativeObject.NativeSciChartObject;
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return _nativeSciChartObject;
+			}
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
+{
+	
+	
+	public partial class FastBandRenderableSeries : BaseBandRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastBandRenderableSeries
+	{
+		
+		public static BindableProperty IsDigitalLineProperty = BindableProperty.Create("IsDigitalLine", typeof(bool), typeof(FastBandRenderableSeries), null, BindingMode.Default, null, OnIsDigitalLinePropertyChanged, null, null, DefaultIsDigitalLinePropertyValueCreator);
+		
+		public FastBandRenderableSeries() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewFastBandRenderableSeries())
+		{
+		}
+		
+		public FastBandRenderableSeries(SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastBandRenderableSeries nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public bool IsDigitalLine
+		{
+			get
+			{
+				return ((bool)(this.GetValue(IsDigitalLineProperty)));
+			}
+			set
+			{
+				this.SetValue(IsDigitalLineProperty, value);
+			}
+		}
+		
+		private static void OnIsDigitalLinePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastBandRenderableSeries>().IsDigitalLine = ((bool)(newValue));
+		}
+		
+		private static object DefaultIsDigitalLinePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastBandRenderableSeries>().IsDigitalLine;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
+{
+	
+	
+	public partial class FastBubbleRenderableSeries : RenderableSeriesBase, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastBubbleRenderableSeries
+	{
+		
+		public static BindableProperty AutoZRangeProperty = BindableProperty.Create("AutoZRange", typeof(bool), typeof(FastBubbleRenderableSeries), null, BindingMode.Default, null, OnAutoZRangePropertyChanged, null, null, DefaultAutoZRangePropertyValueCreator);
+		
+		public static BindableProperty BubbleBrushStyleProperty = BindableProperty.Create("BubbleBrushStyle", typeof(SciChart.Xamarin.Views.Drawing.IBrushStyle), typeof(FastBubbleRenderableSeries), null, BindingMode.Default, null, OnBubbleBrushStylePropertyChanged, null, null, DefaultBubbleBrushStylePropertyValueCreator);
+		
+		public static BindableProperty ZScaleFactorProperty = BindableProperty.Create("ZScaleFactor", typeof(double), typeof(FastBubbleRenderableSeries), null, BindingMode.Default, null, OnZScaleFactorPropertyChanged, null, null, DefaultZScaleFactorPropertyValueCreator);
+		
+		public FastBubbleRenderableSeries() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewFastBubbleRenderableSeries())
+		{
+		}
+		
+		public FastBubbleRenderableSeries(SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastBubbleRenderableSeries nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public bool AutoZRange
+		{
+			get
+			{
+				return ((bool)(this.GetValue(AutoZRangeProperty)));
+			}
+			set
+			{
+				this.SetValue(AutoZRangeProperty, value);
+			}
+		}
+		
+		[XTypeConverter(typeof(BrushStyleConverter))]
+		public SciChart.Xamarin.Views.Drawing.IBrushStyle BubbleBrushStyle
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Drawing.IBrushStyle)(this.GetValue(BubbleBrushStyleProperty)));
+			}
+			set
+			{
+				this.SetValue(BubbleBrushStyleProperty, value);
+			}
+		}
+		
+		public double ZScaleFactor
+		{
+			get
+			{
+				return ((double)(this.GetValue(ZScaleFactorProperty)));
+			}
+			set
+			{
+				this.SetValue(ZScaleFactorProperty, value);
+			}
+		}
+		
+		private static void OnAutoZRangePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastBubbleRenderableSeries>().AutoZRange = ((bool)(newValue));
+		}
+		
+		private static object DefaultAutoZRangePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastBubbleRenderableSeries>().AutoZRange;
+		}
+		
+		private static void OnBubbleBrushStylePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastBubbleRenderableSeries>().BubbleBrushStyle = ((SciChart.Xamarin.Views.Drawing.IBrushStyle)(newValue));
+		}
+		
+		private static object DefaultBubbleBrushStylePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastBubbleRenderableSeries>().BubbleBrushStyle;
+		}
+		
+		private static void OnZScaleFactorPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastBubbleRenderableSeries>().ZScaleFactor = ((double)(newValue));
+		}
+		
+		private static object DefaultZScaleFactorPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastBubbleRenderableSeries>().ZScaleFactor;
+		}
 	}
 }
 namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
@@ -185,8 +637,398 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
 {
 	
 	
+	public partial class FastColumnRenderableSeries : BaseColumnRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastColumnRenderableSeries
+	{
+		
+		public FastColumnRenderableSeries() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewFastColumnRenderableSeries())
+		{
+		}
+		
+		public FastColumnRenderableSeries(SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastColumnRenderableSeries nativeObject) : 
+				base(nativeObject)
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
+{
+	
+	
+	public partial class FastErrorBarsRenderableSeries : RenderableSeriesBase, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastErrorBarsRenderableSeries
+	{
+		
+		public static BindableProperty StrokeLowStyleProperty = BindableProperty.Create("StrokeLowStyle", typeof(SciChart.Xamarin.Views.Drawing.IPenStyle), typeof(FastErrorBarsRenderableSeries), null, BindingMode.Default, null, OnStrokeLowStylePropertyChanged, null, null, DefaultStrokeLowStylePropertyValueCreator);
+		
+		public static BindableProperty StrokeHighStyleProperty = BindableProperty.Create("StrokeHighStyle", typeof(SciChart.Xamarin.Views.Drawing.IPenStyle), typeof(FastErrorBarsRenderableSeries), null, BindingMode.Default, null, OnStrokeHighStylePropertyChanged, null, null, DefaultStrokeHighStylePropertyValueCreator);
+		
+		public static BindableProperty ErrorDirectionProperty = BindableProperty.Create("ErrorDirection", typeof(SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorDirection), typeof(FastErrorBarsRenderableSeries), null, BindingMode.Default, null, OnErrorDirectionPropertyChanged, null, null, DefaultErrorDirectionPropertyValueCreator);
+		
+		public static BindableProperty ErrorModeProperty = BindableProperty.Create("ErrorMode", typeof(SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorMode), typeof(FastErrorBarsRenderableSeries), null, BindingMode.Default, null, OnErrorModePropertyChanged, null, null, DefaultErrorModePropertyValueCreator);
+		
+		public static BindableProperty ErrorTypeProperty = BindableProperty.Create("ErrorType", typeof(SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorType), typeof(FastErrorBarsRenderableSeries), null, BindingMode.Default, null, OnErrorTypePropertyChanged, null, null, DefaultErrorTypePropertyValueCreator);
+		
+		public FastErrorBarsRenderableSeries() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewFastErrorBarsRenderableSeries())
+		{
+		}
+		
+		public FastErrorBarsRenderableSeries(SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastErrorBarsRenderableSeries nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		[XTypeConverter(typeof(PenStyleConverter))]
+		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeLowStyle
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Drawing.IPenStyle)(this.GetValue(StrokeLowStyleProperty)));
+			}
+			set
+			{
+				this.SetValue(StrokeLowStyleProperty, value);
+			}
+		}
+		
+		[XTypeConverter(typeof(PenStyleConverter))]
+		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeHighStyle
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Drawing.IPenStyle)(this.GetValue(StrokeHighStyleProperty)));
+			}
+			set
+			{
+				this.SetValue(StrokeHighStyleProperty, value);
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorDirection ErrorDirection
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorDirection)(this.GetValue(ErrorDirectionProperty)));
+			}
+			set
+			{
+				this.SetValue(ErrorDirectionProperty, value);
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorMode ErrorMode
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorMode)(this.GetValue(ErrorModeProperty)));
+			}
+			set
+			{
+				this.SetValue(ErrorModeProperty, value);
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorType ErrorType
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorType)(this.GetValue(ErrorTypeProperty)));
+			}
+			set
+			{
+				this.SetValue(ErrorTypeProperty, value);
+			}
+		}
+		
+		private static void OnStrokeLowStylePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastErrorBarsRenderableSeries>().StrokeLowStyle = ((SciChart.Xamarin.Views.Drawing.IPenStyle)(newValue));
+		}
+		
+		private static object DefaultStrokeLowStylePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastErrorBarsRenderableSeries>().StrokeLowStyle;
+		}
+		
+		private static void OnStrokeHighStylePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastErrorBarsRenderableSeries>().StrokeHighStyle = ((SciChart.Xamarin.Views.Drawing.IPenStyle)(newValue));
+		}
+		
+		private static object DefaultStrokeHighStylePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastErrorBarsRenderableSeries>().StrokeHighStyle;
+		}
+		
+		private static void OnErrorDirectionPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastErrorBarsRenderableSeries>().ErrorDirection = ((SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorDirection)(newValue));
+		}
+		
+		private static object DefaultErrorDirectionPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastErrorBarsRenderableSeries>().ErrorDirection;
+		}
+		
+		private static void OnErrorModePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastErrorBarsRenderableSeries>().ErrorMode = ((SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorMode)(newValue));
+		}
+		
+		private static object DefaultErrorModePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastErrorBarsRenderableSeries>().ErrorMode;
+		}
+		
+		private static void OnErrorTypePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastErrorBarsRenderableSeries>().ErrorType = ((SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorType)(newValue));
+		}
+		
+		private static object DefaultErrorTypePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastErrorBarsRenderableSeries>().ErrorType;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
+{
+	
+	
+	public partial class FastFixedErrorBarsRenderableSeries : RenderableSeriesBase, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries
+	{
+		
+		public static BindableProperty StrokeLowStyleProperty = BindableProperty.Create("StrokeLowStyle", typeof(SciChart.Xamarin.Views.Drawing.IPenStyle), typeof(FastFixedErrorBarsRenderableSeries), null, BindingMode.Default, null, OnStrokeLowStylePropertyChanged, null, null, DefaultStrokeLowStylePropertyValueCreator);
+		
+		public static BindableProperty StrokeHighStyleProperty = BindableProperty.Create("StrokeHighStyle", typeof(SciChart.Xamarin.Views.Drawing.IPenStyle), typeof(FastFixedErrorBarsRenderableSeries), null, BindingMode.Default, null, OnStrokeHighStylePropertyChanged, null, null, DefaultStrokeHighStylePropertyValueCreator);
+		
+		public static BindableProperty ErrorDirectionProperty = BindableProperty.Create("ErrorDirection", typeof(SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorDirection), typeof(FastFixedErrorBarsRenderableSeries), null, BindingMode.Default, null, OnErrorDirectionPropertyChanged, null, null, DefaultErrorDirectionPropertyValueCreator);
+		
+		public static BindableProperty ErrorModeProperty = BindableProperty.Create("ErrorMode", typeof(SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorMode), typeof(FastFixedErrorBarsRenderableSeries), null, BindingMode.Default, null, OnErrorModePropertyChanged, null, null, DefaultErrorModePropertyValueCreator);
+		
+		public static BindableProperty ErrorTypeProperty = BindableProperty.Create("ErrorType", typeof(SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorType), typeof(FastFixedErrorBarsRenderableSeries), null, BindingMode.Default, null, OnErrorTypePropertyChanged, null, null, DefaultErrorTypePropertyValueCreator);
+		
+		public static BindableProperty DataPointWidthProperty = BindableProperty.Create("DataPointWidth", typeof(double), typeof(FastFixedErrorBarsRenderableSeries), null, BindingMode.Default, null, OnDataPointWidthPropertyChanged, null, null, DefaultDataPointWidthPropertyValueCreator);
+		
+		public static BindableProperty ErrorLowProperty = BindableProperty.Create("ErrorLow", typeof(double), typeof(FastFixedErrorBarsRenderableSeries), null, BindingMode.Default, null, OnErrorLowPropertyChanged, null, null, DefaultErrorLowPropertyValueCreator);
+		
+		public static BindableProperty ErrorHighProperty = BindableProperty.Create("ErrorHigh", typeof(double), typeof(FastFixedErrorBarsRenderableSeries), null, BindingMode.Default, null, OnErrorHighPropertyChanged, null, null, DefaultErrorHighPropertyValueCreator);
+		
+		public FastFixedErrorBarsRenderableSeries() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewFastFixedErrorBarsRenderableSeries())
+		{
+		}
+		
+		public FastFixedErrorBarsRenderableSeries(SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		[XTypeConverter(typeof(PenStyleConverter))]
+		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeLowStyle
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Drawing.IPenStyle)(this.GetValue(StrokeLowStyleProperty)));
+			}
+			set
+			{
+				this.SetValue(StrokeLowStyleProperty, value);
+			}
+		}
+		
+		[XTypeConverter(typeof(PenStyleConverter))]
+		public SciChart.Xamarin.Views.Drawing.IPenStyle StrokeHighStyle
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Drawing.IPenStyle)(this.GetValue(StrokeHighStyleProperty)));
+			}
+			set
+			{
+				this.SetValue(StrokeHighStyleProperty, value);
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorDirection ErrorDirection
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorDirection)(this.GetValue(ErrorDirectionProperty)));
+			}
+			set
+			{
+				this.SetValue(ErrorDirectionProperty, value);
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorMode ErrorMode
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorMode)(this.GetValue(ErrorModeProperty)));
+			}
+			set
+			{
+				this.SetValue(ErrorModeProperty, value);
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorType ErrorType
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorType)(this.GetValue(ErrorTypeProperty)));
+			}
+			set
+			{
+				this.SetValue(ErrorTypeProperty, value);
+			}
+		}
+		
+		public double DataPointWidth
+		{
+			get
+			{
+				return ((double)(this.GetValue(DataPointWidthProperty)));
+			}
+			set
+			{
+				this.SetValue(DataPointWidthProperty, value);
+			}
+		}
+		
+		public double ErrorLow
+		{
+			get
+			{
+				return ((double)(this.GetValue(ErrorLowProperty)));
+			}
+			set
+			{
+				this.SetValue(ErrorLowProperty, value);
+			}
+		}
+		
+		public double ErrorHigh
+		{
+			get
+			{
+				return ((double)(this.GetValue(ErrorHighProperty)));
+			}
+			set
+			{
+				this.SetValue(ErrorHighProperty, value);
+			}
+		}
+		
+		private static void OnStrokeLowStylePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries>().StrokeLowStyle = ((SciChart.Xamarin.Views.Drawing.IPenStyle)(newValue));
+		}
+		
+		private static object DefaultStrokeLowStylePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries>().StrokeLowStyle;
+		}
+		
+		private static void OnStrokeHighStylePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries>().StrokeHighStyle = ((SciChart.Xamarin.Views.Drawing.IPenStyle)(newValue));
+		}
+		
+		private static object DefaultStrokeHighStylePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries>().StrokeHighStyle;
+		}
+		
+		private static void OnErrorDirectionPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries>().ErrorDirection = ((SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorDirection)(newValue));
+		}
+		
+		private static object DefaultErrorDirectionPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries>().ErrorDirection;
+		}
+		
+		private static void OnErrorModePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries>().ErrorMode = ((SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorMode)(newValue));
+		}
+		
+		private static object DefaultErrorModePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries>().ErrorMode;
+		}
+		
+		private static void OnErrorTypePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries>().ErrorType = ((SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorType)(newValue));
+		}
+		
+		private static object DefaultErrorTypePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries>().ErrorType;
+		}
+		
+		private static void OnDataPointWidthPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries>().DataPointWidth = ((double)(newValue));
+		}
+		
+		private static object DefaultDataPointWidthPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries>().DataPointWidth;
+		}
+		
+		private static void OnErrorLowPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries>().ErrorLow = ((double)(newValue));
+		}
+		
+		private static object DefaultErrorLowPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries>().ErrorLow;
+		}
+		
+		private static void OnErrorHighPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries>().ErrorHigh = ((double)(newValue));
+		}
+		
+		private static object DefaultErrorHighPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries>().ErrorHigh;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
+{
+	
+	
+	public partial class FastImpulseRenderableSeries : RenderableSeriesBase, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastImpulseRenderableSeries
+	{
+		
+		public FastImpulseRenderableSeries() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewFastImpulseRenderableSeries())
+		{
+		}
+		
+		public FastImpulseRenderableSeries(SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastImpulseRenderableSeries nativeObject) : 
+				base(nativeObject)
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
+{
+	
+	
 	public partial class FastLineRenderableSeries : RenderableSeriesBase, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastLineRenderableSeries
 	{
+		
+		public static BindableProperty IsDigitalLineProperty = BindableProperty.Create("IsDigitalLine", typeof(bool), typeof(FastLineRenderableSeries), null, BindingMode.Default, null, OnIsDigitalLinePropertyChanged, null, null, DefaultIsDigitalLinePropertyValueCreator);
 		
 		public FastLineRenderableSeries() : 
 				this(DependencyService.Get<INativeSciChartObjectFactory>().NewFastLineRenderableSeries())
@@ -196,6 +1038,178 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
 		public FastLineRenderableSeries(SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastLineRenderableSeries nativeObject) : 
 				base(nativeObject)
 		{
+		}
+		
+		public bool IsDigitalLine
+		{
+			get
+			{
+				return ((bool)(this.GetValue(IsDigitalLineProperty)));
+			}
+			set
+			{
+				this.SetValue(IsDigitalLineProperty, value);
+			}
+		}
+		
+		private static void OnIsDigitalLinePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastLineRenderableSeries>().IsDigitalLine = ((bool)(newValue));
+		}
+		
+		private static object DefaultIsDigitalLinePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastLineRenderableSeries>().IsDigitalLine;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
+{
+	
+	
+	public partial class FastMountainRenderableSeries : BaseMountainRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastMountainRenderableSeries
+	{
+		
+		public FastMountainRenderableSeries() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewFastMountainRenderableSeries())
+		{
+		}
+		
+		public FastMountainRenderableSeries(SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastMountainRenderableSeries nativeObject) : 
+				base(nativeObject)
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
+{
+	
+	
+	public partial class FastOhlcRenderableSeries : OhlcRenderableSeriesBase, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastOhlcRenderableSeries
+	{
+		
+		public FastOhlcRenderableSeries() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewFastOhlcRenderableSeries())
+		{
+		}
+		
+		public FastOhlcRenderableSeries(SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastOhlcRenderableSeries nativeObject) : 
+				base(nativeObject)
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
+{
+	
+	
+	public partial class FastUniformHeatmapRenderableSeries : RenderableSeriesBase, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastUniformHeatmapRenderableSeries
+	{
+		
+		public static BindableProperty MinimumProperty = BindableProperty.Create("Minimum", typeof(double), typeof(FastUniformHeatmapRenderableSeries), null, BindingMode.Default, null, OnMinimumPropertyChanged, null, null, DefaultMinimumPropertyValueCreator);
+		
+		public static BindableProperty MaximumProperty = BindableProperty.Create("Maximum", typeof(double), typeof(FastUniformHeatmapRenderableSeries), null, BindingMode.Default, null, OnMaximumPropertyChanged, null, null, DefaultMaximumPropertyValueCreator);
+		
+		public static BindableProperty DrawTextInCellProperty = BindableProperty.Create("DrawTextInCell", typeof(bool), typeof(FastUniformHeatmapRenderableSeries), null, BindingMode.Default, null, OnDrawTextInCellPropertyChanged, null, null, DefaultDrawTextInCellPropertyValueCreator);
+		
+		public static BindableProperty ColorMapProperty = BindableProperty.Create("ColorMap", typeof(SciChart.Xamarin.Views.Visuals.RenderableSeries.IColorMap), typeof(FastUniformHeatmapRenderableSeries), null, BindingMode.Default, null, OnColorMapPropertyChanged, null, null, DefaultColorMapPropertyValueCreator);
+		
+		public FastUniformHeatmapRenderableSeries() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewFastUniformHeatmapRenderableSeries())
+		{
+		}
+		
+		public FastUniformHeatmapRenderableSeries(SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastUniformHeatmapRenderableSeries nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public double Minimum
+		{
+			get
+			{
+				return ((double)(this.GetValue(MinimumProperty)));
+			}
+			set
+			{
+				this.SetValue(MinimumProperty, value);
+			}
+		}
+		
+		public double Maximum
+		{
+			get
+			{
+				return ((double)(this.GetValue(MaximumProperty)));
+			}
+			set
+			{
+				this.SetValue(MaximumProperty, value);
+			}
+		}
+		
+		public bool DrawTextInCell
+		{
+			get
+			{
+				return ((bool)(this.GetValue(DrawTextInCellProperty)));
+			}
+			set
+			{
+				this.SetValue(DrawTextInCellProperty, value);
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IColorMap ColorMap
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Visuals.RenderableSeries.IColorMap)(this.GetValue(ColorMapProperty)));
+			}
+			set
+			{
+				this.SetValue(ColorMapProperty, value);
+			}
+		}
+		
+		private static void OnMinimumPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastUniformHeatmapRenderableSeries>().Minimum = ((double)(newValue));
+		}
+		
+		private static object DefaultMinimumPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastUniformHeatmapRenderableSeries>().Minimum;
+		}
+		
+		private static void OnMaximumPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastUniformHeatmapRenderableSeries>().Maximum = ((double)(newValue));
+		}
+		
+		private static object DefaultMaximumPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastUniformHeatmapRenderableSeries>().Maximum;
+		}
+		
+		private static void OnDrawTextInCellPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastUniformHeatmapRenderableSeries>().DrawTextInCell = ((bool)(newValue));
+		}
+		
+		private static object DefaultDrawTextInCellPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastUniformHeatmapRenderableSeries>().DrawTextInCell;
+		}
+		
+		private static void OnColorMapPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastUniformHeatmapRenderableSeries>().ColorMap = ((SciChart.Xamarin.Views.Visuals.RenderableSeries.IColorMap)(newValue));
+		}
+		
+		private static object DefaultColorMapPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastUniformHeatmapRenderableSeries>().ColorMap;
 		}
 	}
 }
@@ -440,6 +1454,60 @@ namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
 			{
 				return _nativeSciChartObject;
 			}
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
+{
+	
+	
+	public partial class SplineBandRenderableSeries : BaseBandRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.ISplineBandRenderableSeries
+	{
+		
+		public SplineBandRenderableSeries() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewSplineBandRenderableSeries())
+		{
+		}
+		
+		public SplineBandRenderableSeries(SciChart.Xamarin.Views.Visuals.RenderableSeries.ISplineBandRenderableSeries nativeObject) : 
+				base(nativeObject)
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
+{
+	
+	
+	public partial class SplineLineRenderableSeries : RenderableSeriesBase, SciChart.Xamarin.Views.Visuals.RenderableSeries.ISplineLineRenderableSeries
+	{
+		
+		public SplineLineRenderableSeries() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewSplineLineRenderableSeries())
+		{
+		}
+		
+		public SplineLineRenderableSeries(SciChart.Xamarin.Views.Visuals.RenderableSeries.ISplineLineRenderableSeries nativeObject) : 
+				base(nativeObject)
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
+{
+	
+	
+	public partial class XyScatterRenderableSeries : RenderableSeriesBase, SciChart.Xamarin.Views.Visuals.RenderableSeries.IXyScatterRenderableSeries
+	{
+		
+		public XyScatterRenderableSeries() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewXyScatterRenderableSeries())
+		{
+		}
+		
+		public XyScatterRenderableSeries(SciChart.Xamarin.Views.Visuals.RenderableSeries.IXyScatterRenderableSeries nativeObject) : 
+				base(nativeObject)
+		{
 		}
 	}
 }
@@ -1361,8 +2429,94 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
 {
 	
 	
+	public partial class DateTimeAxis : AxisBase, SciChart.Xamarin.Views.Visuals.Axes.IDateTimeAxis
+	{
+		
+		public static BindableProperty SubDayTextFormattingProperty = BindableProperty.Create("SubDayTextFormatting", typeof(string), typeof(DateTimeAxis), null, BindingMode.Default, null, OnSubDayTextFormattingPropertyChanged, null, null, DefaultSubDayTextFormattingPropertyValueCreator);
+		
+		public DateTimeAxis() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewDateTimeAxis())
+		{
+		}
+		
+		public DateTimeAxis(SciChart.Xamarin.Views.Visuals.Axes.IDateTimeAxis nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public string SubDayTextFormatting
+		{
+			get
+			{
+				return ((string)(this.GetValue(SubDayTextFormattingProperty)));
+			}
+			set
+			{
+				this.SetValue(SubDayTextFormattingProperty, value);
+			}
+		}
+		
+		private static void OnSubDayTextFormattingPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IDateTimeAxis>().SubDayTextFormatting = ((string)(newValue));
+		}
+		
+		private static object DefaultSubDayTextFormattingPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.IDateTimeAxis>().SubDayTextFormatting;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.Axes
+{
+	
+	
+	public partial class LogarithmicNumericAxis : NumericAxis, SciChart.Xamarin.Views.Visuals.Axes.ILogarithmicNumericAxis
+	{
+		
+		public static BindableProperty LogarithmicBaseProperty = BindableProperty.Create("LogarithmicBase", typeof(double), typeof(LogarithmicNumericAxis), null, BindingMode.Default, null, OnLogarithmicBasePropertyChanged, null, null, DefaultLogarithmicBasePropertyValueCreator);
+		
+		public LogarithmicNumericAxis() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewLogarithmicNumericAxis())
+		{
+		}
+		
+		public LogarithmicNumericAxis(SciChart.Xamarin.Views.Visuals.Axes.ILogarithmicNumericAxis nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public double LogarithmicBase
+		{
+			get
+			{
+				return ((double)(this.GetValue(LogarithmicBaseProperty)));
+			}
+			set
+			{
+				this.SetValue(LogarithmicBaseProperty, value);
+			}
+		}
+		
+		private static void OnLogarithmicBasePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.ILogarithmicNumericAxis>().LogarithmicBase = ((double)(newValue));
+		}
+		
+		private static object DefaultLogarithmicBasePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.ILogarithmicNumericAxis>().LogarithmicBase;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.Axes
+{
+	
+	
 	public partial class NumericAxis : AxisBase, SciChart.Xamarin.Views.Visuals.Axes.INumericAxis
 	{
+		
+		public static BindableProperty ScientificNotationProperty = BindableProperty.Create("ScientificNotation", typeof(SciChart.Xamarin.Views.Visuals.Axes.ScientificNotation), typeof(NumericAxis), null, BindingMode.Default, null, OnScientificNotationPropertyChanged, null, null, DefaultScientificNotationPropertyValueCreator);
 		
 		public NumericAxis() : 
 				this(DependencyService.Get<INativeSciChartObjectFactory>().NewNumericAxis())
@@ -1372,6 +2526,28 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
 		public NumericAxis(SciChart.Xamarin.Views.Visuals.Axes.INumericAxis nativeObject) : 
 				base(nativeObject)
 		{
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.Axes.ScientificNotation ScientificNotation
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Visuals.Axes.ScientificNotation)(this.GetValue(ScientificNotationProperty)));
+			}
+			set
+			{
+				this.SetValue(ScientificNotationProperty, value);
+			}
+		}
+		
+		private static void OnScientificNotationPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.INumericAxis>().ScientificNotation = ((SciChart.Xamarin.Views.Visuals.Axes.ScientificNotation)(newValue));
+		}
+		
+		private static object DefaultScientificNotationPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Axes.INumericAxis>().ScientificNotation;
 		}
 	}
 }
@@ -2509,6 +3685,26 @@ namespace SciChart.Xamarin.Views.Model.DataSeries
 				NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IDataSeries>().AcceptsUnsortedData = value;
 			}
 		}
+		
+		public bool IsFifo
+		{
+			get
+			{
+				return NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IDataSeries>().IsFifo;
+			}
+		}
+		
+		public System.Nullable<Int32> FifoCapacity
+		{
+			get
+			{
+				return NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IDataSeries>().FifoCapacity;
+			}
+			set
+			{
+				NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IDataSeries>().FifoCapacity = value;
+			}
+		}
 	}
 }
 namespace SciChart.Xamarin.Views.Model.DataSeries
@@ -2545,6 +3741,14 @@ namespace SciChart.Xamarin.Views.Model.DataSeries
 			}
 		}
 		
+		public bool HasValues
+		{
+			get
+			{
+				return NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IDataSeriesCore>().HasValues;
+			}
+		}
+		
 		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
@@ -2557,13 +3761,68 @@ namespace SciChart.Xamarin.Views.Model.DataSeries
 		{
 			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IDataSeriesCore>().Clear();
 		}
+		
+		public void Clear(bool retainCapacity)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IDataSeriesCore>().Clear(retainCapacity);
+		}
 	}
 }
 namespace SciChart.Xamarin.Views.Model.DataSeries
 {
 	
 	
-	public partial class OhlcDataSeries<TX, TY> : DataSeries, SciChart.Xamarin.Views.Model.DataSeries.IOhlcDataSeries<TX,TY>
+	public partial class HlDataSeries<TX, TY> : XDataSeries, SciChart.Xamarin.Views.Model.DataSeries.IHlDataSeries<TX,TY>
+		where TX : System.IComparable
+		where TY : System.IComparable
+	{
+		
+		public HlDataSeries() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewHlDataSeries<TX, TY>())
+		{
+		}
+		
+		public HlDataSeries(SciChart.Xamarin.Views.Model.DataSeries.IHlDataSeries<TX,TY> nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public void Append(TX x, TY y, TY high, TY low)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IHlDataSeries<TX,TY>>().Append(x, y, high, low);
+		}
+		
+		public void Append(System.Collections.Generic.IEnumerable<TX> xValues, System.Collections.Generic.IEnumerable<TY> yValues, System.Collections.Generic.IEnumerable<TY> highValues, System.Collections.Generic.IEnumerable<TY> lowValues)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IHlDataSeries<TX,TY>>().Append(xValues, yValues, highValues, lowValues);
+		}
+		
+		public void Update(int index, TY y, TY high, TY low)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IHlDataSeries<TX,TY>>().Update(index, y, high, low);
+		}
+		
+		public void Update(int index, System.Collections.Generic.IEnumerable<TY> yValues, System.Collections.Generic.IEnumerable<TY> highValues, System.Collections.Generic.IEnumerable<TY> lowValues)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IHlDataSeries<TX,TY>>().Update(index, yValues, highValues, lowValues);
+		}
+		
+		public void Insert(int index, TX x, TY y, TY high, TY low)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IHlDataSeries<TX,TY>>().Insert(index, x, y, high, low);
+		}
+		
+		public void InsertRange(int startIndex, System.Collections.Generic.IEnumerable<TX> xValues, System.Collections.Generic.IEnumerable<TY> yValues, System.Collections.Generic.IEnumerable<TY> highValues, System.Collections.Generic.IEnumerable<TY> lowValues)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IHlDataSeries<TX,TY>>().InsertRange(startIndex, xValues, yValues, highValues, lowValues);
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Model.DataSeries
+{
+	
+	
+	public partial class OhlcDataSeries<TX, TY> : XDataSeries, SciChart.Xamarin.Views.Model.DataSeries.IOhlcDataSeries<TX,TY>
 		where TX : System.IComparable
 		where TY : System.IComparable
 	{
@@ -2587,13 +3846,135 @@ namespace SciChart.Xamarin.Views.Model.DataSeries
 		{
 			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IOhlcDataSeries<TX,TY>>().Append(xValues, openValues, highValues, lowValues, closeValues);
 		}
+		
+		public void Update(int index, TY open, TY high, TY low, TY close)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IOhlcDataSeries<TX,TY>>().Update(index, open, high, low, close);
+		}
+		
+		public void Update(int index, System.Collections.Generic.IEnumerable<TY> openValues, System.Collections.Generic.IEnumerable<TY> highValues, System.Collections.Generic.IEnumerable<TY> lowValues, System.Collections.Generic.IEnumerable<TY> closeValues)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IOhlcDataSeries<TX,TY>>().Update(index, openValues, highValues, lowValues, closeValues);
+		}
+		
+		public void Insert(int index, TX x, TY open, TY high, TY low, TY close)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IOhlcDataSeries<TX,TY>>().Insert(index, x, open, high, low, close);
+		}
+		
+		public void InsertRange(int startIndex, System.Collections.Generic.IEnumerable<TX> xValues, System.Collections.Generic.IEnumerable<TY> openValues, System.Collections.Generic.IEnumerable<TY> highValues, System.Collections.Generic.IEnumerable<TY> lowValues, System.Collections.Generic.IEnumerable<TY> closeValues)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IOhlcDataSeries<TX,TY>>().InsertRange(startIndex, xValues, openValues, highValues, lowValues, closeValues);
+		}
 	}
 }
 namespace SciChart.Xamarin.Views.Model.DataSeries
 {
 	
 	
-	public partial class XyDataSeries<TX, TY> : DataSeries, SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY>
+	public partial class UniformHeatmapDataSeries<TX, TY, TZ> : DataSeries, SciChart.Xamarin.Views.Model.DataSeries.IUniformHeatmapDataSeries<TX,TY,TZ>
+		where TX : System.IComparable
+		where TY : System.IComparable
+		where TZ : System.IComparable
+	{
+		
+		public UniformHeatmapDataSeries(int xSize, int ySize) : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewUniformHeatmapDataSeries<TX, TY, TZ>(xSize, ySize))
+		{
+		}
+		
+		public UniformHeatmapDataSeries(SciChart.Xamarin.Views.Model.DataSeries.IUniformHeatmapDataSeries<TX,TY,TZ> nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public TX StartX
+		{
+			get
+			{
+				return NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IUniformHeatmapDataSeries<TX,TY,TZ>>().StartX;
+			}
+			set
+			{
+				NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IUniformHeatmapDataSeries<TX,TY,TZ>>().StartX = value;
+			}
+		}
+		
+		public TY StartY
+		{
+			get
+			{
+				return NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IUniformHeatmapDataSeries<TX,TY,TZ>>().StartY;
+			}
+			set
+			{
+				NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IUniformHeatmapDataSeries<TX,TY,TZ>>().StartY = value;
+			}
+		}
+		
+		public TX StepX
+		{
+			get
+			{
+				return NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IUniformHeatmapDataSeries<TX,TY,TZ>>().StepX;
+			}
+			set
+			{
+				NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IUniformHeatmapDataSeries<TX,TY,TZ>>().StepX = value;
+			}
+		}
+		
+		public TY StepY
+		{
+			get
+			{
+				return NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IUniformHeatmapDataSeries<TX,TY,TZ>>().StepY;
+			}
+			set
+			{
+				NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IUniformHeatmapDataSeries<TX,TY,TZ>>().StepY = value;
+			}
+		}
+		
+		public void UpdateZValues(System.Collections.Generic.IEnumerable<TZ> values)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IUniformHeatmapDataSeries<TX,TY,TZ>>().UpdateZValues(values);
+		}
+		
+		public void UpdateRangeZAt(int xIndex, int yIndex, System.Collections.Generic.IEnumerable<TZ> values)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IUniformHeatmapDataSeries<TX,TY,TZ>>().UpdateRangeZAt(xIndex, yIndex, values);
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Model.DataSeries
+{
+	
+	
+	public abstract partial class XDataSeries : DataSeries, SciChart.Xamarin.Views.Model.DataSeries.IXDataSeries
+	{
+		
+		public XDataSeries(SciChart.Xamarin.Views.Model.DataSeries.IXDataSeries nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public void RemoveAt(int index)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXDataSeries>().RemoveAt(index);
+		}
+		
+		public void RemoveRange(int startIndex, int count)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXDataSeries>().RemoveRange(startIndex, count);
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Model.DataSeries
+{
+	
+	
+	public partial class XyDataSeries<TX, TY> : XDataSeries, SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY>
 		where TX : System.IComparable
 		where TY : System.IComparable
 	{
@@ -2616,6 +3997,207 @@ namespace SciChart.Xamarin.Views.Model.DataSeries
 		public void Append(System.Collections.Generic.IEnumerable<TX> xValues, System.Collections.Generic.IEnumerable<TY> yValues)
 		{
 			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY>>().Append(xValues, yValues);
+		}
+		
+		public void UpdateXyAt(int index, TX x, TY y)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY>>().UpdateXyAt(index, x, y);
+		}
+		
+		public void UpdateXAt(int index, TX x)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY>>().UpdateXAt(index, x);
+		}
+		
+		public void UpdateYAt(int index, TY y)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY>>().UpdateYAt(index, y);
+		}
+		
+		public void UpdateRangeXyAt(int index, System.Collections.Generic.IEnumerable<TX> xValues, System.Collections.Generic.IEnumerable<TY> yValues)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY>>().UpdateRangeXyAt(index, xValues, yValues);
+		}
+		
+		public void UpdateRangeXAt(int index, System.Collections.Generic.IEnumerable<TX> xValues)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY>>().UpdateRangeXAt(index, xValues);
+		}
+		
+		public void UpdateRangeYAt(int index, System.Collections.Generic.IEnumerable<TY> yValues)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY>>().UpdateRangeYAt(index, yValues);
+		}
+		
+		public void Insert(int index, TX x, TY y)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY>>().Insert(index, x, y);
+		}
+		
+		public void InsertRange(int startIndex, System.Collections.Generic.IEnumerable<TX> xValues, System.Collections.Generic.IEnumerable<TY> yValues)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY>>().InsertRange(startIndex, xValues, yValues);
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Model.DataSeries
+{
+	
+	
+	public partial class XyyDataSeries<TX, TY> : XDataSeries, SciChart.Xamarin.Views.Model.DataSeries.IXyyDataSeries<TX,TY>
+		where TX : System.IComparable
+		where TY : System.IComparable
+	{
+		
+		public XyyDataSeries() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewXyyDataSeries<TX, TY>())
+		{
+		}
+		
+		public XyyDataSeries(SciChart.Xamarin.Views.Model.DataSeries.IXyyDataSeries<TX,TY> nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public void Append(TX x, TY y, TY y1)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyyDataSeries<TX,TY>>().Append(x, y, y1);
+		}
+		
+		public void Append(System.Collections.Generic.IEnumerable<TX> xValues, System.Collections.Generic.IEnumerable<TY> yValues, System.Collections.Generic.IEnumerable<TY> y1Values)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyyDataSeries<TX,TY>>().Append(xValues, yValues, y1Values);
+		}
+		
+		public void UpdateXyy1At(int index, TX x, TY y, TY y1)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyyDataSeries<TX,TY>>().UpdateXyy1At(index, x, y, y1);
+		}
+		
+		public void UpdateXAt(int index, TX x)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyyDataSeries<TX,TY>>().UpdateXAt(index, x);
+		}
+		
+		public void UpdateYAt(int index, TY y)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyyDataSeries<TX,TY>>().UpdateYAt(index, y);
+		}
+		
+		public void UpdateY1At(int index, TY y1)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyyDataSeries<TX,TY>>().UpdateY1At(index, y1);
+		}
+		
+		public void UpdateRangeXyy1At(int index, System.Collections.Generic.IEnumerable<TX> xValues, System.Collections.Generic.IEnumerable<TY> yValues, System.Collections.Generic.IEnumerable<TY> y1Values)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyyDataSeries<TX,TY>>().UpdateRangeXyy1At(index, xValues, yValues, y1Values);
+		}
+		
+		public void UpdateRangeXAt(int index, System.Collections.Generic.IEnumerable<TX> xValues)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyyDataSeries<TX,TY>>().UpdateRangeXAt(index, xValues);
+		}
+		
+		public void UpdateRangeYAt(int index, System.Collections.Generic.IEnumerable<TY> yValues)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyyDataSeries<TX,TY>>().UpdateRangeYAt(index, yValues);
+		}
+		
+		public void UpdateRangeY1At(int index, System.Collections.Generic.IEnumerable<TY> y1Values)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyyDataSeries<TX,TY>>().UpdateRangeY1At(index, y1Values);
+		}
+		
+		public void Insert(int index, TX x, TY y, TY y1)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyyDataSeries<TX,TY>>().Insert(index, x, y, y1);
+		}
+		
+		public void InsertRange(int startIndex, System.Collections.Generic.IEnumerable<TX> xValues, System.Collections.Generic.IEnumerable<TY> yValues, System.Collections.Generic.IEnumerable<TY> y1Values)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyyDataSeries<TX,TY>>().InsertRange(startIndex, xValues, yValues, y1Values);
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Model.DataSeries
+{
+	
+	
+	public partial class XyzDataSeries<TX, TY, TZ> : XDataSeries, SciChart.Xamarin.Views.Model.DataSeries.IXyzDataSeries<TX,TY,TZ>
+		where TX : System.IComparable
+		where TY : System.IComparable
+		where TZ : System.IComparable
+	{
+		
+		public XyzDataSeries() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewXyzDataSeries<TX, TY, TZ>())
+		{
+		}
+		
+		public XyzDataSeries(SciChart.Xamarin.Views.Model.DataSeries.IXyzDataSeries<TX,TY,TZ> nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public void Append(TX x, TY y, TZ z)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyzDataSeries<TX,TY,TZ>>().Append(x, y, z);
+		}
+		
+		public void Append(System.Collections.Generic.IEnumerable<TX> xValues, System.Collections.Generic.IEnumerable<TY> yValues, System.Collections.Generic.IEnumerable<TZ> zValues)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyzDataSeries<TX,TY,TZ>>().Append(xValues, yValues, zValues);
+		}
+		
+		public void Insert(int index, TX x, TY y, TZ z)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyzDataSeries<TX,TY,TZ>>().Insert(index, x, y, z);
+		}
+		
+		public void InsertRange(int startIndex, System.Collections.Generic.IEnumerable<TX> xValues, System.Collections.Generic.IEnumerable<TY> yValues, System.Collections.Generic.IEnumerable<TZ> zValues)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyzDataSeries<TX,TY,TZ>>().InsertRange(startIndex, xValues, yValues, zValues);
+		}
+		
+		public void UpdateXyzAt(int index, TX x, TY y, TZ z)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyzDataSeries<TX,TY,TZ>>().UpdateXyzAt(index, x, y, z);
+		}
+		
+		public void UpdateXAt(int index, TX x)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyzDataSeries<TX,TY,TZ>>().UpdateXAt(index, x);
+		}
+		
+		public void UpdateYAt(int index, TY y)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyzDataSeries<TX,TY,TZ>>().UpdateYAt(index, y);
+		}
+		
+		public void UpdateZAt(int index, TZ z)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyzDataSeries<TX,TY,TZ>>().UpdateZAt(index, z);
+		}
+		
+		public void UpdateRangeXyzAt(int index, System.Collections.Generic.IEnumerable<TX> xValues, System.Collections.Generic.IEnumerable<TY> yValues, System.Collections.Generic.IEnumerable<TZ> zValues)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyzDataSeries<TX,TY,TZ>>().UpdateRangeXyzAt(index, xValues, yValues, zValues);
+		}
+		
+		public void UpdateRangeXAt(int index, System.Collections.Generic.IEnumerable<TX> xValues)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyzDataSeries<TX,TY,TZ>>().UpdateRangeXAt(index, xValues);
+		}
+		
+		public void UpdateRangeYAt(int index, System.Collections.Generic.IEnumerable<TY> yValues)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyzDataSeries<TX,TY,TZ>>().UpdateRangeYAt(index, yValues);
+		}
+		
+		public void UpdateRangeZAt(int index, System.Collections.Generic.IEnumerable<TZ> zValues)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.DataSeries.IXyzDataSeries<TX,TY,TZ>>().UpdateRangeZAt(index, zValues);
 		}
 	}
 }

@@ -34,5 +34,15 @@ namespace SciChart.Xamarin.Android.Renderer.Utility
             // since we don't provide default data series for renderable series so there will be no need in reverse conversion
             throw new NotImplementedException();
         }
+
+        public static int? FifoCapacityToXamarin(this Java.Lang.Integer fifoCapacity)
+        {
+            return fifoCapacity?.IntValue();
+        }
+
+        public static Java.Lang.Integer FifoCapacityFromXamarin(this int? fifoCapacity)
+        {
+            return fifoCapacity.HasValue ? new Integer(fifoCapacity.Value) : null;
+        }
     }
 }

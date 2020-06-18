@@ -80,6 +80,11 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
                 members.Add(CreateNativePropertyConverterFrom(converter));
             }
 
+            foreach (var converter in information.NativeMethodConverters)
+            {
+                members.Add(CreateNativeMethodConverterFrom(converter));
+            }
+
             members.Add(new CodeMemberProperty()
             {
                 Name = "NativeSciChartObject",
@@ -134,6 +139,51 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
                         Right = setter                    }
                 }
             };
+        }
+
+        private CodeMemberMethod CreateNativeMethodConverterFrom(NativeMethodConverterInformation information)
+        {
+            var methodName = information.Name;
+            var nativeMethodName = information.NativeMethodName;
+            var converter = information.Converter;
+
+            var attributes = MemberAttributes.Public | MemberAttributes.Final;
+            if (methodName == nativeMethodName)
+                attributes |= MemberAttributes.New;
+
+            var methodDeclaration = new CodeMemberMethod()
+            {
+                Name = methodName,
+                Attributes = attributes,
+                ReturnType = new CodeTypeReference(information.ReturnType),
+            };
+
+            var parameters = new List<CodeParameterDeclarationExpression>();
+            var arguments = new List<CodeExpression>();
+            foreach (var parameterInfo in information.Params)
+            {
+                parameters.Add(new CodeParameterDeclarationExpression(parameterInfo.ParameterType, parameterInfo.Name));
+                arguments.Add(new CodeArgumentReferenceExpression(parameterInfo.Name));
+            }
+
+            var nativeMethodCall = new CodeMethodInvokeExpression(new CodeBaseReferenceExpression(), nativeMethodName, arguments.ToArray());
+
+            // call converter extensions if it's present
+            if (converter != null)
+                nativeMethodCall = new CodeMethodInvokeExpression(nativeMethodCall, $"{converter}ToXamarin");
+
+            if (information.ReturnType != typeof(void))
+            {
+                methodDeclaration.Statements.Add(new CodeMethodReturnStatement(nativeMethodCall));
+            }
+            else
+            {
+                methodDeclaration.Statements.Add(nativeMethodCall);
+            }
+
+            methodDeclaration.Parameters.AddRange(parameters.ToArray());
+
+            return methodDeclaration;
         }
 
         protected override string GetTypeName(Type type)
@@ -220,13 +270,12 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
                 ReturnType = new CodeTypeReference(information.NativeEnumType)
             };
 
-            var enumNames = Enum.GetNames(enumToMap);
-            foreach (var enumName in enumNames)
+            foreach (var (xamarinEnumName, nativeEnumName) in information.EnumValues)
             {
-                var nativeEnumValue = new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(new CodeTypeReference(information.NativeEnumType)), enumName);
+                var nativeEnumValue = new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(new CodeTypeReference(information.NativeEnumType)), nativeEnumName);
                 var nativeValueEqualCheck = new CodeBinaryOperatorExpression(new CodeVariableReferenceExpression(nativeValue), CodeBinaryOperatorType.IdentityEquality, nativeEnumValue);
 
-                var xamarinEnumValue = new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(enumToMap), enumName);
+                var xamarinEnumValue = new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(enumToMap), xamarinEnumName);
                 var xamarinValueEqualCheck = new CodeBinaryOperatorExpression(new CodeVariableReferenceExpression(formsValue), CodeBinaryOperatorType.IdentityEquality, xamarinEnumValue);
 
                 var xamarinMapping = new CodeConditionStatement(xamarinValueEqualCheck, new CodeMethodReturnStatement(nativeEnumValue));

@@ -6,6 +6,8 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
     [InjectNativeSciChartObject]
     public interface INumericAxis : IAxis
     {
-        
+        [BindablePropertyDefinition()]
+        [NativePropertyConverterDeclaration("ScientificNotation")]
+        ScientificNotation ScientificNotation { get; set; } 
     }
 }

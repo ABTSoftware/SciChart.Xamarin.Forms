@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:visuals="clr-namespace:SciChart.Xamarin.Views.Visuals;assembly=SciChart.Xamarin.Views"
+             xmlns:renderableSeries="clr-namespace:SciChart.Xamarin.Views.Visuals.RenderableSeries;assembly=SciChart.Xamarin.Views"
+             xmlns:axes="clr-namespace:SciChart.Xamarin.Views.Visuals.Axes;assembly=SciChart.Xamarin.Views"
+             xmlns:modifiers="clr-namespace:SciChart.Xamarin.Views.Modifiers;assembly=SciChart.Xamarin.Views"
+             mc:Ignorable="d"
+             x:Class="TestApp.UI.Examples.BandChart">
+    <ContentPage.Content>
+        <visuals:SciChartSurface HorizontalOptions="Fill" VerticalOptions="Fill">
+            <visuals:SciChartSurface.RenderableSeries>
+                <renderableSeries:FastBandRenderableSeries x:Name="BandSeries" StrokeStyle="#FFFF1919, 2" StrokeY1Style="#FF279B27, 2" FillBrushStyle="#33279B27" FillY1BrushStyle="#33FF1919"/>
+            </visuals:SciChartSurface.RenderableSeries>
+
+            <visuals:SciChartSurface.XAxes>
+                <axes:NumericAxis/>
+            </visuals:SciChartSurface.XAxes>
+
+            <visuals:SciChartSurface.YAxes>
+                <axes:NumericAxis/>
+            </visuals:SciChartSurface.YAxes>
+
+            <visuals:SciChartSurface.ChartModifiers>
+                <modifiers:ModifierGroup>
+                    <modifiers:PinchZoomModifier/>
+                    <modifiers:ZoomPanModifier ReceiveHandledEvents="true"/>
+                    <modifiers:ZoomExtentsModifier/>
+                </modifiers:ModifierGroup>
+            </visuals:SciChartSurface.ChartModifiers>
+
+        </visuals:SciChartSurface>
+    </ContentPage.Content>
+</ContentPage>

@@ -16,6 +16,194 @@ namespace SciChart.Xamarin.iOS.Renderer
 	using SciChart.Xamarin.iOS.Renderer.Utility;
 	
 	
+	public partial class ColorMapiOS : SCIColorMap, SciChart.Xamarin.Views.Visuals.RenderableSeries.IColorMap, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public ColorMapiOS(UIKit.UIColor[] colors, float[] stops) : 
+				base(colors, stops)
+		{
+		}
+		
+		public ColorMapiOS()
+		{
+		}
+		
+		public ColorMapiOS(UIKit.UIColor[] colors, Foundation.NSNumber[] stops) : 
+				base(colors, stops)
+		{
+		}
+		
+		public ColorMapiOS(UIKit.UIColor startColor, UIKit.UIColor endColor) : 
+				base(startColor, endColor)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class FastBandRenderableSeriesiOS : SCIFastBandRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastBandRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public FastBandRenderableSeriesiOS()
+		{
+		}
+		
+		public FastBandRenderableSeriesiOS(SciChart.iOS.Charting.SCIBandRenderPassData renderPassData, SciChart.iOS.Charting.IISCIHitProvider hitProvider, SciChart.iOS.Charting.IISCINearestPointProvider nearestPointProvider) : 
+				base(renderPassData, hitProvider, nearestPointProvider)
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeY1Style
+		{
+			get
+			{
+				return base.StrokeY1Style.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeY1Style = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IBrushStyle FillBrushStyle
+		{
+			get
+			{
+				return base.FillBrushStyle.BrushStyleToXamarin();
+			}
+			set
+			{
+				base.FillBrushStyle = value.BrushStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IBrushStyle FillY1BrushStyle
+		{
+			get
+			{
+				return base.FillY1BrushStyle.BrushStyleToXamarin();
+			}
+			set
+			{
+				base.FillY1BrushStyle = value.BrushStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Model.DataSeries.IDataSeries DataSeries
+		{
+			get
+			{
+				return base.DataSeries.DataSeriesToXamarin();
+			}
+			set
+			{
+				base.DataSeries = value.DataSeriesFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		{
+			get
+			{
+				return base.StrokeStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.PointMarkers.IPointMarker PointMarker
+		{
+			get
+			{
+				return base.PointMarker.PointMarkerToXamarin();
+			}
+			set
+			{
+				base.PointMarker = value.PointMarkerFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class FastBubbleRenderableSeriesiOS : SCIFastBubbleRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastBubbleRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public FastBubbleRenderableSeriesiOS()
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IBrushStyle BubbleBrushStyle
+		{
+			get
+			{
+				return base.BubbleBrushStyle.BrushStyleToXamarin();
+			}
+			set
+			{
+				base.BubbleBrushStyle = value.BrushStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Model.DataSeries.IDataSeries DataSeries
+		{
+			get
+			{
+				return base.DataSeries.DataSeriesToXamarin();
+			}
+			set
+			{
+				base.DataSeries = value.DataSeriesFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		{
+			get
+			{
+				return base.StrokeStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.PointMarkers.IPointMarker PointMarker
+		{
+			get
+			{
+				return base.PointMarker.PointMarkerToXamarin();
+			}
+			set
+			{
+				base.PointMarker = value.PointMarkerFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
 	public partial class FastCandlestickRenderableSeriesiOS : SCIFastCandlestickRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastCandlestickRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
@@ -116,10 +304,783 @@ namespace SciChart.Xamarin.iOS.Renderer
 		}
 	}
 	
+	public partial class FastColumnRenderableSeriesiOS : SCIFastColumnRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastColumnRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public FastColumnRenderableSeriesiOS()
+		{
+		}
+		
+		public FastColumnRenderableSeriesiOS(SciChart.iOS.Charting.SCIColumnRenderPassData renderPassData, SciChart.iOS.Charting.IISCIHitProvider hitProvider, SciChart.iOS.Charting.IISCINearestPointProvider nearestPointProvider) : 
+				base(renderPassData, hitProvider, nearestPointProvider)
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IBrushStyle FillBrushStyle
+		{
+			get
+			{
+				return base.FillBrushStyle.BrushStyleToXamarin();
+			}
+			set
+			{
+				base.FillBrushStyle = value.BrushStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.TextureMappingMode FillBrushMappingMode
+		{
+			get
+			{
+				return base.FillBrushMappingMode.TextureMappingModeToXamarin();
+			}
+			set
+			{
+				base.FillBrushMappingMode = value.TextureMappingModeFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Model.DataSeries.IDataSeries DataSeries
+		{
+			get
+			{
+				return base.DataSeries.DataSeriesToXamarin();
+			}
+			set
+			{
+				base.DataSeries = value.DataSeriesFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		{
+			get
+			{
+				return base.StrokeStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.PointMarkers.IPointMarker PointMarker
+		{
+			get
+			{
+				return base.PointMarker.PointMarkerToXamarin();
+			}
+			set
+			{
+				base.PointMarker = value.PointMarkerFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class FastErrorBarsRenderableSeriesiOS : SCIFastErrorBarsRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastErrorBarsRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public FastErrorBarsRenderableSeriesiOS()
+		{
+		}
+		
+		public FastErrorBarsRenderableSeriesiOS(SciChart.iOS.Charting.SCIErrorBarsRenderPassData renderPassData, SciChart.iOS.Charting.IISCIHitProvider hitProvider, SciChart.iOS.Charting.IISCINearestPointProvider nearestPointProvider) : 
+				base(renderPassData, hitProvider, nearestPointProvider)
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeLowStyle
+		{
+			get
+			{
+				return base.StrokeLowStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeLowStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeHighStyle
+		{
+			get
+			{
+				return base.StrokeHighStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeHighStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorDirection ErrorDirection
+		{
+			get
+			{
+				return base.ErrorDirection.ErrorDirectionToXamarin();
+			}
+			set
+			{
+				base.ErrorDirection = value.ErrorDirectionFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorMode ErrorMode
+		{
+			get
+			{
+				return base.ErrorMode.ErrorModeToXamarin();
+			}
+			set
+			{
+				base.ErrorMode = value.ErrorModeFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorType ErrorType
+		{
+			get
+			{
+				return base.ErrorType.ErrorTypeToXamarin();
+			}
+			set
+			{
+				base.ErrorType = value.ErrorTypeFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Model.DataSeries.IDataSeries DataSeries
+		{
+			get
+			{
+				return base.DataSeries.DataSeriesToXamarin();
+			}
+			set
+			{
+				base.DataSeries = value.DataSeriesFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		{
+			get
+			{
+				return base.StrokeStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.PointMarkers.IPointMarker PointMarker
+		{
+			get
+			{
+				return base.PointMarker.PointMarkerToXamarin();
+			}
+			set
+			{
+				base.PointMarker = value.PointMarkerFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class FastFixedErrorBarsRenderableSeriesiOS : SCIFastFixedErrorBarsRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public FastFixedErrorBarsRenderableSeriesiOS()
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeLowStyle
+		{
+			get
+			{
+				return base.StrokeLowStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeLowStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeHighStyle
+		{
+			get
+			{
+				return base.StrokeHighStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeHighStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorDirection ErrorDirection
+		{
+			get
+			{
+				return base.ErrorDirection.ErrorDirectionToXamarin();
+			}
+			set
+			{
+				base.ErrorDirection = value.ErrorDirectionFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorMode ErrorMode
+		{
+			get
+			{
+				return base.ErrorMode.ErrorModeToXamarin();
+			}
+			set
+			{
+				base.ErrorMode = value.ErrorModeFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorType ErrorType
+		{
+			get
+			{
+				return base.ErrorType.ErrorTypeToXamarin();
+			}
+			set
+			{
+				base.ErrorType = value.ErrorTypeFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Model.DataSeries.IDataSeries DataSeries
+		{
+			get
+			{
+				return base.DataSeries.DataSeriesToXamarin();
+			}
+			set
+			{
+				base.DataSeries = value.DataSeriesFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		{
+			get
+			{
+				return base.StrokeStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.PointMarkers.IPointMarker PointMarker
+		{
+			get
+			{
+				return base.PointMarker.PointMarkerToXamarin();
+			}
+			set
+			{
+				base.PointMarker = value.PointMarkerFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class FastImpulseRenderableSeriesiOS : SCIFastImpulseRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastImpulseRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public FastImpulseRenderableSeriesiOS()
+		{
+		}
+		
+		public FastImpulseRenderableSeriesiOS(SciChart.iOS.Charting.SCIImpulseRenderPassData renderPassData, SciChart.iOS.Charting.IISCIHitProvider hitProvider, SciChart.iOS.Charting.IISCINearestPointProvider nearestPointProvider) : 
+				base(renderPassData, hitProvider, nearestPointProvider)
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Model.DataSeries.IDataSeries DataSeries
+		{
+			get
+			{
+				return base.DataSeries.DataSeriesToXamarin();
+			}
+			set
+			{
+				base.DataSeries = value.DataSeriesFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		{
+			get
+			{
+				return base.StrokeStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.PointMarkers.IPointMarker PointMarker
+		{
+			get
+			{
+				return base.PointMarker.PointMarkerToXamarin();
+			}
+			set
+			{
+				base.PointMarker = value.PointMarkerFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
 	public partial class FastLineRenderableSeriesiOS : SCIFastLineRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastLineRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
 		public FastLineRenderableSeriesiOS()
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Model.DataSeries.IDataSeries DataSeries
+		{
+			get
+			{
+				return base.DataSeries.DataSeriesToXamarin();
+			}
+			set
+			{
+				base.DataSeries = value.DataSeriesFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		{
+			get
+			{
+				return base.StrokeStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.PointMarkers.IPointMarker PointMarker
+		{
+			get
+			{
+				return base.PointMarker.PointMarkerToXamarin();
+			}
+			set
+			{
+				base.PointMarker = value.PointMarkerFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class FastMountainRenderableSeriesiOS : SCIFastMountainRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastMountainRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public FastMountainRenderableSeriesiOS()
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IBrushStyle AreaStyle
+		{
+			get
+			{
+				return base.AreaStyle.BrushStyleToXamarin();
+			}
+			set
+			{
+				base.AreaStyle = value.BrushStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Model.DataSeries.IDataSeries DataSeries
+		{
+			get
+			{
+				return base.DataSeries.DataSeriesToXamarin();
+			}
+			set
+			{
+				base.DataSeries = value.DataSeriesFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		{
+			get
+			{
+				return base.StrokeStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.PointMarkers.IPointMarker PointMarker
+		{
+			get
+			{
+				return base.PointMarker.PointMarkerToXamarin();
+			}
+			set
+			{
+				base.PointMarker = value.PointMarkerFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class FastOhlcRenderableSeriesiOS : SCIFastOhlcRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastOhlcRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public FastOhlcRenderableSeriesiOS()
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeDownStyle
+		{
+			get
+			{
+				return base.StrokeDownStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeDownStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeUpStyle
+		{
+			get
+			{
+				return base.StrokeUpStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeUpStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Model.DataSeries.IDataSeries DataSeries
+		{
+			get
+			{
+				return base.DataSeries.DataSeriesToXamarin();
+			}
+			set
+			{
+				base.DataSeries = value.DataSeriesFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		{
+			get
+			{
+				return base.StrokeStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.PointMarkers.IPointMarker PointMarker
+		{
+			get
+			{
+				return base.PointMarker.PointMarkerToXamarin();
+			}
+			set
+			{
+				base.PointMarker = value.PointMarkerFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class FastUniformHeatmapRenderableSeriesiOS : SCIFastUniformHeatmapRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastUniformHeatmapRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public FastUniformHeatmapRenderableSeriesiOS()
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.RenderableSeries.IColorMap ColorMap
+		{
+			get
+			{
+				return base.ColorMap.ColorMapToXamarin();
+			}
+			set
+			{
+				base.ColorMap = value.ColorMapFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Model.DataSeries.IDataSeries DataSeries
+		{
+			get
+			{
+				return base.DataSeries.DataSeriesToXamarin();
+			}
+			set
+			{
+				base.DataSeries = value.DataSeriesFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		{
+			get
+			{
+				return base.StrokeStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.PointMarkers.IPointMarker PointMarker
+		{
+			get
+			{
+				return base.PointMarker.PointMarkerToXamarin();
+			}
+			set
+			{
+				base.PointMarker = value.PointMarkerFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class SplineBandRenderableSeriesiOS : SCISplineBandRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.ISplineBandRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public SplineBandRenderableSeriesiOS()
+		{
+		}
+		
+		public SplineBandRenderableSeriesiOS(SciChart.iOS.Charting.SCISplineBandRenderPassData renderPassData, SciChart.iOS.Charting.IISCIHitProvider hitProvider, SciChart.iOS.Charting.IISCINearestPointProvider nearestPointProvider) : 
+				base(renderPassData, hitProvider, nearestPointProvider)
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeY1Style
+		{
+			get
+			{
+				return base.StrokeY1Style.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeY1Style = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IBrushStyle FillBrushStyle
+		{
+			get
+			{
+				return base.FillBrushStyle.BrushStyleToXamarin();
+			}
+			set
+			{
+				base.FillBrushStyle = value.BrushStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IBrushStyle FillY1BrushStyle
+		{
+			get
+			{
+				return base.FillY1BrushStyle.BrushStyleToXamarin();
+			}
+			set
+			{
+				base.FillY1BrushStyle = value.BrushStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Model.DataSeries.IDataSeries DataSeries
+		{
+			get
+			{
+				return base.DataSeries.DataSeriesToXamarin();
+			}
+			set
+			{
+				base.DataSeries = value.DataSeriesFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		{
+			get
+			{
+				return base.StrokeStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.PointMarkers.IPointMarker PointMarker
+		{
+			get
+			{
+				return base.PointMarker.PointMarkerToXamarin();
+			}
+			set
+			{
+				base.PointMarker = value.PointMarkerFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class SplineLineRenderableSeriesiOS : SCISplineLineRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.ISplineLineRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public SplineLineRenderableSeriesiOS()
+		{
+		}
+		
+		public SplineLineRenderableSeriesiOS(SciChart.iOS.Charting.SCISplineLineRenderPassData renderPassData, SciChart.iOS.Charting.IISCIHitProvider hitProvider, SciChart.iOS.Charting.IISCINearestPointProvider nearestPointProvider) : 
+				base(renderPassData, hitProvider, nearestPointProvider)
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Model.DataSeries.IDataSeries DataSeries
+		{
+			get
+			{
+				return base.DataSeries.DataSeriesToXamarin();
+			}
+			set
+			{
+				base.DataSeries = value.DataSeriesFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle StrokeStyle
+		{
+			get
+			{
+				return base.StrokeStyle.PenStyleToXamarin();
+			}
+			set
+			{
+				base.StrokeStyle = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.PointMarkers.IPointMarker PointMarker
+		{
+			get
+			{
+				return base.PointMarker.PointMarkerToXamarin();
+			}
+			set
+			{
+				base.PointMarker = value.PointMarkerFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class XyScatterRenderableSeriesiOS : SCIXyScatterRenderableSeries, SciChart.Xamarin.Views.Visuals.RenderableSeries.IXyScatterRenderableSeries, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public XyScatterRenderableSeriesiOS()
 		{
 		}
 		
@@ -436,11 +1397,355 @@ namespace SciChart.Xamarin.iOS.Renderer
 		}
 	}
 	
+	public partial class DateAxisiOS : SCIDateAxis, SciChart.Xamarin.Views.Visuals.Axes.IDateTimeAxis, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public DateAxisiOS()
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment AxisAlignment
+		{
+			get
+			{
+				return base.AxisAlignment.AxisAlignmentToXamarin();
+			}
+			set
+			{
+				base.AxisAlignment = value.AxisAlignmentFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IBrushStyle AxisBandsFill
+		{
+			get
+			{
+				return base.AxisBandsStyle.BrushStyleToXamarin();
+			}
+			set
+			{
+				base.AxisBandsStyle = value.BrushStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Axes.AutoRange AutoRange
+		{
+			get
+			{
+				return base.AutoRange.AutoRangeToXamarin();
+			}
+			set
+			{
+				base.AutoRange = value.AutoRangeFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Model.IRange VisibleRange
+		{
+			get
+			{
+				return base.VisibleRange.RangeToXamarin();
+			}
+			set
+			{
+				base.VisibleRange = value.RangeFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Model.IRange GrowBy
+		{
+			get
+			{
+				return base.GrowBy.RangeToXamarin();
+			}
+			set
+			{
+				base.GrowBy = value.RangeFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Model.RangeClipMode VisibleRangeLimitMode
+		{
+			get
+			{
+				return base.VisibleRangeLimitMode.RangeClipModeToXamarin();
+			}
+			set
+			{
+				base.VisibleRangeLimitMode = value.RangeClipModeFromXamarin();
+			}
+		}
+		
+		public new System.IComparable MinimalZoomConstrain
+		{
+			get
+			{
+				return base.MinimalZoomConstrain.ComparableToXamarin();
+			}
+			set
+			{
+				base.MinimalZoomConstrain = value.ComparableFromXamarin();
+			}
+		}
+		
+		public new System.IComparable MaximumZoomConstrain
+		{
+			get
+			{
+				return base.MaximumZoomConstrain.ComparableToXamarin();
+			}
+			set
+			{
+				base.MaximumZoomConstrain = value.ComparableFromXamarin();
+			}
+		}
+		
+		public new System.IComparable MajorDelta
+		{
+			get
+			{
+				return base.MajorDelta.ComparableToXamarin();
+			}
+			set
+			{
+				base.MajorDelta = value.ComparableFromXamarin();
+			}
+		}
+		
+		public new System.IComparable MinorDelta
+		{
+			get
+			{
+				return base.MinorDelta.ComparableToXamarin();
+			}
+			set
+			{
+				base.MinorDelta = value.ComparableFromXamarin();
+			}
+		}
+		
+		public new uint MaxAutoTicks
+		{
+			get
+			{
+				return base.MaxAutoTicks.UIntToXamarin();
+			}
+			set
+			{
+				base.MaxAutoTicks = value.UIntFromXamarin();
+			}
+		}
+		
+		public new uint MinorsPerMajor
+		{
+			get
+			{
+				return base.MinorsPerMajor.UIntToXamarin();
+			}
+			set
+			{
+				base.MinorsPerMajor = value.UIntFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class LogarithmicNumericAxisiOS : SCILogarithmicNumericAxis, SciChart.Xamarin.Views.Visuals.Axes.ILogarithmicNumericAxis, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public LogarithmicNumericAxisiOS()
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Axes.ScientificNotation ScientificNotation
+		{
+			get
+			{
+				return base.ScientificNotation.ScientificNotationToXamarin();
+			}
+			set
+			{
+				base.ScientificNotation = value.ScientificNotationFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment AxisAlignment
+		{
+			get
+			{
+				return base.AxisAlignment.AxisAlignmentToXamarin();
+			}
+			set
+			{
+				base.AxisAlignment = value.AxisAlignmentFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Drawing.IBrushStyle AxisBandsFill
+		{
+			get
+			{
+				return base.AxisBandsStyle.BrushStyleToXamarin();
+			}
+			set
+			{
+				base.AxisBandsStyle = value.BrushStyleFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Axes.AutoRange AutoRange
+		{
+			get
+			{
+				return base.AutoRange.AutoRangeToXamarin();
+			}
+			set
+			{
+				base.AutoRange = value.AutoRangeFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Model.IRange VisibleRange
+		{
+			get
+			{
+				return base.VisibleRange.RangeToXamarin();
+			}
+			set
+			{
+				base.VisibleRange = value.RangeFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Model.IRange GrowBy
+		{
+			get
+			{
+				return base.GrowBy.RangeToXamarin();
+			}
+			set
+			{
+				base.GrowBy = value.RangeFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Model.RangeClipMode VisibleRangeLimitMode
+		{
+			get
+			{
+				return base.VisibleRangeLimitMode.RangeClipModeToXamarin();
+			}
+			set
+			{
+				base.VisibleRangeLimitMode = value.RangeClipModeFromXamarin();
+			}
+		}
+		
+		public new System.IComparable MinimalZoomConstrain
+		{
+			get
+			{
+				return base.MinimalZoomConstrain.ComparableToXamarin();
+			}
+			set
+			{
+				base.MinimalZoomConstrain = value.ComparableFromXamarin();
+			}
+		}
+		
+		public new System.IComparable MaximumZoomConstrain
+		{
+			get
+			{
+				return base.MaximumZoomConstrain.ComparableToXamarin();
+			}
+			set
+			{
+				base.MaximumZoomConstrain = value.ComparableFromXamarin();
+			}
+		}
+		
+		public new System.IComparable MajorDelta
+		{
+			get
+			{
+				return base.MajorDelta.ComparableToXamarin();
+			}
+			set
+			{
+				base.MajorDelta = value.ComparableFromXamarin();
+			}
+		}
+		
+		public new System.IComparable MinorDelta
+		{
+			get
+			{
+				return base.MinorDelta.ComparableToXamarin();
+			}
+			set
+			{
+				base.MinorDelta = value.ComparableFromXamarin();
+			}
+		}
+		
+		public new uint MaxAutoTicks
+		{
+			get
+			{
+				return base.MaxAutoTicks.UIntToXamarin();
+			}
+			set
+			{
+				base.MaxAutoTicks = value.UIntFromXamarin();
+			}
+		}
+		
+		public new uint MinorsPerMajor
+		{
+			get
+			{
+				return base.MinorsPerMajor.UIntToXamarin();
+			}
+			set
+			{
+				base.MinorsPerMajor = value.UIntFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
 	public partial class NumericAxisiOS : SCINumericAxis, SciChart.Xamarin.Views.Visuals.Axes.INumericAxis, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
 		public NumericAxisiOS()
 		{
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Axes.ScientificNotation ScientificNotation
+		{
+			get
+			{
+				return base.ScientificNotation.ScientificNotationToXamarin();
+			}
+			set
+			{
+				base.ScientificNotation = value.ScientificNotationFromXamarin();
+			}
 		}
 		
 		public new SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment AxisAlignment
@@ -1626,6 +2931,46 @@ namespace SciChart.Xamarin.iOS.Renderer
 		}
 	}
 	
+	public partial class HlDataSeriesiOS<TX, TY> : HlDataSeries<TX,TY>, SciChart.Xamarin.Views.Model.DataSeries.IHlDataSeries<TX,TY>, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+		where TX : System.IComparable
+		where TY : System.IComparable
+	{
+		
+		public HlDataSeriesiOS()
+		{
+		}
+		
+		public new System.Nullable<int> FifoCapacity
+		{
+			get
+			{
+				return base.FifoCapacity.FifoCapacityToXamarin();
+			}
+			set
+			{
+				base.FifoCapacity = value.FifoCapacityFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+		
+		public void RemoveRange(int startIndex, int count)
+		{
+			base.RemoveRangeAt(startIndex, count);
+		}
+		
+		public void Clear(bool retainCapacity)
+		{
+			base.ClearWithRetainCapacity(retainCapacity);
+		}
+	}
+	
 	public partial class OhlcDataSeriesiOS<TX, TY> : OhlcDataSeries<TX,TY>, SciChart.Xamarin.Views.Model.DataSeries.IOhlcDataSeries<TX,TY>, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 		where TX : System.IComparable
 		where TY : System.IComparable
@@ -1635,12 +2980,76 @@ namespace SciChart.Xamarin.iOS.Renderer
 		{
 		}
 		
+		public new System.Nullable<int> FifoCapacity
+		{
+			get
+			{
+				return base.FifoCapacity.FifoCapacityToXamarin();
+			}
+			set
+			{
+				base.FifoCapacity = value.FifoCapacityFromXamarin();
+			}
+		}
+		
 		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
 			{
 				return this;
 			}
+		}
+		
+		public void RemoveRange(int startIndex, int count)
+		{
+			base.RemoveRangeAt(startIndex, count);
+		}
+		
+		public void Clear(bool retainCapacity)
+		{
+			base.ClearWithRetainCapacity(retainCapacity);
+		}
+	}
+	
+	public partial class UniformHeatmapDataSeriesiOS<TX, TY, TZ> : UniformHeatmapDataSeries<TX,TY,TZ>, SciChart.Xamarin.Views.Model.DataSeries.IUniformHeatmapDataSeries<TX,TY,TZ>, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+		where TX : System.IComparable
+		where TY : System.IComparable
+		where TZ : System.IComparable
+	{
+		
+		public UniformHeatmapDataSeriesiOS(int xSize, int ySize) : 
+				base(xSize, ySize)
+		{
+		}
+		
+		public UniformHeatmapDataSeriesiOS(TZ[,] array2D, TX xStart, TX xStep, TY yStart, TY yStep) : 
+				base(array2D, xStart, xStep, yStart, yStep)
+		{
+		}
+		
+		public new System.Nullable<int> FifoCapacity
+		{
+			get
+			{
+				return base.FifoCapacity.FifoCapacityToXamarin();
+			}
+			set
+			{
+				base.FifoCapacity = value.FifoCapacityFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+		
+		public void Clear(bool retainCapacity)
+		{
+			base.ClearWithRetainCapacity(retainCapacity);
 		}
 	}
 	
@@ -1653,12 +3062,115 @@ namespace SciChart.Xamarin.iOS.Renderer
 		{
 		}
 		
+		public new System.Nullable<int> FifoCapacity
+		{
+			get
+			{
+				return base.FifoCapacity.FifoCapacityToXamarin();
+			}
+			set
+			{
+				base.FifoCapacity = value.FifoCapacityFromXamarin();
+			}
+		}
+		
 		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
 			{
 				return this;
 			}
+		}
+		
+		public void RemoveRange(int startIndex, int count)
+		{
+			base.RemoveRangeAt(startIndex, count);
+		}
+		
+		public void Clear(bool retainCapacity)
+		{
+			base.ClearWithRetainCapacity(retainCapacity);
+		}
+	}
+	
+	public partial class XyyDataSeriesiOS<TX, TY> : XyyDataSeries<TX,TY>, SciChart.Xamarin.Views.Model.DataSeries.IXyyDataSeries<TX,TY>, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+		where TX : System.IComparable
+		where TY : System.IComparable
+	{
+		
+		public XyyDataSeriesiOS()
+		{
+		}
+		
+		public new System.Nullable<int> FifoCapacity
+		{
+			get
+			{
+				return base.FifoCapacity.FifoCapacityToXamarin();
+			}
+			set
+			{
+				base.FifoCapacity = value.FifoCapacityFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+		
+		public void RemoveRange(int startIndex, int count)
+		{
+			base.RemoveRangeAt(startIndex, count);
+		}
+		
+		public void Clear(bool retainCapacity)
+		{
+			base.ClearWithRetainCapacity(retainCapacity);
+		}
+	}
+	
+	public partial class XyzDataSeriesiOS<TX, TY, TZ> : XyzDataSeries<TX,TY,TZ>, SciChart.Xamarin.Views.Model.DataSeries.IXyzDataSeries<TX,TY,TZ>, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+		where TX : System.IComparable
+		where TY : System.IComparable
+		where TZ : System.IComparable
+	{
+		
+		public XyzDataSeriesiOS()
+		{
+		}
+		
+		public new System.Nullable<int> FifoCapacity
+		{
+			get
+			{
+				return base.FifoCapacity.FifoCapacityToXamarin();
+			}
+			set
+			{
+				base.FifoCapacity = value.FifoCapacityFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+		
+		public void RemoveRange(int startIndex, int count)
+		{
+			base.RemoveRangeAt(startIndex, count);
+		}
+		
+		public void Clear(bool retainCapacity)
+		{
+			base.ClearWithRetainCapacity(retainCapacity);
 		}
 	}
 	
@@ -1678,6 +3190,11 @@ namespace SciChart.Xamarin.iOS.Renderer
 			{
 				return this;
 			}
+		}
+		
+		public void Clear(bool retainCapacity)
+		{
+			base.ClearWithRetainCapacity(retainCapacity);
 		}
 	}
 	
@@ -1838,14 +3355,84 @@ namespace SciChart.Xamarin.iOS.Renderer
 	public partial class iOSFactory
 	{
 		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IColorMap NewColorMap(Color[] colors, float[] stops)
+		{
+			return new ColorMapiOS(colors, stops);
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IColorMap NewColorMap(Color startColor, Color endColor)
+		{
+			return new ColorMapiOS(startColor, endColor);
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastBandRenderableSeries NewFastBandRenderableSeries()
+		{
+			return new FastBandRenderableSeriesiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastBubbleRenderableSeries NewFastBubbleRenderableSeries()
+		{
+			return new FastBubbleRenderableSeriesiOS();
+		}
+		
 		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastCandlestickRenderableSeries NewFastCandlestickRenderableSeries()
 		{
 			return new FastCandlestickRenderableSeriesiOS();
 		}
 		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastColumnRenderableSeries NewFastColumnRenderableSeries()
+		{
+			return new FastColumnRenderableSeriesiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastErrorBarsRenderableSeries NewFastErrorBarsRenderableSeries()
+		{
+			return new FastErrorBarsRenderableSeriesiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastFixedErrorBarsRenderableSeries NewFastFixedErrorBarsRenderableSeries()
+		{
+			return new FastFixedErrorBarsRenderableSeriesiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastImpulseRenderableSeries NewFastImpulseRenderableSeries()
+		{
+			return new FastImpulseRenderableSeriesiOS();
+		}
+		
 		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastLineRenderableSeries NewFastLineRenderableSeries()
 		{
 			return new FastLineRenderableSeriesiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastMountainRenderableSeries NewFastMountainRenderableSeries()
+		{
+			return new FastMountainRenderableSeriesiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastOhlcRenderableSeries NewFastOhlcRenderableSeries()
+		{
+			return new FastOhlcRenderableSeriesiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IFastUniformHeatmapRenderableSeries NewFastUniformHeatmapRenderableSeries()
+		{
+			return new FastUniformHeatmapRenderableSeriesiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.ISplineBandRenderableSeries NewSplineBandRenderableSeries()
+		{
+			return new SplineBandRenderableSeriesiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.ISplineLineRenderableSeries NewSplineLineRenderableSeries()
+		{
+			return new SplineLineRenderableSeriesiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IXyScatterRenderableSeries NewXyScatterRenderableSeries()
+		{
+			return new XyScatterRenderableSeriesiOS();
 		}
 		
 		public SciChart.Xamarin.Views.Visuals.RenderableSeries3D.IScatterRenderableSeries3D NewScatterRenderableSeries3D()
@@ -1866,6 +3453,16 @@ namespace SciChart.Xamarin.iOS.Renderer
 		public SciChart.Xamarin.Views.Visuals.Axes.ICategoryDateTimeAxis NewCategoryDateTimeAxis()
 		{
 			return new CategoryDateAxisiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.Axes.IDateTimeAxis NewDateTimeAxis()
+		{
+			return new DateAxisiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.Axes.ILogarithmicNumericAxis NewLogarithmicNumericAxis()
+		{
+			return new LogarithmicNumericAxisiOS();
 		}
 		
 		public SciChart.Xamarin.Views.Visuals.Axes.INumericAxis NewNumericAxis()
@@ -1963,6 +3560,13 @@ namespace SciChart.Xamarin.iOS.Renderer
 			return new DoubleRangeiOS(min, max);
 		}
 		
+		public SciChart.Xamarin.Views.Model.DataSeries.IHlDataSeries<TX,TY> NewHlDataSeries<TX, TY>()
+			where TX : System.IComparable
+			where TY : System.IComparable
+		{
+			return new HlDataSeriesiOS<TX,TY>();
+		}
+		
 		public SciChart.Xamarin.Views.Model.DataSeries.IOhlcDataSeries<TX,TY> NewOhlcDataSeries<TX, TY>()
 			where TX : System.IComparable
 			where TY : System.IComparable
@@ -1970,11 +3574,34 @@ namespace SciChart.Xamarin.iOS.Renderer
 			return new OhlcDataSeriesiOS<TX,TY>();
 		}
 		
+		public SciChart.Xamarin.Views.Model.DataSeries.IUniformHeatmapDataSeries<TX,TY,TZ> NewUniformHeatmapDataSeries<TX, TY, TZ>(int xSize, int ySize)
+			where TX : System.IComparable
+			where TY : System.IComparable
+			where TZ : System.IComparable
+		{
+			return new UniformHeatmapDataSeriesiOS<TX,TY,TZ>(xSize, ySize);
+		}
+		
 		public SciChart.Xamarin.Views.Model.DataSeries.IXyDataSeries<TX,TY> NewXyDataSeries<TX, TY>()
 			where TX : System.IComparable
 			where TY : System.IComparable
 		{
 			return new XyDataSeriesiOS<TX,TY>();
+		}
+		
+		public SciChart.Xamarin.Views.Model.DataSeries.IXyyDataSeries<TX,TY> NewXyyDataSeries<TX, TY>()
+			where TX : System.IComparable
+			where TY : System.IComparable
+		{
+			return new XyyDataSeriesiOS<TX,TY>();
+		}
+		
+		public SciChart.Xamarin.Views.Model.DataSeries.IXyzDataSeries<TX,TY,TZ> NewXyzDataSeries<TX, TY, TZ>()
+			where TX : System.IComparable
+			where TY : System.IComparable
+			where TZ : System.IComparable
+		{
+			return new XyzDataSeriesiOS<TX,TY,TZ>();
 		}
 		
 		public SciChart.Xamarin.Views.Model.DataSeries3D.IXyzDataSeries3D<TX,TY,TZ> NewXyzDataSeries3D<TX, TY, TZ>()
@@ -2005,6 +3632,113 @@ namespace SciChart.Xamarin.iOS.Renderer
 			return new SolidPenStyleiOS(color, thickness, antiAliasing, strokeDashArray);
 		}
 	}
+	
+	#region ErrorDirection extensions
+	static
+	public class ErrorDirectionMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorDirection ErrorDirectionToXamarin(this SCIErrorDirection nativeValue)
+		{
+			if ((nativeValue == SCIErrorDirection.Horizontal))
+			{
+				return SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorDirection.Horizontal;
+			}
+			if ((nativeValue == SCIErrorDirection.Vertical))
+			{
+				return SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorDirection.Vertical;
+			}
+			throw new System.ArgumentOutOfRangeException("The ErrorDirection value has not been handled");
+		}
+		
+		public static SCIErrorDirection ErrorDirectionFromXamarin(this SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorDirection xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorDirection.Horizontal))
+			{
+				return SCIErrorDirection.Horizontal;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorDirection.Vertical))
+			{
+				return SCIErrorDirection.Vertical;
+			}
+			throw new System.ArgumentOutOfRangeException("The ErrorDirection value has not been handled");
+		}
+	}
+	#endregion
+	
+	#region ErrorMode extensions
+	static
+	public class ErrorModeMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorMode ErrorModeToXamarin(this SCIErrorMode nativeValue)
+		{
+			if ((nativeValue == SCIErrorMode.High))
+			{
+				return SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorMode.High;
+			}
+			if ((nativeValue == SCIErrorMode.Low))
+			{
+				return SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorMode.Low;
+			}
+			if ((nativeValue == SCIErrorMode.Both))
+			{
+				return SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorMode.Both;
+			}
+			throw new System.ArgumentOutOfRangeException("The ErrorMode value has not been handled");
+		}
+		
+		public static SCIErrorMode ErrorModeFromXamarin(this SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorMode xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorMode.High))
+			{
+				return SCIErrorMode.High;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorMode.Low))
+			{
+				return SCIErrorMode.Low;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorMode.Both))
+			{
+				return SCIErrorMode.Both;
+			}
+			throw new System.ArgumentOutOfRangeException("The ErrorMode value has not been handled");
+		}
+	}
+	#endregion
+	
+	#region ErrorType extensions
+	static
+	public class ErrorTypeMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorType ErrorTypeToXamarin(this SCIErrorType nativeValue)
+		{
+			if ((nativeValue == SCIErrorType.Absolute))
+			{
+				return SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorType.Absolute;
+			}
+			if ((nativeValue == SCIErrorType.Relative))
+			{
+				return SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorType.Relative;
+			}
+			throw new System.ArgumentOutOfRangeException("The ErrorType value has not been handled");
+		}
+		
+		public static SCIErrorType ErrorTypeFromXamarin(this SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorType xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorType.Absolute))
+			{
+				return SCIErrorType.Absolute;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.RenderableSeries.ErrorType.Relative))
+			{
+				return SCIErrorType.Relative;
+			}
+			throw new System.ArgumentOutOfRangeException("The ErrorType value has not been handled");
+		}
+	}
+	#endregion
 	
 	#region AutoRange extensions
 	static
@@ -2100,6 +3834,55 @@ namespace SciChart.Xamarin.iOS.Renderer
 				return SCIAxisAlignment.Auto;
 			}
 			throw new System.ArgumentOutOfRangeException("The AxisAlignment value has not been handled");
+		}
+	}
+	#endregion
+	
+	#region ScientificNotation extensions
+	static
+	public class ScientificNotationMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Visuals.Axes.ScientificNotation ScientificNotationToXamarin(this SCIScientificNotation nativeValue)
+		{
+			if ((nativeValue == SCIScientificNotation.None))
+			{
+				return SciChart.Xamarin.Views.Visuals.Axes.ScientificNotation.None;
+			}
+			if ((nativeValue == SCIScientificNotation.Normalized))
+			{
+				return SciChart.Xamarin.Views.Visuals.Axes.ScientificNotation.Normalized;
+			}
+			if ((nativeValue == SCIScientificNotation.E))
+			{
+				return SciChart.Xamarin.Views.Visuals.Axes.ScientificNotation.E;
+			}
+			if ((nativeValue == SCIScientificNotation.LogarithmicBase))
+			{
+				return SciChart.Xamarin.Views.Visuals.Axes.ScientificNotation.LogarithmicBase;
+			}
+			throw new System.ArgumentOutOfRangeException("The ScientificNotation value has not been handled");
+		}
+		
+		public static SCIScientificNotation ScientificNotationFromXamarin(this SciChart.Xamarin.Views.Visuals.Axes.ScientificNotation xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Axes.ScientificNotation.None))
+			{
+				return SCIScientificNotation.None;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Axes.ScientificNotation.Normalized))
+			{
+				return SCIScientificNotation.Normalized;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Axes.ScientificNotation.E))
+			{
+				return SCIScientificNotation.E;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Visuals.Axes.ScientificNotation.LogarithmicBase))
+			{
+				return SCIScientificNotation.LogarithmicBase;
+			}
+			throw new System.ArgumentOutOfRangeException("The ScientificNotation value has not been handled");
 		}
 	}
 	#endregion
@@ -2370,6 +4153,39 @@ namespace SciChart.Xamarin.iOS.Renderer
 				return SCIRangeClipMode.Min;
 			}
 			throw new System.ArgumentOutOfRangeException("The RangeClipMode value has not been handled");
+		}
+	}
+	#endregion
+	
+	#region TextureMappingMode extensions
+	static
+	public class TextureMappingModeMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Drawing.TextureMappingMode TextureMappingModeToXamarin(this SCITextureMappingMode nativeValue)
+		{
+			if ((nativeValue == SCITextureMappingMode.Screen))
+			{
+				return SciChart.Xamarin.Views.Drawing.TextureMappingMode.PerScreen;
+			}
+			if ((nativeValue == SCITextureMappingMode.Primitive))
+			{
+				return SciChart.Xamarin.Views.Drawing.TextureMappingMode.PerPrimitive;
+			}
+			throw new System.ArgumentOutOfRangeException("The TextureMappingMode value has not been handled");
+		}
+		
+		public static SCITextureMappingMode TextureMappingModeFromXamarin(this SciChart.Xamarin.Views.Drawing.TextureMappingMode xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Drawing.TextureMappingMode.PerScreen))
+			{
+				return SCITextureMappingMode.Screen;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Drawing.TextureMappingMode.PerPrimitive))
+			{
+				return SCITextureMappingMode.Primitive;
+			}
+			throw new System.ArgumentOutOfRangeException("The TextureMappingMode value has not been handled");
 		}
 	}
 	#endregion

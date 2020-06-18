@@ -8,10 +8,23 @@ namespace SciChart.Xamarin.Views.Model.DataSeries
     public interface IDataSeries : IDataSeriesCore
     {
         /// <summary>
-        /// New to v3.3: when AcceptsUnsortedData is false, the DataSeries with throw an InvalidOperationException if unsorted data is appended. Unintentional unsorted data can result in much slower performance. 
+        /// Defines the value indicating whether this series accepts unsorted data. If it is false, the DataSeries will throw exception is unsorted data is appended. U
         /// To disable this check, set AcceptsUnsortedData = true. 
         /// </summary>        
         [PropertyDeclaration]
         bool AcceptsUnsortedData { get; set; }
+
+        /// <summary>
+        /// Gets whether the series behaves as a FIFO.
+        /// </summary>
+        [PropertyDeclaration]
+        bool IsFifo { get; }
+
+        /// <summary>
+        /// Defines the size of the FIFO buffer. If null, then the series is unlimited. If a value is set, when the point count reaches this value, older points will be discarded.
+        /// </summary>
+        [PropertyDeclaration]
+        [NativePropertyConverterDeclaration("FifoCapacity")]
+        int? FifoCapacity { get; set; }
     }
 }

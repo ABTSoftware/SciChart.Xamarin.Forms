@@ -73,6 +73,7 @@
     <Compile Include="Utility\DataSeriesHelpers.cs" />
     <Compile Include="Utility\PointMarkerHelper.cs" />
     <Compile Include="Utility\RangeHelpers.cs" />
+    <Compile Include="Utility\RenderableSeriesHelpers.cs" />
     <Compile Include="Utility\StyleUtil.cs" />
     <Compile Include="ViewRendererBase.cs" />
   </ItemGroup>

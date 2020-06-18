@@ -32,5 +32,18 @@ namespace SciChart.Xamarin.iOS.Renderer.Utility
             // since we don't provide default data series for renderable series so there will be no need in reverse conversion
             throw new NotImplementedException();
         }
+
+        public static int? FifoCapacityToXamarin(this int fifoCapacity)
+        {
+            if (fifoCapacity == 0)
+                return null;
+
+            return fifoCapacity;
+        }
+
+        public static int FifoCapacityFromXamarin(this int? fifoCapacity)
+        {
+            return fifoCapacity ?? 0;
+        }
     }
 }

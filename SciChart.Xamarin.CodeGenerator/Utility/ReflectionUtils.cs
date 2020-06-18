@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Mono.Cecil;
 using SciChart.Xamarin.Views.Core.Generation;
 
 namespace SciChart.Xamarin.CodeGenerator.Utility
@@ -16,6 +17,16 @@ namespace SciChart.Xamarin.CodeGenerator.Utility
             return (new Type[] { type })
                 .Concat(type.GetInterfaces())
                 .SelectMany(i => i.GetProperties());
+        }
+
+        public static IEnumerable<MethodInfo> GetPublicMethods(this Type type)
+        {
+            if (!type.IsInterface)
+                return type.GetMethods();
+
+            return (new Type[] { type })
+                .Concat(type.GetInterfaces())
+                .SelectMany(i => i.GetMethods());
         }
 
         public static bool HasInjectAndroidContext(this Type type)
@@ -67,6 +78,24 @@ namespace SciChart.Xamarin.CodeGenerator.Utility
             return $"{type.Namespace}.{type.Name}";
         }
 
+        public static string ToGenericName(this TypeReference type)
+        {
+            if (type.IsGenericInstance)
+            {
+                var genericParamsString = String.Join(",", type.GenericParameters.Select(x => x.Name));
+                var name = type.Name.Split('`').FirstOrDefault() ?? type.Name;
+                return $"{type.Namespace}.{name}<{genericParamsString}>";
+            }
+
+            if (type.IsGenericParameter)
+                return type.Name;
+
+            if (type.IsArray)
+                return type.FullName.Replace("0...","");
+
+            return $"{type.Namespace}.{type.Name}";
+        }
+
         public static string ToXamarinFormsName(this Type type)
         {
             if (Attribute.IsDefined(type, typeof(XamarinFormsWrapperDefinition)))
@@ -105,6 +134,18 @@ namespace SciChart.Xamarin.CodeGenerator.Utility
             if (Attribute.IsDefined(property, typeof(T)))
             {
                 return property.GetCustomAttribute<T>();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static T GetAttribute<T>(this FieldInfo field) where T : Attribute
+        {
+            if (Attribute.IsDefined(field, typeof(T)))
+            {
+                return field.GetCustomAttribute<T>();
             }
             else
             {

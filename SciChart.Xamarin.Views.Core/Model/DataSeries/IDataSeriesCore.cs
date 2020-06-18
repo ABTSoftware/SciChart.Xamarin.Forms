@@ -19,11 +19,24 @@ namespace SciChart.Xamarin.Views.Model.DataSeries
         [PropertyDeclaration]
         int Count { get; }
 
-
+        /// <summary>
+        /// Gets whether the DataSeries has values(is not empty).
+        /// </summary>
+        [PropertyDeclaration]
+        bool HasValues { get; }
+        
         /// <summary>
         /// Clears the series, resetting internal lists to zero size.
         /// </summary>
         [MethodDeclaration]
         void Clear();
+
+        /// <summary>
+        /// Clears the series, resetting internal lists to zero size.
+        /// </summary>
+        /// <param name="retainCapacity"></param>
+        [MethodDeclaration]
+        [NativeMethodConverterDeclaration(null, null, null, "ClearWithRetainCapacity")]
+        void Clear(bool retainCapacity);
     }
 }

@@ -390,7 +390,19 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
 
         protected override string GetTypeName(Type type)
         {
-            return _typeMappings.TryGetValue(type, out var mappedType) ? mappedType : type.FullName;
+            if (type.IsArray)
+            {
+                var elementType = type.GetElementType();
+
+                var mappedTypeName = _typeMappings.TryGetValue(elementType, out var mappedType) ? mappedType : elementType.ToGenericName();
+
+                var arrayDimension = string.Join(',', Enumerable.Range(0, type.GetArrayRank()).Select(x =>""));
+                return $"{mappedTypeName}[{arrayDimension}]";
+            }
+            else
+            {
+                return _typeMappings.TryGetValue(type, out var mappedType) ? mappedType : type.ToGenericName();
+            }
         }
     }
 }
