@@ -8,6 +8,7 @@ using SciChart.Xamarin.iOS.Renderer.Utility;
 using SciChart.Xamarin.Views.Core.Common;
 using SciChart.Xamarin.Views.Model.ObservableCollection;
 using SciChart.Xamarin.Views.Modifiers;
+using SciChart.Xamarin.Views.Visuals;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
@@ -68,6 +69,11 @@ namespace SciChart.Xamarin.iOS.Renderer
         {
             base.MoveAnnotationByXDelta(horizontalOffset, verticalOffset);
         }
+
+        public void SetBackgroundColor(Color backgroundColor)
+        {
+            base.FillBrush = new SCISolidBrushStyle(backgroundColor.ColorFromXamarin());
+        }
     }
 
     public partial class LineArrowAnnotationiOS
@@ -125,6 +131,11 @@ namespace SciChart.Xamarin.iOS.Renderer
         public void MoveAnnotation(float horizontalOffset, float verticalOffset)
         {
             base.MoveAnnotationByXDelta(horizontalOffset, verticalOffset);
+        }
+
+        public void SetBackgroundColor(Color backgroundColor)
+        {
+            base.BackgroundBrush = new SCISolidBrushStyle(backgroundColor.ColorFromXamarin());
         }
     }
 
@@ -232,6 +243,32 @@ namespace SciChart.Xamarin.iOS.Renderer
         public ColorMapiOS(Color[] colors, float[] stops) : base(colors.Select(x => x.ToUIColor()).ToArray(), stops)
         {
 
+        }
+    }
+
+    #endregion
+
+    #region VerticalGroup
+
+    public partial class ChartVerticalGroupiOS
+    {
+        public void AddSurfaceToGroup(ISciChartSurface surface)
+        {
+            var sciChartSurface = GetNativeSciChartSurface(surface);
+            if(sciChartSurface?.LayoutManager != null)
+                base.AddSurfaceToGroup(sciChartSurface);
+        }
+
+        public void RemoveSurfaceFromGroup(ISciChartSurface surface)
+        {
+            var sciChartSurface = GetNativeSciChartSurface(surface);
+            if (sciChartSurface?.LayoutManager != null)
+                base.RemoveSurfaceFromGroup(sciChartSurface);
+        }
+
+        private static SCIChartSurface GetNativeSciChartSurface(ISciChartSurface surface)
+        {
+            return surface?.NativeView as SCIChartSurface;
         }
     }
 

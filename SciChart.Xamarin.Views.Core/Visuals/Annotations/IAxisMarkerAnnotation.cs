@@ -1,5 +1,6 @@
 ﻿using SciChart.Xamarin.Views.Core.Generation;
 using SciChart.Xamarin.Views.Drawing;
+using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views.Visuals.Annotations
 {
@@ -16,5 +17,7 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
 
         [BindablePropertyDefinition()]
         int MarkerPointWidth { get; set; }
+
+        void SetBackgroundColor(Color backgroundColor);
     }
 }

@@ -16,6 +16,22 @@ namespace SciChart.Xamarin.iOS.Renderer
 	using SciChart.Xamarin.iOS.Renderer.Utility;
 	
 	
+	public partial class ChartVerticalGroupiOS : SCIChartVerticalGroup, SciChart.Xamarin.Views.Visuals.Synchronization.ISciChartVerticalGroup, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public ChartVerticalGroupiOS()
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
 	public partial class ColorMapiOS : SCIColorMap, SciChart.Xamarin.Views.Visuals.RenderableSeries.IColorMap, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
@@ -2801,6 +2817,18 @@ namespace SciChart.Xamarin.iOS.Renderer
 		{
 		}
 		
+		public new SciChart.Xamarin.Views.Core.Common.Direction2D Direction
+		{
+			get
+			{
+				return base.Direction.Direction2DToXamarin();
+			}
+			set
+			{
+				base.Direction = value.Direction2DFromXamarin();
+			}
+		}
+		
 		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
@@ -2841,6 +2869,96 @@ namespace SciChart.Xamarin.iOS.Renderer
 		public TooltipModifieriOS(SciChart.iOS.Charting.SCICrossDrawableBehavior crossDrawableBehavior, SciChart.iOS.Charting.IISCITooltipContainer tooltipContainer) : 
 				base(crossDrawableBehavior, tooltipContainer)
 		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class XAxisDragModifieriOS : SCIXAxisDragModifier, SciChart.Xamarin.Views.Modifiers.IXAxisDragModifier, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public XAxisDragModifieriOS()
+		{
+		}
+		
+		public XAxisDragModifieriOS(System.nuint defaultNumberOfTouches) : 
+				base(defaultNumberOfTouches)
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Core.Common.ClipModeTarget ClipModeTargetX
+		{
+			get
+			{
+				return base.ClipModeTargetX.ClipModeTargetToXamarin();
+			}
+			set
+			{
+				base.ClipModeTargetX = value.ClipModeTargetFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Core.Common.ClipMode ClipModeX
+		{
+			get
+			{
+				return base.ClipModeX.ClipModeToXamarin();
+			}
+			set
+			{
+				base.ClipModeX = value.ClipModeFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Modifiers.AxisDragMode DragMode
+		{
+			get
+			{
+				return base.DragMode.AxisDragModeToXamarin();
+			}
+			set
+			{
+				base.DragMode = value.AxisDragModeFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class YAxisDragModifieriOS : SCIYAxisDragModifier, SciChart.Xamarin.Views.Modifiers.IYAxisDragModifier, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public YAxisDragModifieriOS()
+		{
+		}
+		
+		public YAxisDragModifieriOS(System.nuint defaultNumberOfTouches) : 
+				base(defaultNumberOfTouches)
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Modifiers.AxisDragMode DragMode
+		{
+			get
+			{
+				return base.DragMode.AxisDragModeToXamarin();
+			}
+			set
+			{
+				base.DragMode = value.AxisDragModeFromXamarin();
+			}
 		}
 		
 		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
@@ -3355,6 +3473,11 @@ namespace SciChart.Xamarin.iOS.Renderer
 	public partial class iOSFactory
 	{
 		
+		public SciChart.Xamarin.Views.Visuals.Synchronization.ISciChartVerticalGroup NewSciChartVerticalGroup()
+		{
+			return new ChartVerticalGroupiOS();
+		}
+		
 		public SciChart.Xamarin.Views.Visuals.RenderableSeries.IColorMap NewColorMap(Color[] colors, float[] stops)
 		{
 			return new ColorMapiOS(colors, stops);
@@ -3533,6 +3656,16 @@ namespace SciChart.Xamarin.iOS.Renderer
 		public SciChart.Xamarin.Views.Modifiers.ITooltipModifier NewTooltipModifier()
 		{
 			return new TooltipModifieriOS();
+		}
+		
+		public SciChart.Xamarin.Views.Modifiers.IXAxisDragModifier NewXAxisDragModifier()
+		{
+			return new XAxisDragModifieriOS();
+		}
+		
+		public SciChart.Xamarin.Views.Modifiers.IYAxisDragModifier NewYAxisDragModifier()
+		{
+			return new YAxisDragModifieriOS();
 		}
 		
 		public SciChart.Xamarin.Views.Modifiers.IZoomExtentsModifier NewZoomExtentsModifier()
@@ -4067,6 +4200,39 @@ namespace SciChart.Xamarin.iOS.Renderer
 	}
 	#endregion
 	
+	#region AxisDragMode extensions
+	static
+	public class AxisDragModeMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Modifiers.AxisDragMode AxisDragModeToXamarin(this SCIAxisDragMode nativeValue)
+		{
+			if ((nativeValue == SCIAxisDragMode.Scale))
+			{
+				return SciChart.Xamarin.Views.Modifiers.AxisDragMode.Scale;
+			}
+			if ((nativeValue == SCIAxisDragMode.Pan))
+			{
+				return SciChart.Xamarin.Views.Modifiers.AxisDragMode.Pan;
+			}
+			throw new System.ArgumentOutOfRangeException("The AxisDragMode value has not been handled");
+		}
+		
+		public static SCIAxisDragMode AxisDragModeFromXamarin(this SciChart.Xamarin.Views.Modifiers.AxisDragMode xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Modifiers.AxisDragMode.Scale))
+			{
+				return SCIAxisDragMode.Scale;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Modifiers.AxisDragMode.Pan))
+			{
+				return SCIAxisDragMode.Pan;
+			}
+			throw new System.ArgumentOutOfRangeException("The AxisDragMode value has not been handled");
+		}
+	}
+	#endregion
+	
 	#region SourceMode extensions
 	static
 	public class SourceModeMapper
@@ -4186,6 +4352,104 @@ namespace SciChart.Xamarin.iOS.Renderer
 				return SCITextureMappingMode.Primitive;
 			}
 			throw new System.ArgumentOutOfRangeException("The TextureMappingMode value has not been handled");
+		}
+	}
+	#endregion
+	
+	#region ClipMode extensions
+	static
+	public class ClipModeMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Core.Common.ClipMode ClipModeToXamarin(this SCIClipMode nativeValue)
+		{
+			if ((nativeValue == SCIClipMode.None))
+			{
+				return SciChart.Xamarin.Views.Core.Common.ClipMode.None;
+			}
+			if ((nativeValue == SCIClipMode.StretchAtExtents))
+			{
+				return SciChart.Xamarin.Views.Core.Common.ClipMode.StretchAtExtents;
+			}
+			if ((nativeValue == SCIClipMode.ClipAtMin))
+			{
+				return SciChart.Xamarin.Views.Core.Common.ClipMode.ClipAtMin;
+			}
+			if ((nativeValue == SCIClipMode.ClipAtMax))
+			{
+				return SciChart.Xamarin.Views.Core.Common.ClipMode.ClipAtMax;
+			}
+			if ((nativeValue == SCIClipMode.ClipAtExtents))
+			{
+				return SciChart.Xamarin.Views.Core.Common.ClipMode.ClipAtExtents;
+			}
+			throw new System.ArgumentOutOfRangeException("The ClipMode value has not been handled");
+		}
+		
+		public static SCIClipMode ClipModeFromXamarin(this SciChart.Xamarin.Views.Core.Common.ClipMode xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.ClipMode.None))
+			{
+				return SCIClipMode.None;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.ClipMode.StretchAtExtents))
+			{
+				return SCIClipMode.StretchAtExtents;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.ClipMode.ClipAtMin))
+			{
+				return SCIClipMode.ClipAtMin;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.ClipMode.ClipAtMax))
+			{
+				return SCIClipMode.ClipAtMax;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.ClipMode.ClipAtExtents))
+			{
+				return SCIClipMode.ClipAtExtents;
+			}
+			throw new System.ArgumentOutOfRangeException("The ClipMode value has not been handled");
+		}
+	}
+	#endregion
+	
+	#region ClipModeTarget extensions
+	static
+	public class ClipModeTargetMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Core.Common.ClipModeTarget ClipModeTargetToXamarin(this SCIClipModeTarget nativeValue)
+		{
+			if ((nativeValue == SCIClipModeTarget.MaximumRange))
+			{
+				return SciChart.Xamarin.Views.Core.Common.ClipModeTarget.MaximumRange;
+			}
+			if ((nativeValue == SCIClipModeTarget.DataRange))
+			{
+				return SciChart.Xamarin.Views.Core.Common.ClipModeTarget.DataRange;
+			}
+			if ((nativeValue == SCIClipModeTarget.VisibleRangeLimit))
+			{
+				return SciChart.Xamarin.Views.Core.Common.ClipModeTarget.VisibleRangeLimit;
+			}
+			throw new System.ArgumentOutOfRangeException("The ClipModeTarget value has not been handled");
+		}
+		
+		public static SCIClipModeTarget ClipModeTargetFromXamarin(this SciChart.Xamarin.Views.Core.Common.ClipModeTarget xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.ClipModeTarget.MaximumRange))
+			{
+				return SCIClipModeTarget.MaximumRange;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.ClipModeTarget.DataRange))
+			{
+				return SCIClipModeTarget.DataRange;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.ClipModeTarget.VisibleRangeLimit))
+			{
+				return SCIClipModeTarget.VisibleRangeLimit;
+			}
+			throw new System.ArgumentOutOfRangeException("The ClipModeTarget value has not been handled");
 		}
 	}
 	#endregion

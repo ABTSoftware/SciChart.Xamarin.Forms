@@ -8,17 +8,7 @@ using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views.Visuals
 {
-    public interface ISciChartSurface3D
-    {
-        IAxis3D XAxis { get; set; }
-        IAxis3D YAxis { get; set; }
-        IAxis3D ZAxis { get; set; }
-
-        RenderableSeries3DCollection RenderableSeries { get; set; }
-        ChartModifier3DCollection ChartModifiers { get; set; }
-    }
-
-    public class SciChartSurface3D : View, ISciChartSurface3D
+    public class SciChartSurface3D : NativeViewProvider, ISciChartSurface3D
     {
         public static readonly BindableProperty XAxisProperty = BindableProperty.Create("XAxis", typeof(IAxis3D), typeof(SciChartSurface3D), null, BindingMode.Default, null, OnXAxisDependencyPropertyChanged, null, null, null);
 

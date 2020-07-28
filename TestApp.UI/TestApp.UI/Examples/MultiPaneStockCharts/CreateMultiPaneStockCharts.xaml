@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:visuals="clr-namespace:SciChart.Xamarin.Views.Visuals;assembly=SciChart.Xamarin.Views"
+             xmlns:renderableSeries="clr-namespace:SciChart.Xamarin.Views.Visuals.RenderableSeries;assembly=SciChart.Xamarin.Views"
+             xmlns:axes="clr-namespace:SciChart.Xamarin.Views.Visuals.Axes;assembly=SciChart.Xamarin.Views"
+             xmlns:modifiers="clr-namespace:SciChart.Xamarin.Views.Modifiers;assembly=SciChart.Xamarin.Views"
+             xmlns:multiPaneStockCharts="clr-namespace:TestApp.UI.Examples.MultiPaneStockCharts;assembly=TestApp.UI"
+             xmlns:synchronization="clr-namespace:SciChart.Xamarin.Views.Visuals.Synchronization;assembly=SciChart.Xamarin.Views"
+             mc:Ignorable="d"
+             x:Class="TestApp.UI.Examples.MultiPaneStockCharts.CreateMultiPaneStockCharts">
+    <ContentPage.BindingContext>
+        <multiPaneStockCharts:CreateMultiPaneStockChartsViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <visuals:SciChartSurface Grid.Row="0" BindingContext="{Binding PricesViewModel}"  
+                                 RenderableSeries="{Binding RenderableSeries}"
+                                 ChartModifiers="{Binding ChartModifiers}"
+                                 XAxes="{Binding XAxes}"
+                                 YAxes="{Binding YAxes}"
+                                 Annotations="{Binding Annotations}"
+                                 synchronization:SciChartVerticalGroup.VerticalGroup="{Binding VerticalGroup}" />
+
+        <Grid Grid.Row="1" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+            <visuals:SciChartSurface Grid.Row="0" BindingContext="{Binding MacdViewModel}" 
+                                     RenderableSeries="{Binding RenderableSeries}"
+                                     ChartModifiers="{Binding ChartModifiers}"
+                                     XAxes="{Binding XAxes}"
+                                     YAxes="{Binding YAxes}"
+                                     Annotations="{Binding Annotations}"
+                                     synchronization:SciChartVerticalGroup.VerticalGroup="{Binding VerticalGroup}"/>
+
+            <visuals:SciChartSurface Grid.Row="1" BindingContext="{Binding RsiViewModel}" 
+                                     RenderableSeries="{Binding RenderableSeries}"
+                                     ChartModifiers="{Binding ChartModifiers}"
+                                     XAxes="{Binding XAxes}"
+                                     YAxes="{Binding YAxes}"
+                                     Annotations="{Binding Annotations}"
+                                     synchronization:SciChartVerticalGroup.VerticalGroup="{Binding VerticalGroup}"/>
+
+            <visuals:SciChartSurface Grid.Row="2" BindingContext="{Binding VolumeViewModel}" 
+                                     RenderableSeries="{Binding RenderableSeries}"
+                                     ChartModifiers="{Binding ChartModifiers}"
+                                     XAxes="{Binding XAxes}"
+                                     YAxes="{Binding YAxes}"
+                                     Annotations="{Binding Annotations}"
+                                     synchronization:SciChartVerticalGroup.VerticalGroup="{Binding VerticalGroup}"/>
+        </Grid>
+    </Grid>
+</ContentPage>

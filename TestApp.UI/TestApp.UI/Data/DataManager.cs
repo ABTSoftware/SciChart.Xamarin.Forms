@@ -12,7 +12,7 @@ namespace TestApp.UI.Data
         private const string Prefix = "TestApp.UI.Data.Resources.";
 
         private const string PriceDataIndu = Prefix + "INDU_Daily.csv";
-        private const string PriceDataEurUsd = Prefix + "EURUSD_Daily.csv";
+        private const string PriceDataEurUsd = Prefix + "EURUSD__Daily.csv";
         private const string TradeTicks = Prefix + "TradeTicks.csv";
         private const string Waveform = Prefix + "waveform.txt";
         private const string FFT = Prefix + "FourierTransform.txt";

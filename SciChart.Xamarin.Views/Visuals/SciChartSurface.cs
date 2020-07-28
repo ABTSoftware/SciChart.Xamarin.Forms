@@ -5,20 +5,12 @@ using SciChart.Xamarin.Views.Modifiers;
 using SciChart.Xamarin.Views.Visuals.Annotations;
 using SciChart.Xamarin.Views.Visuals.Axes;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;
+using SciChart.Xamarin.Views.Visuals.Synchronization;
 using Xamarin.Forms;
 
 namespace SciChart.Xamarin.Views.Visuals
 {
-    public interface ISciChartSurface
-    {        
-        AxisCollection XAxes { get; set; }
-        AxisCollection YAxes { get; set; }
-        RenderableSeriesCollection RenderableSeries { get; set; }
-        AnnotationCollection Annotations { get; set; }
-        ChartModifierCollection ChartModifiers { get; set; }
-    }
-
-    public class SciChartSurface : View, ISciChartSurface
+    public class SciChartSurface : NativeViewProvider, ISciChartSurface
     {        
         /// <summary>
         /// Defines the YAxes BindableProperty

@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.ComponentModel;
+using System.Linq;
 using Java.Lang;
+using SciChart.Charting.Visuals;
 using SciChart.Xamarin.Android.Renderer;
 using SciChart.Xamarin.Android.Renderer.DependencyService;
 using SciChart.Xamarin.Android.Renderer.Utility;
@@ -8,6 +10,7 @@ using SciChart.Xamarin.Views.Model.ObservableCollection;
 using SciChart.Xamarin.Views.Modifiers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using ISciChartSurface = SciChart.Xamarin.Views.Visuals.ISciChartSurface;
 
 [assembly: Dependency(typeof(AndroidFactory))]
 namespace SciChart.Xamarin.Android.Renderer
@@ -81,6 +84,24 @@ namespace SciChart.Xamarin.Android.Renderer
         }
     }
 
+    public partial class XAxisDragModifierAndroid
+    {
+        public new bool IsEnabled
+        {
+            get => base.IsEnabled;
+            set => SetIsEnabled(value);
+        }
+    }
+
+    public partial class YAxisDragModifierAndroid
+    {
+        public new bool IsEnabled
+        {
+            get => base.IsEnabled;
+            set => SetIsEnabled(value);
+        }
+    }
+
 
     public partial class ModifierGroup3DAndroid
     {
@@ -125,8 +146,20 @@ namespace SciChart.Xamarin.Android.Renderer
 
     public partial class BoxAnnotationAndroid
     {
-        public Color BackgroundColor { get; set; }
+        public void SetBackgroundColor(Color backgroundColor)
+        {
+            base.SetBackgroundColor(backgroundColor.ToAndroid());
+        }
     }
+
+    public partial class AxisMarkerAnnotationAndroid
+    {
+        public void SetBackgroundColor(Color backgroundColor)
+        {
+            base.SetBackgroundColor(backgroundColor.ToAndroid());
+        }
+    }
+
     #endregion
 
 
@@ -142,6 +175,32 @@ namespace SciChart.Xamarin.Android.Renderer
         public ColorMapAndroid(Color[] colors, float[] stops) : base(colors.Select(x => x.ColorFromXamarin()).ToArray(), stops)
         {
 
+        }
+    }
+
+    #endregion
+
+    #region VerticalGroup
+
+    public partial class SciChartVerticalGroupAndroid
+    {
+        public void AddSurfaceToGroup(ISciChartSurface surface)
+        {
+            var sciChartSurface = GetNativeSciChartSurface(surface);
+            if (sciChartSurface != null)
+                base.AddSurfaceToGroup(sciChartSurface);
+        }
+
+        public void RemoveSurfaceFromGroup(ISciChartSurface surface)
+        {
+            var sciChartSurface = GetNativeSciChartSurface(surface);
+            if(sciChartSurface != null)
+                base.RemoveSurfaceFromGroup(sciChartSurface);
+        }
+
+        private static SciChartSurface GetNativeSciChartSurface(ISciChartSurface surface)
+        {
+            return surface?.NativeView as SciChartSurface;
         }
     }
 

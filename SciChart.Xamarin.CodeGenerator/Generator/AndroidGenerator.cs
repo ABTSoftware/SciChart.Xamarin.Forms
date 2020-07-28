@@ -23,6 +23,7 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
             {"Android.Util.IAttributeSet", "IAndroidAttributesSet"},
             {"Android.Util.ComplexUnitType", "AndroidComplexUnitType"},
             {"Android.Graphics.Typeface", "AndroidTypeface"},
+            {"SciChart.Charting.Modifiers.AxisDragModifierBase.AxisDragMode", "AxisDragMode" }
         };
 
         public AndroidGenerator(string sciChartAndroidVersion, ITypeInformationExtractor<AndroidTypeInformation> typeInformationExtractor) : base(typeInformationExtractor, "Android", "SciChart.Xamarin.Android.Renderer")

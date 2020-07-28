@@ -16,6 +16,7 @@ using SciChart.Xamarin.Views.Model.DataSeries3D;
 using SciChart.Xamarin.Views.Model.ObservableCollection;
 using SciChart.Xamarin.Views.Modifiers;
 using SciChart.Xamarin.Views.Utility.Converters;
+using SciChart.Xamarin.Views.Visuals;
 using SciChart.Xamarin.Views.Visuals.Annotations;
 using SciChart.Xamarin.Views.Visuals.Axes;
 using SciChart.Xamarin.Views.Visuals.Axes3D;
@@ -24,6 +25,7 @@ using SciChart.Xamarin.Views.Visuals.PointMarkers;
 using SciChart.Xamarin.Views.Visuals.PointMarkers3D;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries;
 using SciChart.Xamarin.Views.Visuals.RenderableSeries3D;
+using SciChart.Xamarin.Views.Visuals.Synchronization;
 using System;
 using XFColor = Xamarin.Forms.Color;
 using XTypeConverter = Xamarin.Forms.TypeConverterAttribute;
@@ -40,6 +42,8 @@ namespace SciChart.Xamarin.Views.Core.Common
 	
 	public partial interface INativeSciChartObjectFactory
 	{
+		
+		SciChart.Xamarin.Views.Visuals.Synchronization.ISciChartVerticalGroup NewSciChartVerticalGroup();
 		
 		SciChart.Xamarin.Views.Visuals.RenderableSeries.IColorMap NewColorMap(XFColor[] colors, float[] stops);
 		
@@ -113,6 +117,10 @@ namespace SciChart.Xamarin.Views.Core.Common
 		
 		SciChart.Xamarin.Views.Modifiers.ITooltipModifier NewTooltipModifier();
 		
+		SciChart.Xamarin.Views.Modifiers.IXAxisDragModifier NewXAxisDragModifier();
+		
+		SciChart.Xamarin.Views.Modifiers.IYAxisDragModifier NewYAxisDragModifier();
+		
 		SciChart.Xamarin.Views.Modifiers.IZoomExtentsModifier NewZoomExtentsModifier();
 		
 		SciChart.Xamarin.Views.Modifiers.IZoomExtentsModifier3D NewZoomExtentsModifier3D();
@@ -161,6 +169,44 @@ namespace SciChart.Xamarin.Views.Core.Common
 		SciChart.Xamarin.Views.Drawing.ISolidBrushStyle NewSolidBrushStyle(XFColor color);
 		
 		SciChart.Xamarin.Views.Drawing.ISolidPenStyle NewSolidPenStyle(XFColor color, float thickness, bool antiAliasing, float[] strokeDashArray);
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.Synchronization
+{
+	
+	
+	public partial class SciChartVerticalGroup : SciChart.Xamarin.Views.Visuals.Synchronization.ISciChartVerticalGroup
+	{
+		
+		private SciChart.Xamarin.Views.Core.Common.INativeSciChartObject _nativeSciChartObject;
+		
+		public SciChartVerticalGroup() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewSciChartVerticalGroup())
+		{
+		}
+		
+		public SciChartVerticalGroup(SciChart.Xamarin.Views.Visuals.Synchronization.ISciChartVerticalGroup nativeObject)
+		{
+			_nativeSciChartObject = nativeObject.NativeSciChartObject;
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return _nativeSciChartObject;
+			}
+		}
+		
+		public void AddSurfaceToGroup(SciChart.Xamarin.Views.Visuals.ISciChartSurface surface)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Visuals.Synchronization.ISciChartVerticalGroup>().AddSurfaceToGroup(surface);
+		}
+		
+		public void RemoveSurfaceFromGroup(SciChart.Xamarin.Views.Visuals.ISciChartSurface surface)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Visuals.Synchronization.ISciChartVerticalGroup>().RemoveSurfaceFromGroup(surface);
+		}
 	}
 }
 namespace SciChart.Xamarin.Views.Visuals.RenderableSeries
@@ -3346,6 +3392,67 @@ namespace SciChart.Xamarin.Views.Modifiers
 {
 	
 	
+	public abstract partial class AxisDragModifierBase : ChartModifierBase, SciChart.Xamarin.Views.Modifiers.IAxisDragModifierBase
+	{
+		
+		public static BindableProperty DragModeProperty = BindableProperty.Create("DragMode", typeof(SciChart.Xamarin.Views.Modifiers.AxisDragMode), typeof(AxisDragModifierBase), null, BindingMode.Default, null, OnDragModePropertyChanged, null, null, DefaultDragModePropertyValueCreator);
+		
+		public static BindableProperty MinTouchAreaProperty = BindableProperty.Create("MinTouchArea", typeof(float), typeof(AxisDragModifierBase), null, BindingMode.Default, null, OnMinTouchAreaPropertyChanged, null, null, DefaultMinTouchAreaPropertyValueCreator);
+		
+		public AxisDragModifierBase(SciChart.Xamarin.Views.Modifiers.IAxisDragModifierBase nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Modifiers.AxisDragMode DragMode
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Modifiers.AxisDragMode)(this.GetValue(DragModeProperty)));
+			}
+			set
+			{
+				this.SetValue(DragModeProperty, value);
+			}
+		}
+		
+		public float MinTouchArea
+		{
+			get
+			{
+				return ((float)(this.GetValue(MinTouchAreaProperty)));
+			}
+			set
+			{
+				this.SetValue(MinTouchAreaProperty, value);
+			}
+		}
+		
+		private static void OnDragModePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IAxisDragModifierBase>().DragMode = ((SciChart.Xamarin.Views.Modifiers.AxisDragMode)(newValue));
+		}
+		
+		private static object DefaultDragModePropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IAxisDragModifierBase>().DragMode;
+		}
+		
+		private static void OnMinTouchAreaPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IAxisDragModifierBase>().MinTouchArea = ((float)(newValue));
+		}
+		
+		private static object DefaultMinTouchAreaPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IAxisDragModifierBase>().MinTouchArea;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Modifiers
+{
+	
+	
 	public abstract partial class ChartModifierBase : ChartModifierCore, SciChart.Xamarin.Views.Modifiers.IChartModifier
 	{
 		
@@ -3538,6 +3645,12 @@ namespace SciChart.Xamarin.Views.Modifiers
 	public partial class PinchZoomModifier : ChartModifierBase, SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier
 	{
 		
+		public static BindableProperty DirectionProperty = BindableProperty.Create("Direction", typeof(SciChart.Xamarin.Views.Core.Common.Direction2D), typeof(PinchZoomModifier), null, BindingMode.Default, null, OnDirectionPropertyChanged, null, null, DefaultDirectionPropertyValueCreator);
+		
+		public static BindableProperty ScaleFactorProperty = BindableProperty.Create("ScaleFactor", typeof(float), typeof(PinchZoomModifier), null, BindingMode.Default, null, OnScaleFactorPropertyChanged, null, null, DefaultScaleFactorPropertyValueCreator);
+		
+		public static BindableProperty IsUniformZoomProperty = BindableProperty.Create("IsUniformZoom", typeof(bool), typeof(PinchZoomModifier), null, BindingMode.Default, null, OnIsUniformZoomPropertyChanged, null, null, DefaultIsUniformZoomPropertyValueCreator);
+		
 		public PinchZoomModifier() : 
 				this(DependencyService.Get<INativeSciChartObjectFactory>().NewPinchZoomModifier())
 		{
@@ -3546,6 +3659,72 @@ namespace SciChart.Xamarin.Views.Modifiers
 		public PinchZoomModifier(SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier nativeObject) : 
 				base(nativeObject)
 		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.Direction2D Direction
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Core.Common.Direction2D)(this.GetValue(DirectionProperty)));
+			}
+			set
+			{
+				this.SetValue(DirectionProperty, value);
+			}
+		}
+		
+		public float ScaleFactor
+		{
+			get
+			{
+				return ((float)(this.GetValue(ScaleFactorProperty)));
+			}
+			set
+			{
+				this.SetValue(ScaleFactorProperty, value);
+			}
+		}
+		
+		public bool IsUniformZoom
+		{
+			get
+			{
+				return ((bool)(this.GetValue(IsUniformZoomProperty)));
+			}
+			set
+			{
+				this.SetValue(IsUniformZoomProperty, value);
+			}
+		}
+		
+		private static void OnDirectionPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier>().Direction = ((SciChart.Xamarin.Views.Core.Common.Direction2D)(newValue));
+		}
+		
+		private static object DefaultDirectionPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier>().Direction;
+		}
+		
+		private static void OnScaleFactorPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier>().ScaleFactor = ((float)(newValue));
+		}
+		
+		private static object DefaultScaleFactorPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier>().ScaleFactor;
+		}
+		
+		private static void OnIsUniformZoomPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier>().IsUniformZoom = ((bool)(newValue));
+		}
+		
+		private static object DefaultIsUniformZoomPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IPinchZoomModifier>().IsUniformZoom;
 		}
 	}
 }
@@ -3580,6 +3759,90 @@ namespace SciChart.Xamarin.Views.Modifiers
 		}
 		
 		public TooltipModifier(SciChart.Xamarin.Views.Modifiers.ITooltipModifier nativeObject) : 
+				base(nativeObject)
+		{
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Modifiers
+{
+	
+	
+	public partial class XAxisDragModifier : AxisDragModifierBase, SciChart.Xamarin.Views.Modifiers.IXAxisDragModifier
+	{
+		
+		public static BindableProperty ClipModeTargetXProperty = BindableProperty.Create("ClipModeTargetX", typeof(SciChart.Xamarin.Views.Core.Common.ClipModeTarget), typeof(XAxisDragModifier), null, BindingMode.Default, null, OnClipModeTargetXPropertyChanged, null, null, DefaultClipModeTargetXPropertyValueCreator);
+		
+		public static BindableProperty ClipModeXProperty = BindableProperty.Create("ClipModeX", typeof(SciChart.Xamarin.Views.Core.Common.ClipMode), typeof(XAxisDragModifier), null, BindingMode.Default, null, OnClipModeXPropertyChanged, null, null, DefaultClipModeXPropertyValueCreator);
+		
+		public XAxisDragModifier() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewXAxisDragModifier())
+		{
+		}
+		
+		public XAxisDragModifier(SciChart.Xamarin.Views.Modifiers.IXAxisDragModifier nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.ClipModeTarget ClipModeTargetX
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Core.Common.ClipModeTarget)(this.GetValue(ClipModeTargetXProperty)));
+			}
+			set
+			{
+				this.SetValue(ClipModeTargetXProperty, value);
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.ClipMode ClipModeX
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Core.Common.ClipMode)(this.GetValue(ClipModeXProperty)));
+			}
+			set
+			{
+				this.SetValue(ClipModeXProperty, value);
+			}
+		}
+		
+		private static void OnClipModeTargetXPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IXAxisDragModifier>().ClipModeTargetX = ((SciChart.Xamarin.Views.Core.Common.ClipModeTarget)(newValue));
+		}
+		
+		private static object DefaultClipModeTargetXPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IXAxisDragModifier>().ClipModeTargetX;
+		}
+		
+		private static void OnClipModeXPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IXAxisDragModifier>().ClipModeX = ((SciChart.Xamarin.Views.Core.Common.ClipMode)(newValue));
+		}
+		
+		private static object DefaultClipModeXPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IXAxisDragModifier>().ClipModeX;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Modifiers
+{
+	
+	
+	public partial class YAxisDragModifier : AxisDragModifierBase, SciChart.Xamarin.Views.Modifiers.IYAxisDragModifier
+	{
+		
+		public YAxisDragModifier() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewYAxisDragModifier())
+		{
+		}
+		
+		public YAxisDragModifier(SciChart.Xamarin.Views.Modifiers.IYAxisDragModifier nativeObject) : 
 				base(nativeObject)
 		{
 		}

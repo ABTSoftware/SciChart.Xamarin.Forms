@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel;
 using Android.Content;
-using SciChart.Charting.Visuals;
 using SciChart.Xamarin.Views.Utility;
-using Xamarin.Forms;
+using SciChart.Xamarin.Views.Visuals;
 using Xamarin.Forms.Platform.Android;
 
 namespace SciChart.Xamarin.Android.Renderer
 {
-    public class ViewRendererBase<TView, TNativeView> : ViewRenderer<TView, TNativeView> where TView : View where TNativeView : global::Android.Views.View
+    public class ViewRendererBase<TView, TNativeView> : ViewRenderer<TView, TNativeView> where TView : NativeViewProvider where TNativeView : global::Android.Views.View
     {
         private readonly PropertyMapper<TView, TNativeView> _propertyMapper;
 
@@ -20,12 +19,15 @@ namespace SciChart.Xamarin.Android.Renderer
         {
             base.OnElementChanged(e);
 
-            if (e.OldElement != null)
+            var oldElement = e.OldElement;
+            if (oldElement != null)
             {
                 _propertyMapper.Detach();
+                oldElement.OnNativeViewDetached(Control);
             }
 
-            if (e.NewElement != null)
+            var newElement = e.NewElement;
+            if (newElement != null)
             {
                 if (Control == null)
                 {
@@ -33,7 +35,8 @@ namespace SciChart.Xamarin.Android.Renderer
                     this.SetNativeControl(CreateNativeControl());
                 }
 
-                _propertyMapper.Attach(e.NewElement, Control);
+                _propertyMapper.Attach(newElement, Control);
+                newElement.OnNativeViewAttached(Control);
             }
         }
 
