@@ -23,6 +23,7 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
             {"Android.Util.IAttributeSet", "IAndroidAttributesSet"},
             {"Android.Util.ComplexUnitType", "AndroidComplexUnitType"},
             {"Android.Graphics.Typeface", "AndroidTypeface"},
+            {"Android.Views.GravityFlags", "AndroidGravityFlags" },
             {"SciChart.Charting.Modifiers.AxisDragModifierBase.AxisDragMode", "AxisDragMode" }
         };
 
@@ -109,6 +110,13 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
                     constructor.Parameters.Add(
                         new CodeParameterDeclarationExpression(parameterType, parameter.Name));
                     constructor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression(parameter.Name));
+                }
+
+                if (information.InjectInitMethod)
+                {
+                    var initCall = new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), "InternalInit");
+
+                    constructor.Statements.Add(initCall);
                 }
              
                 typeDeclaration.Members.Add(constructor);

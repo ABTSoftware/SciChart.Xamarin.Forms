@@ -29,14 +29,14 @@ namespace SciChart.Xamarin.CodeGenerator.Utility
                 .SelectMany(i => i.GetMethods());
         }
 
-        public static bool HasInjectAndroidContext(this Type type)
+        public static bool HasAttribute<T>(this Type type) where T : Attribute
         {
-            var injectAndroidContextAttribute = typeof(InjectAndroidContext);
+            var attributeType = typeof(T);
+
             if (!type.IsInterface)
-                return Attribute.IsDefined(type, injectAndroidContextAttribute);
+                return Attribute.IsDefined(type, attributeType);
 
-            return Attribute.IsDefined(type, injectAndroidContextAttribute) || type.GetInterfaces().Any(t => Attribute.IsDefined(t, injectAndroidContextAttribute));
-
+            return Attribute.IsDefined(type, attributeType) || type.GetInterfaces().Any(t => Attribute.IsDefined(t, attributeType));
         }
 
         public static string ToReflectedName(this string type, int genericParamsCount)

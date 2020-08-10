@@ -10,6 +10,7 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
 {
     [ClassDeclaration("AxisCore", typeof(View))]
     [AbstractClassDefinition]
+    [InjectInitMethod]
     public interface IAxisCore : INativeSciChartObjectWrapper
     {
         /// <summary>
@@ -27,7 +28,6 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
         ///   If <c>true</c> reverses the ticks and coordinates for the axis.
         /// </value>
         [BindablePropertyDefinition]
-
         bool FlipCoordinates { get; set; }
 
         /// <summary>
@@ -117,6 +117,7 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
         /// </summary>
         [NativePropertyConverterDeclaration("Range")]
         [BindablePropertyDefinition]
+        [TypeConverterDeclaration("DoubleRangeConverter")]
         IRange GrowBy { get; set; }
 
         [NativePropertyConverterDeclaration("RangeClipMode")]
@@ -153,6 +154,6 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
         /// <summary>
         /// Raised when the VisibleRange is changed
         /// </summary>
-        // event EventHandler<VisibleRangeChangedEventArgs> VisibleRangeChanged;
+        event EventHandler<VisibleRangeChangedEventArgs> VisibleRangeChanged;
     }
 }

@@ -36,7 +36,6 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
                     HasGet = x.GetGetMethod() != null,
                 }).ToArray();
 
-
             information.FactoryConstructors = type.GetCustomAttributes<InjectNativeSciChartObject>().Select(x =>
                 new FactoryCtorInformation()
                 {

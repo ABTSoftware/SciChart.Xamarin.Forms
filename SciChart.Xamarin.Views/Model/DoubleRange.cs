@@ -1,10 +1,5 @@
-﻿using SciChart.Xamarin.Views.Core.Common;
-using Xamarin.Forms;
-
-namespace SciChart.Xamarin.Views.Model
+﻿namespace SciChart.Xamarin.Views.Model
 {
-
-
     /// <summary>
     /// Defines a range of type <see cref="System.Double"/>
     /// </summary>
@@ -12,14 +7,14 @@ namespace SciChart.Xamarin.Views.Model
     {
         public double Min
         {
-            get => ((IDoubleRange)NativeRange).Min;
-            set => ((IDoubleRange)NativeRange).Min = value;
+            get => ((IDoubleRange)NativeSciChartObject).Min;
+            set => ((IDoubleRange)NativeSciChartObject).Min = value;
         }
 
         public double Max
         {
-            get => ((IDoubleRange)NativeRange).Max;
-            set => ((IDoubleRange)NativeRange).Max = value;
+            get => ((IDoubleRange)NativeSciChartObject).Max;
+            set => ((IDoubleRange)NativeSciChartObject).Max = value;
         }
     }
 }

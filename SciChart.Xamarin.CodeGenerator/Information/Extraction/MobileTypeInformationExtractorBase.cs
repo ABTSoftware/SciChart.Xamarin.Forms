@@ -19,6 +19,8 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
             information.NativeMethodConverters = type.GetPublicMethods()
                 .Where(method => Attribute.IsDefined(method, typeof(NativeMethodConverterDeclaration)))
                 .Select(GetMethodDeclarationFrom).ToArray();
+
+            information.InjectInitMethod = type.HasAttribute<InjectInitMethod>();
         }
 
         protected abstract NativePropertyConverterInformation GetPropertyDeclarationFrom(PropertyInfo property);

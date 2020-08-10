@@ -1,4 +1,5 @@
-﻿using SciChart.Xamarin.Views.Core.Generation;
+﻿using SciChart.Xamarin.Views.Core.Common;
+using SciChart.Xamarin.Views.Core.Generation;
 
 namespace SciChart.Xamarin.Views.Modifiers
 {
@@ -18,5 +19,11 @@ namespace SciChart.Xamarin.Views.Modifiers
 
         [MethodDeclaration()]
         void SetSourceMode(SourceMode sourceMode);
+
+        [MethodDeclaration()]
+        void SetLegendOrientation(Orientation orientation);
+
+        [MethodDeclaration()]
+        void SetLegendPosition(HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment, int topMargin, int leftMargin, int bottomMargin, int rightMargin);
     }
 }

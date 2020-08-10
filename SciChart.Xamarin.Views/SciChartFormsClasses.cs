@@ -97,11 +97,15 @@ namespace SciChart.Xamarin.Views.Core.Common
 		
 		SciChart.Xamarin.Views.Visuals.Annotations.IBoxAnnotation NewBoxAnnotation();
 		
+		SciChart.Xamarin.Views.Visuals.Annotations.IHorizontalLineAnnotation NewHorizontalLineAnnotation();
+		
 		SciChart.Xamarin.Views.Visuals.Annotations.ILineAnnotation NewLineAnnotation();
 		
 		SciChart.Xamarin.Views.Visuals.Annotations.ILineArrowAnnotation NewLineArrowAnnotation();
 		
 		SciChart.Xamarin.Views.Visuals.Annotations.ITextAnnotation NewTextAnnotation();
+		
+		SciChart.Xamarin.Views.Visuals.Annotations.IVerticalLineAnnotation NewVerticalLineAnnotation();
 		
 		SciChart.Xamarin.Views.Modifiers.ILegendModifier NewLegendModifier();
 		
@@ -2116,6 +2120,7 @@ namespace SciChart.Xamarin.Views.Visuals.Axes
 			}
 		}
 		
+		[XTypeConverter(typeof(DoubleRangeConverter))]
 		public SciChart.Xamarin.Views.Model.IRange GrowBy
 		{
 			get
@@ -2729,6 +2734,7 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
 			_nativeSciChartObject = nativeObject.NativeSciChartObject;
 		}
 		
+		[XTypeConverter(typeof(StringToAnnotationCoordinateConverter))]
 		public System.IComparable X1
 		{
 			get
@@ -2741,6 +2747,7 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
 			}
 		}
 		
+		[XTypeConverter(typeof(StringToAnnotationCoordinateConverter))]
 		public System.IComparable X2
 		{
 			get
@@ -2753,6 +2760,7 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
 			}
 		}
 		
+		[XTypeConverter(typeof(StringToAnnotationCoordinateConverter))]
 		public System.IComparable Y1
 		{
 			get
@@ -2765,6 +2773,7 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
 			}
 		}
 		
+		[XTypeConverter(typeof(StringToAnnotationCoordinateConverter))]
 		public System.IComparable Y2
 		{
 			get
@@ -3156,6 +3165,48 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
 {
 	
 	
+	public partial class HorizontalLineAnnotation : LineAnnotationWithLabelsBase, SciChart.Xamarin.Views.Visuals.Annotations.IHorizontalLineAnnotation
+	{
+		
+		public static BindableProperty VerticalAlignmentProperty = BindableProperty.Create("VerticalAlignment", typeof(SciChart.Xamarin.Views.Core.Common.HorizontalAlignment), typeof(HorizontalLineAnnotation), null, BindingMode.Default, null, OnVerticalAlignmentPropertyChanged, null, null, DefaultVerticalAlignmentPropertyValueCreator);
+		
+		public HorizontalLineAnnotation() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewHorizontalLineAnnotation())
+		{
+		}
+		
+		public HorizontalLineAnnotation(SciChart.Xamarin.Views.Visuals.Annotations.IHorizontalLineAnnotation nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.HorizontalAlignment VerticalAlignment
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Core.Common.HorizontalAlignment)(this.GetValue(VerticalAlignmentProperty)));
+			}
+			set
+			{
+				this.SetValue(VerticalAlignmentProperty, value);
+			}
+		}
+		
+		private static void OnVerticalAlignmentPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IHorizontalLineAnnotation>().VerticalAlignment = ((SciChart.Xamarin.Views.Core.Common.HorizontalAlignment)(newValue));
+		}
+		
+		private static object DefaultVerticalAlignmentPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IHorizontalLineAnnotation>().VerticalAlignment;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.Annotations
+{
+	
+	
 	public partial class LineAnnotation : LineAnnotationBase, SciChart.Xamarin.Views.Visuals.Annotations.ILineAnnotation
 	{
 		
@@ -3205,6 +3256,19 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
 		private static object DefaultStrokePropertyValueCreator(BindableObject bindable)
 		{
 			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.ILineAnnotationBase>().Stroke;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.Annotations
+{
+	
+	
+	public abstract partial class LineAnnotationWithLabelsBase : LineAnnotation, SciChart.Xamarin.Views.Visuals.Annotations.ILineAnnotationWithLabelsBase
+	{
+		
+		public LineAnnotationWithLabelsBase(SciChart.Xamarin.Views.Visuals.Annotations.ILineAnnotationWithLabelsBase nativeObject) : 
+				base(nativeObject)
+		{
 		}
 	}
 }
@@ -3385,6 +3449,48 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
 		private static object DefaultRotationAnglePropertyValueCreator(BindableObject bindable)
 		{
 			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.ITextAnnotation>().RotationAngle;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Visuals.Annotations
+{
+	
+	
+	public partial class VerticalLineAnnotation : LineAnnotationWithLabelsBase, SciChart.Xamarin.Views.Visuals.Annotations.IVerticalLineAnnotation
+	{
+		
+		public static BindableProperty VerticalAlignmentProperty = BindableProperty.Create("VerticalAlignment", typeof(SciChart.Xamarin.Views.Core.Common.VerticalAlignment), typeof(VerticalLineAnnotation), null, BindingMode.Default, null, OnVerticalAlignmentPropertyChanged, null, null, DefaultVerticalAlignmentPropertyValueCreator);
+		
+		public VerticalLineAnnotation() : 
+				this(DependencyService.Get<INativeSciChartObjectFactory>().NewVerticalLineAnnotation())
+		{
+		}
+		
+		public VerticalLineAnnotation(SciChart.Xamarin.Views.Visuals.Annotations.IVerticalLineAnnotation nativeObject) : 
+				base(nativeObject)
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.VerticalAlignment VerticalAlignment
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Core.Common.VerticalAlignment)(this.GetValue(VerticalAlignmentProperty)));
+			}
+			set
+			{
+				this.SetValue(VerticalAlignmentProperty, value);
+			}
+		}
+		
+		private static void OnVerticalAlignmentPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IVerticalLineAnnotation>().VerticalAlignment = ((SciChart.Xamarin.Views.Core.Common.VerticalAlignment)(newValue));
+		}
+		
+		private static object DefaultVerticalAlignmentPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Visuals.Annotations.IVerticalLineAnnotation>().VerticalAlignment;
 		}
 	}
 }
@@ -3581,6 +3687,16 @@ namespace SciChart.Xamarin.Views.Modifiers
 		public void SetSourceMode(SciChart.Xamarin.Views.Modifiers.SourceMode sourceMode)
 		{
 			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Modifiers.ILegendModifier>().SetSourceMode(sourceMode);
+		}
+		
+		public void SetLegendOrientation(SciChart.Xamarin.Views.Core.Common.Orientation orientation)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Modifiers.ILegendModifier>().SetLegendOrientation(orientation);
+		}
+		
+		public void SetLegendPosition(SciChart.Xamarin.Views.Core.Common.HorizontalAlignment horizontalAlignment, SciChart.Xamarin.Views.Core.Common.VerticalAlignment verticalAlignment, int topMargin, int leftMargin, int bottomMargin, int rightMargin)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Modifiers.ILegendModifier>().SetLegendPosition(horizontalAlignment, verticalAlignment, topMargin, leftMargin, bottomMargin, rightMargin);
 		}
 	}
 }
@@ -3891,6 +4007,14 @@ namespace SciChart.Xamarin.Views.Modifiers
 	public partial class ZoomPanModifier : ChartModifierBase, SciChart.Xamarin.Views.Modifiers.IZoomPanModifier
 	{
 		
+		public static BindableProperty DirectionProperty = BindableProperty.Create("Direction", typeof(SciChart.Xamarin.Views.Core.Common.Direction2D), typeof(ZoomPanModifier), null, BindingMode.Default, null, OnDirectionPropertyChanged, null, null, DefaultDirectionPropertyValueCreator);
+		
+		public static BindableProperty ClipModeTargetXProperty = BindableProperty.Create("ClipModeTargetX", typeof(SciChart.Xamarin.Views.Core.Common.ClipModeTarget), typeof(ZoomPanModifier), null, BindingMode.Default, null, OnClipModeTargetXPropertyChanged, null, null, DefaultClipModeTargetXPropertyValueCreator);
+		
+		public static BindableProperty ClipModeXProperty = BindableProperty.Create("ClipModeX", typeof(SciChart.Xamarin.Views.Core.Common.ClipMode), typeof(ZoomPanModifier), null, BindingMode.Default, null, OnClipModeXPropertyChanged, null, null, DefaultClipModeXPropertyValueCreator);
+		
+		public static BindableProperty ZoomExtentsYProperty = BindableProperty.Create("ZoomExtentsY", typeof(bool), typeof(ZoomPanModifier), null, BindingMode.Default, null, OnZoomExtentsYPropertyChanged, null, null, DefaultZoomExtentsYPropertyValueCreator);
+		
 		public ZoomPanModifier() : 
 				this(DependencyService.Get<INativeSciChartObjectFactory>().NewZoomPanModifier())
 		{
@@ -3899,6 +4023,138 @@ namespace SciChart.Xamarin.Views.Modifiers
 		public ZoomPanModifier(SciChart.Xamarin.Views.Modifiers.IZoomPanModifier nativeObject) : 
 				base(nativeObject)
 		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.Direction2D Direction
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Core.Common.Direction2D)(this.GetValue(DirectionProperty)));
+			}
+			set
+			{
+				this.SetValue(DirectionProperty, value);
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.ClipModeTarget ClipModeTargetX
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Core.Common.ClipModeTarget)(this.GetValue(ClipModeTargetXProperty)));
+			}
+			set
+			{
+				this.SetValue(ClipModeTargetXProperty, value);
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.ClipMode ClipModeX
+		{
+			get
+			{
+				return ((SciChart.Xamarin.Views.Core.Common.ClipMode)(this.GetValue(ClipModeXProperty)));
+			}
+			set
+			{
+				this.SetValue(ClipModeXProperty, value);
+			}
+		}
+		
+		public bool ZoomExtentsY
+		{
+			get
+			{
+				return ((bool)(this.GetValue(ZoomExtentsYProperty)));
+			}
+			set
+			{
+				this.SetValue(ZoomExtentsYProperty, value);
+			}
+		}
+		
+		private static void OnDirectionPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IZoomPanModifier>().Direction = ((SciChart.Xamarin.Views.Core.Common.Direction2D)(newValue));
+		}
+		
+		private static object DefaultDirectionPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IZoomPanModifier>().Direction;
+		}
+		
+		private static void OnClipModeTargetXPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IZoomPanModifier>().ClipModeTargetX = ((SciChart.Xamarin.Views.Core.Common.ClipModeTarget)(newValue));
+		}
+		
+		private static object DefaultClipModeTargetXPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IZoomPanModifier>().ClipModeTargetX;
+		}
+		
+		private static void OnClipModeXPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IZoomPanModifier>().ClipModeX = ((SciChart.Xamarin.Views.Core.Common.ClipMode)(newValue));
+		}
+		
+		private static object DefaultClipModeXPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IZoomPanModifier>().ClipModeX;
+		}
+		
+		private static void OnZoomExtentsYPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		{
+			bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IZoomPanModifier>().ZoomExtentsY = ((bool)(newValue));
+		}
+		
+		private static object DefaultZoomExtentsYPropertyValueCreator(BindableObject bindable)
+		{
+			return bindable.CastBindableWrapper<SciChart.Xamarin.Views.Modifiers.IZoomPanModifier>().ZoomExtentsY;
+		}
+	}
+}
+namespace SciChart.Xamarin.Views.Model
+{
+	
+	
+	public abstract partial class RangeBase : SciChart.Xamarin.Views.Model.IRange
+	{
+		
+		private SciChart.Xamarin.Views.Core.Common.INativeSciChartObject _nativeSciChartObject;
+		
+		public RangeBase(SciChart.Xamarin.Views.Model.IRange nativeObject)
+		{
+			_nativeSciChartObject = nativeObject.NativeSciChartObject;
+		}
+		
+		public double MinAsDouble
+		{
+			get
+			{
+				return NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.IRange>().MinAsDouble;
+			}
+		}
+		
+		public double MaxAsDouble
+		{
+			get
+			{
+				return NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.IRange>().MaxAsDouble;
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return _nativeSciChartObject;
+			}
+		}
+		
+		public void SetMinMaxDouble(double min, double max)
+		{
+			NativeSciChartObject.CastSciChartObject<SciChart.Xamarin.Views.Model.IRange>().SetMinMaxDouble(min, max);
 		}
 	}
 }

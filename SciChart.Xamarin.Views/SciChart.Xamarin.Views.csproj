@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Numerics\GenericMath\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SciChart.Xamarin.Views.Core\SciChart.Xamarin.Views.Core.csproj" />
   </ItemGroup>
 

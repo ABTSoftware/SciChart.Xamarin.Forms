@@ -16,7 +16,7 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
 
         public void SetBackgroundColor(Color backgroundColor)
         {
-            NativeSciChartObject.CastSciChartObject<IAxisMarkerAnnotation>().SetBackgroundColor(backgroundColor);
+            NativeSciChartObject.CastSciChartObject<IBoxAnnotation>().SetBackgroundColor(backgroundColor);
         }
     }
 }

@@ -5,5 +5,7 @@
         public NativePropertyConverterInformation[] NativePropertyConverters { get; set; }
 
         public NativeMethodConverterInformation[] NativeMethodConverters { get; set; }
+
+        public bool InjectInitMethod { get; set; }
     }
 }

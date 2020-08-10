@@ -36,6 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Examples\CreateRealtimeTickingStockCharts\CreateRealtimeTickingStockCharts.xaml.cs">
+      <DependentUpon>CreateRealtimeTickingStockCharts.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Examples\MultiPaneStockCharts\CreateMultiPaneStockCharts.xaml.cs">
       <DependentUpon>CreateMultiPaneStockCharts.xaml</DependentUpon>
     </Compile>
@@ -52,6 +55,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Examples\ColumnChart.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Examples\CreateRealtimeTickingStockCharts\CreateRealtimeTickingStockCharts.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Examples\MultiPaneStockCharts\CreateMultiPaneStockCharts.xaml">

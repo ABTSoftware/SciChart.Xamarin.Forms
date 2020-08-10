@@ -58,6 +58,13 @@ namespace SciChart.Xamarin.CodeGenerator.Generator
                     constructor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression(parameter.Name));
                 }
 
+                if (information.InjectInitMethod)
+                {
+                    var initCall = new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), "InternalInit");
+
+                    constructor.Statements.Add(initCall);
+                }
+
                 typeDeclaration.Members.Add(constructor);
             }
         }

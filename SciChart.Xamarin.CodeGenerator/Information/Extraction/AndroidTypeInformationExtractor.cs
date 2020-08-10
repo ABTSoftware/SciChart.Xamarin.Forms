@@ -12,7 +12,7 @@ namespace SciChart.Xamarin.CodeGenerator.Information.Extraction
         {
             base.ExtractInformationFrom(type, information);
 
-            information.InjectContextIntoConstructor = type.HasInjectAndroidContext();
+            information.InjectContextIntoConstructor = type.HasAttribute<InjectAndroidContext>();
         }
 
         protected override void ExtractClassDeclaration(Type type, ClassDeclaration classDeclaration,

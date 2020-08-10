@@ -1258,6 +1258,7 @@ namespace SciChart.Xamarin.iOS.Renderer
 		
 		public CategoryDateAxisiOS()
 		{
+			this.InternalInit();
 		}
 		
 		public new SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment AxisAlignment
@@ -1418,6 +1419,7 @@ namespace SciChart.Xamarin.iOS.Renderer
 		
 		public DateAxisiOS()
 		{
+			this.InternalInit();
 		}
 		
 		public new SciChart.Xamarin.Views.Visuals.Axes.AxisAlignment AxisAlignment
@@ -1578,6 +1580,7 @@ namespace SciChart.Xamarin.iOS.Renderer
 		
 		public LogarithmicNumericAxisiOS()
 		{
+			this.InternalInit();
 		}
 		
 		public new SciChart.Xamarin.Views.Visuals.Axes.ScientificNotation ScientificNotation
@@ -1750,6 +1753,7 @@ namespace SciChart.Xamarin.iOS.Renderer
 		
 		public NumericAxisiOS()
 		{
+			this.InternalInit();
 		}
 		
 		public new SciChart.Xamarin.Views.Visuals.Axes.ScientificNotation ScientificNotation
@@ -1922,6 +1926,7 @@ namespace SciChart.Xamarin.iOS.Renderer
 		
 		public NumericAxis3DiOS()
 		{
+			this.InternalInit();
 		}
 		
 		public SciChart.Xamarin.Views.Drawing.IBrushStyle AxisBandsFill
@@ -2218,6 +2223,142 @@ namespace SciChart.Xamarin.iOS.Renderer
 		
 		public BoxAnnotationiOS()
 		{
+		}
+		
+		public System.IComparable X1
+		{
+			get
+			{
+				return base.X1Value;
+			}
+			set
+			{
+				base.X1Value = value;
+			}
+		}
+		
+		public System.IComparable X2
+		{
+			get
+			{
+				return base.X2Value;
+			}
+			set
+			{
+				base.X2Value = value;
+			}
+		}
+		
+		public System.IComparable Y1
+		{
+			get
+			{
+				return base.Y1Value;
+			}
+			set
+			{
+				base.Y1Value = value;
+			}
+		}
+		
+		public System.IComparable Y2
+		{
+			get
+			{
+				return base.Y2Value;
+			}
+			set
+			{
+				base.Y2Value = value;
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Core.Common.Direction2D DragDirections
+		{
+			get
+			{
+				return base.DragDirections.Direction2DToXamarin();
+			}
+			set
+			{
+				base.DragDirections = value.Direction2DFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Core.Common.Direction2D ResizeDirections
+		{
+			get
+			{
+				return base.ResizeDirections.Direction2DToXamarin();
+			}
+			set
+			{
+				base.ResizeDirections = value.Direction2DFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface AnnotationSurface
+		{
+			get
+			{
+				return base.AnnotationSurface.AnnotationSurfaceToXamarin();
+			}
+			set
+			{
+				base.AnnotationSurface = value.AnnotationSurfaceFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode CoordinateMode
+		{
+			get
+			{
+				return base.CoordinateMode.AnnotationCoordinateModeToXamarin();
+			}
+			set
+			{
+				base.CoordinateMode = value.AnnotationCoordinateModeFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
+	public partial class HorizontalLineAnnotationiOS : SCIHorizontalLineAnnotation, SciChart.Xamarin.Views.Visuals.Annotations.IHorizontalLineAnnotation, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public HorizontalLineAnnotationiOS()
+		{
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.HorizontalAlignment VerticalAlignment
+		{
+			get
+			{
+				return base.HorizontalAlignment.HorizontalAlignmentToXamarin();
+			}
+			set
+			{
+				base.HorizontalAlignment = value.HorizontalAlignmentFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle Stroke
+		{
+			get
+			{
+				return base.Stroke.PenStyleToXamarin();
+			}
+			set
+			{
+				base.Stroke = value.PenStyleFromXamarin();
+			}
 		}
 		
 		public System.IComparable X1
@@ -2721,6 +2862,142 @@ namespace SciChart.Xamarin.iOS.Renderer
 		}
 	}
 	
+	public partial class VerticalLineAnnotationiOS : SCIVerticalLineAnnotation, SciChart.Xamarin.Views.Visuals.Annotations.IVerticalLineAnnotation, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
+	{
+		
+		public VerticalLineAnnotationiOS()
+		{
+		}
+		
+		public new SciChart.Xamarin.Views.Core.Common.VerticalAlignment VerticalAlignment
+		{
+			get
+			{
+				return base.VerticalAlignment.VerticalAlignmentToXamarin();
+			}
+			set
+			{
+				base.VerticalAlignment = value.VerticalAlignmentFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Drawing.IPenStyle Stroke
+		{
+			get
+			{
+				return base.Stroke.PenStyleToXamarin();
+			}
+			set
+			{
+				base.Stroke = value.PenStyleFromXamarin();
+			}
+		}
+		
+		public System.IComparable X1
+		{
+			get
+			{
+				return base.X1Value;
+			}
+			set
+			{
+				base.X1Value = value;
+			}
+		}
+		
+		public System.IComparable X2
+		{
+			get
+			{
+				return base.X2Value;
+			}
+			set
+			{
+				base.X2Value = value;
+			}
+		}
+		
+		public System.IComparable Y1
+		{
+			get
+			{
+				return base.Y1Value;
+			}
+			set
+			{
+				base.Y1Value = value;
+			}
+		}
+		
+		public System.IComparable Y2
+		{
+			get
+			{
+				return base.Y2Value;
+			}
+			set
+			{
+				base.Y2Value = value;
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Core.Common.Direction2D DragDirections
+		{
+			get
+			{
+				return base.DragDirections.Direction2DToXamarin();
+			}
+			set
+			{
+				base.DragDirections = value.Direction2DFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Core.Common.Direction2D ResizeDirections
+		{
+			get
+			{
+				return base.ResizeDirections.Direction2DToXamarin();
+			}
+			set
+			{
+				base.ResizeDirections = value.Direction2DFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Annotations.AnnotationSurface AnnotationSurface
+		{
+			get
+			{
+				return base.AnnotationSurface.AnnotationSurfaceToXamarin();
+			}
+			set
+			{
+				base.AnnotationSurface = value.AnnotationSurfaceFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Visuals.Annotations.AnnotationCoordinateMode CoordinateMode
+		{
+			get
+			{
+				return base.CoordinateMode.AnnotationCoordinateModeToXamarin();
+			}
+			set
+			{
+				base.CoordinateMode = value.AnnotationCoordinateModeFromXamarin();
+			}
+		}
+		
+		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
+		{
+			get
+			{
+				return this;
+			}
+		}
+	}
+	
 	public partial class LegendModifieriOS : SCILegendModifier, SciChart.Xamarin.Views.Modifiers.ILegendModifier, SciChart.Xamarin.Views.Core.Common.INativeSciChartObject
 	{
 		
@@ -3014,6 +3291,42 @@ namespace SciChart.Xamarin.iOS.Renderer
 		{
 		}
 		
+		public new SciChart.Xamarin.Views.Core.Common.Direction2D Direction
+		{
+			get
+			{
+				return base.Direction.Direction2DToXamarin();
+			}
+			set
+			{
+				base.Direction = value.Direction2DFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Core.Common.ClipModeTarget ClipModeTargetX
+		{
+			get
+			{
+				return base.ClipModeTargetX.ClipModeTargetToXamarin();
+			}
+			set
+			{
+				base.ClipModeTargetX = value.ClipModeTargetFromXamarin();
+			}
+		}
+		
+		public new SciChart.Xamarin.Views.Core.Common.ClipMode ClipModeX
+		{
+			get
+			{
+				return base.ClipModeX.ClipModeToXamarin();
+			}
+			set
+			{
+				base.ClipModeX = value.ClipModeFromXamarin();
+			}
+		}
+		
 		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
 		{
 			get
@@ -3028,16 +3341,19 @@ namespace SciChart.Xamarin.iOS.Renderer
 		
 		public DoubleRangeiOS()
 		{
+			this.InternalInit();
 		}
 		
 		public DoubleRangeiOS(double min, double max) : 
 				base(min, max)
 		{
+			this.InternalInit();
 		}
 		
 		public DoubleRangeiOS(SciChart.iOS.Charting.SCIDoubleRange range) : 
 				base(range)
 		{
+			this.InternalInit();
 		}
 		
 		public SciChart.Xamarin.Views.Core.Common.INativeSciChartObject NativeSciChartObject
@@ -3608,6 +3924,11 @@ namespace SciChart.Xamarin.iOS.Renderer
 			return new BoxAnnotationiOS();
 		}
 		
+		public SciChart.Xamarin.Views.Visuals.Annotations.IHorizontalLineAnnotation NewHorizontalLineAnnotation()
+		{
+			return new HorizontalLineAnnotationiOS();
+		}
+		
 		public SciChart.Xamarin.Views.Visuals.Annotations.ILineAnnotation NewLineAnnotation()
 		{
 			return new LineAnnotationiOS();
@@ -3621,6 +3942,11 @@ namespace SciChart.Xamarin.iOS.Renderer
 		public SciChart.Xamarin.Views.Visuals.Annotations.ITextAnnotation NewTextAnnotation()
 		{
 			return new TextAnnotationiOS();
+		}
+		
+		public SciChart.Xamarin.Views.Visuals.Annotations.IVerticalLineAnnotation NewVerticalLineAnnotation()
+		{
+			return new VerticalLineAnnotationiOS();
 		}
 		
 		public SciChart.Xamarin.Views.Modifiers.ILegendModifier NewLegendModifier()
@@ -4491,6 +4817,137 @@ namespace SciChart.Xamarin.iOS.Renderer
 				return SCIDirection2D.XyDirection;
 			}
 			throw new System.ArgumentOutOfRangeException("The Direction2D value has not been handled");
+		}
+	}
+	#endregion
+	
+	#region HorizontalAlignment extensions
+	static
+	public class HorizontalAlignmentMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Core.Common.HorizontalAlignment HorizontalAlignmentToXamarin(this SCIAlignment nativeValue)
+		{
+			if ((nativeValue == SCIAlignment.FillHorizontal))
+			{
+				return SciChart.Xamarin.Views.Core.Common.HorizontalAlignment.Fill;
+			}
+			if ((nativeValue == SCIAlignment.CenterHorizontal))
+			{
+				return SciChart.Xamarin.Views.Core.Common.HorizontalAlignment.Center;
+			}
+			if ((nativeValue == SCIAlignment.Left))
+			{
+				return SciChart.Xamarin.Views.Core.Common.HorizontalAlignment.Left;
+			}
+			if ((nativeValue == SCIAlignment.Right))
+			{
+				return SciChart.Xamarin.Views.Core.Common.HorizontalAlignment.Right;
+			}
+			throw new System.ArgumentOutOfRangeException("The HorizontalAlignment value has not been handled");
+		}
+		
+		public static SCIAlignment HorizontalAlignmentFromXamarin(this SciChart.Xamarin.Views.Core.Common.HorizontalAlignment xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.HorizontalAlignment.Fill))
+			{
+				return SCIAlignment.FillHorizontal;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.HorizontalAlignment.Center))
+			{
+				return SCIAlignment.CenterHorizontal;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.HorizontalAlignment.Left))
+			{
+				return SCIAlignment.Left;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.HorizontalAlignment.Right))
+			{
+				return SCIAlignment.Right;
+			}
+			throw new System.ArgumentOutOfRangeException("The HorizontalAlignment value has not been handled");
+		}
+	}
+	#endregion
+	
+	#region Orientation extensions
+	static
+	public class OrientationMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Core.Common.Orientation OrientationToXamarin(this SCIOrientation nativeValue)
+		{
+			if ((nativeValue == SCIOrientation.Horizontal))
+			{
+				return SciChart.Xamarin.Views.Core.Common.Orientation.Horizontal;
+			}
+			if ((nativeValue == SCIOrientation.Vertical))
+			{
+				return SciChart.Xamarin.Views.Core.Common.Orientation.Vertical;
+			}
+			throw new System.ArgumentOutOfRangeException("The Orientation value has not been handled");
+		}
+		
+		public static SCIOrientation OrientationFromXamarin(this SciChart.Xamarin.Views.Core.Common.Orientation xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.Orientation.Horizontal))
+			{
+				return SCIOrientation.Horizontal;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.Orientation.Vertical))
+			{
+				return SCIOrientation.Vertical;
+			}
+			throw new System.ArgumentOutOfRangeException("The Orientation value has not been handled");
+		}
+	}
+	#endregion
+	
+	#region VerticalAlignment extensions
+	static
+	public class VerticalAlignmentMapper
+	{
+		
+		public static SciChart.Xamarin.Views.Core.Common.VerticalAlignment VerticalAlignmentToXamarin(this SCIAlignment nativeValue)
+		{
+			if ((nativeValue == SCIAlignment.FillVertical))
+			{
+				return SciChart.Xamarin.Views.Core.Common.VerticalAlignment.Fill;
+			}
+			if ((nativeValue == SCIAlignment.CenterVertical))
+			{
+				return SciChart.Xamarin.Views.Core.Common.VerticalAlignment.Center;
+			}
+			if ((nativeValue == SCIAlignment.Top))
+			{
+				return SciChart.Xamarin.Views.Core.Common.VerticalAlignment.Top;
+			}
+			if ((nativeValue == SCIAlignment.Bottom))
+			{
+				return SciChart.Xamarin.Views.Core.Common.VerticalAlignment.Bottom;
+			}
+			throw new System.ArgumentOutOfRangeException("The VerticalAlignment value has not been handled");
+		}
+		
+		public static SCIAlignment VerticalAlignmentFromXamarin(this SciChart.Xamarin.Views.Core.Common.VerticalAlignment xamarinFormsValue)
+		{
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.VerticalAlignment.Fill))
+			{
+				return SCIAlignment.FillVertical;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.VerticalAlignment.Center))
+			{
+				return SCIAlignment.CenterVertical;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.VerticalAlignment.Top))
+			{
+				return SCIAlignment.Top;
+			}
+			if ((xamarinFormsValue == SciChart.Xamarin.Views.Core.Common.VerticalAlignment.Bottom))
+			{
+				return SCIAlignment.Bottom;
+			}
+			throw new System.ArgumentOutOfRangeException("The VerticalAlignment value has not been handled");
 		}
 	}
 	#endregion

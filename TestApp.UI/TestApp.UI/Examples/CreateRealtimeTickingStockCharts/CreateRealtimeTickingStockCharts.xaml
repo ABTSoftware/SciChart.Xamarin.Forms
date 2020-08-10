@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:visuals="clr-namespace:SciChart.Xamarin.Views.Visuals;assembly=SciChart.Xamarin.Views"
+             xmlns:renderableSeries="clr-namespace:SciChart.Xamarin.Views.Visuals.RenderableSeries;assembly=SciChart.Xamarin.Views"
+             xmlns:axes="clr-namespace:SciChart.Xamarin.Views.Visuals.Axes;assembly=SciChart.Xamarin.Views"
+             xmlns:modifiers="clr-namespace:SciChart.Xamarin.Views.Modifiers;assembly=SciChart.Xamarin.Views"
+             xmlns:annotations="clr-namespace:SciChart.Xamarin.Views.Visuals.Annotations;assembly=SciChart.Xamarin.Views"
+             mc:Ignorable="d"
+             x:Class="TestApp.UI.Examples.CreateRealtimeTickingStockCharts.CreateRealtimeTickingStockCharts">
+    <ContentPage.Content>
+
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="75"/>
+            </Grid.RowDefinitions>
+
+            <visuals:SciChartSurface Grid.Row="0">
+                <visuals:SciChartSurface.RenderableSeries>
+                    <renderableSeries:FastOhlcRenderableSeries StrokeUpStyle="#FF00AA00, 2" 
+                                                               StrokeDownStyle="#FFFF0000, 2"
+                                                               DataSeries="{Binding OhlcDataSeries}"/>
+
+                    <renderableSeries:FastLineRenderableSeries StrokeStyle="#FFFF6600, 1"
+                                                               DataSeries="{Binding XyDataSeries}"/>
+                </visuals:SciChartSurface.RenderableSeries>
+
+                <visuals:SciChartSurface.XAxes>
+                    <axes:CategoryDateTimeAxis VisibleRange="{Binding XRange}" 
+                                               DrawMajorGridLines="False"
+                                               GrowBy="0, 0.1" />
+                </visuals:SciChartSurface.XAxes>
+
+                <visuals:SciChartSurface.YAxes>
+                    <axes:NumericAxis AutoRange="Always"/>
+                </visuals:SciChartSurface.YAxes>
+
+                <visuals:SciChartSurface.ChartModifiers>
+                    <modifiers:ModifierGroup>
+                        <modifiers:XAxisDragModifier/>
+                        <modifiers:ZoomPanModifier ReceiveHandledEvents="true" Direction="XDirection"/>
+                        <modifiers:ZoomExtentsModifier/>
+                        <modifiers:LegendModifier x:Name="LegendModifier"/>
+                    </modifiers:ModifierGroup>
+                </visuals:SciChartSurface.ChartModifiers>
+
+                <visuals:SciChartSurface.Annotations>
+                    <annotations:AxisMarkerAnnotation BackgroundColor="{Binding PriceMarkerColor}" 
+                                                      Y1="{Binding CloseValue}"/>
+
+                    <annotations:AxisMarkerAnnotation BackgroundColor="#FFFF6600" 
+                                                      Y1="{Binding SmaValue}"/>
+                </visuals:SciChartSurface.Annotations>
+            </visuals:SciChartSurface>
+
+            <!-- Define Overview chart -->
+            <visuals:SciChartSurface Grid.Row="1">
+                <visuals:SciChartSurface.RenderableSeries>
+                    <renderableSeries:FastMountainRenderableSeries DataSeries="{Binding OhlcDataSeries}"/>
+                </visuals:SciChartSurface.RenderableSeries>
+
+                <visuals:SciChartSurface.XAxes>
+                    <axes:CategoryDateTimeAxis AutoRange="Always"
+                                               DrawMajorGridLines="False"
+                                               DrawMinorGridLines="False"
+                                               DrawMajorBands="False"
+                                               DrawLabels="False"
+                                               DrawMajorTicks="False"
+                                               DrawMinorTicks="False"/>
+                </visuals:SciChartSurface.XAxes>
+
+                <visuals:SciChartSurface.YAxes>
+                    <axes:NumericAxis AutoRange="Always" 
+                                      GrowBy="0.1, 0.1"
+                                      DrawMajorGridLines="False"
+                                      DrawMinorGridLines="False"
+                                      DrawMajorBands="False"
+                                      DrawLabels="False"
+                                      DrawMajorTicks="False"
+                                      DrawMinorTicks="False"/>
+                </visuals:SciChartSurface.YAxes>
+
+                <visuals:SciChartSurface.Annotations>
+                    <annotations:BoxAnnotation CoordinateMode="RelativeY"
+                                               Y1="0"
+                                               Y2="1"
+                                               X1="0"
+                                               X2="{Binding XRange.Min}"
+                                               BackgroundColor="#BB262728"/>
+
+                    <annotations:BoxAnnotation CoordinateMode="RelativeY"
+                                               Y1="0"
+                                               Y2="1"
+                                               X1="{Binding XRange.Max}"
+                                               X2="{Binding PointCount}"
+                                               BackgroundColor="#BB262728"/>
+
+                    <annotations:VerticalLineAnnotation CoordinateMode="RelativeY"
+                                                        VerticalAlignment="Center"
+                                                        Y1="0.3"
+                                                        Y2="0.7"
+                                                        X1="{Binding XRange.Min}"
+                                                        Stroke="#FF808080, 5"/>
+                    <annotations:VerticalLineAnnotation CoordinateMode="RelativeY"
+                                                        VerticalAlignment="Center"
+                                                        Y1="0.3"
+                                                        Y2="0.7"
+                                                        X1="{Binding XRange.Max}"
+                                                        Stroke="#FF808080, 5"/>
+                </visuals:SciChartSurface.Annotations>
+            </visuals:SciChartSurface>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

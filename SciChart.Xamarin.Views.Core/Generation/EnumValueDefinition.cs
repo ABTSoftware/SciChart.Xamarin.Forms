@@ -13,5 +13,9 @@ namespace SciChart.Xamarin.Views.Core.Generation
             AndroidName = androidName;
             IOSName = iOSName;
         }
+
+        public EnumValueDefinition(string nativeName) : this(nativeName, nativeName)
+        {
+        }
     }
 }

@@ -13,18 +13,22 @@ namespace SciChart.Xamarin.Views.Visuals.Annotations
     {        
         [BindablePropertyDefinition()]
         [NativePropertyConverterDeclaration(nativeProperty: "X1Value")]
+        [TypeConverterDeclaration("StringToAnnotationCoordinateConverter")]
         IComparable X1 { get; set; }
 
         [BindablePropertyDefinition()]
         [NativePropertyConverterDeclaration(nativeProperty: "X2Value")]
+        [TypeConverterDeclaration("StringToAnnotationCoordinateConverter")]
         IComparable X2 { get; set; }
 
         [BindablePropertyDefinition()]
         [NativePropertyConverterDeclaration(nativeProperty: "Y1Value")]
+        [TypeConverterDeclaration("StringToAnnotationCoordinateConverter")]
         IComparable Y1 { get; set; }
 
         [BindablePropertyDefinition()]
         [NativePropertyConverterDeclaration(nativeProperty: "Y2Value")]
+        [TypeConverterDeclaration("StringToAnnotationCoordinateConverter")]
         IComparable Y2 { get; set; }
 
         [BindablePropertyDefinition()]

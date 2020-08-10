@@ -1,4 +1,5 @@
-﻿using SciChart.Xamarin.Views.Core.Common;
+﻿using System.ComponentModel;
+using SciChart.Xamarin.Views.Core.Common;
 using SciChart.Xamarin.Views.Core.Generation;
 
 namespace SciChart.Xamarin.Views.Model
@@ -8,17 +9,24 @@ namespace SciChart.Xamarin.Views.Model
     /// </summary>
     [AbstractClassDefinition]
     [XamarinFormsWrapperDefinition("RangeBase")]
-    public interface IRange : INativeSciChartObjectWrapper 
+    [ClassDeclaration("RangeBase", null)]
+    [InjectInitMethod]
+    public interface IRange : INativeSciChartObjectWrapper, INotifyPropertyChanged 
     {
         /// <summary>
         /// Gets the double representation of min value
         /// </summary>
+        [PropertyDeclaration]
         double MinAsDouble { get; }
 
         /// <summary>
         /// Gets the double representation of max value
         /// </summary>
+        [PropertyDeclaration]
         double MaxAsDouble { get; }
+
+        [MethodDeclaration]
+        void SetMinMaxDouble(double min, double max);
     }
 
     [ClassDeclaration("DoubleRange", typeof(IRange))]
